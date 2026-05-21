@@ -1,4 +1,3 @@
-hi
 ---
 title: FloodGuard AI
 emoji: 🌊
