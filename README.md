@@ -251,7 +251,7 @@ Detects **13 crop diseases** including:
 
 **Nishan Kashyap**
 - 🎓 BTech Computer Science — KIIT University
-- 📍 Jorhat, Assam, India
+- 📍 Guwahati, Assam, India
 - 🔗 [GitHub](https://github.com/Y2XNishan)
 
 ---
