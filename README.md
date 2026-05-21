@@ -1,232 +1,269 @@
-# 🌊 Flood Risk Prediction System — Assam, India
+hi
+---
+title: FloodGuard AI
+emoji: 🌊
+colorFrom: blue
+colorTo: cyan
+sdk: streamlit
+sdk_version: 1.32.0
+app_file: app/streamlit_app.py
+pinned: true
+---
 
-> An end-to-end machine learning system for predicting flood risk in Assam's Brahmaputra basin using XGBoost, LSTM with Attention, and SHAP explainability.
+# 🌊 FloodGuard AI
+### India Flood Risk Prediction & Agricultural Intelligence System
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-ff4b4b?logo=streamlit&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-337ab7?logo=xgboost&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red?style=for-the-badge&logo=streamlit)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange?style=for-the-badge&logo=pytorch)
+![XGBoost](https://img.shields.io/badge/XGBoost-AUC_0.83-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-cyan?style=for-the-badge)
+
+> 🇮🇳 AI-powered flood risk assessment and agricultural intelligence platform covering all 736 districts across India
 
 ---
 
-## 📋 Project Overview
-
-This system predicts flood risk for 10 districts in Assam, India using historical weather, hydrological, and environmental data from the Brahmaputra river basin. It combines traditional ML (XGBoost) with deep learning (LSTM + Attention) and provides explainable predictions through SHAP analysis.
-
-### Key Features
-- 🔮 **Real-time flood risk prediction** for any Assam district
-- 🗺️ **Interactive risk map** with district-level risk visualization
-- 🧠 **Explainable AI** — SHAP values show why a prediction was made
-- 📊 **Model comparison** — XGBoost vs LSTM performance dashboard
-- 📈 **Data exploration** — interactive charts and trend analysis
+## 🚀 Live Demo
+🔗 [FloodGuard AI on HuggingFace Spaces](https://huggingface.co/spaces/Y2XNishan/floodguard-ai) *(Coming Soon)*
 
 ---
 
-## 📊 Dataset Sources
+## 📌 Overview
 
-| Source | Data Type | Temporal Resolution |
-|--------|-----------|-------------------|
-| IMD (India Meteorological Dept) | Rainfall, Temperature | Daily |
-| CWC (Central Water Commission) | River Levels | Daily |
-| NASA MODIS | NDVI (Vegetation Index) | 16-day |
-| NASA SMAP | Soil Moisture | Daily |
-| SRTM | Elevation | Static |
-| **Synthetic (included)** | **All features combined** | **Daily** |
+FloodGuard AI is a comprehensive machine learning platform designed to:
+- Predict flood risk for any of India's 736 districts in real-time
+- Analyze historical flood patterns using NDMA data (2015–2024)
+- Detect crop diseases and predict agricultural yield
+- Send email alerts before floods hit your district
+- Provide AI-powered flood advisory via chatbot
 
-> **Note:** The included `data/sample_data.csv` contains realistic synthetic data for demonstration. Replace with real data for production use.
+Built for farmers, disaster management officials, and researchers across India.
 
 ---
 
-## 🏗️ Model Architecture
+## ✨ Features
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    INPUT FEATURES                            │
-│  rainfall, river_level, temp, humidity, ndvi, soil_moisture  │
-│  + engineered: rolling sums, API, interactions, cyclical     │
-└─────────────────────┬────────────────────────────────────────┘
-                      │
-          ┌───────────┴───────────┐
-          │                       │
-   ┌──────▼──────┐        ┌──────▼──────┐
-   │  XGBoost    │        │ LSTM (x2)   │
-   │  Classifier │        │ hidden=128  │
-   │  (Baseline) │        │ dropout=0.3 │
-   └──────┬──────┘        └──────┬──────┘
-          │                      │
-          │               ┌──────▼──────┐
-          │               │  Attention  │
-          │               │  Mechanism  │
-          │               └──────┬──────┘
-          │                      │
-          │               ┌──────▼──────┐
-          │               │ FC: 128→64  │
-          │               │ ReLU+Drop   │
-          │               │ 64→1→Sigm   │
-          │               └──────┬──────┘
-          │                      │
-   ┌──────▼──────────────────────▼──────┐
-   │        FLOOD RISK SCORE            │
-   │     🟢 Safe  🟡 Moderate  🔴 High  │
-   └────────────────┬───────────────────┘
-                    │
-            ┌───────▼───────┐
-            │ SHAP Analysis │
-            │ (Explainable) │
-            └───────────────┘
-```
+| Tab | Feature | Description |
+|---|---|---|
+| 🌊 | **Risk Predictor** | XGBoost-based flood risk prediction for any district |
+| 🗺️ | **Risk Map** | Interactive dark-theme map of 736 districts |
+| 📈 | **Flood Trends** | NDMA historical data (2015–2024) with Plotly charts |
+| 📅 | **7-Day Forecast** | Weekly flood risk forecast with rainfall charts |
+| 🤖 | **FloodGuard AI** | AI chatbot powered by Groq LLaMA 3.3 |
+| 🛰️ | **Damage Classifier** | CNN-based flood damage assessment from images |
+| 🌿 | **Crop Disease** | EfficientNetB0 crop disease detector (13 classes) |
+| 🌾 | **Yield Predictor** | Random Forest + Gradient Boosting yield prediction |
+| 💰 | **Crop Loss Estimator** | Estimate financial loss from flood damage |
+| 🔔 | **Alert System** | Email alerts via Gmail SMTP |
+| ℹ️ | **About** | Project info and team |
 
 ---
 
-## 🔧 Feature Engineering
+## 🤖 ML Models
 
-| Feature | Description | Method |
-|---------|-------------|--------|
-| `rainfall_7day_cumsum` | 7-day cumulative rainfall | Rolling sum (window=7) |
-| `rainfall_30day_cumsum` | 30-day cumulative rainfall | Rolling sum (window=30) |
-| `api` | Antecedent Precipitation Index | EWM (span=7) |
-| `river_rise_rate` | Daily river level change | `.diff()` |
-| `rainfall_river_interaction` | Rainfall × River level | Product of 7-day rain × level |
-| `is_monsoon` | June–September flag | Binary (0/1) |
-| `month_sin` | Cyclical month (sine) | `sin(2π × month/12)` |
-| `month_cos` | Cyclical month (cosine) | `cos(2π × month/12)` |
+| Model | Architecture | Performance | Task |
+|---|---|---|---|
+| Flood Risk Predictor | XGBoost | AUC: **0.83** | Binary flood classification |
+| Flood Sequence Model | LSTM + Attention | Recall: **0.70** | Temporal flood prediction |
+| Damage Classifier | EfficientNetB0 | Accuracy: **89.6%** | Flood damage severity |
+| Crop Disease Detector | EfficientNetB0 | Accuracy: **98.4%** | 13-class disease detection |
+| Yield Predictor | RF + Gradient Boosting | R² optimized | Crop yield estimation |
 
 ---
 
-## 🚀 Installation & Setup
+## 📊 Coverage
+
+| Metric | Value |
+|---|---|
+| Districts covered | **736** |
+| States & UTs | **36** |
+| Training records | **4,695** |
+| Historical years | **2015–2024** |
+| Crop disease classes | **13** |
+| Languages supported | **English + हिंदी** |
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Tools |
+|---|---|
+| **Frontend** | Streamlit |
+| **ML/DL** | PyTorch, XGBoost, Scikit-learn |
+| **Computer Vision** | EfficientNetB0, torchvision |
+| **Visualization** | Plotly, Folium |
+| **AI Chatbot** | Groq API (LLaMA 3.3 70B) |
+| **Weather Data** | OpenWeatherMap API |
+| **Alert System** | Gmail SMTP |
+| **Maps** | Folium + CartoDB Dark tiles |
+| **Data** | NDMA, IMD, CWC |
+| **Language** | Python 3.9+ |
+
+---
+
+## 📦 Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-cd flood-risk-prediction
+git clone https://github.com/Y2XNishan/Floodguard-AI.git
+cd Floodguard-AI
 ```
 
-### 2. Create Virtual Environment
-```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Generate Sample Data
-```bash
-python data/generate_data.py
+### 3. Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+GMAIL_USER=your@gmail.com
+GMAIL_APP_PASSWORD=your_gmail_app_password
+GROQ_API_KEY=your_groq_api_key
+OPENWEATHERMAP_API_KEY=your_openweathermap_key
+GEMINI_API_KEY=your_gemini_key
 ```
 
-### 5. Run Preprocessing
-```bash
-python src/preprocessing.py
-```
-
-### 6. Train Models
-```bash
-# XGBoost (with Optuna tuning — ~5 min)
-python src/train_baseline.py
-
-# LSTM (may take 10-30 min depending on hardware)
-python src/train_lstm.py
-```
-
-### 7. Generate Explainability Plots
-```bash
-python src/explainability.py
-```
-
-### 8. Generate Flood Risk Map
-```bash
-python src/flood_map.py
-```
-
----
-
-## 🖥️ Running the Streamlit App
-
+### 4. Run the App
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-The app will open at `http://localhost:8501` with four pages:
-1. **🌊 Risk Predictor** — Make predictions with custom inputs
-2. **🗺️ Risk Map** — Interactive Assam flood risk map
-3. **📊 Model Performance** — Compare XGBoost vs LSTM
-4. **📈 Data Explorer** — Explore historical data with Plotly charts
-
----
-
-## 📊 Model Performance Results
-
-| Metric | XGBoost | LSTM |
-|--------|---------|------|
-| Accuracy | TBD | TBD |
-| F1 Score | TBD | TBD |
-| ROC-AUC | TBD | TBD |
-| Recall | TBD | TBD |
-| Precision | TBD | TBD |
-
-> Results will be populated after training. Run the training scripts to see actual performance.
-
 ---
 
 ## 📁 Project Structure
-
-```
 flood-risk-prediction/
-├── data/
-│   ├── raw/                    ← raw data downloads
-│   ├── processed/              ← preprocessed splits (.npy)
-│   ├── generate_data.py        ← synthetic data generator
-│   └── sample_data.csv         ← 5-year daily data (10 districts)
-├── notebooks/
-│   └── EDA.ipynb               ← exploratory data analysis
-├── src/
-│   ├── data_collection.py      ← data fetching module
-│   ├── preprocessing.py        ← cleaning & feature engineering
-│   ├── train_baseline.py       ← XGBoost + Optuna training
-│   ├── train_lstm.py           ← PyTorch LSTM + Attention
-│   ├── explainability.py       ← SHAP analysis & plots
-│   └── flood_map.py            ← Folium risk map generator
-├── models/
-│   ├── xgb_model.pkl           ← saved XGBoost model
-│   ├── lstm_model.pt           ← saved LSTM weights
-│   ├── scaler.pkl              ← fitted StandardScaler
-│   ├── loss_curve.png          ← LSTM training curve
-│   ├── shap_summary_plot.png   ← SHAP feature importance
-│   ├── shap_force_plot.html    ← SHAP force explanation
-│   └── shap_dependence_rainfall.png
 ├── app/
-│   └── streamlit_app.py        ← Streamlit web dashboard
-├── flood_risk_map.html         ← interactive Folium map
-├── requirements.txt
+│   └── streamlit_app.py      ← Main Streamlit application
+├── src/
+│   ├── alert_system.py       ← Email alert system
+│   ├── chatbot.py            ← Groq AI chatbot
+│   ├── forecast.py           ← 7-day forecast logic
+│   └── ...
+├── data/
+│   ├── ndma_flood_history.csv ← Historical flood data
+│   ├── india_districts.csv   ← 736 districts data
+│   └── processed/            ← Preprocessed datasets
+├── models/
+│   ├── xgb_real_model.pkl    ← XGBoost model
+│   ├── lstm_real_model.pt    ← LSTM model
+│   ├── flood_classifier.pth  ← Damage classifier
+│   ├── crop_disease_classifier.pth ← Crop disease model
+│   └── crop_yield_model.pkl  ← Yield predictor
+├── config.py                 ← App configuration
+├── requirements.txt          ← Dependencies
 └── README.md
-```
+flood-risk-prediction/
+├── app/
+│   └── streamlit_app.py      ← Main Streamlit application
+├── src/
+│   ├── alert_system.py       ← Email alert system
+│   ├── chatbot.py            ← Groq AI chatbot
+│   ├── forecast.py           ← 7-day forecast logic
+│   └── ...
+├── data/
+│   ├── ndma_flood_history.csv ← Historical flood data
+│   ├── india_districts.csv   ← 736 districts data
+│   └── processed/            ← Preprocessed datasets
+├── models/
+│   ├── xgb_real_model.pkl    ← XGBoost model
+│   ├── lstm_real_model.pt    ← LSTM model
+│   ├── flood_classifier.pth  ← Damage classifier
+│   ├── crop_disease_classifier.pth ← Crop disease model
+│   └── crop_yield_model.pkl  ← Yield predictor
+├── config.py                 ← App configuration
+├── requirements.txt          ← Dependencies
+└── README.md
+---
+
+## 🔑 API Keys Required
+
+| Service | Purpose | Get Key |
+|---|---|---|
+| Groq | AI Chatbot | [console.groq.com](https://console.groq.com) |
+| OpenWeatherMap | Live weather | [openweathermap.org](https://openweathermap.org) |
+| Gmail | Email alerts | Google Account → App Passwords |
+| Gemini (optional) | Backup chatbot | [aistudio.google.com](https://aistudio.google.com) |
+
+---
+
+## 🚨 Emergency Contacts
+
+| Service | Number |
+|---|---|
+| National Disaster Helpline | **1070** |
+| Emergency Services | **112** |
+| NDMA | **1078** |
+
+---
+
+## 🗺️ Districts Coverage
+
+FloodGuard AI covers all **736 districts** across **36 states and UTs** of India including high-risk zones:
+
+- 🔴 **High Risk:** Assam, Bihar, Odisha, West Bengal, Kerala, Uttar Pradesh
+- 🟡 **Moderate Risk:** Maharashtra, Andhra Pradesh, Tamil Nadu, Gujarat
+- 🟢 **Low Risk:** Rajasthan, Ladakh, Himachal Pradesh
+
+---
+
+## 📈 Flood Trends Analysis
+
+Historical flood data from **NDMA (2015–2024)** for all districts:
+- Year-over-year flood event frequency
+- Area affected (hectares)
+- People affected
+- Economic damage (₹ Crore)
+- Trend indicators (Increasing/Decreasing/Stable)
+
+---
+
+## 🌿 Crop Disease Detection
+
+Detects **13 crop diseases** including:
+- Apple Scab, Apple Black Rot
+- Corn Gray Leaf Spot, Corn Common Rust
+- Potato Early Blight, Potato Late Blight
+- Tomato diseases (7 classes)
+- And more...
+
+---
+
+## ⚠️ Important Notes
+
+- **Windows users:** `num_workers=0` is set for DataLoader compatibility
+- **Models:** Pre-trained models not included in repo due to size — use Git LFS or download separately
+- **API Keys:** Never commit `.env` file to GitHub
 
 ---
 
 ## 🔮 Future Improvements
 
-- [ ] **Real-time data integration** — Connect to live IMD/CWC APIs
-- [ ] **Satellite imagery** — Use Sentinel-2/MODIS flood extent mapping
-- [ ] **Transformer model** — Replace LSTM with temporal transformer
-- [ ] **Multi-task learning** — Predict both occurrence and severity
-- [ ] **Spatial features** — Add GNN for district-level spatial relationships
-- [ ] **Ensemble model** — Combine XGBoost + LSTM predictions
-- [ ] **Alert system** — SMS/email notifications for high-risk predictions
-- [ ] **Mobile app** — React Native companion app for field workers
+- [ ] Real-time IMD/CWC API integration
+- [ ] Satellite imagery flood extent mapping
+- [ ] WhatsApp alert integration
+- [ ] Mobile app (React Native)
+- [ ] Transformer model replacing LSTM
+- [ ] GNN for spatial district relationships
+
+---
+
+## 👨‍💻 Developer
+
+**Nishan Kashyap**
+- 🎓 BTech Computer Science — KIIT University
+- 📍 Jorhat, Assam, India
+- 🔗 [GitHub](https://github.com/Y2XNishan)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+MIT License — feel free to use, modify and distribute.
 
 ---
 
-<p align="center">
-  Built with ❤️ for flood-resilient communities in Assam, India
-</p>
+<div align="center">
+  <b>🌊 FloodGuard AI — Protecting Lives & Livelihoods across India</b><br>
+  <i>India Flood Risk Prediction & Agricultural Intelligence System</i>
+</div>
