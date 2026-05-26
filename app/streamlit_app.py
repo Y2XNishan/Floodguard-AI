@@ -9,10 +9,15 @@ from pathlib import Path
 
 APP_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_DIR.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 sys.path.insert(0, str(PROJECT_ROOT))
 MODELS_DIR = PROJECT_ROOT / "models"
-DATA_DIR = PROJECT_ROOT / "data"
+DATA_DIR = os.path.join(BASE_DIR, "data")
+if not os.path.exists(DATA_DIR):
+    DATA_DIR = os.path.join(os.getcwd(), "data")
+if not os.path.exists(DATA_DIR):
+    DATA_DIR = "/app/data"
 
 # Load environment variables (.env)
 try:
@@ -360,7 +365,7 @@ def get_text(key: str, lang_code: str = None) -> str:
     )
 
 MAP_PATH = PROJECT_ROOT / "flood_risk_map.html"
-INDIA_DISTRICTS_PATH = DATA_DIR / "india_districts.csv"
+INDIA_DISTRICTS_PATH = os.path.join(DATA_DIR, "india_districts.csv")
 
 DISTRICTS = ["Kamrup","Jorhat","Dibrugarh","Cachar","Sonitpur","Nagaon","Dhubri","Barpeta","Sibsagar","Lakhimpur"]
 
@@ -741,7 +746,9 @@ inject_custom_css()
 # ===== DATA & MODEL LOADING =====
 @st.cache_data
 def load_sample_data():
-    try: return pd.read_csv(os.path.join(DATA_DIR, "sample_data.csv"), parse_dates=["date"])
+    try:
+        data_path = os.path.join(DATA_DIR, "sample_data.csv")
+        return pd.read_csv(data_path, parse_dates=["date"])
     except: return pd.DataFrame()
 
 @st.cache_data
@@ -759,16 +766,30 @@ def load_india_districts():
 
 @st.cache_data
 def load_real_data():
-    path = os.path.join(DATA_DIR, "processed", "india_flood_clean.csv")
-    if os.path.exists(path):
-        return pd.read_csv(path)
+    data_path = os.path.join(DATA_DIR, "processed", "india_flood_clean.csv")
+    if os.path.exists(data_path):
+        return pd.read_csv(data_path)
     return load_sample_data()
 
 @st.cache_data
 def load_ndma_history():
-    path = os.path.join(DATA_DIR, "ndma_flood_history.csv")
-    if os.path.exists(path):
-        return pd.read_csv(path)
+    import os, pandas as pd
+    possible_paths = [
+        "data/processed/india_flood_clean.csv",
+        "data/raw/ndma_flood_records/ndma_flood_data.csv",
+        "data/india_flood_clean.csv",
+        os.path.join(os.path.dirname(__file__), "../data/processed/india_flood_clean.csv"),
+        os.path.join(os.path.dirname(__file__), "../../data/processed/india_flood_clean.csv"),
+        "/app/data/processed/india_flood_clean.csv",
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            try:
+                df = pd.read_csv(path)
+                if not df.empty:
+                    return df
+            except:
+                continue
     return pd.DataFrame()
 
 def get_state_helpline(state):
@@ -1144,6 +1165,16 @@ def render_ai_summary_card(summary):
         <div class="ai-summary-title">FloodGuard AI</div>
         <div class="ai-summary-body">{summary}</div>
     </div>""", unsafe_allow_html=True)
+
+def render_risk_overview_table(df):
+    """Render searchable district risk metadata."""
+    df = df[["state", "district", "flood_type", "lat", "lon"]].copy()
+    search_query = st.text_input("🔍 Search state or district", placeholder="e.g. Assam, Dibrugarh...", key="risk_overview_search")
+    filtered_df = df[df['state'].str.contains(search_query, case=False, na=False) | df['district'].str.contains(search_query, case=False, na=False)] if search_query else df
+    filtered_df = filtered_df.copy()
+    filtered_df['Risk Level'] = filtered_df['flood_type'].apply(lambda x: '🔴 High' if 'coastal' in str(x).lower() else ('🟡 Moderate' if 'river' in str(x).lower() else '🟢 Low'))
+    st.markdown(f"Showing **{len(filtered_df)}** of **{len(df)}** districts")
+    st.dataframe(filtered_df[['state','district','Risk Level','flood_type','lat','lon']], use_container_width=True, hide_index=True, height=400)
 
 def add_chat_message(role, content):
     """Append a timestamped chat message and keep history bounded."""
@@ -1727,9 +1758,9 @@ text-align: center; margin-top: 4px;">
 
         if mini_forecast_df is None or len(mini_forecast_df) == 0:
             import pandas as pd
-            from datetime import datetime
+            dt = datetime
             days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-            start_day = datetime.now().weekday()
+            start_day = dt.now().weekday()
             ordered_days = [days[(start_day + i) % 7] for i in range(7)]
             mini_forecast_df = pd.DataFrame({
                 'day': ordered_days,
@@ -1772,40 +1803,6 @@ text-align: center; margin-top: 4px;">
                         <span>LSTM</span>
                         <span style="color:{risk_color};">{lstm_score:.1f}%</span>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
-
-            # RIGHT COLUMN (col2) — 7-Day Forecast Panel:
-            with col2:
-                # Build forecast rows from mini_forecast_df
-                forecast_rows = ""
-                for _, row in mini_forecast_df.iterrows():
-                    pct = float(row.get('flood_probability_pct', 
-                                row.get('risk_probability', 20)))
-                    day = str(row.get('day', row.get('date_display', 'Day')))[:3]
-                    bar_color = "#22c55e" if pct < 30 else \
-                               "#f97316" if pct < 60 else "#ef4444"
-                    forecast_rows += f"""
-                    <div style="display:flex; align-items:center; gap:8px; 
-                    padding:6px 0; border-bottom:0.5px solid rgba(255,255,255,0.05);">
-                        <span style="font-size:12px; color:rgba(255,255,255,0.6); 
-                        min-width:28px;">{day}</span>
-                        <div style="flex:1; height:6px; background:rgba(255,255,255,0.08); 
-                        border-radius:3px; overflow:hidden;">
-                            <div style="width:{min(pct,100)}%; height:100%; 
-                            background:{bar_color}; border-radius:3px;"></div>
-                        </div>
-                        <span style="font-size:11px; font-weight:500; min-width:32px; 
-                        text-align:right; color:{bar_color};">{pct:.0f}%</span>
-                    </div>"""
-
-                st.markdown(f"""
-                <div style="background:rgba(255,255,255,0.03); border:0.5px solid 
-                rgba(255,255,255,0.08); border-radius:10px; padding:16px;">
-                    <div style="font-size:11px; color:rgba(255,255,255,0.4); 
-                    text-transform:uppercase; letter-spacing:0.5px; 
-                    margin-bottom:10px;">7-Day Forecast</div>
-                    {forecast_rows}
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -2037,11 +2034,7 @@ def page_map():
         st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
         st.markdown("### 📋 India Risk Overview (Offline)")
         districts_df = load_india_districts()
-        st.dataframe(
-            districts_df[["state", "district", "flood_type", "lat", "lon"]].head(200),
-            use_container_width=True,
-            hide_index=True,
-        )
+        render_risk_overview_table(districts_df)
         return
 
     districts_df = load_india_districts()
@@ -2150,11 +2143,7 @@ def page_map():
 
     st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
     st.markdown("### 📋 India Risk Overview")
-    st.dataframe(
-        districts_df[["state", "district", "flood_type", "lat", "lon"]].head(200),
-        use_container_width=True,
-        hide_index=True,
-    )
+    render_risk_overview_table(districts_df)
 
 # ===== PAGE 3: FLOODGUARD AI =====
 
@@ -2643,7 +2632,7 @@ def page_damage_classifier():
 
         if uploaded_file:
             image = Image.open(uploaded_file).convert("RGB")
-            st.image(image, caption="Uploaded Image", use_container_width=True)
+            st.image(image, caption="Uploaded Image", use_column_width=True)
 
             analyze = st.button(
                 "🔍 Classify Damage Severity",
@@ -3337,8 +3326,24 @@ def page_trends():
     # Load data
     df = load_ndma_history()
     if df.empty:
-        st.warning("Historical data file not found or empty.")
-        return
+        st.warning("Historical flood data not found.")
+        st.info("Searched paths: data/processed/india_flood_clean.csv, data/raw/ndma_flood_records/ndma_flood_data.csv, data/india_flood_clean.csv, app/../data/processed/india_flood_clean.csv, app/../../data/processed/india_flood_clean.csv, /app/data/processed/india_flood_clean.csv")
+        st.info(f"Working directory: {os.getcwd()}")
+        st.info(f"Files in data/: {os.listdir('data') if os.path.exists('data') else 'data/ folder not found'}")
+        st.info(f"Files in data/processed/: {os.listdir('data/processed') if os.path.exists('data/processed') else 'data/processed/ not found'}")
+        st.warning("Using sample data — upload india_flood_clean.csv to data/processed/ for real historical trends.")
+        import numpy as np
+        years = list(range(2010, 2024))
+        df = pd.DataFrame({
+            'year': years,
+            'district': ['Sample District'] * len(years),
+            'state': ['Sample State'] * len(years),
+            'flood_events': np.random.randint(1, 8, len(years)),
+            'area_affected_ha': np.random.randint(1000, 50000, len(years)),
+            'people_affected': np.random.randint(5000, 200000, len(years)),
+            'damage_cr': np.random.randint(10, 500, len(years))
+        })
+    df_trends = df
         
     # Filters Row (3 columns)
     col1, col2, col3 = st.columns(3)
@@ -3383,20 +3388,20 @@ def page_trends():
             selected_cols.append(("damage_cr", get_text("metric_damage", lang)))
 
     # Filter df to selected district
-    df_district = df[(df["state"] == selected_state) & (df["district"] == selected_district)].sort_values("year")
+    filtered = df_trends[(df_trends['state'] == selected_state) & (df_trends['district'] == selected_district)].sort_values("year")
     
     # Calculate stats
-    total_events = int(df_district["flood_events"].sum())
+    total_events = int(filtered["flood_events"].sum())
     
     # Worst year: year with max flood events
-    max_events_idx = df_district["flood_events"].idxmax()
-    worst_year = int(df_district.loc[max_events_idx, "year"])
+    max_events_idx = filtered["flood_events"].idxmax()
+    worst_year = int(filtered.loc[max_events_idx, "year"])
     
     # Peak people affected: max in any year
-    peak_people = int(df_district["people_affected"].max())
+    peak_people = int(filtered["people_affected"].max())
     
     # Total damage
-    total_damage = float(df_district["damage_cr"].sum())
+    total_damage = float(filtered["damage_cr"].sum())
     
     # Render Stat Cards
     c1, c2, c3, c4 = st.columns(4)
@@ -3430,8 +3435,8 @@ def page_trends():
         """, unsafe_allow_html=True)
 
     # Trend Indicator Calculation
-    df_recent = df_district[df_district["year"] >= 2020]
-    df_old = df_district[df_district["year"] < 2020]
+    df_recent = filtered[filtered["year"] >= 2020]
+    df_old = filtered[filtered["year"] < 2020]
     
     avg_recent = df_recent["flood_events"].mean() if not df_recent.empty else 0.0
     avg_old = df_old["flood_events"].mean() if not df_old.empty else 0.0
@@ -3474,8 +3479,8 @@ def page_trends():
     
     for i, (col, display_label) in enumerate(selected_cols):
         fig1.add_trace(go.Scatter(
-            x=df_district["year"],
-            y=df_district[col],
+            x=filtered["year"],
+            y=filtered[col],
             mode="lines+markers",
             name=display_label,
             line=dict(color=colors[i % len(colors)], width=3),
@@ -3518,10 +3523,10 @@ def page_trends():
     
     # CHART 2 — Bar Chart (Flood Events by Year)
     fig2 = go.Figure(go.Bar(
-        x=df_district["year"],
-        y=df_district["flood_events"],
+        x=filtered["year"],
+        y=filtered["flood_events"],
         marker=dict(
-            color=df_district["flood_events"],
+            color=filtered["flood_events"],
             colorscale=[[0.0, "#06b6d4"], [1.0, "#ef4444"]],
             showscale=False
         ),
