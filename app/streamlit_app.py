@@ -2037,6 +2037,7 @@ def page_map():
     )
     
     # 1. LEGEND — add to map
+    # Accessible legend: color-coded risk levels for screen readers
     legend_html = """
     <div style="position:fixed;bottom:30px;left:30px;z-index:1000;
       background:#1e293b;padding:12px 16px;border-radius:10px;
