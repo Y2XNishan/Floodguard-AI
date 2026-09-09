@@ -2828,7 +2828,7 @@ def page_yield_predictor():
         selected_state = st.selectbox(
             "Select State",
             options=states,
-            index=states.index(st.session_state["last_state"]) if st.session_state.get("last_state") in states else 0,
+            index=states.index(st.session_state.get("last_state")) if st.session_state.get("last_state") in states else 0,
             help="Select your state",
         )
 
