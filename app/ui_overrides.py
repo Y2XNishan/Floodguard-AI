@@ -150,6 +150,29 @@ def inject_ui_overrides() -> None:
         [data-testid="stSidebar"] hr {
           border-color: var(--fg-border) !important;
         }
+
+        .glass-card,
+        .metric-card,
+        .weather-card,
+        .chat-window,
+        .ai-summary-card,
+        .rec-box,
+        .stat-card {
+          background: var(--fg-surface) !important;
+          border-color: var(--fg-border) !important;
+          border-radius: 6px !important;
+          box-shadow: none !important;
+        }
+
+        .metric-card,
+        .stat-card {
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+
+        .weather-metrics {
+          grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)) !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
