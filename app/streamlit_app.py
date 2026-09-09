@@ -742,6 +742,8 @@ def inject_custom_css():
     )
 
 inject_custom_css()
+from ui_overrides import inject_ui_overrides
+inject_ui_overrides()
 
 # ===== DATA & MODEL LOADING =====
 @st.cache_data
