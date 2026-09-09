@@ -751,7 +751,8 @@ def load_sample_data():
     try:
         data_path = os.path.join(DATA_DIR, "sample_data.csv")
         return pd.read_csv(data_path, parse_dates=["date"])
-    except: return pd.DataFrame()
+    except Exception:
+        return pd.DataFrame()
 
 @st.cache_data
 def load_india_districts():
