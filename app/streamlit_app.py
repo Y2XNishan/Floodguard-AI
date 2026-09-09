@@ -804,7 +804,6 @@ def load_real_data():
 @st.cache_data
 def load_ndma_history():
     import os
-    import pandas as pd
 
     base = os.path.dirname(os.path.abspath(__file__))
 
@@ -1752,7 +1751,6 @@ text-align: center; margin-top: 4px;">
                 mini_forecast_df = None
 
         if mini_forecast_df is None or len(mini_forecast_df) == 0:
-            import pandas as pd
             dt = datetime
             days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
             start_day = dt.now().weekday()
