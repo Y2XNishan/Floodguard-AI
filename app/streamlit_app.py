@@ -1452,7 +1452,8 @@ gap:8px; margin-bottom:16px;">
                             cw = om.get("current_weather", {})
                             daily = om.get("daily", {})
                             hourly = om.get("hourly", {})
-                            precip = (daily.get("precipitation_sum") or [0])[0]
+                            precip_list = daily.get("precipitation_sum") or [0]
+                            precip = precip_list[0] if precip_list else 0
                             temp = cw.get("temperature", 28.0)
                             # Get real humidity from hourly data (use current hour)
                             humidity_list = hourly.get("relativehumidity_2m", [])
