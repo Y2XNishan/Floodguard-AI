@@ -9,6 +9,7 @@ where connectivity is unreliable.
 import json
 import os
 import socket
+import tempfile
 from datetime import datetime
 from pathlib import Path
 
@@ -38,8 +39,16 @@ def save_to_cache(key: str, data: dict):
         cache_data = dict(data)
         cache_data["_cached_at"] = datetime.now().strftime("%d %b %Y, %I:%M %p")
         cache_data["_cache_version"] = "1.0"
-        with open(_cache_file_for(key), "w", encoding="utf-8") as f:
-            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+        cache_file = _cache_file_for(key)
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=cache_file.parent,
+            delete=False,
+        ) as file:
+            json.dump(cache_data, file, ensure_ascii=False, indent=2)
+            temp_path = Path(file.name)
+        temp_path.replace(cache_file)
         return True
     except Exception as e:
         print(f"Cache save failed for {key}: {e}")
