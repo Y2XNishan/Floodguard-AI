@@ -173,6 +173,21 @@ def inject_ui_overrides() -> None:
         .weather-metrics {
           grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)) !important;
         }
+
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        [role="tab"]:focus-visible,
+        [data-baseweb="select"]:focus-within {
+          outline: 3px solid rgba(140, 228, 220, 0.7) !important;
+          outline-offset: 2px !important;
+          box-shadow: none !important;
+        }
+
+        [data-testid="stCheckbox"] label,
+        [data-testid="stRadio"] label {
+          color: var(--fg-text) !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
