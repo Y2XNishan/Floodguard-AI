@@ -344,8 +344,8 @@ def get_rainfall_forecast(district_name: str) -> list:
             if i < len(precipitation_sums):
                 precip_mm = _nonnegative_float(precipitation_sums[i], precip_mm)
                 
-            t_max = temp_maxs[i] if i < len(temp_maxs) and temp_maxs[i] is not None else 28.0
-            t_min = temp_mins[i] if i < len(temp_mins) and temp_mins[i] is not None else 20.0
+            t_max = _finite_float(temp_maxs[i], 28.0) if i < len(temp_maxs) else 28.0
+            t_min = _finite_float(temp_mins[i], 20.0) if i < len(temp_mins) else 20.0
             temp_avg = round((t_max + t_min) / 2.0, 1)
             
             forecast.append({
