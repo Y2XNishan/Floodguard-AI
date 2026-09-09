@@ -133,7 +133,7 @@ HIGH_RISK_DISTRICTS = [
 
 def get_high_risk_districts():
     """Return list of high-risk districts for pre-caching."""
-    return HIGH_RISK_DISTRICTS
+    return list(HIGH_RISK_DISTRICTS)
 
 
 def should_skip_map(is_online: bool) -> bool:
