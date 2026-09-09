@@ -98,12 +98,15 @@ def get_cache_age(key: str) -> str:
 
 def clear_all_cache():
     """Delete all cache files."""
-    for key, path in CACHE_FILES.items():
+    cleared = 0
+    for path in CACHE_FILES.values():
         try:
             if path.exists():
                 path.unlink()
+                cleared += 1
         except Exception:
             pass
+    return cleared
 
 
 def is_internet_available() -> bool:
