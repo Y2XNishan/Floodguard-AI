@@ -2111,10 +2111,11 @@ def page_map():
             "Kutch", "Banaskantha", "Patan", "Mahesana"
         ]
 
-        import random
+        import hashlib as _hl
         if district in LOW_RISK_DISTRICTS:
             risk_level = "LOW"
-            risk_score = round(random.uniform(5, 20), 1)
+            _seed = int(_hl.md5(district.encode()).hexdigest(), 16)
+            risk_score = round(5 + (_seed % 1500) / 100.0, 1)
             score = risk_score / 100.0
             
         risk_color = {
