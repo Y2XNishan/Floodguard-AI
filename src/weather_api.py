@@ -338,6 +338,9 @@ def get_rainfall_forecast(district_name: str) -> list:
                 precip_mm, desc = 50.0, "Thunderstorm ⛈️"
             else:
                 precip_mm, desc = 0.0, "Cloudy ☁️"
+
+            if i < len(precipitation_sums):
+                precip_mm = _nonnegative_float(precipitation_sums[i], precip_mm)
                 
             t_max = temp_maxs[i] if i < len(temp_maxs) and temp_maxs[i] is not None else 28.0
             t_min = temp_mins[i] if i < len(temp_mins) and temp_mins[i] is not None else 20.0
