@@ -72,7 +72,7 @@ def load_from_cache(key: str) -> dict | None:
 def is_cache_available(key: str) -> bool:
     """Check if cache file exists and is not empty."""
     try:
-        cache_file = CACHE_FILES[key]
+        cache_file = _cache_file_for(key)
         return cache_file.exists() and cache_file.stat().st_size > 0
     except Exception:
         return False
@@ -81,7 +81,7 @@ def is_cache_available(key: str) -> bool:
 def get_cache_age(key: str) -> str:
     """Return human-readable age of cache file."""
     try:
-        cache_file = CACHE_FILES[key]
+        cache_file = _cache_file_for(key)
         if cache_file.exists():
             mtime = datetime.fromtimestamp(cache_file.stat().st_mtime)
             diff = datetime.now() - mtime
