@@ -1456,7 +1456,7 @@ gap:8px; margin-bottom:16px;">
                             temp = cw.get("temperature", 28.0)
                             # Get real humidity from hourly data (use current hour)
                             humidity_list = hourly.get("relativehumidity_2m", [])
-                            humidity_val = int(humidity_list[min(datetime.now().hour, len(humidity_list) - 1)]) if humidity_list else 70
+                            humidity_val = int(humidity_list[min(datetime.now().hour, max(len(humidity_list) - 1, 0))]) if humidity_list else 70
 
                             # Decode Open-Meteo weather code to description
                             wmo_code = int(cw.get("weathercode", 0))
