@@ -280,7 +280,7 @@ def get_rainfall_forecast(district_name: str) -> list:
     params = {
         "latitude": lat,
         "longitude": lon,
-        "daily": "precipitation_probability_max,weathercode,temperature_2m_max,temperature_2m_min",
+        "daily": "precipitation_sum,precipitation_probability_max,weathercode,temperature_2m_max,temperature_2m_min",
         "timezone": "Asia/Kolkata",
         "forecast_days": 7,
     }
@@ -295,6 +295,7 @@ def get_rainfall_forecast(district_name: str) -> list:
         
         daily = forecast_data.get("daily", {})
         times = daily.get("time", [])
+        precipitation_sums = daily.get("precipitation_sum", [])
         precip_prob_max = daily.get("precipitation_probability_max", [])
         weathercodes = daily.get("weathercode", [])
         temp_maxs = daily.get("temperature_2m_max", [])
