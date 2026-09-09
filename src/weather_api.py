@@ -98,6 +98,7 @@ def calculate_daily_flood_risk(rainfall_mm, state):
 
 
 def get_daily_risk_level(risk_pct):
+    risk_pct = _nonnegative_float(risk_pct)
     if risk_pct < 20:
         return "Low"
     if risk_pct < 40:
