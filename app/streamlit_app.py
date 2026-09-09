@@ -736,6 +736,13 @@ def inject_custom_css():
         ::-webkit-scrollbar-thumb:hover {
           background: #06b6d4;
         }
+        .sidebar-field-label {
+          font-size: 12px !important;
+          color: rgba(255,255,255,0.4) !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.5px !important;
+          margin-bottom: 4px !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -1348,17 +1355,17 @@ gap:8px; margin-bottom:16px;">
 
     with st.sidebar:
         state_options = sorted(districts_df["state"].dropna().unique().tolist())
-        st.markdown('<p style="font-size:12px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">State</p>', unsafe_allow_html=True)
+        st.markdown('<p class="sidebar-field-label">State</p>', unsafe_allow_html=True)
         state = st.selectbox(" ", state_options, label_visibility="collapsed", key="state_select")
         
         district_options = sorted(districts_df.loc[districts_df["state"] == state, "district"].dropna().unique().tolist())
-        st.markdown('<p style="font-size:12px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">District</p>', unsafe_allow_html=True)
+        st.markdown('<p class="sidebar-field-label">District</p>', unsafe_allow_html=True)
         district = st.selectbox(" ", district_options, label_visibility="collapsed", key="district_select")
         
         district_profile = get_district_profile(state, district)
         weather_location = f"{district}, {state}"
         
-        st.markdown('<p style="font-size:12px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Date</p>', unsafe_allow_html=True)
+        st.markdown('<p class="sidebar-field-label">Date</p>', unsafe_allow_html=True)
         date = st.date_input(" ", label_visibility="collapsed", key="date_select")
 
         # --- OpenWeatherMap API Key ---
