@@ -24,6 +24,14 @@ CACHE_FILES = {
 }
 
 
+def _cache_file_for(key: str) -> Path:
+    """Resolve a supported cache key with a useful error for callers."""
+    try:
+        return CACHE_FILES[key]
+    except KeyError as exc:
+        raise ValueError(f"Unsupported cache key: {key}") from exc
+
+
 def save_to_cache(key: str, data: dict):
     """Save data to local JSON cache file with timestamp."""
     try:
