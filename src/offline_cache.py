@@ -35,10 +35,11 @@ def _cache_file_for(key: str) -> Path:
 def save_to_cache(key: str, data: dict):
     """Save data to local JSON cache file with timestamp."""
     try:
-        data["_cached_at"] = datetime.now().strftime("%d %b %Y, %I:%M %p")
-        data["_cache_version"] = "1.0"
-        with open(CACHE_FILES[key], "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+        cache_data = dict(data)
+        cache_data["_cached_at"] = datetime.now().strftime("%d %b %Y, %I:%M %p")
+        cache_data["_cache_version"] = "1.0"
+        with open(_cache_file_for(key), "w", encoding="utf-8") as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
         return True
     except Exception as e:
         print(f"Cache save failed for {key}: {e}")
