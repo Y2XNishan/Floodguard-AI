@@ -1098,11 +1098,13 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
     )
     fig_rain.update_layout(
         height=300,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="#0f172a",
+        plot_bgcolor="#1e293b",
         font={"color":"#e2e8f0","family":"Inter"},
         yaxis_title="Rainfall (mm)",
         xaxis_title="",
+        xaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
+        yaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
         margin=dict(l=10,r=10,t=10,b=10),
     )
     st.plotly_chart(fig_rain, use_container_width=True)
@@ -1118,10 +1120,11 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
     ))
     fig_risk.update_layout(
         height=240,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="#0f172a",
+        plot_bgcolor="#1e293b",
         font={"color":"#e2e8f0","family":"Inter"},
-        yaxis=dict(title="Flood Risk (%)", range=[0, 100]),
+        yaxis=dict(title="Flood Risk (%)", range=[0, 100], gridcolor="rgba(255,255,255,0.05)"),
+        xaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
         xaxis_title="",
         margin=dict(l=10,r=10,t=10,b=10),
     )
