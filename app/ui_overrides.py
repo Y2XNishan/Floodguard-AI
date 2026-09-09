@@ -76,6 +76,33 @@ def inject_ui_overrides() -> None:
           color: var(--fg-text) !important;
           font-weight: 600 !important;
         }
+
+        .stButton > button,
+        .stDownloadButton > button {
+          min-height: 2.5rem;
+          border-radius: 6px !important;
+          font-weight: 700 !important;
+          transition: background-color 120ms ease, border-color 120ms ease !important;
+        }
+
+        .stButton > button[kind="primary"] {
+          background: var(--fg-primary) !important;
+          color: #07201e !important;
+          border-color: var(--fg-primary) !important;
+        }
+
+        .stButton > button:not([kind="primary"]),
+        .stDownloadButton > button {
+          background: transparent !important;
+          color: #8ce4dc !important;
+          border-color: #4c8c88 !important;
+        }
+
+        .stButton > button:hover,
+        .stDownloadButton > button:hover {
+          transform: none !important;
+          filter: brightness(1.08);
+        }
         </style>
         """,
         unsafe_allow_html=True,
