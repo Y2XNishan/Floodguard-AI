@@ -85,8 +85,9 @@ def get_cache_age(key: str) -> str:
         if cache_file.exists():
             mtime = datetime.fromtimestamp(cache_file.stat().st_mtime)
             diff = datetime.now() - mtime
-            hours = int(diff.total_seconds() // 3600)
-            minutes = int((diff.total_seconds() % 3600) // 60)
+            total_seconds = max(int(diff.total_seconds()), 0)
+            hours, remainder = divmod(total_seconds, 3600)
+            minutes = remainder // 60
             if hours > 0:
                 return f"{hours} hour{'s' if hours > 1 else ''} ago"
             return f"{minutes} minute{'s' if minutes > 1 else ''} ago"
