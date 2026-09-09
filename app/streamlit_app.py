@@ -1778,7 +1778,7 @@ text-align: center; margin-top: 4px;">
             ordered_days = [days[(start_day + i) % 7] for i in range(7)]
             mini_forecast_df = pd.DataFrame({
                 'day': ordered_days,
-                'flood_probability_pct': [max(0.0, min(100.0, float(prob * 100) + ((hash(district) * (i+1)) % 21) - 10)) for i in range(7)]
+                'flood_probability_pct': [max(0.0, min(100.0, float(prob * 100) + ((int(__import__('hashlib').md5(district.encode()).hexdigest(), 16) * (i+1)) % 21) - 10)) for i in range(7)]
             })
 
         # Try/except block to wrap the HTML rendering as instructed
