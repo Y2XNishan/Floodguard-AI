@@ -2551,7 +2551,10 @@ def page_forecast():
             table_df = forecast_df[display_cols].copy()
             table_df.columns = ["Date", "Rainfall (mm)", "Flood Risk %", "Risk Level"]
             table_df["Flood Risk %"] = (table_df["Flood Risk %"] * 100).round(1).astype(str) + "%"
-            table_df["Date"] = table_df["Date"].dt.strftime("%a, %b %d")
+            try:
+                table_df["Date"] = pd.to_datetime(table_df["Date"]).dt.strftime("%a, %b %d")
+            except Exception:
+                pass  # Keep raw dates if parsing fails
             
             st.dataframe(table_df, use_container_width=True, hide_index=True)
 
