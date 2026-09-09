@@ -169,3 +169,12 @@ div[data-testid="stMetric"] { background:rgba(15,23,42,0.5); backdrop-filter:blu
 @keyframes spin { to { transform:rotate(360deg); } }
 .loading-spinner { display:inline-block; width:20px; height:20px; border:3px solid rgba(0,210,255,0.2);
                    border-top-color:#00d4ff; border-radius:50%; animation:spin 0.8s linear infinite; }
+
+/* Accessible focus indicators */
+.stTabs [role="tab"]:focus-visible {
+  outline: 2px solid #06b6d4 !important;
+  outline-offset: 2px !important;
+}
+
+/* Improve color contrast for muted text */
+.hero-text { color: #b0bec5 !important; }
