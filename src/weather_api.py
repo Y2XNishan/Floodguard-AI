@@ -54,7 +54,7 @@ def _nonnegative_float(value, default: float = 0.0) -> float:
 
 def calculate_daily_flood_risk(rainfall_mm, state):
     """Rule-based daily forecast risk using IMD daily rainfall thresholds."""
-    rainfall_mm = max(float(rainfall_mm or 0), 0.0)
+    rainfall_mm = _nonnegative_float(rainfall_mm)
 
     if rainfall_mm < 7.5:
         base_risk = 5
