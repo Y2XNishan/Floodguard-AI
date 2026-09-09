@@ -3425,17 +3425,14 @@ def page_trends():
     filtered = df_trends[(df_trends['state'] == selected_state) & (df_trends['district'] == selected_district)].sort_values("year")
     
     # Calculate stats
-    total_events = int(filtered["flood_events"].sum())
-    
-    # Worst year: year with max flood events
-    max_events_idx = filtered["flood_events"].idxmax()
-    worst_year = int(filtered.loc[max_events_idx, "year"])
-    
-    # Peak people affected: max in any year
-    peak_people = int(filtered["people_affected"].max())
-    
-    # Total damage
-    total_damage = float(filtered["damage_cr"].sum())
+    if filtered.empty:
+        total_events, worst_year, peak_people, total_damage = 0, 0, 0, 0.0
+    else:
+        total_events = int(filtered["flood_events"].sum())
+        max_events_idx = filtered["flood_events"].idxmax()
+        worst_year = int(filtered.loc[max_events_idx, "year"])
+        peak_people = int(filtered["people_affected"].max())
+        total_damage = float(filtered["damage_cr"].sum())
     
     # Render Stat Cards
     c1, c2, c3, c4 = st.columns(4)
