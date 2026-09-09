@@ -371,6 +371,9 @@ def subscribe_user(
 ) -> str:
     """Save a user subscription and return its generated id."""
     _ensure_csv(SUBSCRIPTIONS_FILE, SUBSCRIPTION_FIELDS)
+    contact = str(contact or "").strip()
+    if not contact:
+        raise ValueError("An alert contact is required")
     try:
         risk_threshold = int(risk_threshold)
     except (TypeError, ValueError):
