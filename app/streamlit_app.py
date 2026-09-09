@@ -3994,7 +3994,7 @@ def main():
             else:
                 st.sidebar.caption("No districts found")
 
-        st.sidebar.divider()
+        st.markdown("---")
 
         # --- Language Expander ---
         with st.sidebar.expander("🌐 Language / भाषा", expanded=True):
