@@ -131,6 +131,25 @@ def inject_ui_overrides() -> None:
           color: var(--fg-text) !important;
           font-variant-numeric: tabular-nums;
         }
+
+        [data-testid="stSidebar"] {
+          background: #0c1320 !important;
+          border-right-color: var(--fg-border) !important;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stExpander"] {
+          border-color: var(--fg-border) !important;
+          border-radius: 6px !important;
+        }
+
+        [data-testid="stSidebar"] .stButton > button {
+          min-height: 2.25rem;
+          text-align: left;
+        }
+
+        [data-testid="stSidebar"] hr {
+          border-color: var(--fg-border) !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
