@@ -1,0 +1,737 @@
+district,state,lat,lon,flood_type
+Nicobars,Andaman And Nicobar Islands,11.7401,92.7786,Coastal / river flood
+North And Middle Andaman,Andaman And Nicobar Islands,11.844816,92.544322,Coastal / river flood
+South Andamans,Andaman And Nicobar Islands,11.550823,92.67516,Coastal / river flood
+Alluri Sitharama Raju,Andhra Pradesh,16.091405,79.876971,Coastal / river flood
+Anakapalli,Andhra Pradesh,15.867751,79.48395,Coastal / river flood
+Ananthapuramu,Andhra Pradesh,15.754397,79.9888,Coastal / river flood
+Annamayya,Andhra Pradesh,16.231656,79.65459,Coastal / river flood
+Bapatla,Andhra Pradesh,15.589141,79.571462,Coastal / river flood
+Chittoor,Andhra Pradesh,13.215319,79.100032,Coastal / river flood
+Dr. B.R. Ambedkar Konaseema,Andhra Pradesh,15.958822,79.629134,Coastal / river flood
+East Godavari,Andhra Pradesh,16.969397,82.236435,Coastal / river flood
+Eluru,Andhra Pradesh,16.094106,79.797134,Coastal / river flood
+Guntur,Andhra Pradesh,16.297356,80.447394,Coastal / river flood
+Kakinada,Andhra Pradesh,15.856626,79.993837,Coastal / river flood
+Krishna,Andhra Pradesh,16.189204,81.136184,Coastal / river flood
+Kurnool,Andhra Pradesh,15.834985,78.041533,Coastal / river flood
+Nandyal,Andhra Pradesh,16.147517,80.019606,Coastal / river flood
+Ntr,Andhra Pradesh,15.930348,79.340381,Coastal / river flood
+Palnadu,Andhra Pradesh,15.828047,79.824853,Coastal / river flood
+Parvathipuram Manyam,Andhra Pradesh,16.067752,79.733239,Coastal / river flood
+Prakasam,Andhra Pradesh,15.514451,80.048738,Coastal / river flood
+Sri Potti Sriramulu Nellore,Andhra Pradesh,15.942268,79.963075,Coastal / river flood
+Sri Sathya Sai,Andhra Pradesh,16.06203,79.52702,Coastal / river flood
+Srikakulam,Andhra Pradesh,18.296866,83.891833,Coastal / river flood
+Tirupati,Andhra Pradesh,16.198688,79.905,Coastal / river flood
+Visakhapatnam,Andhra Pradesh,17.724253,83.305865,Coastal / river flood
+Vizianagaram,Andhra Pradesh,18.124612,83.406912,Coastal / river flood
+Anjaw,Arunachal Pradesh,27.894204,96.790213,Flash / glacial flood
+Bichom,Arunachal Pradesh,28.072348,94.674787,Flash / glacial flood
+Changlang,Arunachal Pradesh,27.087745,95.731123,Flash / glacial flood
+Dibang Valley,Arunachal Pradesh,28.850861,95.871559,Flash / glacial flood
+East Kameng,Arunachal Pradesh,27.333113,93.063248,Flash / glacial flood
+East Siang,Arunachal Pradesh,28.065355,95.333325,Flash / glacial flood
+Kamle,Arunachal Pradesh,28.017109,94.465993,Flash / glacial flood
+Keyi Panyor,Arunachal Pradesh,28.186188,95.091411,Flash / glacial flood
+Kra Daadi,Arunachal Pradesh,28.512911,94.457564,Flash / glacial flood
+Kurung Kumey,Arunachal Pradesh,27.861258,93.499644,Flash / glacial flood
+Leparada,Arunachal Pradesh,28.332278,94.832516,Flash / glacial flood
+Lohit,Arunachal Pradesh,27.925439,96.166869,Flash / glacial flood
+Longding,Arunachal Pradesh,28.081029,94.906305,Flash / glacial flood
+Lower Dibang Valley,Arunachal Pradesh,28.1375,95.798781,Flash / glacial flood
+Lower Siang,Arunachal Pradesh,27.9692,94.569297,Flash / glacial flood
+Lower Subansiri,Arunachal Pradesh,27.5556,93.812343,Flash / glacial flood
+Namsai,Arunachal Pradesh,28.386538,94.404041,Flash / glacial flood
+Pakke Kessang,Arunachal Pradesh,27.842123,94.864608,Flash / glacial flood
+Papum Pare,Arunachal Pradesh,27.101465,93.597901,Flash / glacial flood
+Shi Yomi,Arunachal Pradesh,28.152494,94.587322,Flash / glacial flood
+Siang,Arunachal Pradesh,28.160866,94.909006,Flash / glacial flood
+Tawang,Arunachal Pradesh,27.587899,91.885444,Flash / glacial flood
+Tirap,Arunachal Pradesh,26.991189,95.50663,Flash / glacial flood
+Upper Siang,Arunachal Pradesh,28.613345,95.066152,Flash / glacial flood
+Upper Subansiri,Arunachal Pradesh,28.029687,94.216858,Flash / glacial flood
+Bajali,Assam,25.920994,93.172217,Riverine flood
+Baksa,Assam,26.600219,92.955048,Riverine flood
+Barpeta,Assam,26.318438,91.012313,Riverine flood
+Biswanath,Assam,26.207361,93.092452,Riverine flood
+Bongaigaon,Assam,26.502443,90.564968,Riverine flood
+Cachar,Assam,24.820025,92.795038,Riverine flood
+Charaideo,Assam,26.41358,93.08673,Riverine flood
+Chirang,Assam,26.13675,92.649593,Riverine flood
+Darrang,Assam,26.441811,92.033565,Riverine flood
+Dhemaji,Assam,27.4844,94.594933,Riverine flood
+Dhubri,Assam,26.019042,89.991086,Riverine flood
+Dibrugarh,Assam,27.480193,94.912419,Riverine flood
+Dima Hasao,Assam,26.253613,92.791948,Riverine flood
+Goalpara,Assam,26.176465,90.631164,Riverine flood
+Golaghat,Assam,26.509522,93.974001,Riverine flood
+Hailakandi,Assam,24.709416,92.568191,Riverine flood
+Hojai,Assam,26.149374,93.228118,Riverine flood
+Jorhat,Assam,26.754666,94.218519,Riverine flood
+Kamrup,Assam,26.181061,91.751916,Riverine flood
+Kamrup Metropolitan,Assam,26.470836,93.232511,Riverine flood
+Karbi Anglong,Assam,25.838215,93.446934,Riverine flood
+Kokrajhar,Assam,26.40281,90.273819,Riverine flood
+Lakhimpur,Assam,27.236148,94.105136,Riverine flood
+Majuli,Assam,26.022095,92.800629,Riverine flood
+Morigaon,Assam,26.255106,92.337553,Riverine flood
+Nagaon,Assam,26.355771,92.686525,Riverine flood
+Nalbari,Assam,26.444776,91.445234,Riverine flood
+Sibsagar,Assam,26.524359,93.106138,Riverine flood
+Sonitpur,Assam,26.623221,92.791733,Riverine flood
+South Salmara Mancachar,Assam,26.154678,93.048466,Riverine flood
+Sribhumi,Assam,26.341078,92.872094,Riverine flood
+Tamulpur,Assam,26.019394,92.880466,Riverine flood
+Tinsukia,Assam,27.49208,95.370027,Riverine flood
+Araria,Bihar,26.137794,87.464469,Riverine flood
+Arwal,Bihar,24.85445,85.482305,Riverine flood
+Aurangabad,Bihar,24.749745,84.379225,Riverine flood
+Banka,Bihar,24.880617,86.919712,Riverine flood
+Begusarai,Bihar,25.409515,86.135757,Riverine flood
+Bhagalpur,Bihar,25.239305,86.974522,Riverine flood
+Bhojpur,Bihar,25.565465,84.677244,Riverine flood
+Buxar,Bihar,25.571102,83.98059,Riverine flood
+Darbhanga,Bihar,26.164221,85.910612,Riverine flood
+Gaya,Bihar,24.79151,85.004475,Riverine flood
+Gopalganj,Bihar,26.465323,84.444294,Riverine flood
+Jamui,Bihar,24.925934,86.216344,Riverine flood
+Jehanabad,Bihar,25.212198,84.982009,Riverine flood
+Kaimur (Bhabua),Bihar,25.040295,83.602718,Riverine flood
+Katihar,Bihar,25.537374,87.583497,Riverine flood
+Khagaria,Bihar,25.508751,86.472735,Riverine flood
+Kishanganj,Bihar,26.112966,87.9283,Riverine flood
+Lakhisarai,Bihar,25.176411,86.090783,Riverine flood
+Madhepura,Bihar,25.921099,86.792579,Riverine flood
+Madhubani,Bihar,26.356596,86.070431,Riverine flood
+Munger,Bihar,25.37403,86.47675,Riverine flood
+Muzaffarpur,Bihar,26.117382,85.406908,Riverine flood
+Nalanda,Bihar,25.194764,85.521417,Riverine flood
+Nawada,Bihar,24.887955,85.543198,Riverine flood
+Champaran,Bihar,26.804014,84.510335,Riverine flood
+Patna,Bihar,25.603125,85.119195,Riverine flood
+Purbi Champaran,Bihar,25.233071,85.134595,Riverine flood
+Purnea,Bihar,25.777226,87.47066,Riverine flood
+Rohtas,Bihar,24.92088,84.039698,Riverine flood
+Saharsa,Bihar,25.872235,86.59889,Riverine flood
+Samastipur,Bihar,25.846512,85.779185,Riverine flood
+Saran,Bihar,25.777293,84.751385,Riverine flood
+Sheikhpura,Bihar,25.147495,85.839471,Riverine flood
+Sheohar,Bihar,26.514445,85.29636,Riverine flood
+Sitamarhi,Bihar,26.59391,85.496766,Riverine flood
+Chandigarh,Chandigarh,30.731928,76.785486,Urban / river flood
+Balod,Chhattisgarh,21.532537,81.922374,Urban / river flood
+Balodabazar-Bhatapara,Chhattisgarh,21.109495,81.62445,Urban / river flood
+Balrampur-Ramanujganj,Chhattisgarh,21.235626,82.193277,Urban / river flood
+Bastar,Chhattisgarh,21.558306,81.631483,Urban / river flood
+Bemetara,Chhattisgarh,20.879081,81.848652,Urban / river flood
+Bijapur,Chhattisgarh,21.363553,81.950953,Urban / river flood
+Bilaspur,Chhattisgarh,22.074605,82.176189,Urban / river flood
+Dakshin Bastar Dantewada,Chhattisgarh,21.15657,82.011648,Urban / river flood
+Dhamtari,Chhattisgarh,20.703812,81.567596,Urban / river flood
+Durg,Chhattisgarh,21.188278,81.275855,Urban / river flood
+Gariyaband,Chhattisgarh,21.34255,82.154107,Urban / river flood
+Gaurela-Pendra-Marwahi,Chhattisgarh,21.4437,81.580312,Urban / river flood
+Janjgir-Champa,Chhattisgarh,22.003783,82.594618,Urban / river flood
+Jashpur,Chhattisgarh,22.892329,84.158393,Urban / river flood
+Kabeerdham,Chhattisgarh,21.232778,81.755234,Urban / river flood
+Khairagarh-Chhuikhadan-Gandai,Chhattisgarh,21.225687,82.011752,Urban / river flood
+Kondagaon,Chhattisgarh,21.447232,81.778368,Urban / river flood
+Korba,Chhattisgarh,22.337193,82.715651,Urban / river flood
+Korea,Chhattisgarh,21.418398,82.085382,Urban / river flood
+Mahasamund,Chhattisgarh,21.09393,82.111104,Urban / river flood
+Manendragarh-Chirmiri-Bharatpur(M C B),Chhattisgarh,21.016893,82.066991,Urban / river flood
+Mohla-Manpur-Ambagarh Chouki,Chhattisgarh,21.642311,81.897912,Urban / river flood
+Mungeli,Chhattisgarh,21.008464,81.571189,Urban / river flood
+Narayanpur,Chhattisgarh,21.2787,81.9861,Urban / river flood
+Raigarh,Chhattisgarh,21.908949,83.395958,Urban / river flood
+Raipur,Chhattisgarh,21.227374,81.629069,Urban / river flood
+Rajnandgaon,Chhattisgarh,21.089426,81.034625,Urban / river flood
+Sakti,Chhattisgarh,21.233551,81.61005,Urban / river flood
+Sarangarh-Bilaigarh,Chhattisgarh,21.120197,82.1149,Urban / river flood
+Sukma,Chhattisgarh,21.597456,81.78069,Urban / river flood
+Surajpur,Chhattisgarh,20.954941,81.697562,Urban / river flood
+Central,Delhi,28.840908,77.478377,Urban / river flood
+East,Delhi,28.750022,76.991634,Urban / river flood
+New Delhi,Delhi,28.563622,77.168006,Urban / river flood
+North,Delhi,28.885306,77.159634,Urban / river flood
+North East,Delhi,28.5916,76.907644,Urban / river flood
+North West,Delhi,28.647826,77.356337,Urban / river flood
+Shahdara,Delhi,28.94575,76.933295,Urban / river flood
+South,Delhi,28.376923,77.059426,Urban / river flood
+South East,Delhi,28.938717,77.382106,Urban / river flood
+South West,Delhi,28.721548,76.702881,Urban / river flood
+West,Delhi,28.619247,77.187353,Urban / river flood
+North Goa,Goa,15.480081,73.822329,Coastal / river flood
+South Goa,Goa,15.304936,73.959411,Coastal / river flood
+Ahmedabad,Gujarat,22.288068,71.415475,Coastal / river flood
+Amreli,Gujarat,21.598002,71.216081,Coastal / river flood
+Anand,Gujarat,22.566883,72.953775,Coastal / river flood
+Arvalli,Gujarat,22.544488,71.3574,Coastal / river flood
+Banas Kantha,Gujarat,24.185024,72.444088,Coastal / river flood
+Bharuch,Gujarat,21.69417,72.978556,Coastal / river flood
+Bhavnagar,Gujarat,21.77414,72.139722,Coastal / river flood
+Botad,Gujarat,22.113048,71.139387,Coastal / river flood
+Chhotaudepur,Gujarat,22.346432,71.360932,Coastal / river flood
+Dahod,Gujarat,22.316934,70.975067,Coastal / river flood
+Dangs,Gujarat,22.039418,71.332098,Coastal / river flood
+Devbhumi Dwarka,Gujarat,22.549218,71.243626,Coastal / river flood
+Gandhinagar,Gujarat,23.235737,72.671374,Coastal / river flood
+Gir Somnath,Gujarat,22.226888,71.556011,Coastal / river flood
+Jamnagar,Gujarat,22.471076,70.07265,Coastal / river flood
+Junagadh,Gujarat,21.522705,70.461296,Coastal / river flood
+Kachchh,Gujarat,23.251213,69.666108,Coastal / river flood
+Kheda,Gujarat,22.747316,72.695273,Coastal / river flood
+Mahesana,Gujarat,23.60274,72.385689,Coastal / river flood
+Mahisagar,Gujarat,22.51475,71.147251,Coastal / river flood
+Morbi,Gujarat,22.0099,71.033897,Coastal / river flood
+Narmada,Gujarat,21.875823,73.499823,Coastal / river flood
+Navsari,Gujarat,20.948755,72.925226,Coastal / river flood
+Panch Mahals,Gujarat,22.772915,73.60953,Coastal / river flood
+Patan,Gujarat,23.845103,72.111466,Coastal / river flood
+Porbandar,Gujarat,21.636581,69.59674,Coastal / river flood
+Rajkot,Gujarat,22.295207,70.805355,Coastal / river flood
+Sabar Kantha,Gujarat,23.605115,72.96492,Coastal / river flood
+Surat,Gujarat,21.205128,72.847119,Coastal / river flood
+Surendranagar,Gujarat,22.732978,71.614645,Coastal / river flood
+Tapi,Gujarat,22.301774,70.865223,Coastal / river flood
+Ambala,Haryana,30.376076,76.78821,Riverine flood
+Bhiwani,Haryana,28.791052,76.143875,Riverine flood
+Charkhi Dadri,Haryana,28.973947,76.000747,Riverine flood
+Faridabad,Haryana,28.427902,77.329409,Riverine flood
+Fatehabad,Haryana,29.516385,75.4548,Riverine flood
+Gurugram,Haryana,28.835725,76.114968,Riverine flood
+Hisar,Haryana,29.151765,75.725027,Riverine flood
+Jhajjar,Haryana,28.601349,76.6536,Riverine flood
+Jind,Haryana,29.318821,76.313347,Riverine flood
+Kaithal,Haryana,29.804185,76.399321,Riverine flood
+Karnal,Haryana,29.692495,76.985142,Riverine flood
+Kurukshetra,Haryana,29.962444,76.838151,Riverine flood
+Mahendragarh,Haryana,28.045836,76.11006,Riverine flood
+Nuh,Haryana,28.890268,76.173332,Riverine flood
+Palwal,Haryana,29.276133,76.143834,Riverine flood
+Panchkula,Haryana,30.722619,76.880191,Riverine flood
+Panipat,Haryana,29.387951,76.968552,Riverine flood
+Rewari,Haryana,28.198138,76.615433,Riverine flood
+Rohtak,Haryana,28.888214,76.587935,Riverine flood
+Sirsa,Haryana,29.531177,75.026343,Riverine flood
+Bilaspur,Himachal Pradesh,31.323902,76.761527,Flash / glacial flood
+Chamba,Himachal Pradesh,32.558843,76.126097,Flash / glacial flood
+Hamirpur,Himachal Pradesh,31.672705,76.521404,Flash / glacial flood
+Kangra,Himachal Pradesh,32.217751,76.31406,Flash / glacial flood
+Kinnaur,Himachal Pradesh,31.546954,78.26285,Flash / glacial flood
+Kullu,Himachal Pradesh,31.960573,77.107897,Flash / glacial flood
+Lahaul And Spiti,Himachal Pradesh,30.786044,77.25881,Flash / glacial flood
+Mandi,Himachal Pradesh,31.711956,76.932031,Flash / glacial flood
+Shimla,Himachal Pradesh,31.10003,77.171181,Flash / glacial flood
+Sirmaur,Himachal Pradesh,30.525617,77.230732,Flash / glacial flood
+Solan,Himachal Pradesh,30.910522,77.108405,Flash / glacial flood
+Una,Himachal Pradesh,31.46426,76.268458,Flash / glacial flood
+Anantnag,Jammu And Kashmir,33.8907,76.771056,Flash / glacial flood
+Bandipora,Jammu And Kashmir,33.834474,76.322363,Flash / glacial flood
+Baramulla,Jammu And Kashmir,33.53655,76.745405,Flash / glacial flood
+Budgam,Jammu And Kashmir,34.105377,76.619274,Flash / glacial flood
+Doda,Jammu And Kashmir,33.543583,76.296594,Flash / glacial flood
+Ganderbal,Jammu And Kashmir,33.760752,76.975819,Flash / glacial flood
+Jammu,Jammu And Kashmir,33.863053,76.491347,Flash / glacial flood
+Kathua,Jammu And Kashmir,33.623348,76.582961,Flash / glacial flood
+Kishtwar,Jammu And Kashmir,33.923748,76.69833,Flash / glacial flood
+Kulgam,Jammu And Kashmir,33.748832,76.353125,Flash / glacial flood
+Kupwara,Jammu And Kashmir,33.62907,76.78918,Flash / glacial flood
+Poonch,Jammu And Kashmir,34.066207,76.51235,Flash / glacial flood
+Pulwama,Jammu And Kashmir,33.492412,76.4112,Flash / glacial flood
+Rajouri,Jammu And Kashmir,33.887958,76.924307,Flash / glacial flood
+Ramban,Jammu And Kashmir,33.947247,76.213677,Flash / glacial flood
+Reasi,Jammu And Kashmir,33.667334,76.622122,Flash / glacial flood
+Samba,Jammu And Kashmir,33.923852,76.629213,Flash / glacial flood
+Shopian,Jammu And Kashmir,33.690468,76.407668,Flash / glacial flood
+Srinagar,Jammu And Kashmir,33.719966,76.793533,Flash / glacial flood
+Udhampur,Jammu And Kashmir,33.997482,76.436502,Flash / glacial flood
+Bokaro,Jharkhand,23.640657,86.162947,Urban / river flood
+Chatra,Jharkhand,24.208676,84.866295,Urban / river flood
+Deoghar,Jharkhand,24.481265,86.700615,Urban / river flood
+Dhanbad,Jharkhand,23.797727,86.436225,Urban / river flood
+Dumka,Jharkhand,24.271014,87.249367,Urban / river flood
+East Singhbum,Jharkhand,23.495922,85.175184,Urban / river flood
+Garhwa,Jharkhand,24.17351,83.81231,Urban / river flood
+Giridih,Jharkhand,24.189967,86.313267,Urban / river flood
+Godda,Jharkhand,24.829078,87.215924,Urban / river flood
+Gumla,Jharkhand,23.026635,84.534374,Urban / river flood
+Hazaribagh,Jharkhand,23.52479,84.961144,Urban / river flood
+Jamtara,Jharkhand,23.959798,86.788385,Urban / river flood
+Khunti,Jharkhand,23.986077,85.143092,Urban / river flood
+Koderma,Jharkhand,23.499334,85.233978,Urban / river flood
+Latehar,Jharkhand,23.75162,84.509376,Urban / river flood
+Lohardaga,Jharkhand,23.432486,84.681568,Urban / river flood
+Pakur,Jharkhand,23.415344,85.3924,Urban / river flood
+Palamu,Jharkhand,24.040242,84.069328,Urban / river flood
+Ramgarh,Jharkhand,23.440995,85.03825,Urban / river flood
+Ranchi,Jharkhand,23.363068,85.340321,Urban / river flood
+Sahebganj,Jharkhand,23.889806,85.045283,Urban / river flood
+Saraikela Kharsawan,Jharkhand,23.210581,85.262452,Urban / river flood
+Bagalkote,Karnataka,15.402153,75.798753,Coastal / river flood
+Ballari,Karnataka,15.310539,75.559048,Coastal / river flood
+Belagavi,Karnataka,15.19517,75.859448,Coastal / river flood
+Bengaluru Rural,Karnataka,15.540375,75.684532,Coastal / river flood
+Bengaluru South,Karnataka,15.10432,75.56477,Coastal / river flood
+Bengaluru Urban,Karnataka,15.38115,76.001907,Coastal / river flood
+Bidar,Karnataka,17.915869,77.531757,Coastal / river flood
+Chamarajanagar,Karnataka,14.969193,75.823658,Coastal / river flood
+Chikkaballapura,Karnataka,15.679823,75.882947,Coastal / river flood
+Chikkamagaluru,Karnataka,15.271378,75.603034,Coastal / river flood
+Chitradurga,Karnataka,14.227245,76.402839,Coastal / river flood
+Dakshina Kannada,Karnataka,12.863889,74.841219,Coastal / river flood
+Davanagere,Karnataka,15.099967,75.655666,Coastal / river flood
+Dharwad,Karnataka,15.452454,75.012073,Coastal / river flood
+Gadag,Karnataka,15.441432,75.646857,Coastal / river flood
+Hassan,Karnataka,13.008913,76.098149,Coastal / river flood
+Haveri,Karnataka,14.810215,75.407562,Coastal / river flood
+Kalaburagi,Karnataka,15.047064,75.418989,Coastal / river flood
+Kodagu,Karnataka,12.422433,75.744027,Coastal / river flood
+Kolar,Karnataka,13.135759,78.136263,Coastal / river flood
+Koppal,Karnataka,15.362997,76.167916,Coastal / river flood
+Mandya,Karnataka,12.517368,76.898666,Coastal / river flood
+Mysuru,Karnataka,15.272151,75.45785,Coastal / river flood
+Raichur,Karnataka,16.207752,77.358779,Coastal / river flood
+Shivamogga,Karnataka,15.636056,75.62849,Coastal / river flood
+Tumakuru,Karnataka,14.993541,75.545362,Coastal / river flood
+Udupi,Karnataka,13.359567,74.759237,Coastal / river flood
+Uttara Kannada,Karnataka,14.804209,74.131214,Coastal / river flood
+Vijayanagara,Karnataka,15.176822,75.779406,Coastal / river flood
+Alappuzha,Kerala,9.501632,76.329606,Coastal / river flood
+Ernakulam,Kerala,9.956764,76.292401,Coastal / river flood
+Idukki,Kerala,9.900515,77.176271,Coastal / river flood
+Kannur,Kerala,11.868687,75.36639,Coastal / river flood
+Kasaragod,Kerala,12.498305,74.990213,Coastal / river flood
+Kollam,Kerala,8.888392,76.609021,Coastal / river flood
+Kottayam,Kerala,9.595602,76.521426,Coastal / river flood
+Kozhikode,Kerala,11.239895,75.795215,Coastal / river flood
+Malappuram,Kerala,11.043786,76.085683,Coastal / river flood
+Palakkad,Kerala,10.772089,76.658319,Coastal / river flood
+Pathanamthitta,Kerala,9.294782,76.75528,Coastal / river flood
+Thiruvananthapuram,Kerala,8.490191,76.917805,Coastal / river flood
+Thrissur,Kerala,10.522671,76.21865,Coastal / river flood
+Wayanad,Kerala,11.606117,76.088347,Coastal / river flood
+Kargil,Ladakh,34.042842,77.228893,Flash / glacial flood
+Leh Ladakh,Ladakh,33.983553,77.939523,Flash / glacial flood
+Lakshadweep District,Lakshadweep,10.677566,72.595778,Coastal / river flood
+Agar-Malwa,Madhya Pradesh,22.827748,78.603887,Urban / river flood
+Alirajpur,Madhya Pradesh,23.061132,78.825432,Urban / river flood
+Anuppur,Madhya Pradesh,23.097789,81.701139,Urban / river flood
+Ashoknagar,Madhya Pradesh,24.568718,77.728572,Urban / river flood
+Balaghat,Madhya Pradesh,21.815447,80.1932,Urban / river flood
+Barwani,Madhya Pradesh,22.02929,74.891275,Urban / river flood
+Betul,Madhya Pradesh,21.903513,77.902064,Urban / river flood
+Bhind,Madhya Pradesh,26.564114,78.789336,Urban / river flood
+Bhopal,Madhya Pradesh,23.266323,77.414303,Urban / river flood
+Burhanpur,Madhya Pradesh,21.33186,76.20459,Urban / river flood
+Chhatarpur,Madhya Pradesh,24.915425,79.592243,Urban / river flood
+Chhindwara,Madhya Pradesh,22.057572,78.940098,Urban / river flood
+Damoh,Madhya Pradesh,23.824248,79.455215,Urban / river flood
+Datia,Madhya Pradesh,25.673026,78.458158,Urban / river flood
+Dewas,Madhya Pradesh,22.962736,76.071156,Urban / river flood
+Dhar,Madhya Pradesh,22.598554,75.314536,Urban / river flood
+Dindori,Madhya Pradesh,22.939702,81.083584,Urban / river flood
+Guna,Madhya Pradesh,24.644351,77.313136,Urban / river flood
+Gwalior,Madhya Pradesh,26.222524,78.168463,Urban / river flood
+Harda,Madhya Pradesh,22.336719,77.085484,Urban / river flood
+Indore,Madhya Pradesh,22.716881,75.867271,Urban / river flood
+Jabalpur,Madhya Pradesh,23.172246,79.937619,Urban / river flood
+Jhabua,Madhya Pradesh,22.769906,74.599553,Urban / river flood
+Katni,Madhya Pradesh,23.841092,80.397878,Urban / river flood
+Khandwa (East Nimar),Madhya Pradesh,22.693794,78.891517,Urban / river flood
+Khargone (West Nimar),Madhya Pradesh,23.373019,78.674348,Urban / river flood
+MAUGANJ,Madhya Pradesh,22.888547,78.572047,Urban / river flood
+Maihar,Madhya Pradesh,22.980161,78.811752,Urban / river flood
+Mandla,Madhya Pradesh,22.605889,80.370917,Urban / river flood
+Mandsaur,Madhya Pradesh,24.063675,75.074883,Urban / river flood
+Morena,Madhya Pradesh,26.500863,78.001752,Urban / river flood
+Narmadapuram,Madhya Pradesh,22.90955,78.368893,Urban / river flood
+Narsimhapur,Madhya Pradesh,22.948386,79.193312,Urban / river flood
+Neemuch,Madhya Pradesh,24.473691,74.876342,Urban / river flood
+Niwari,Madhya Pradesh,22.610877,78.487853,Urban / river flood
+Pandhurna,Madhya Pradesh,23.019322,78.767766,Urban / river flood
+Panna,Madhya Pradesh,24.719464,80.189266,Urban / river flood
+Raisen,Madhya Pradesh,23.33011,77.780588,Urban / river flood
+Rajgarh,Madhya Pradesh,24.005868,76.739744,Urban / river flood
+Ratlam,Madhya Pradesh,23.327034,75.040755,Urban / river flood
+Rewa,Madhya Pradesh,24.540725,81.288305,Urban / river flood
+Sagar,Madhya Pradesh,23.837188,78.749867,Urban / river flood
+Satna,Madhya Pradesh,24.566488,80.833433,Urban / river flood
+Sehore,Madhya Pradesh,23.206208,77.085006,Urban / river flood
+Seoni,Madhya Pradesh,22.088143,79.548337,Urban / river flood
+Shahdol,Madhya Pradesh,23.294345,81.360684,Urban / river flood
+Shajapur,Madhya Pradesh,23.423091,76.280682,Urban / river flood
+Sheopur,Madhya Pradesh,25.676035,76.698332,Urban / river flood
+Shivpuri,Madhya Pradesh,25.42602,77.653283,Urban / river flood
+Sidhi,Madhya Pradesh,24.409558,81.883792,Urban / river flood
+Singrauli,Madhya Pradesh,22.654644,78.74231,Urban / river flood
+Tikamgarh,Madhya Pradesh,24.743252,78.831962,Urban / river flood
+Ahilyanagar,Maharashtra,19.614692,75.338023,Coastal / river flood
+Akola,Maharashtra,20.710576,77.00373,Coastal / river flood
+Amravati,Maharashtra,20.937346,77.760249,Coastal / river flood
+Beed,Maharashtra,19.570294,75.656766,Coastal / river flood
+Bhandara,Maharashtra,21.169245,79.657152,Coastal / river flood
+Buldhana,Maharashtra,19.807774,75.460063,Coastal / river flood
+Chandrapur,Maharashtra,19.951685,79.295823,Coastal / river flood
+Chhatrapati Sambhajinagar,Maharashtra,20.078677,75.756974,Coastal / river flood
+Dharashiv,Maharashtra,19.516883,75.434294,Coastal / river flood
+Dhule,Maharashtra,20.90441,74.781243,Coastal / river flood
+Gadchiroli,Maharashtra,20.184794,80.007887,Coastal / river flood
+Gondia,Maharashtra,19.596648,75.720661,Coastal / river flood
+Hingoli,Maharashtra,19.713154,77.153409,Coastal / river flood
+Jalgaon,Maharashtra,21.009559,75.570044,Coastal / river flood
+Jalna,Maharashtra,19.848844,75.901627,Coastal / river flood
+Kolhapur,Maharashtra,16.694394,74.22406,Coastal / river flood
+Latur,Maharashtra,18.401122,76.576955,Coastal / river flood
+Mumbai,Maharashtra,18.987074,72.830007,Coastal / river flood
+Mumbai Suburban,Maharashtra,19.054135,72.832678,Coastal / river flood
+Nagpur,Maharashtra,21.148204,79.096814,Coastal / river flood
+Nanded,Maharashtra,19.159314,77.313188,Coastal / river flood
+Nandurbar,Maharashtra,21.36675,74.244736,Coastal / river flood
+Nashik,Maharashtra,20.006006,73.795878,Coastal / river flood
+Palghar,Maharashtra,19.970782,75.574202,Coastal / river flood
+Parbhani,Maharashtra,19.268358,76.777025,Coastal / river flood
+Pune,Maharashtra,18.525994,73.862602,Coastal / river flood
+Raigad,Maharashtra,19.783312,75.350289,Coastal / river flood
+Ratnagiri,Maharashtra,16.990597,73.297537,Coastal / river flood
+Sangli,Maharashtra,16.860757,74.57878,Coastal / river flood
+Satara,Maharashtra,17.690393,74.010744,Coastal / river flood
+Sindhudurg,Maharashtra,16.107985,73.714977,Coastal / river flood
+Solapur,Maharashtra,17.672099,75.907906,Coastal / river flood
+Thane,Maharashtra,19.205931,72.971198,Coastal / river flood
+Wardha,Maharashtra,20.735221,78.604456,Coastal / river flood
+Bishnupur,Manipur,24.632371,93.764667,Urban / river flood
+Chandel,Manipur,24.320947,93.989857,Urban / river flood
+Churachandpur,Manipur,24.334438,93.658102,Urban / river flood
+Imphal East,Manipur,24.811571,93.950799,Urban / river flood
+Imphal West,Manipur,24.729206,94.046778,Urban / river flood
+Jiribam,Manipur,24.720834,93.725094,Urban / river flood
+Kakching,Manipur,24.468844,94.0188,Urban / river flood
+Kamjong,Manipur,24.917537,93.962574,Urban / river flood
+Kangpokpi,Manipur,24.494495,93.66465,Urban / river flood
+Noney,Manipur,24.620626,94.233477,Urban / river flood
+Pherzawl,Manipur,24.943306,93.671683,Urban / river flood
+Senapati,Manipur,25.302888,94.048471,Urban / river flood
+Tamenglong,Manipur,24.996325,93.502375,Urban / river flood
+Tengnoupal,Manipur,24.656939,93.751448,Urban / river flood
+Thoubal,Manipur,24.637889,94.006052,Urban / river flood
+Ukhrul,Manipur,25.091234,94.363891,Urban / river flood
+East Garo Hills,Meghalaya,25.528369,90.593784,Urban / river flood
+East Jaintia Hills,Meghalaya,25.53085,91.654207,Urban / river flood
+East Khasi Hills,Meghalaya,25.588025,91.887356,Urban / river flood
+Eastern West Khasi Hills,Meghalaya,25.118893,91.475958,Urban / river flood
+North Garo Hills,Meghalaya,25.829523,91.535247,Urban / river flood
+Ri Bhoi,Meghalaya,25.915944,91.88132,Urban / river flood
+South Garo Hills,Meghalaya,25.200104,90.645557,Urban / river flood
+South West Garo Hills,Meghalaya,25.635532,91.278468,Urban / river flood
+South West Khasi Hills,Meghalaya,25.249667,91.307966,Urban / river flood
+West Garo Hills,Meghalaya,25.505214,90.280827,Urban / river flood
+West Jaintia Hills,Meghalaya,25.518226,91.075682,Urban / river flood
+West Khasi Hills,Meghalaya,25.518083,91.269445,Urban / river flood
+Aizawl,Mizoram,23.748659,92.728016,Urban / river flood
+Champhai,Mizoram,23.489023,93.345186,Urban / river flood
+Hnahthial,Mizoram,23.1645,93.0576,Urban / river flood
+Khawzawl,Mizoram,23.269216,92.823322,Urban / river flood
+Kolasib,Mizoram,24.252182,92.690303,Urban / river flood
+Lawngtlai,Mizoram,23.343005,93.074571,Urban / river flood
+Lunglei,Mizoram,22.888359,92.746609,Urban / river flood
+Mamit,Mizoram,23.942233,92.499553,Urban / river flood
+Saitual,Mizoram,23.483256,92.85219,Urban / river flood
+Serchhip,Mizoram,23.3256,92.864991,Urban / river flood
+Siaha,Mizoram,23.301308,93.313477,Urban / river flood
+Chumoukedima,Nagaland,26.204322,94.451534,Urban / river flood
+Dimapur,Nagaland,25.91789,93.746839,Urban / river flood
+Kiphire,Nagaland,26.339606,94.619534,Urban / river flood
+Kohima,Nagaland,25.684924,94.118903,Urban / river flood
+Longleng,Nagaland,26.102126,94.816237,Urban / river flood
+Meluri,Nagaland,26.40005,94.393195,Urban / river flood
+Mokokchung,Nagaland,26.321208,94.519572,Urban / river flood
+Mon,Nagaland,26.723923,95.031768,Urban / river flood
+Niuland,Nagaland,26.175848,94.162781,Urban / river flood
+Noklak,Nagaland,26.073547,94.647253,Urban / river flood
+Peren,Nagaland,26.313252,94.555639,Urban / river flood
+Phek,Nagaland,25.701797,94.465739,Urban / river flood
+Shamator,Nagaland,26.187768,94.785475,Urban / river flood
+Tseminyu,Nagaland,26.30753,94.34942,Urban / river flood
+Tuensang,Nagaland,26.229854,94.814512,Urban / river flood
+Wokha,Nagaland,26.0917,94.258877,Urban / river flood
+Zunheboto,Nagaland,26.009562,94.521241,Urban / river flood
+Anugul,Odisha,20.782653,85.461023,Coastal / river flood
+Balangir,Odisha,21.062566,85.052578,Coastal / river flood
+Baleshwar,Odisha,20.806048,85.045487,Coastal / river flood
+Bargarh,Odisha,21.039432,85.267032,Coastal / river flood
+Bhadrak,Odisha,21.009934,84.881167,Coastal / river flood
+Boudh,Odisha,20.732418,85.238198,Coastal / river flood
+Cuttack,Odisha,21.242218,85.149726,Coastal / river flood
+Deogarh,Odisha,20.750809,84.836693,Coastal / river flood
+Dhenkanal,Odisha,20.919888,85.462111,Coastal / river flood
+Gajapati,Odisha,21.246611,84.828264,Coastal / river flood
+Ganjam,Odisha,20.8317,85.0985,Coastal / river flood
+Jagatsinghapur,Odisha,21.065978,85.203216,Coastal / river flood
+Jajapur,Odisha,20.93514,84.909223,Coastal / river flood
+Jharsuguda,Odisha,20.814729,85.277005,Coastal / river flood
+Kalahandi,Odisha,21.20775,85.053351,Coastal / river flood
+Kandhamal,Odisha,20.7029,84.939997,Coastal / river flood
+Kendrapara,Odisha,21.03711,85.417256,Coastal / river flood
+Kendujhar,Odisha,21.120238,84.774741,Coastal / river flood
+Khordha,Odisha,20.575823,85.235308,Coastal / river flood
+Koraput,Odisha,21.062566,85.144422,Coastal / river flood
+Malkangiri,Odisha,20.886194,84.958022,Coastal / river flood
+Mayurbhanj,Odisha,20.894566,85.279706,Coastal / river flood
+Nabarangpur,Odisha,21.146556,84.986,Coastal / river flood
+Nayagarh,Odisha,20.697863,85.042226,Coastal / river flood
+Nuapada,Odisha,21.120905,85.34015,Coastal / river flood
+Puri,Odisha,20.994774,84.771323,Coastal / river flood
+Rayagada,Odisha,20.672094,85.333117,Coastal / river flood
+Sambalpur,Odisha,21.351319,85.115948,Coastal / river flood
+Karaikal,Puducherry,11.856747,79.723447,Coastal / river flood
+Puducherry,Puducherry,11.948361,79.963152,Coastal / river flood
+Amritsar,Punjab,31.623088,74.87248,Riverine flood
+Barnala,Punjab,30.924025,75.370568,Riverine flood
+Bathinda,Punjab,30.293282,74.951926,Riverine flood
+Faridkot,Punjab,30.67333,74.758547,Riverine flood
+Fatehgarh Sahib,Punjab,30.647528,76.406922,Riverine flood
+Fazilka,Punjab,31.495207,75.231442,Riverine flood
+Ferozepur,Punjab,30.784577,75.172153,Riverine flood
+Gurdaspur,Punjab,32.045131,75.408744,Riverine flood
+Hoshiarpur,Punjab,31.535053,75.914418,Riverine flood
+Jalandhar,Punjab,31.339673,75.581698,Riverine flood
+Kapurthala,Punjab,31.379585,75.385678,Riverine flood
+Ludhiana,Punjab,30.908679,75.851626,Riverine flood
+Malerkotla,Punjab,31.095874,75.631718,Riverine flood
+Mansa,Punjab,29.986894,75.390143,Riverine flood
+Moga,Punjab,30.801361,75.162775,Riverine flood
+Pathankot,Punjab,31.417336,75.636111,Riverine flood
+Patiala,Punjab,30.317367,76.407038,Riverine flood
+Rupnagar,Punjab,30.964466,76.526375,Riverine flood
+S.A.S Nagar,Punjab,31.336377,75.32464,Riverine flood
+Sangrur,Punjab,30.241479,75.841924,Riverine flood
+Shahid Bhagat Singh Nagar,Punjab,31.192249,75.59725,Riverine flood
+Ajmer,Rajasthan,26.460578,74.641756,Urban / river flood
+Alwar,Rajasthan,27.566581,76.610602,Urban / river flood
+Balotra,Rajasthan,27.347559,74.386438,Urban / river flood
+Banswara,Rajasthan,23.545683,74.448134,Urban / river flood
+Baran,Rajasthan,25.113409,76.513669,Urban / river flood
+Barmer,Rajasthan,25.743971,71.393059,Urban / river flood
+Beawar,Rajasthan,26.842594,74.160766,Urban / river flood
+Bharatpur,Rajasthan,27.213921,77.500799,Urban / river flood
+Bhilwara,Rajasthan,25.347483,74.637973,Urban / river flood
+Bikaner,Rajasthan,28.016543,73.317199,Urban / river flood
+Bundi,Rajasthan,25.442985,75.643423,Urban / river flood
+Chittorgarh,Rajasthan,26.789183,73.938294,Urban / river flood
+Churu,Rajasthan,28.300078,74.966601,Urban / river flood
+Dausa,Rajasthan,26.899411,76.334441,Urban / river flood
+Deeg,Rajasthan,26.868948,74.224661,Urban / river flood
+Dholpur,Rajasthan,27.169348,74.34003,Urban / river flood
+Didwana-Kuchaman,Rajasthan,26.994432,73.994825,Urban / river flood
+Dungarpur,Rajasthan,23.837104,73.716702,Urban / river flood
+Ganganagar,Rajasthan,29.928315,73.867201,Urban / river flood
+Hanumangarh,Rajasthan,29.577336,74.320427,Urban / river flood
+Jaipur,Rajasthan,26.914736,75.810664,Urban / river flood
+Jaisalmer,Rajasthan,26.911481,70.91459,Urban / river flood
+Jalore,Rajasthan,26.912934,74.263822,Urban / river flood
+Jhalawar,Rajasthan,24.592312,76.165807,Urban / river flood
+Jhunjhunu,Rajasthan,26.936068,74.049368,Urban / river flood
+Jodhpur,Rajasthan,26.279624,73.022778,Urban / river flood
+Karauli,Rajasthan,26.4987,77.022184,Urban / river flood
+Khairthal-Tijara,Rajasthan,26.733282,74.166674,Urban / river flood
+Kota,Rajasthan,25.179993,75.846204,Urban / river flood
+Kotputli-Behror,Rajasthan,27.055612,73.854289,Urban / river flood
+Nagaur,Rajasthan,27.200302,73.736974,Urban / river flood
+Pali,Rajasthan,25.777043,73.322215,Urban / river flood
+Phalodi,Rajasthan,26.909522,74.113184,Urban / river flood
+Pratapgarh,Rajasthan,27.04036,74.407177,Urban / river flood
+Rajsamand,Rajasthan,25.075336,73.860393,Urban / river flood
+Salumbar,Rajasthan,26.76775,74.263049,Urban / river flood
+Sawai Madhopur,Rajasthan,25.987844,76.381194,Urban / river flood
+Sikar,Rajasthan,27.610617,75.147048,Urban / river flood
+Gangtok,Sikkim,27.364462,88.835959,Flash / glacial flood
+Gyalshing,Sikkim,27.908877,88.375392,Flash / glacial flood
+Mangan,Sikkim,27.422134,88.466278,Flash / glacial flood
+Namchi,Sikkim,27.598506,88.652678,Flash / glacial flood
+Pakyong,Sikkim,27.590134,88.330994,Flash / glacial flood
+Soreng,Sikkim,27.338144,88.6247,Flash / glacial flood
+Ariyalur,Tamil Nadu,11.380937,78.713174,Coastal / river flood
+Chengalpattu,Tamil Nadu,10.957895,78.41525,Coastal / river flood
+Chennai,Tamil Nadu,13.074737,80.267689,Coastal / river flood
+Coimbatore,Tamil Nadu,10.994743,76.96688,Coastal / river flood
+Cuddalore,Tamil Nadu,11.75553,79.762325,Coastal / river flood
+Dharmapuri,Tamil Nadu,12.134803,78.161203,Coastal / river flood
+Dindigul,Tamil Nadu,10.361936,77.968908,Coastal / river flood
+Erode,Tamil Nadu,11.334348,77.72772,Coastal / river flood
+Kallakurichi,Tamil Nadu,11.350175,78.627532,Coastal / river flood
+Kancheepuram,Tamil Nadu,12.834822,79.715697,Coastal / river flood
+Kanniyakumari,Tamil Nadu,8.175865,77.440953,Coastal / river flood
+Karur,Tamil Nadu,10.948948,78.086832,Coastal / river flood
+Krishnagiri,Tamil Nadu,12.533802,78.228528,Coastal / river flood
+Madurai,Tamil Nadu,9.924937,78.129356,Coastal / river flood
+Mayiladuthurai,Tamil Nadu,11.081178,78.546034,Coastal / river flood
+Nagapattinam,Tamil Nadu,10.770587,79.834871,Coastal / river flood
+Namakkal,Tamil Nadu,11.225821,78.171836,Coastal / river flood
+Perambalur,Tamil Nadu,11.243109,78.866417,Coastal / river flood
+Pudukkottai,Tamil Nadu,10.383944,78.81216,Coastal / river flood
+Ramanathapuram,Tamil Nadu,9.363516,78.840969,Coastal / river flood
+Ranipet,Tamil Nadu,10.865293,78.857791,Coastal / river flood
+Salem,Tamil Nadu,11.65821,78.152968,Coastal / river flood
+Sivaganga,Tamil Nadu,9.860311,78.481581,Coastal / river flood
+Tenkasi,Tamil Nadu,11.1271,78.7769,Coastal / river flood
+Thanjavur,Tamil Nadu,10.785111,79.138403,Coastal / river flood
+The Nilgiris,Tamil Nadu,11.415521,76.705867,Coastal / river flood
+Theni,Tamil Nadu,9.999588,77.464364,Coastal / river flood
+Thiruvallur,Tamil Nadu,13.153773,79.915219,Coastal / river flood
+Thiruvarur,Tamil Nadu,10.780886,79.626455,Coastal / river flood
+Thoothukkudi,Tamil Nadu,8.810166,78.148882,Coastal / river flood
+Tiruchirappalli,Tamil Nadu,10.82225,78.681043,Coastal / river flood
+Tirunelveli,Tamil Nadu,8.730059,77.692464,Coastal / river flood
+Tirupathur,Tamil Nadu,11.173022,78.546034,Coastal / river flood
+Tiruppur,Tamil Nadu,10.986622,78.722406,Coastal / river flood
+Tiruvannamalai,Tamil Nadu,12.233386,79.07432,Coastal / river flood
+Adilabad,Telangana,17.9999,78.824444,Urban / river flood
+Bhadradri Kothagudem,Telangana,18.056126,79.273137,Urban / river flood
+Hanumakonda,Telangana,18.35405,78.850095,Urban / river flood
+Hyderabad,Telangana,17.785223,78.976226,Urban / river flood
+Jagitial,Telangana,18.347017,79.298906,Urban / river flood
+Jangoan,Telangana,18.129848,78.619681,Urban / river flood
+Jayashankar Bhupalapally,Telangana,18.027547,79.104153,Urban / river flood
+Jogulamba Gadwal,Telangana,18.267252,79.012539,Urban / river flood
+Kamareddy,Telangana,17.966852,78.89717,Urban / river flood
+Karimnagar,Telangana,18.141768,79.242375,Urban / river flood
+Khammam,Telangana,18.26153,78.80632,Urban / river flood
+Kumuram Bheem Asifabad,Telangana,17.824393,79.08315,Urban / river flood
+Mahabubabad,Telangana,18.398188,79.1843,Urban / river flood
+Mahabubnagar,Telangana,18.002642,78.671193,Urban / river flood
+Mancherial,Telangana,17.943353,79.381823,Urban / river flood
+Medak,Telangana,18.223266,78.973378,Urban / river flood
+Medchal Malkajgiri,Telangana,17.966748,78.966287,Urban / river flood
+Mulugu,Telangana,18.200132,79.187832,Urban / river flood
+Nagarkurnool,Telangana,18.170634,78.801967,Urban / river flood
+Nalgonda,Telangana,17.893118,79.158998,Urban / river flood
+Narayanpet,Telangana,18.402918,79.070526,Urban / river flood
+Nirmal,Telangana,17.911509,78.757493,Urban / river flood
+Nizamabad,Telangana,18.080588,79.382911,Urban / river flood
+Peddapalli,Telangana,18.407311,78.749064,Urban / river flood
+Rajanna Sircilla,Telangana,17.9924,79.0193,Urban / river flood
+Ranga Reddy,Telangana,18.226678,79.124016,Urban / river flood
+Sangareddy,Telangana,18.09584,78.830023,Urban / river flood
+Siddipet,Telangana,17.975429,79.197805,Urban / river flood
+Suryapet,Telangana,18.36845,78.974151,Urban / river flood
+Vikarabad,Telangana,17.8636,78.860797,Urban / river flood
+Wanaparthy,Telangana,18.19781,79.338056,Urban / river flood
+Dadra And Nagar Haveli,The Dadra And Nagar Haveli And Daman And Diu,20.349438,72.693141,Coastal / river flood
+Daman,The Dadra And Nagar Haveli And Daman And Diu,19.805023,73.153708,Coastal / river flood
+Diu,The Dadra And Nagar Haveli And Daman And Diu,20.291766,73.062822,Coastal / river flood
+Dhalai,Tripura,23.938769,91.868389,Urban / river flood
+Gomati,Tripura,23.883666,92.169406,Urban / river flood
+Khowai,Tripura,24.135656,91.8757,Urban / river flood
+North Tripura,Tripura,24.342116,92.017914,Urban / river flood
+Sepahijala,Tripura,24.110005,92.22985,Urban / river flood
+South Tripura,Tripura,23.53045,91.485363,Urban / river flood
+Unakoti,Tripura,23.661194,92.222817,Urban / river flood
+West Tripura,Tripura,23.827795,91.274175,Urban / river flood
+Agra,Uttar Pradesh,27.17568,78.008109,Riverine flood
+Aligarh,Uttar Pradesh,27.875204,78.068216,Riverine flood
+Ambedkar Nagar,Uttar Pradesh,26.413411,82.54027,Riverine flood
+Amethi,Uttar Pradesh,26.623625,80.975568,Riverine flood
+Amroha,Uttar Pradesh,27.05968,81.09533,Riverine flood
+Auraiya,Uttar Pradesh,26.460045,79.519467,Riverine flood
+Ayodhya,Uttar Pradesh,26.6817,81.231988,Riverine flood
+Azamgarh,Uttar Pradesh,26.053641,83.181213,Riverine flood
+Baghpat,Uttar Pradesh,28.934887,77.226645,Riverine flood
+Bahraich,Uttar Pradesh,27.577746,81.598143,Riverine flood
+Ballia,Uttar Pradesh,25.760427,84.155791,Riverine flood
+Balrampur,Uttar Pradesh,27.424362,82.195912,Riverine flood
+Banda,Uttar Pradesh,25.467372,80.325071,Riverine flood
+Bara Banki,Uttar Pradesh,26.931977,81.203728,Riverine flood
+Bareilly,Uttar Pradesh,28.361856,79.419697,Riverine flood
+Basti,Uttar Pradesh,26.801568,82.758574,Riverine flood
+Bhadohi,Uttar Pradesh,26.483089,80.914388,Riverine flood
+Bijnor,Uttar Pradesh,29.379583,78.13407,Riverine flood
+Budaun,Uttar Pradesh,28.034404,79.124138,Riverine flood
+Bulandshahr,Uttar Pradesh,28.400237,77.861025,Riverine flood
+Chandauli,Uttar Pradesh,25.258531,83.270958,Riverine flood
+Chitrakoot,Uttar Pradesh,25.210734,80.914156,Riverine flood
+Deoria,Uttar Pradesh,26.500556,83.783389,Riverine flood
+Etah,Uttar Pradesh,27.55673,78.657582,Riverine flood
+Etawah,Uttar Pradesh,26.77697,79.025561,Riverine flood
+Farrukhabad,Uttar Pradesh,27.367541,79.635106,Riverine flood
+Fatehpur,Uttar Pradesh,25.927961,80.817369,Riverine flood
+Firozabad,Uttar Pradesh,27.142217,78.398303,Riverine flood
+Gautam Buddha Nagar,Uttar Pradesh,28.567013,77.327519,Riverine flood
+Ghaziabad,Uttar Pradesh,28.660255,77.445653,Riverine flood
+Ghazipur,Uttar Pradesh,25.586118,83.581496,Riverine flood
+Gonda,Uttar Pradesh,27.133796,81.962471,Riverine flood
+Gorakhpur,Uttar Pradesh,26.759828,83.370935,Riverine flood
+Hamirpur,Uttar Pradesh,25.959941,80.117055,Riverine flood
+Hapur,Uttar Pradesh,26.612083,80.666594,Riverine flood
+Hardoi,Uttar Pradesh,27.395551,80.127149,Riverine flood
+Hathras,Uttar Pradesh,27.585241,78.05918,Riverine flood
+Jalaun,Uttar Pradesh,25.989945,79.454191,Riverine flood
+Jaunpur,Uttar Pradesh,25.748744,82.687741,Riverine flood
+Jhansi,Uttar Pradesh,25.462975,78.57546,Riverine flood
+Kannauj,Uttar Pradesh,27.056124,79.926694,Riverine flood
+Kanpur Dehat,Uttar Pradesh,26.375967,79.955267,Riverine flood
+Kanpur Nagar,Uttar Pradesh,26.461855,80.344194,Riverine flood
+Kasganj,Uttar Pradesh,26.956458,81.294307,Riverine flood
+Kaushambi,Uttar Pradesh,25.524545,81.383437,Riverine flood
+Kheri,Uttar Pradesh,27.947796,80.788432,Riverine flood
+Kushinagar,Uttar Pradesh,26.907172,83.985134,Riverine flood
+Lalitpur,Uttar Pradesh,24.691585,78.418609,Riverine flood
+Lucknow,Uttar Pradesh,26.83323,80.943614,Riverine flood
+Mahoba,Uttar Pradesh,25.286105,79.880627,Riverine flood
+Mahrajganj,Uttar Pradesh,26.556182,80.894974,Riverine flood
+Mainpuri,Uttar Pradesh,27.229325,79.049369,Riverine flood
+Mathura,Uttar Pradesh,27.494256,77.684411,Riverine flood
+Mau,Uttar Pradesh,25.947961,83.561419,Riverine flood
+Meerut,Uttar Pradesh,28.986554,77.70386,Riverine flood
+Mirzapur,Uttar Pradesh,25.143896,82.562668,Riverine flood
+Moradabad,Uttar Pradesh,28.832848,78.780652,Riverine flood
+Muzaffarnagar,Uttar Pradesh,29.471716,77.700412,Riverine flood
+Pilibhit,Uttar Pradesh,28.634994,79.812128,Riverine flood
+Pratapgarh,Uttar Pradesh,25.93741,81.995137,Riverine flood
+Prayagraj,Uttar Pradesh,26.76129,80.627444,Riverine flood
+Rae Bareli,Uttar Pradesh,26.231689,81.230631,Riverine flood
+Rampur,Uttar Pradesh,28.791807,79.029148,Riverine flood
+Saharanpur,Uttar Pradesh,29.965049,77.553476,Riverine flood
+Sambhal,Uttar Pradesh,26.912206,81.086678,Riverine flood
+Sant Kabir Nagar,Uttar Pradesh,26.778133,83.086966,Riverine flood
+Shahjahanpur,Uttar Pradesh,27.871092,79.908609,Riverine flood
+Shamli,Uttar Pradesh,27.100537,81.002474,Riverine flood
+Shrawasti,Uttar Pradesh,27.700545,81.931928,Riverine flood
+Siddharthnagar,Uttar Pradesh,27.246253,83.066141,Riverine flood
+Sitapur,Uttar Pradesh,27.563585,80.686343,Riverine flood
+Sonbhadra,Uttar Pradesh,24.687697,83.069029,Riverine flood
+Almora,Uttarakhand,30.151653,79.104153,Flash / glacial flood
+Bageshwar,Uttarakhand,30.060039,78.864448,Flash / glacial flood
+Chamoli,Uttarakhand,29.94467,79.164848,Flash / glacial flood
+Champawat,Uttarakhand,30.289875,78.989932,Flash / glacial flood
+Dehradun,Uttarakhand,29.85382,78.87017,Flash / glacial flood
+Haridwar,Uttarakhand,30.13065,79.307307,Flash / glacial flood
+Nainital,Uttarakhand,30.2318,78.733512,Flash / glacial flood
+Pauri Garhwal,Uttarakhand,29.718693,79.129058,Flash / glacial flood
+Pithoragarh,Uttarakhand,30.429323,79.188347,Flash / glacial flood
+Rudraprayag,Uttarakhand,30.020878,78.908434,Flash / glacial flood
+Tehri Garhwal,Uttarakhand,30.013787,79.164952,Flash / glacial flood
+Udham Singh Nagar,Uttarakhand,30.235332,78.931568,Flash / glacial flood
+Uttarkashi,Uttarakhand,29.849467,78.961066,Flash / glacial flood
+Alipurduar,West Bengal,23.126498,88.074282,Coastal / river flood
+Bankura,West Bengal,23.249965,87.061434,Coastal / river flood
+Birbhum,West Bengal,23.908735,87.534251,Coastal / river flood
+Cooch Behar,West Bengal,23.350411,87.886812,Coastal / river flood
+Dakshin Dinajpur,West Bengal,25.230003,88.789755,Coastal / river flood
+Darjeeling,West Bengal,22.9868,87.975,Coastal / river flood
+Hooghly,West Bengal,23.091516,87.740722,Coastal / river flood
+Howrah,West Bengal,22.797523,87.87156,Coastal / river flood
+Jalpaiguri,West Bengal,26.527845,88.719039,Coastal / river flood
+Jhargram,West Bengal,22.941651,87.59895,Coastal / river flood
+Kalimpong,West Bengal,22.828297,88.1038,Coastal / river flood
+Kolkata,West Bengal,22.548783,88.39894,Coastal / river flood
+Malda,West Bengal,22.663041,87.686462,Coastal / river flood
+Murshidabad,West Bengal,24.100513,88.278789,Coastal / river flood
+Nadia,West Bengal,23.418592,88.504458,Coastal / river flood
+North 24 Parganas,West Bengal,22.846322,87.920506,Coastal / river flood
+Paschim Bardhaman,West Bengal,23.168006,87.912134,Coastal / river flood
+Paschim Medinipur,West Bengal,22.8743,87.660144,Coastal / river flood
+Purba Bardhaman,West Bengal,22.930526,88.108837,Coastal / river flood
+Purba Medinipur,West Bengal,23.22845,87.685795,Coastal / river flood
+Purulia,West Bengal,22.659623,87.811926,Coastal / river flood

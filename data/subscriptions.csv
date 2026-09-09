@@ -1,0 +1,4 @@
+id,name,district,state,alert_type,contact,risk_threshold,send_daily,subscribed_date,is_active
+20260520143022521223,Nishan Kashyap,Kamrup Metropolitan,Assam,SMS,08752914749,60,True,2026-05-20T14:30:22,True
+20260520153744559229,Nishan Kashyap,Kamrup Metropolitan,Assam,Email,nishankashyap2004@gmail.com,47,True,2026-05-20T15:37:44,True
+20260521183300653114,Nishankashyap2004,Kamrup,Assam,Email,nishankashyap2004@gmail.com,60,True,2026-05-21T18:33:00,True
