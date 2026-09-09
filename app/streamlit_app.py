@@ -1610,38 +1610,7 @@ text-align: center; margin-top: 4px;">
             use_container_width=True):
             st.session_state.input_mode = "expert"
 
-        # Dynamic CSS styling for active/inactive input mode buttons
-        if st.session_state.input_mode == "simple":
-            active_btn_css = """
-            <style>
-            section[data-testid="stSidebar"] div[data-testid="stHorizontalBlock"]:nth-of-type(3) div[data-testid="column"]:nth-of-type(1) button {
-                border: 2px solid #06b6d4 !important;
-                background: #1e293b !important;
-                color: #06b6d4 !important;
-            }
-            section[data-testid="stSidebar"] div[data-testid="stHorizontalBlock"]:nth-of-type(3) div[data-testid="column"]:nth-of-type(2) button {
-                border: 1px solid #334155 !important;
-                background: transparent !important;
-                color: #cbd5e1 !important;
-            }
-            </style>
-            """
-        else:
-            active_btn_css = """
-            <style>
-            section[data-testid="stSidebar"] div[data-testid="stHorizontalBlock"]:nth-of-type(3) div[data-testid="column"]:nth-of-type(1) button {
-                border: 1px solid #334155 !important;
-                background: transparent !important;
-                color: #cbd5e1 !important;
-            }
-            section[data-testid="stSidebar"] div[data-testid="stHorizontalBlock"]:nth-of-type(3) div[data-testid="column"]:nth-of-type(2) button {
-                border: 2px solid #06b6d4 !important;
-                background: #1e293b !important;
-                color: #06b6d4 !important;
-            }
-            </style>
-            """
-        render_html(active_btn_css)
+        # No fragile nth-of-type CSS needed — active mode is indicated by the button labels above
 
         disable_inputs = st.session_state.using_live_weather and not st.session_state.manual_override
         if st.session_state.input_mode == "simple":
