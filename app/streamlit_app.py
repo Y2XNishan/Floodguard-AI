@@ -1734,6 +1734,7 @@ text-align: center; margin-top: 4px;">
                 "state": state,
                 "risk_score": float(prob),
                 "risk_level": risk_level_from_score(prob),
+                "_cached_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
             })
         except Exception:
             pass
