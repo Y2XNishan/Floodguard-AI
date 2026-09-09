@@ -58,7 +58,11 @@ for i, df in enumerate(dfs):
         print(f"File {i+1}: None")
 
 # For merging, since different structures, we'll concatenate all dataframes
-master_df = pd.concat(dfs, ignore_index=True, sort=False)
+if not dfs:
+    print("No data files found to merge.")
+    master_df = pd.DataFrame()
+else:
+    master_df = pd.concat(dfs, ignore_index=True, sort=False)
 
 # Save to CSV
 output_path = 'data/processed/india_flood_master.csv'
@@ -72,7 +76,7 @@ columns = list(master_df.columns)
 flood_count = 0
 if 'Flood Occurred' in master_df.columns:
     flood_count = master_df['Flood Occurred'].sum()
-    flood_rate = flood_count / total_rows * 100
+    flood_rate = flood_count / total_rows * 100 if total_rows > 0 else 0
 else:
     flood_rate = 0  # or estimate
 
@@ -84,7 +88,7 @@ if date_cols:
         try:
             dates = pd.to_datetime(master_df[col], errors='coerce')
             all_dates.extend(dates.dropna())
-        except:
+        except Exception:
             pass
     if all_dates:
         min_date = min(all_dates)
