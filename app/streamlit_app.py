@@ -1321,13 +1321,17 @@ def page_predictor():
     model, scaler, features = load_xgb_model()
     districts_df = load_india_districts()
     real_df = load_real_data()
-    st.markdown("""
+    n_districts = len(districts_df['district'].unique()) if not districts_df.empty else 736
+    n_states = len(districts_df['state'].unique()) if not districts_df.empty else 36
+    n_records = len(real_df) if not real_df.empty else 4695
+
+    st.markdown(f"""
 <div style="display:grid; grid-template-columns:repeat(4,1fr); 
 gap:8px; margin-bottom:16px;">
     <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
     rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
     text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">736</div>
+        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_districts}</div>
         <div style="font-size:10px; color:rgba(255,255,255,0.35); 
         text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
         Districts</div>
@@ -1335,7 +1339,7 @@ gap:8px; margin-bottom:16px;">
     <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
     rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
     text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">36</div>
+        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_states}</div>
         <div style="font-size:10px; color:rgba(255,255,255,0.35); 
         text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
         States</div>
@@ -1343,7 +1347,7 @@ gap:8px; margin-bottom:16px;">
     <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
     rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
     text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">4,695</div>
+        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_records:,}</div>
         <div style="font-size:10px; color:rgba(255,255,255,0.35); 
         text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
         Records</div>
