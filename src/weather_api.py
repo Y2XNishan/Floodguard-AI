@@ -133,6 +133,11 @@ def _find_district_coords(district_name: str):
     if normalized in DISTRICT_COORDS:
         return DISTRICT_COORDS[normalized]
 
+    normalized_casefold = normalized.casefold()
+    for known_name, coordinates in DISTRICT_COORDS.items():
+        if known_name.casefold() == normalized_casefold:
+            return coordinates
+
     parts = [part.strip() for part in normalized.split(",") if part.strip()]
     if len(parts) >= 2:
         exact = f"{parts[0]}, {parts[1]}"
