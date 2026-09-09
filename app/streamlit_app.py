@@ -975,9 +975,6 @@ def build_features(district, rainfall, river_level, temp, humidity, month, soil_
         "terrain_rain_risk": terrain_rain_risk,
     }
 
-    # Debug: print to terminal for verification
-    print(f"\n[build_features] {district}: rain={rainfall}, r30={rain_30d}, "
-          f"elev={elev}, fp={is_flood_plain}, year={model_year}, monsoon={is_monsoon}")
 
     return feat
 
@@ -991,7 +988,6 @@ def predict_risk(model, scaler, features, feat_dict):
     vec = df.values
     # xgb_real_model was trained on raw (unscaled) features
     prob = model.predict_proba(vec)[0][1]
-    print(f"[predict_risk] prob={prob*100:.1f}%")
     return prob
 
 def get_top_shap_drivers(scaler, features, feat_dict, fallback_count=5):
