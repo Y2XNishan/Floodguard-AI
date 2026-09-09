@@ -383,6 +383,19 @@ DISTRICT_ELEVATIONS = _ELEV_MAP if _ELEV_MAP else {
     "Sibsagar": 95, "Lakhimpur": 102,
 }
 
+LOW_RISK_DISTRICTS = [
+    "Jaisalmer", "Barmer", "Bikaner", "Jodhpur", "Churu",
+    "Jalore", "Sirohi", "Pali", "Nagaur", "Sikar",
+    "Ladakh", "Leh", "Kargil", "Lahaul And Spiti",
+    "Kinnaur", "Dibang Valley", "Anjaw", "Tawang",
+    "Upper Siang", "West Kameng", "East Kameng",
+    "Phek", "Longleng", "Kiphire", "Tuensang",
+    "Senapati", "Ukhrul", "Chandel", "Churachandpur",
+    "Ri Bhoi", "East Khasi Hills", "West Jaintia Hills",
+    "Hamirpur", "Una", "Bilaspur", "Solan",
+    "Kutch", "Banaskantha", "Patan", "Mahesana"
+]
+
 STATE_HELPLINES = {
     "Assam": "1070",
     "Bihar": "0612-2294204",
@@ -2065,18 +2078,7 @@ def page_map():
             
         risk_score = score * 100
         
-        LOW_RISK_DISTRICTS = [
-            "Jaisalmer", "Barmer", "Bikaner", "Jodhpur", "Churu",
-            "Jalore", "Sirohi", "Pali", "Nagaur", "Sikar",
-            "Ladakh", "Leh", "Kargil", "Lahaul And Spiti",
-            "Kinnaur", "Dibang Valley", "Anjaw", "Tawang",
-            "Upper Siang", "West Kameng", "East Kameng",
-            "Phek", "Longleng", "Kiphire", "Tuensang",
-            "Senapati", "Ukhrul", "Chandel", "Churachandpur",
-            "Ri Bhoi", "East Khasi Hills", "West Jaintia Hills",
-            "Hamirpur", "Una", "Bilaspur", "Solan",
-            "Kutch", "Banaskantha", "Patan", "Mahesana"
-        ]
+
 
         import hashlib as _hl
         if district in LOW_RISK_DISTRICTS:
@@ -4035,18 +4037,7 @@ def main():
             "Riverine flood": 0.62,
             "Urban / river flood": 0.44,
         }
-        LOW_RISK_DISTRICTS = [
-            "Jaisalmer", "Barmer", "Bikaner", "Jodhpur", "Churu",
-            "Jalore", "Sirohi", "Pali", "Nagaur", "Sikar",
-            "Ladakh", "Leh", "Kargil", "Lahaul And Spiti",
-            "Kinnaur", "Dibang Valley", "Anjaw", "Tawang",
-            "Upper Siang", "West Kameng", "East Kameng",
-            "Phek", "Longleng", "Kiphire", "Tuensang",
-            "Senapati", "Ukhrul", "Chandel", "Churachandpur",
-            "Ri Bhoi", "East Khasi Hills", "West Jaintia Hills",
-            "Hamirpur", "Una", "Bilaspur", "Solan",
-            "Kutch", "Banaskantha", "Patan", "Mahesana"
-        ]
+
         
         results = []
         for _, row in ticker_df.iterrows():
