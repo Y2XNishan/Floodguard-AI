@@ -1182,7 +1182,7 @@ def render_risk_overview_table(df):
     """Render searchable district risk metadata."""
     df = df[["state", "district", "flood_type", "lat", "lon"]].copy()
     search_query = st.text_input("🔍 Search state or district", placeholder="e.g. Assam, Dibrugarh...", key="risk_overview_search")
-    filtered_df = df[df['state'].str.contains(search_query, case=False, na=False) | df['district'].str.contains(search_query, case=False, na=False)] if search_query else df
+    filtered_df = df[df['state'].str.contains(search_query, case=False, na=False, regex=False) | df['district'].str.contains(search_query, case=False, na=False, regex=False)] if search_query else df
     filtered_df = filtered_df.copy()
     filtered_df['Risk Level'] = filtered_df['flood_type'].apply(lambda x: '🔴 High' if 'coastal' in str(x).lower() else ('🟡 Moderate' if 'river' in str(x).lower() else '🟢 Low'))
     st.markdown(f"Showing **{len(filtered_df)}** of **{len(df)}** districts")
