@@ -2624,10 +2624,10 @@ def page_damage_classifier():
                 result = classify_flood_image(image)
 
             colors = {
-                "No Flooding": "blue",
-                "Mild": "green",
-                "Moderate": "orange",
-                "Severe": "red",
+                "No Flooding": "#06b6d4",
+                "Mild": "#22c55e",
+                "Moderate": "#f59e0b",
+                "Severe": "#ef4444",
             }
             color = colors.get(result["severity"], "blue")
             severity_label = (
