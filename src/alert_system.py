@@ -6,6 +6,7 @@ import csv
 import json
 import os
 import smtplib
+import uuid
 from datetime import datetime
 from email.mime.text import MIMEText
 from pathlib import Path
@@ -379,7 +380,7 @@ def subscribe_user(
     except (TypeError, ValueError):
         risk_threshold = 60
     risk_threshold = min(max(risk_threshold, 0), 100)
-    subscription_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
+    subscription_id = uuid.uuid4().hex
     row = {
         "id": subscription_id,
         "name": name,
