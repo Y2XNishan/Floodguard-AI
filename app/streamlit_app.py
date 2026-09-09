@@ -1655,23 +1655,7 @@ text-align: center; margin-top: 4px;">
             )
 
         st.markdown("---")
-        st.markdown("""
-        <style>
-        div[data-testid="stButton"] > button {
-            background: rgba(0,188,212,0.12);
-            border: 0.5px solid rgba(0,188,212,0.4);
-            color: #00BCD4;
-            font-size: 14px;
-            font-weight: 500;
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-        }
-        div[data-testid="stButton"] > button:hover {
-            background: rgba(0,188,212,0.22);
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        # Predict button uses global primary button styling
         predict_btn = st.button(get_text("predict_button", lang), type="primary", use_container_width=True)
 
     live_weather = st.session_state.live_weather if st.session_state.using_live_weather else None
