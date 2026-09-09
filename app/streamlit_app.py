@@ -2589,8 +2589,11 @@ DETAILED DATA:
 
 # ===== PAGE 5: FLOOD DAMAGE SEVERITY CLASSIFIER =====
 def page_damage_classifier():
-    st.title("🛰️ Flood Damage Severity Classifier")
-    st.markdown("Upload an aerial or ground photo to assess flood damage severity using AI")
+    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
+        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🛰️ Flood Damage Severity Classifier</h1>
+        <p class="hero-text" style="max-width:650px;margin:0 auto">Upload an aerial or ground photo to assess flood damage severity using AI</p>
+    </div>""", unsafe_allow_html=True)
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 
     if not FLOOD_CLASSIFIER_AVAILABLE:
         st.error("Flood damage classifier is not available.")
@@ -2665,12 +2668,11 @@ def page_damage_classifier():
 
 # ===== PAGE 6: CROP DISEASE DETECTION =====
 def page_crop_disease():
-    st.title("🌿 Crop Disease Detection")
-    st.markdown("""
-Upload a crop leaf image to detect diseases using AI.
-**Flood Connection:** Flooding increases crop disease 
-risk by 3-5x due to excess moisture and waterlogging.
-""")
+    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
+        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌿 Crop Disease Detection</h1>
+        <p class="hero-text" style="max-width:650px;margin:0 auto">Upload a crop leaf image to detect diseases using AI</p>
+    </div>""", unsafe_allow_html=True)
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 
     if not CROP_DISEASE_AVAILABLE:
         st.error("Crop disease classifier is not available.")
@@ -2764,12 +2766,11 @@ risk by 3-5x due to excess moisture and waterlogging.
 
 # ===== PAGE 7: CROP YIELD PREDICTOR =====
 def page_yield_predictor():
-    st.title("🌾 Crop Yield Predictor")
-    st.markdown(
-        "Predict crop yield based on flood risk, "
-        "rainfall and historical patterns for "
-        "any district in India"
-    )
+    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
+        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Yield Predictor</h1>
+        <p class="hero-text" style="max-width:650px;margin:0 auto">Predict crop yield based on flood risk, rainfall and historical patterns for any district in India</p>
+    </div>""", unsafe_allow_html=True)
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 
     import json
 
@@ -2924,11 +2925,11 @@ def page_yield_predictor():
 
 # ===== PAGE 8: CROP LOSS ESTIMATOR =====
 def page_crop_loss_estimator():
-    st.title("🌾 Crop Loss Estimator")
-    st.markdown("""
-Estimate financial loss to your crops due to
-flooding. Get compensation scheme information.
-""")
+    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
+        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Loss Estimator</h1>
+        <p class="hero-text" style="max-width:650px;margin:0 auto">Estimate financial loss to your crops due to flooding and get compensation scheme information</p>
+    </div>""", unsafe_allow_html=True)
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns([1, 1])
 
@@ -3099,10 +3100,11 @@ flooding. Get compensation scheme information.
 
 # ===== PAGE 9: ALERT SYSTEM =====
 def page_alert_system():
-    st.title("🔔 Flood Alert System")
-    st.markdown("""
-Subscribe to receive flood alerts via Email before floods hit your district.
-""")
+    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
+        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🔔 Flood Alert System</h1>
+        <p class="hero-text" style="max-width:650px;margin:0 auto">Subscribe to receive flood alerts via Email before floods hit your district</p>
+    </div>""", unsafe_allow_html=True)
+    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
 
     stats = get_alert_stats()
     c1, c2, c3 = st.columns(3)
