@@ -4090,7 +4090,9 @@ def main():
             st_name = row['state']
             f_type = row.get("flood_type", "Riverine flood")
             
-            score = min(max(type_base.get(f_type, 0.45) + ((hash(dist) % 21) - 10) / 100, 0.08), 0.92)
+            import hashlib as _hl
+            _th = int(_hl.md5(dist.encode()).hexdigest(), 16)
+            score = min(max(type_base.get(f_type, 0.45) + ((_th % 21) - 10) / 100, 0.08), 0.92)
             level = "HIGH" if score >= 0.6 else "MODERATE" if score >= 0.3 else "LOW"
             
             row_risk = row.get("risk_level", row.get("risk", row.get("level", None)))
