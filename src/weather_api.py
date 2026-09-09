@@ -43,13 +43,18 @@ BASE_RIVER_LEVELS = {
 }
 
 
-def _nonnegative_float(value, default: float = 0.0) -> float:
-    """Coerce externally supplied measurements to a usable non-negative float."""
+def _finite_float(value, default: float = 0.0) -> float:
+    """Coerce an externally supplied value to a finite float."""
     try:
         number = float(value)
     except (TypeError, ValueError):
         return default
-    return max(number, 0.0) if math.isfinite(number) else default
+    return number if math.isfinite(number) else default
+
+
+def _nonnegative_float(value, default: float = 0.0) -> float:
+    """Coerce externally supplied measurements to a usable non-negative float."""
+    return max(_finite_float(value, default), 0.0)
 
 
 def calculate_daily_flood_risk(rainfall_mm, state):
