@@ -706,9 +706,10 @@ def inject_custom_css():
 
         .rec-box.rec-mod { border-left-color: #f59e0b !important; }
         .rec-box.rec-danger { border-left-color: #dc2626 !important; }
+        .rec-box h4 { margin: 0 0 8px 0 !important; font-size: 1rem !important; }
         .rec-box.rec-safe h4 { color: #10b981 !important; }
         .rec-box.rec-mod h4 { color: #f59e0b !important; }
-        .rec-box.rec-danger h4 { color: #dc2626 !important; }
+        .rec-box.rec-danger h4 { color: #ef4444 !important; }
 
         .sidebar-live-card { background: #1e293b !important; }
 
