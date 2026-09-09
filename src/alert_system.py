@@ -371,6 +371,11 @@ def subscribe_user(
 ) -> str:
     """Save a user subscription and return its generated id."""
     _ensure_csv(SUBSCRIPTIONS_FILE, SUBSCRIPTION_FIELDS)
+    try:
+        risk_threshold = int(risk_threshold)
+    except (TypeError, ValueError):
+        risk_threshold = 60
+    risk_threshold = min(max(risk_threshold, 0), 100)
     subscription_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
     row = {
         "id": subscription_id,
