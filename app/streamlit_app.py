@@ -404,6 +404,12 @@ STATE_HELPLINES = {
     "Tamil Nadu": "1077",
 }
 
+WEATHER_EMOJI_MAP = {
+    "clear": "\u2600\ufe0f", "clouds": "\u26c5", "rain": "\ud83c\udf27\ufe0f",
+    "thunderstorm": "\u26c8\ufe0f", "drizzle": "\ud83c\udf26\ufe0f", "snow": "\u2744\ufe0f",
+    "mist": "\ud83c\udf2b\ufe0f", "fog": "\ud83c\udf2b\ufe0f",
+}
+
 st.set_page_config(page_title="India Flood Risk Predictor", page_icon="🌊", layout="wide", initial_sidebar_state="expanded")
 
 # Inject modern Slate + Cyan theme CSS
@@ -1559,13 +1565,8 @@ gap:8px; margin-bottom:16px;">
             temperature = live_weather.get("temperature") or live_weather.get("temperature_c") or "--"
             humidity = live_weather.get("humidity") or live_weather.get("humidity_pct") or "--"
             rainfall = live_weather.get("rainfall") or live_weather.get("rainfall_mm") or live_weather.get("rain") or 0
-            weather_conditions = {
-                "clear": "☀️", "clouds": "⛅", "rain": "🌧️",
-                "thunderstorm": "⛈️", "drizzle": "🌦️", "snow": "❄️",
-                "mist": "🌫️", "fog": "🌫️"
-            }
-            weather_icon = weather_conditions.get(
-                condition.lower().split()[0], "🌤️"
+            weather_icon = WEATHER_EMOJI_MAP.get(
+                condition.lower().split()[0], "⛅️"
             )
             source_label = live_weather.get("weather_source", "Open-Meteo")
 
@@ -1814,13 +1815,8 @@ text-align: center; margin-top: 4px;">
                 condition = live_weather.get('weather_description', 
                            live_weather.get('description', 
                            'Partly Cloudy')).title()
-                weather_icons = {
-                    "clear": "☀️", "clouds": "⛅", "rain": "🌧️",
-                    "thunderstorm": "⛈️", "drizzle": "🌦️", 
-                    "snow": "❄️", "mist": "🌫️", "fog": "🌫️"
-                }
-                icon = weather_icons.get(
-                    condition.lower().split()[0], "🌤️")
+                icon = WEATHER_EMOJI_MAP.get(
+                    condition.lower().split()[0], "⛅️")
 
                 st.markdown(f"""
                 <div style="background:#0e2a3a; border:0.5px solid 
