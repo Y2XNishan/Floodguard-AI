@@ -103,6 +103,34 @@ def inject_ui_overrides() -> None:
           transform: none !important;
           filter: brightness(1.08);
         }
+
+        [data-testid="stAlert"] {
+          border-radius: 6px !important;
+          border-width: 1px !important;
+          padding: 0.8rem 1rem !important;
+        }
+
+        [data-testid="stAlert"] p {
+          color: var(--fg-text) !important;
+          margin: 0 !important;
+        }
+
+        [data-testid="stMetric"] {
+          background: var(--fg-surface) !important;
+          border: 1px solid var(--fg-border) !important;
+          border-radius: 6px !important;
+          min-height: 7.5rem;
+          padding: 1rem !important;
+        }
+
+        [data-testid="stMetricLabel"] {
+          color: var(--fg-muted) !important;
+        }
+
+        [data-testid="stMetricValue"] {
+          color: var(--fg-text) !important;
+          font-variant-numeric: tabular-nums;
+        }
         </style>
         """,
         unsafe_allow_html=True,
