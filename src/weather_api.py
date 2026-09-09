@@ -87,7 +87,8 @@ def calculate_daily_flood_risk(rainfall_mm, state):
         "Himachal Pradesh": 1.1,
         "Uttarakhand": 1.1,
     }
-    multiplier = flood_prone.get(state, 1.0)
+    state_key = str(state or "").strip().title()
+    multiplier = flood_prone.get(state_key, 1.0)
     return min(round(base_risk * multiplier, 1), 95)
 
 
