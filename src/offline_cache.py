@@ -58,10 +58,11 @@ def save_to_cache(key: str, data: dict):
 def load_from_cache(key: str) -> dict | None:
     """Load cached data if it exists."""
     try:
-        cache_file = CACHE_FILES[key]
+        cache_file = _cache_file_for(key)
         if cache_file.exists():
             with open(cache_file, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                return data if isinstance(data, dict) else None
         return None
     except Exception as e:
         print(f"Cache load failed for {key}: {e}")
