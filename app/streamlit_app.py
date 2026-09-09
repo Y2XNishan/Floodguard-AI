@@ -1284,8 +1284,8 @@ def show_risk_gauge(risk_score, risk_level):
                 "value": risk_score
             }
         },
-        title={"text": f"Flood Risk Level: {risk_level}", 
-               "font": {"color": "#06b6d4", "size": 16}}
+        title={"text": f"Flood Risk: {risk_level}", 
+               "font": {"color": "#94a3b8", "size": 14}}
     ))
     fig.update_layout(
         paper_bgcolor="#0f172a",
