@@ -276,10 +276,17 @@ def get_rainfall_forecast(district_name: str) -> list:
         return []
 
     lat, lon = coords
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=precipitation_probability_max,weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FKolkata&forecast_days=7"
+    url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "daily": "precipitation_probability_max,weathercode,temperature_2m_max,temperature_2m_min",
+        "timezone": "Asia/Kolkata",
+        "forecast_days": 7,
+    }
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
         forecast_data = response.json()
         
