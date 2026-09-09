@@ -422,11 +422,14 @@ def unsubscribe(subscription_id: str) -> bool:
             row["is_active"] = "False"
             found = True
 
+    if not found:
+        return False
+
     with SUBSCRIPTIONS_FILE.open("w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=SUBSCRIPTION_FIELDS)
         writer.writeheader()
         writer.writerows(rows)
-    return found
+    return True
 
 
 def _call_with_district_state(func: Callable[..., Any], district: str, state: str) -> Any:
