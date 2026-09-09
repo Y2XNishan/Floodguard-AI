@@ -197,6 +197,28 @@ def inject_ui_overrides() -> None:
             transition-duration: 0.01ms !important;
           }
         }
+
+        @media (max-width: 720px) {
+          [data-testid="stMainBlockContainer"] {
+            padding: 1rem 0.85rem 2rem !important;
+          }
+
+          .stTabs [role="tab"] {
+            font-size: 0.85rem !important;
+            padding: 0.45rem 0.65rem !important;
+          }
+
+          [data-testid="stMetric"] {
+            min-height: 6.5rem;
+            padding: 0.75rem !important;
+          }
+
+          .chat-bubble,
+          .ai-bubble,
+          .user-bubble {
+            max-width: 92% !important;
+          }
+        }
         </style>
         """,
         unsafe_allow_html=True,
