@@ -33,6 +33,27 @@ def inject_ui_overrides() -> None:
           color: var(--fg-text) !important;
           letter-spacing: 0 !important;
         }
+
+        .stTabs [data-baseweb="tab-list"] {
+          gap: 0.25rem;
+          overflow-x: auto;
+          padding-bottom: 0.25rem;
+        }
+
+        .stTabs [role="tab"] {
+          min-height: 2.5rem;
+          padding: 0.5rem 0.75rem !important;
+          border: 1px solid transparent !important;
+          border-radius: 6px !important;
+          white-space: nowrap;
+        }
+
+        .stTabs [role="tab"][aria-selected="true"] {
+          background: rgba(28, 181, 170, 0.16) !important;
+          border-color: rgba(28, 181, 170, 0.5) !important;
+          border-left-width: 1px !important;
+          border-radius: 6px !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
