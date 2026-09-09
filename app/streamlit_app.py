@@ -2363,8 +2363,9 @@ def page_chatbot():
             </div>
             """, unsafe_allow_html=True)
 
-    # Close the STEP 1 container
+    # Close the STEP 1 chat container div opened above
     st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("")
 
     # STEP 4 - Input row at bottom:
     col1, col2 = st.columns([5, 1])
