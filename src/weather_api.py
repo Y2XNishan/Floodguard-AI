@@ -380,7 +380,7 @@ def get_river_level_estimate(rainfall_mm: float, district_name: str) -> float:
     month = datetime.now().month
     seasonal_factor = 1.25 if month in [6, 7, 8, 9] else 0.9 if month in [11, 12, 1, 2] else 1.0
 
-    rainfall_mm = max(float(rainfall_mm or 0), 0.0)
+    rainfall_mm = _nonnegative_float(rainfall_mm)
     if rainfall_mm <= 10:
         rain_effect = rainfall_mm * 0.04
     elif rainfall_mm <= 50:
