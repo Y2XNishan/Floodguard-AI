@@ -1100,7 +1100,7 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
 
     risk_colors = np.where(forecast_df["risk_probability"] > 60, "#ef4444",
                    np.where(forecast_df["risk_probability"] >= 40, "#f59e0b",
-                   np.where(forecast_df["risk_probability"] >= 20, "#f59e0b", "#10b981")))
+                   np.where(forecast_df["risk_probability"] >= 20, "#eab308", "#10b981")))
     fig_risk = go.Figure(go.Bar(
         x=forecast_df["date_display"],
         y=forecast_df["risk_probability"],
