@@ -54,6 +54,28 @@ def inject_ui_overrides() -> None:
           border-left-width: 1px !important;
           border-radius: 6px !important;
         }
+
+        [data-testid="stTextInput"] input,
+        [data-testid="stTextArea"] textarea,
+        [data-baseweb="select"] > div {
+          background: var(--fg-surface) !important;
+          color: var(--fg-text) !important;
+          border-color: var(--fg-border) !important;
+          border-radius: 6px !important;
+        }
+
+        [data-testid="stTextInput"] input::placeholder,
+        [data-testid="stTextArea"] textarea::placeholder {
+          color: var(--fg-muted) !important;
+          opacity: 1;
+        }
+
+        [data-testid="stTextInput"] label,
+        [data-testid="stTextArea"] label,
+        [data-testid="stSelectbox"] label {
+          color: var(--fg-text) !important;
+          font-weight: 600 !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
