@@ -2752,15 +2752,6 @@ risk by 3-5x due to excess moisture and waterlogging.
 
         st.markdown("**Supported Crops:**")
         crops = [
-            "ðŸŒ½ Corn/Maize",
-            "ðŸ… Tomato",
-            "ðŸ¥” Potato",
-            "ðŸ«‘ Pepper",
-            "ðŸŽ Apple",
-            "ðŸ‡ Grape",
-            "ðŸ“ Strawberry",
-        ]
-        crops = [
             "Corn/Maize",
             "Tomato",
             "Potato",
