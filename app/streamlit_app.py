@@ -2455,7 +2455,10 @@ def page_forecast():
     if st.session_state.get('selected_district'):
         generate_btn = st.button("🔮 Generate 7-Day Forecast", type="primary", use_container_width=True)
     else:
-        st.info("👆 Select a state and district to generate forecast")
+        st.markdown("""<div class="glass-card" style="text-align:center;padding:50px 30px">
+            <h3 style="color:#e2e8f0 !important;font-size:1.3rem !important">Select a Location</h3>
+            <p style="color:#94a3b8;margin-top:8px">Choose a state and district above to generate a 7-day flood forecast</p>
+        </div>""", unsafe_allow_html=True)
         generate_btn = False
 
     # Generate and display forecast
