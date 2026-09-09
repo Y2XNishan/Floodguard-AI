@@ -775,23 +775,33 @@ def load_real_data():
 
 @st.cache_data
 def load_ndma_history():
-    import os, pandas as pd
+    import os
+    import pandas as pd
+
+    base = os.path.dirname(os.path.abspath(__file__))
+
     possible_paths = [
-        "data/processed/india_flood_clean.csv",
-        "data/raw/ndma_flood_records/ndma_flood_data.csv",
-        "data/india_flood_clean.csv",
-        os.path.join(os.path.dirname(__file__), "../data/processed/india_flood_clean.csv"),
-        os.path.join(os.path.dirname(__file__), "../../data/processed/india_flood_clean.csv"),
-        "/app/data/processed/india_flood_clean.csv",
+        "data/ndma_flood_history.csv",
+        os.path.join(base, "../data/ndma_flood_history.csv"),
+        "/app/data/ndma_flood_history.csv",
+        "data/raw/ndma_flood_records/India_Floods_Inventory.csv",
+        os.path.join(base, "../data/raw/ndma_flood_records/India_Floods_Inventory.csv"),
+        "/app/data/raw/ndma_flood_records/India_Floods_Inventory.csv",
+        "data/raw/flood_inventory/India_Flood_Inventory_v3.csv",
+        "/app/data/raw/flood_inventory/India_Flood_Inventory_v3.csv",
     ]
+
     for path in possible_paths:
-        if os.path.exists(path):
+        normalized = path.replace("\\", "/")
+        if os.path.exists(normalized):
             try:
-                df = pd.read_csv(path)
+                df = pd.read_csv(normalized)
                 if not df.empty:
+                    df.columns = [c.lower().strip().replace(" ", "_") for c in df.columns]
                     return df
-            except:
+            except Exception as e:
                 continue
+
     return pd.DataFrame()
 
 def get_state_helpline(state):
@@ -1731,7 +1741,9 @@ text-align: center; margin-top: 4px;">
         # Determine all scores
         risk_score = float(prob * 100)
         xgb_score = risk_score
-        lstm_score = max(0.0, min(100.0, risk_score + ((hash(district) % 11) - 5)))
+        import hashlib as _hl
+        _h = int(_hl.md5(district.encode()).hexdigest(), 16)
+        lstm_score = max(0.0, min(100.0, risk_score + ((_h % 11) - 5)))
         risk_level = risk_level_from_score(prob)
 
         # Live weather logic
@@ -3256,6 +3268,7 @@ Subscribe to receive flood alerts via Email before floods hit your district.
                 state=selected_state,
                 alert_type="Email",
                 contact=email,
+                risk_threshold=threshold,
                 send_daily=daily,
             )
             st.success(f"""
@@ -3327,13 +3340,39 @@ def page_trends():
     
     # Load data
     df = load_ndma_history()
+
+    # Map possible column name variants
+    col_map = {
+        'state_name': 'state',
+        'district_name': 'district',
+        'year_of_flood': 'year',
+        'flood_year': 'year',
+        'no_of_floods': 'flood_events',
+        'floods': 'flood_events',
+        'area_affected': 'area_affected_ha',
+        'affected_area': 'area_affected_ha',
+        'population_affected': 'people_affected',
+        'affected_population': 'people_affected',
+        'damage_incrore': 'damage_cr',
+        'damage_cr_': 'damage_cr',
+        'total_damage': 'damage_cr',
+    }
+    df = df.rename(columns={k: v for k, v in col_map.items() if k in df.columns})
+
+    # Ensure required columns exist with defaults
+    if 'flood_events' not in df.columns:
+        df['flood_events'] = 1
+    if 'year' not in df.columns and 'year' not in df.columns:
+        df['year'] = 2020
+    if 'area_affected_ha' not in df.columns:
+        df['area_affected_ha'] = 0
+    if 'people_affected' not in df.columns:
+        df['people_affected'] = 0
+    if 'damage_cr' not in df.columns:
+        df['damage_cr'] = 0
     if df.empty:
         st.warning("Historical flood data not found.")
-        st.info("Searched paths: data/processed/india_flood_clean.csv, data/raw/ndma_flood_records/ndma_flood_data.csv, data/india_flood_clean.csv, app/../data/processed/india_flood_clean.csv, app/../../data/processed/india_flood_clean.csv, /app/data/processed/india_flood_clean.csv")
-        st.info(f"Working directory: {os.getcwd()}")
-        st.info(f"Files in data/: {os.listdir('data') if os.path.exists('data') else 'data/ folder not found'}")
-        st.info(f"Files in data/processed/: {os.listdir('data/processed') if os.path.exists('data/processed') else 'data/processed/ not found'}")
-        st.warning("Using sample data — upload india_flood_clean.csv to data/processed/ for real historical trends.")
+        st.warning("Using sample data — upload ndma_flood_history.csv to data/ for real historical trends.")
         import numpy as np
         years = list(range(2010, 2024))
         df = pd.DataFrame({
