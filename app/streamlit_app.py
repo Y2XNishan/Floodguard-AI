@@ -1318,7 +1318,7 @@ def page_predictor():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">{get_text('hero_title', lang)}</h1>
         <p class="hero-text" style="max-width:760px;margin:0 auto">{get_text('hero_subtitle', lang)}</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     model, scaler, features = load_xgb_model()
     districts_df = load_india_districts()
@@ -1679,7 +1679,7 @@ text-align: center; margin-top: 4px;">
     live_weather = st.session_state.live_weather if st.session_state.using_live_weather else None
     if live_weather:
         render_current_weather_card(live_weather)
-        st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+        render_html('<div class="gradient-divider"></div>')
 
     if predict_btn and model is not None:
         with st.spinner(get_text("analyzing_risk", lang)):
@@ -1916,7 +1916,7 @@ text-align: center; margin-top: 4px;">
         st.session_state.floodguard_pending_summary = ai_summary
         render_ai_summary_card(ai_summary)
 
-        st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+        render_html('<div class="gradient-divider"></div>')
 
         # 6. SHAP FEATURE IMPORTANCE:
         try:
@@ -2016,12 +2016,12 @@ def page_map():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px;color:#06b6d4;">🗺️ India Flood Risk Map</h1>
         <p class="hero-text" style="max-width:760px;margin:0 auto;color:#94a3b8;">Full India flood risk assessment across 736 districts based on historical flood patterns</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     is_online = st.session_state.get("internet_status", True)
     if should_skip_map(is_online):
         st.info("📡 **Offline Mode**: The interactive map requires internet to load map tiles. Please reconnect to view the full risk map.")
-        st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+        render_html('<div class="gradient-divider"></div>')
         st.markdown("### 📋 India Risk Overview (Offline)")
         districts_df = load_india_districts()
         render_risk_overview_table(districts_df)
@@ -2121,7 +2121,7 @@ def page_map():
     except ImportError:
         st.components.v1.html(m._repr_html_(), height=600, scrolling=True)
 
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
     st.markdown("### 📋 India Risk Overview")
     render_risk_overview_table(districts_df)
 
@@ -2250,7 +2250,7 @@ def page_chatbot():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">FloodGuard AI</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Ask flood safety questions with your latest district and risk score already in context.</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     # Set API keys if available (optional — KB works without any API key)
     gemini_key = _get_gemini_key_for_app()
@@ -2416,7 +2416,7 @@ def page_forecast():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">📊 7-Day Flood Forecast</h1>
         <p class="hero-text" style="max-width:600px;margin:0 auto">District-level flood risk prediction for the next 7 days based on weather forecast</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     # Get all districts and their states
     all_districts = get_district_coordinates()
@@ -2600,7 +2600,7 @@ def page_damage_classifier():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">🛰️ Flood Damage Severity Classifier</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Upload an aerial or ground photo to assess flood damage severity using AI</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     if not FLOOD_CLASSIFIER_AVAILABLE:
         st.error("Flood damage classifier is not available.")
@@ -2679,7 +2679,7 @@ def page_crop_disease():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌿 Crop Disease Detection</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Upload a crop leaf image to detect diseases using AI</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     if not CROP_DISEASE_AVAILABLE:
         st.error("Crop disease classifier is not available.")
@@ -2777,7 +2777,7 @@ def page_yield_predictor():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Yield Predictor</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Predict crop yield based on flood risk, rainfall and historical patterns for any district in India</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     import json
 
@@ -2936,7 +2936,7 @@ def page_crop_loss_estimator():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Loss Estimator</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Estimate financial loss to your crops due to flooding and get compensation scheme information</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     col1, col2 = st.columns([1, 1])
 
@@ -3111,7 +3111,7 @@ def page_alert_system():
         <h1 style="font-size:2.8rem !important;margin-bottom:4px">🔔 Flood Alert System</h1>
         <p class="hero-text" style="max-width:650px;margin:0 auto">Subscribe to receive flood alerts via Email before floods hit your district</p>
     </div>""", unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
 
     stats = get_alert_stats()
     c1, c2, c3 = st.columns(3)
@@ -3302,7 +3302,7 @@ def page_trends():
         <p class="hero-text" style="max-width: 600px; margin: 0 auto;">{get_text("trends_subtitle", lang)}</p>
     </div>
     """, unsafe_allow_html=True)
-    st.markdown('<div class="gradient-divider"></div>', unsafe_allow_html=True)
+    render_html('<div class="gradient-divider"></div>')
     
     # Load data
     df = load_ndma_history()
