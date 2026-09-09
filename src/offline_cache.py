@@ -112,10 +112,8 @@ def clear_all_cache():
 def is_internet_available() -> bool:
     """Check internet connectivity by pinging a reliable server."""
     try:
-        socket.setdefaulttimeout(3)
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect(("8.8.8.8", 53))
-        sock.close()
+        with socket.create_connection(("8.8.8.8", 53), timeout=3):
+            pass
         return True
     except Exception:
         return False
