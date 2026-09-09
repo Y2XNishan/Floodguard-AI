@@ -1043,10 +1043,10 @@ def render_current_weather_card(weather):
             <span class="live-badge">LIVE</span>
         </div>
         <div class="weather-metrics">
-            <div><span class="weather-icon">Thermometer</span><b>{weather.get("temperature_c", 0):.1f} C</b><small>Temperature</small></div>
-            <div><span class="weather-icon">Droplet</span><b>{weather.get("humidity_pct", 0)}%</b><small>Humidity</small></div>
-            <div><span class="weather-icon">Wind</span><b>{wind_speed:.1f} km/h</b><small>Wind Speed</small></div>
-            <div><span class="weather-icon">Rain</span><b>{rainfall:.1f} mm</b><small>Rainfall</small></div>
+            <div><span class="weather-icon">🌡️</span><b>{weather.get("temperature_c", 0):.1f}°C</b><small>Temperature</small></div>
+            <div><span class="weather-icon">💧</span><b>{weather.get("humidity_pct", 0)}%</b><small>Humidity</small></div>
+            <div><span class="weather-icon">💨</span><b>{wind_speed:.1f} km/h</b><small>Wind Speed</small></div>
+            <div><span class="weather-icon">🌧️</span><b>{rainfall:.1f} mm</b><small>Rainfall</small></div>
         </div>
         <div style="margin-top:14px"><span class="weather-badge {severity_cls}">{severity}</span></div>
     </div>""", unsafe_allow_html=True)
