@@ -290,9 +290,6 @@ def get_rainfall_forecast(district_name: str) -> list:
         response.raise_for_status()
         forecast_data = response.json()
         
-        # Print the raw API response exactly as requested
-        print("Forecast API response:", forecast_data)
-        
         daily = forecast_data.get("daily", {})
         times = daily.get("time", [])
         precipitation_sums = daily.get("precipitation_sum", [])
