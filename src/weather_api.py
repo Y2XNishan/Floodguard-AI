@@ -7,6 +7,7 @@ totals and returned as up to 7 calendar days when the API supplies them.
 """
 
 import logging
+import math
 import os
 import sys
 from datetime import datetime
@@ -40,6 +41,15 @@ BASE_RIVER_LEVELS = {
     "Sivasagar": 3.5,
     "Lakhimpur": 3.8,
 }
+
+
+def _nonnegative_float(value, default: float = 0.0) -> float:
+    """Coerce externally supplied measurements to a usable non-negative float."""
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return default
+    return max(number, 0.0) if math.isfinite(number) else default
 
 
 def calculate_daily_flood_risk(rainfall_mm, state):
