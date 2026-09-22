@@ -93,6 +93,66 @@ h2, h3, h4 {
   font-size: 0.75rem;
   color: #94a3b8;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Risk Status Indicators */
+.safe { color: #10b981 !important; }
+.moderate { color: #f59e0b !important; }
+.danger { color: #ef4444 !important; }
+
+/* Clean Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+.badge-safe {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.badge-moderate {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.badge-danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Recommendation Boxes */
+.rec-box {
+  border-radius: 6px;
+  padding: 16px;
+  margin: 10px 0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-left-width: 3px;
+}
+.rec-safe { border-left-color: #10b981; }
+.rec-mod { border-left-color: #f59e0b; }
+.rec-danger { border-left-color: #ef4444; }
+
+/* Subtitle & Descriptive Text */
+.hero-text {
+  color: #94a3b8 !important;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Clean Divider */
+.gradient-divider, .clean-divider {
+  height: 1px;
+  background: #334155;
 
 /* Remaining legacy styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
