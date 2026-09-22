@@ -1,3 +1,35 @@
+/* ==========================================================================
+   FloodGuard AI — Internal Operations & Risk Management Theme
+   Clean, human-made developer tool interface. Single #3b82f6 accent.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Base Canvas */
+.main {
+  background: #0f172a;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+  background: #0b1120 !important;
+  border-right: 1px solid #334155 !important;
+}
+[data-testid="stSidebar"] h1, 
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3 {
+  color: #f8fafc !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* Remaining legacy styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 * { font-family: 'Inter', sans-serif; }
 .main { background: linear-gradient(160deg, #020617 0%, #0a1628 30%, #0f172a 60%, #020617 100%); min-height: 100vh; }
