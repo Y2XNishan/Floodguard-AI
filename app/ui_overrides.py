@@ -118,6 +118,61 @@ def inject_ui_overrides() -> None:
         }
 
         /* Inputs, Selectboxes & Textareas */
+        [data-testid="stTextInput"] input,
+        [data-testid="stTextArea"] textarea,
+        [data-baseweb="select"] > div,
+        [data-testid="stNumberInput"] input {
+          background: #0b1120 !important;
+          color: var(--app-text) !important;
+          border: 1px solid var(--app-border) !important;
+          border-radius: 6px !important;
+          font-family: var(--font-family) !important;
+          font-size: 0.875rem !important;
+          transition: border-color 150ms ease !important;
+        }
+
+        [data-testid="stTextInput"] input:focus,
+        [data-testid="stTextArea"] textarea:focus,
+        [data-baseweb="select"]:focus-within {
+          border-color: var(--app-accent) !important;
+          box-shadow: 0 0 0 1px var(--app-accent) !important;
+          outline: none !important;
+        }
+
+        [data-testid="stTextInput"] label,
+        [data-testid="stTextArea"] label,
+        [data-testid="stSelectbox"] label,
+        [data-testid="stSlider"] label {
+          color: var(--app-text-muted) !important;
+          font-family: var(--font-family) !important;
+          font-size: 0.8125rem !important;
+          font-weight: 500 !important;
+          letter-spacing: 0 !important;
+          text-transform: none !important;
+        }
+
+        /* Buttons - Clean Solid Blue Accent */
+        .stButton > button[kind="primary"] {
+          background: var(--app-accent) !important;
+          color: #ffffff !important;
+          font-family: var(--font-family) !important;
+          font-weight: 600 !important;
+          font-size: 0.875rem !important;
+          border: 1px solid var(--app-accent-hover) !important;
+          border-radius: 6px !important;
+          padding: 0.5rem 1.1rem !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+          transition: background-color 120ms ease !important;
+        }
+
+        .stButton > button[kind="primary"]:hover {
+          background: var(--app-accent-hover) !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+        .stButton > button:not([kind="primary"]),
+        .stDownloadButton > button {
 
 /* Remaining legacy overrides */
 """Focused presentation overrides for the Streamlit application shell."""
