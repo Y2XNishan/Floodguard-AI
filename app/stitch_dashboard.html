@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FloodGuard AI - Flood Risk Prediction &amp; Agricultural Intelligence</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#00382f",
+            "on-background": "#dbe1ff",
+            "on-surface-variant": "#b9cac4",
+            "surface-tint": "#00dfc1",
+            "surface-dim": "#08122c",
+            "primary": "#d7fff3",
+            "error": "#ffb4ab",
+            "background": "#08122c",
+            "tertiary-container": "#ead0ff",
+            "secondary-fixed": "#c4e7ff",
+            "on-secondary-fixed-variant": "#004c69",
+            "primary-fixed-dim": "#00dfc1",
+            "tertiary": "#fdf3ff",
+            "inverse-primary": "#006b5b",
+            "surface-container-highest": "#2b344f",
+            "on-tertiary-container": "#842cd3",
+            "secondary-container": "#00a6e0",
+            "outline-variant": "#3a4a46",
+            "surface-container-low": "#111a34",
+            "on-tertiary-fixed-variant": "#6900b3",
+            "tertiary-fixed": "#f0dbff",
+            "on-primary-fixed": "#00201a",
+            "secondary": "#7bd0ff",
+            "primary-fixed": "#26fedc",
+            "on-primary-fixed-variant": "#005144",
+            "surface-container": "#161e39",
+            "on-secondary-container": "#00374d",
+            "error-container": "#93000a",
+            "on-tertiary": "#490080",
+            "surface-container-lowest": "#040d26",
+            "surface-variant": "#2b344f",
+            "on-error-container": "#ffdad6",
+            "surface": "#08122c",
+            "inverse-surface": "#dbe1ff",
+            "secondary-fixed-dim": "#7bd0ff",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#2c0051",
+            "outline": "#83948f",
+            "on-secondary-fixed": "#001e2c",
+            "primary-container": "#00f5d4",
+            "on-surface": "#dbe1ff",
+            "surface-container-high": "#202944",
+            "on-secondary": "#00354a",
+            "inverse-on-surface": "#272f4a",
+            "on-primary-container": "#006c5c",
+            "tertiary-fixed-dim": "#ddb7ff",
+            "surface-bright": "#303854"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-lg": "2rem",
+            "space-xs": "0.25rem",
+            "margin-sm": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin": "1.25rem",
+            "gutter": "1rem",
+            "space-md": "0.75rem",
+            "gutter-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-lg": "1.5rem",
+            "space-lg": "1.25rem"
+          },
+          "fontFamily": {
+            "telemetry-lg": ["JetBrains Mono"],
+            "telemetry-sm": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-lg": ["Space Grotesk"],
+            "headline-xl": ["Space Grotesk"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Space Grotesk"],
+            "body-sm": ["Inter"],
+            "label-caps": ["JetBrains Mono"],
+            "telemetry-md": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "telemetry-lg": ["22px", { "lineHeight": "26px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "telemetry-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-sm": ["11px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "telemetry-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #08122c;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #2b344f;
+      border-radius: 2px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #3a4a46;
+    }
+    .tactical-grid {
+      background-size: 24px 24px;
+      background-image: linear-gradient(to right, rgba(58, 74, 70, 0.15) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(58, 74, 70, 0.15) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-space-lg h-14 w-full bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/50">
+<div class="flex items-center gap-space-lg">
+<!-- Brand & Emblem -->
+<div class="flex items-center gap-space-sm cursor-pointer">
+<div class="relative flex items-center justify-center w-8 h-8 rounded bg-surface-container-high border border-primary-container/30">
+<span class="material-symbols-outlined text-primary-container animate-pulse text-lg" data-icon="water_drop">water_drop</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+</div>
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-primary-container uppercase">FloodGuard AI</span>
+</div>
+<!-- Sector Selector Badge -->
+<div class="hidden lg:flex items-center gap-space-xs bg-surface-container px-space-sm py-1 border border-outline-variant/60 rounded">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="location_on">location_on</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">PATNA, BIHAR [SECTOR-04 GANGA]</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden xl:flex items-center gap-space-md ml-space-sm">
+<a class="border-b-2 border-primary-container text-primary-container font-headline-md text-body-md py-1" href="#">Telemetry</a>
+<a class="text-on-surface-variant font-headline-md text-body-md hover:text-on-surface py-1 transition-colors" href="#">Inundation Map</a>
+<a class="text-on-surface-variant font-headline-md text-body-md hover:text-on-surface py-1 transition-colors" href="#">Hydrograph</a>
+<a class="text-on-surface-variant font-headline-md text-body-md hover:text-on-surface py-1 transition-colors" href="#">Crop Risk</a>
+<a class="text-on-surface-variant font-headline-md text-body-md hover:text-on-surface py-1 transition-colors" href="#">Evacuation</a>
+</nav>
+</div>
+<!-- Center/Right Search Bar & Telemetry Status -->
+<div class="flex items-center gap-space-md">
+<!-- Search Input -->
+<div class="hidden md:flex items-center bg-surface-container-lowest border border-outline-variant px-space-sm py-1 rounded w-64 focus-within:border-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-space-xs" data-icon="search">search</span>
+<input class="bg-transparent border-none text-body-sm font-telemetry-sm text-on-surface placeholder:text-outline focus:outline-none w-full p-0" placeholder="Search basin or district..." type="text"/>
+<kbd class="font-telemetry-sm text-[10px] text-outline border border-outline-variant px-1 rounded bg-surface-container">⌘K</kbd>
+</div>
+<!-- IMD Radar Active Chip -->
+<div class="flex items-center gap-1.5 bg-surface-container-high/80 px-space-sm py-1 border border-primary-fixed-dim/40 rounded">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-caps text-label-caps text-primary-container">IMD Live Radar Active</span>
+</div>
+<!-- NDMA Hotline Button -->
+<a class="flex items-center gap-1 bg-error-container/40 border border-error/50 px-space-sm py-1 rounded text-error hover:bg-error-container/70 transition-all active:scale-[0.98]" href="tel:1078">
+<span class="material-symbols-outlined text-sm" data-icon="phone_in_talk">phone_in_talk</span>
+<span class="font-label-caps text-label-caps">NDMA Hotline: 1078</span>
+</a>
+<!-- Quick Actions & User -->
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<button class="p-1 hover:bg-surface-container rounded transition-colors text-on-surface hover:text-primary-container" title="Bilingual Switch">
+<span class="material-symbols-outlined text-sm" data-icon="translate">translate</span>
+</button>
+<button class="relative p-1 hover:bg-surface-container rounded transition-colors text-on-surface hover:text-primary-container" title="Notifications">
+<span class="material-symbols-outlined text-sm" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-error"></span>
+</button>
+<div class="w-7 h-7 ml-space-xs rounded border border-outline-variant overflow-hidden flex items-center justify-center bg-surface-container-high" title="Patna Bihar Command Node Operator">
+<span class="material-symbols-outlined text-primary text-base" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- SIDE NAVIGATION RAIL -->
+<aside class="fixed left-0 top-14 bottom-0 z-40 flex flex-col justify-between p-space-md w-64 bg-surface-container-low border-r border-outline-variant/50">
+<div>
+<!-- Sector Info Box -->
+<div class="p-space-sm mb-space-md bg-surface-container border-l-2 border-error rounded">
+<div class="font-headline-md text-title-md text-on-surface font-semibold">SECTOR 04 - BIHAR</div>
+<div class="font-label-caps text-label-caps text-error tracking-wider mt-0.5 animate-pulse">STATUS: DEFCON 2 CRITICAL</div>
+<div class="font-telemetry-sm text-[10px] text-outline mt-1">LAT 25.5941° N | LON 85.1376° E</div>
+</div>
+<!-- Main Navigation Tabs -->
+<nav class="space-y-1">
+<a class="flex items-center gap-space-sm bg-surface-container text-primary-container border-l-2 border-primary-container px-space-md py-space-sm rounded-none font-headline-md text-body-md transition-all" href="#">
+<span class="material-symbols-outlined text-base" data-icon="dashboard">dashboard</span>
+<span>Command Dashboard</span>
+</a>
+<a class="flex items-center gap-space-sm text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container-highest/40 font-headline-md text-body-md transition-all" href="#">
+<span class="material-symbols-outlined text-base" data-icon="map">map</span>
+<span>GIS Inundation Map</span>
+</a>
+<a class="flex items-center gap-space-sm text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container-highest/40 font-headline-md text-body-md transition-all" href="#">
+<span class="material-symbols-outlined text-base" data-icon="water_drop">water_drop</span>
+<span>Hydrologic Telemetry</span>
+</a>
+<a class="flex items-center gap-space-sm text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container-highest/40 font-headline-md text-body-md transition-all" href="#">
+<span class="material-symbols-outlined text-base" data-icon="agriculture">agriculture</span>
+<span>Crop Vulnerability</span>
+</a>
+<a class="flex items-center gap-space-sm text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container-highest/40 font-headline-md text-body-md transition-all" href="#">
+<span class="material-symbols-outlined text-base" data-icon="emergency_share">emergency_share</span>
+<span>Evacuation Protocol</span>
+</a>
+</nav>
+</div>
+<!-- Side Nav Footer & Quick Actions -->
+<div class="pt-space-md border-t border-outline-variant/40 space-y-space-sm">
+<div class="px-space-md py-1 space-y-1">
+<a class="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors text-body-sm font-label-caps" href="#">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm" data-icon="sensors">sensors</span> Sensor Network</span>
+<span class="text-primary-container font-telemetry-sm">48/48 OK</span>
+</a>
+<a class="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors text-body-sm font-label-caps" href="#">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm" data-icon="crisis_alert">crisis_alert</span> NDMA Dispatch</span>
+<span class="text-error font-telemetry-sm">READY</span>
+</a>
+</div>
+<!-- Quick Action Trigger -->
+<button class="w-full flex items-center justify-center gap-1.5 bg-primary-container text-on-primary-container px-space-md py-2 font-headline-md text-body-md font-semibold tracking-wide rounded hover:bg-primary-fixed transition-all shadow-sm active:translate-x-0.5">
+<span class="material-symbols-outlined text-base" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span>Generate Incident PDF</span>
+</button>
+<div class="text-[10px] font-telemetry-sm text-outline text-center mt-2">
+        UTC+05:30 | 14:42:09 IST SYNC
+      </div>
+</div>
+</aside>
+<!-- MAIN OPERATIONAL VIEWPORT -->
+<main class="ml-64 pt-14 min-h-screen bg-surface custom-scroll pb-12">
+<!-- EMERGENCY SITUATION TICKER / BANNER -->
+<div class="w-full bg-error-container/30 border-b border-error/50 px-space-lg py-2 flex flex-wrap items-center justify-between gap-space-sm text-on-surface">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-error animate-ping"></span>
+<span class="font-label-caps text-label-caps bg-error text-surface px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">DEFCON 2 FLASH</span>
+<span class="font-headline-md text-body-md text-error font-semibold">
+          CRITICAL WARNING: Ganga River discharge surge reaching Peak Crest in 14h 22m. Low-lying Danapur &amp; Digha ghats breach imminent.
+        </span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="bg-error hover:bg-error/90 text-white font-headline-md text-body-sm font-bold px-3 py-1 rounded transition-all flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="campaign">campaign</span>
+          Broadcast SMS Siren
+        </button>
+<button class="bg-surface-container border border-outline-variant hover:border-secondary text-secondary font-headline-md text-body-sm px-3 py-1 rounded transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="alt_route">alt_route</span>
+          View Evac Routes
+        </button>
+</div>
+</div>
+<!-- DASHBOARD CONTENT CONTAINER -->
+<div class="p-space-lg space-y-space-lg max-w-[1680px] mx-auto">
+<!-- TOP METRIC & RISK CLUSTER (HERO OVERVIEW + 4 HYDROMET CARDS) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- HERO RISK STATUS CARD (5 COLS) -->
+<div class="xl:col-span-5 bg-surface-container-low border border-outline-variant/60 rounded p-space-lg relative overflow-hidden flex flex-col justify-between tactical-grid">
+<!-- Background Subtle Atmospheric Glow -->
+<div class="absolute -top-16 -right-16 w-56 h-56 bg-error-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Row -->
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-error tracking-wider uppercase">SECTOR FLOOD SEVERITY INDEX</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">High Breach Probability</h2>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm bg-surface-container-high border border-outline-variant px-2 py-0.5 text-on-surface-variant rounded">
+              NODE: PTN-HQ-01
+            </span>
+</div>
+<!-- Central Gauge & Critical Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md my-space-md items-center">
+<!-- Radial SVG Gauge Component -->
+<div class="relative flex flex-col items-center justify-center">
+<svg class="w-44 h-44 -rotate-90 transform" viewbox="0 0 160 160">
+<!-- Gauge Background Track -->
+<circle cx="80" cy="80" fill="transparent" r="66" stroke="#202944" stroke-dasharray="414" stroke-dashoffset="100" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Gauge Dynamic Value Stroke (78%) -->
+<circle class="transition-all duration-1000" cx="80" cy="80" fill="transparent" r="66" stroke="url(#riskGradient)" stroke-dasharray="414" stroke-dashoffset="180" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Definitions -->
+<defs>
+<lineargradient id="riskGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00f5d4"></stop>
+<stop offset="50%" stop-color="#f59e0b"></stop>
+<stop offset="100%" stop-color="#ef4444"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Center Gauge Readout -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-telemetry-lg text-3xl font-bold text-on-surface">78%</span>
+<span class="font-label-caps text-[10px] text-error font-bold tracking-widest uppercase">HIGH RISK</span>
+<span class="font-telemetry-sm text-[10px] text-outline mt-0.5">RUNOFF CREST</span>
+</div>
+</div>
+<!-- Key Indicators & Countdown -->
+<div class="space-y-space-sm">
+<div class="bg-surface-container/70 border border-outline-variant/40 p-space-sm rounded">
+<div class="font-label-caps text-[10px] text-on-surface-variant uppercase">Peak Surge Estimated In</div>
+<div class="font-telemetry-lg text-telemetry-lg text-primary-container font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg text-primary-container" data-icon="timer">timer</span>
+                  06h 48m 12s
+                </div>
+<div class="font-body-sm text-[10px] text-outline">Projected volume: 68,000 cusecs</div>
+</div>
+<div class="bg-surface-container/70 border border-outline-variant/40 p-space-sm rounded">
+<div class="font-label-caps text-[10px] text-on-surface-variant uppercase">Model Architecture &amp; Confidence</div>
+<div class="flex items-center gap-1 text-on-surface font-telemetry-sm text-telemetry-sm font-semibold">
+<span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" data-icon="auto_awesome">auto_awesome</span>
+                  94.2% AI Ensemble
+                </div>
+<div class="font-body-sm text-[10px] text-outline">XGBoost-Hydro + Bi-LSTM Spatial</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Badge Strip -->
+<div class="pt-space-sm border-t border-outline-variant/40 flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+<span class="font-body-sm font-semibold">Immediate: Evacuate low-lying zones (Zones 3 &amp; 4)</span>
+</div>
+<button class="text-primary-container hover:underline font-label-caps text-label-caps uppercase flex items-center gap-0.5">
+              Protocol details <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- 4 REAL-TIME HYDRO-METEOROLOGICAL CARDS (7 COLS) -->
+<div class="xl:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Metric 1: 24h Rainfall -->
+<div class="bg-surface-container-low border border-outline-variant/60 rounded p-space-md flex flex-col justify-between hover:border-primary-container/40 transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline uppercase">24H Cumulative Precipitation</span>
+<div class="font-telemetry-lg text-telemetry-lg text-on-surface mt-1">148.0 <span class="text-title-md font-normal text-on-surface-variant">mm</span></div>
+</div>
+<span class="font-label-caps text-[10px] bg-error-container/40 text-error border border-error/50 px-1.5 py-0.5 rounded">
+                EXTREME TORRENTIAL
+              </span>
+</div>
+<div class="my-space-sm">
+<div class="flex justify-between items-center text-[10px] font-telemetry-sm text-outline mb-1">
+<span>Anomaly vs 10-Yr Mean</span>
+<span class="text-error font-semibold">+42.8 mm (+40.7%)</span>
+</div>
+<!-- Simulated Micro Sparkline Graph -->
+<div class="h-9 w-full flex items-end gap-1 bg-surface-container px-1 pt-1 rounded border border-outline-variant/30">
+<div class="w-1/12 bg-secondary-container/40 h-2 rounded-t"></div>
+<div class="w-1/12 bg-secondary-container/50 h-3 rounded-t"></div>
+<div class="w-1/12 bg-secondary-container/60 h-4 rounded-t"></div>
+<div class="w-1/12 bg-secondary-container/70 h-3 rounded-t"></div>
+<div class="w-1/12 bg-secondary-container h-5 rounded-t"></div>
+<div class="w-1/12 bg-secondary-container h-6 rounded-t"></div>
+<div class="w-1/12 bg-primary-container/80 h-7 rounded-t"></div>
+<div class="w-1/12 bg-primary-container h-8 rounded-t"></div>
+<div class="w-1/12 bg-error h-8 rounded-t animate-pulse"></div>
+<div class="w-1/12 bg-error h-9 rounded-t"></div>
+<div class="w-1/12 bg-error h-full rounded-t"></div>
+<div class="w-1/12 bg-error h-full rounded-t"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-telemetry-sm text-outline pt-space-xs border-t border-outline-variant/30">
+<span>IMD Automatic Station: Digha</span>
+<span class="text-on-surface">Trend: Rising</span>
+</div>
+</div>
+<!-- Metric 2: Ganga River Level -->
+<div class="bg-surface-container-low border border-error/50 rounded p-space-md flex flex-col justify-between hover:border-error transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Ganga Water Level (Gandhi Ghat)</span>
+<div class="font-telemetry-lg text-telemetry-lg text-error mt-1 flex items-baseline gap-1">
+                  50.24 <span class="text-title-md font-normal text-on-surface-variant">meters</span>
+</div>
+</div>
+<span class="font-label-caps text-[10px] bg-error text-surface px-1.5 py-0.5 rounded font-bold uppercase animate-pulse">
+                +0.84M DANGER MARK
+              </span>
+</div>
+<div class="my-space-sm space-y-1">
+<div class="flex justify-between items-center text-[10px] font-telemetry-sm">
+<span class="text-outline">Warning: 48.60m | Danger: 49.40m</span>
+<span class="text-error font-semibold">+4.2 cm/hr</span>
+</div>
+<!-- Dual Level Indicator Bar -->
+<div class="relative w-full h-3 bg-surface-container rounded overflow-hidden border border-outline-variant/40">
+<div class="absolute left-0 top-0 bottom-0 bg-secondary-container w-[70%]"></div>
+<div class="absolute left-[70%] top-0 bottom-0 bg-error w-[25%] animate-pulse"></div>
+<!-- Marker for Danger Level -->
+<div class="absolute left-[78%] top-0 bottom-0 w-0.5 bg-white z-10" title="Danger Level"></div>
+</div>
+<div class="flex justify-between text-[9px] font-telemetry-sm text-outline">
+<span>46.00m (Normal)</span>
+<span class="text-white">Danger Mark (49.40m)</span>
+<span class="text-error">52.00m (Max 1975)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-telemetry-sm text-outline pt-space-xs border-t border-outline-variant/30">
+<span>CWC Gauging Sensor #G-09</span>
+<span class="text-error font-bold">BREACH ACTIVE</span>
+</div>
+</div>
+<!-- Metric 3: Soil Saturation Index -->
+<div class="bg-surface-container-low border border-outline-variant/60 rounded p-space-md flex flex-col justify-between hover:border-primary-container/40 transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Topsoil Saturation (0-30cm)</span>
+<div class="font-telemetry-lg text-telemetry-lg text-on-surface mt-1">92.4 <span class="text-title-md font-normal text-on-surface-variant">%</span></div>
+</div>
+<span class="font-label-caps text-[10px] bg-tertiary-container/30 text-on-primary-fixed border border-tertiary/40 px-1.5 py-0.5 rounded">
+                RUNOFF MAXIMA
+              </span>
+</div>
+<div class="my-space-sm space-y-1">
+<div class="flex justify-between text-[10px] font-telemetry-sm text-outline">
+<span>Field Capacity Exceeded</span>
+<span class="text-primary-container">Permeability: 0.1 mm/h</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded overflow-hidden border border-outline-variant/30">
+<div class="bg-gradient-to-r from-secondary-container via-primary-container to-error h-full w-[92.4%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-telemetry-sm text-outline pt-space-xs border-t border-outline-variant/30">
+<span>SAR Sentinel-1 Soil Inversion</span>
+<span class="text-on-surface">Surface pooling verified</span>
+</div>
+</div>
+<!-- Metric 4: Dam Discharge Rate -->
+<div class="bg-surface-container-low border border-outline-variant/60 rounded p-space-md flex flex-col justify-between hover:border-primary-container/40 transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline uppercase">Upstream Sone Barrage Outflow</span>
+<div class="font-telemetry-lg text-telemetry-lg text-on-surface mt-1">18,420 <span class="text-title-md font-normal text-on-surface-variant">m³/s</span></div>
+</div>
+<span class="font-label-caps text-[10px] bg-surface-container-high border border-outline-variant px-1.5 py-0.5 text-on-surface rounded">
+                GATES 42/48 OPEN
+              </span>
+</div>
+<div class="my-space-sm space-y-1">
+<div class="flex justify-between text-[10px] font-telemetry-sm text-outline">
+<span>Inderkpuri Barrage Sone River</span>
+<span class="text-error font-semibold">Tidal Lag: 4h 15m</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded overflow-hidden border border-outline-variant/30">
+<div class="bg-secondary-container h-full w-[87%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-telemetry-sm text-outline pt-space-xs border-t border-outline-variant/30">
+<span>Farakka Barrage Downstream</span>
+<span class="text-primary-container">Unobstructed sluice flow</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MIDDLE ROW: GIS INUNDATION HEAT MAP & 7-DAY HYDROLOGIC FORECAST -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- GIS INUNDATION MAP CANVAS (7 COLS) -->
+<div class="lg:col-span-7 bg-surface-container-low border border-outline-variant/60 rounded overflow-hidden flex flex-col">
+<!-- Map Header / Controls -->
+<div class="px-space-md py-space-sm bg-surface-container-lowest/80 border-b border-outline-variant/50 flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="layers">layers</span>
+<span class="font-headline-md text-title-md font-semibold text-on-surface">GIS Inundation &amp; Hydrodynamic Contour Map</span>
+<span class="font-label-caps text-[10px] bg-surface-container border border-outline px-1.5 py-0.5 rounded text-outline">
+                SAR + LIDAR OVERLAY
+              </span>
+</div>
+<!-- Layer Toggles -->
+<div class="flex items-center gap-1">
+<button class="bg-surface-container px-2 py-1 text-primary-container text-body-sm font-telemetry-sm border border-primary-container/40 rounded flex items-center gap-1 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="water">water</span> Depth Contours
+              </button>
+<button class="bg-surface-container px-2 py-1 text-on-surface-variant text-body-sm font-telemetry-sm border border-outline-variant rounded flex items-center gap-1 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="shield">shield</span> Shelters
+              </button>
+<button class="bg-surface-container px-2 py-1 text-on-surface-variant text-body-sm font-telemetry-sm border border-outline-variant rounded flex items-center gap-1 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="directions_boat">directions_boat</span> NDRF Boats
+              </button>
+</div>
+</div>
+<!-- Simulated High-Tech Map Canvas -->
+<div class="relative w-full h-[400px] bg-surface-container-lowest overflow-hidden tactical-grid select-none flex items-center justify-center">
+<!-- Map Imagery Background -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="High-resolution synthetic satellite radar mapping showing the swollen Ganga river basin surrounding Patna city during an extreme monsoon flood. Deep midnight slate blue background with glowing neon cyan inundated water contours, amber risk vectors, monospaced geospatial telemetry overlays, and sharp emergency shelter icons." data-location="Patna" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADl1O1XkyZoSV7Mjg08EFI5twnagwuwohMQNcsjumsQBi-ctjhCPeTBz__uHSgty9XXkrsjj1FhOT6UQrkok255DfCnbxpJFeW1ebMWbiGIxCUtMOlVzOzPsQ9ACKctEzKKJbXLJ9e2yt9vuEft9JRYt0HiLcfC9qRAw6anV-Nrtu8oMbcM58h-KXo0t89l0mszkKkQDT17LUCwFv2UkYJB-TIeDa87jDtfXe-tv6jcqkfqpHj6EDdwjDr5z6GKM4byhnm7MqSWNE"/>
+<!-- Hydrographic Breach Contours Graphic Simulation Overlay -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<!-- River Path Primary -->
+<path d="M-50,160 C120,130 280,240 460,190 C620,150 780,210 950,170" fill="none" stroke="#00a6e0" stroke-opacity="0.35" stroke-width="36"></path>
+<path d="M-50,160 C120,130 280,240 460,190 C620,150 780,210 950,170" fill="none" stroke="#00f5d4" stroke-opacity="0.8" stroke-width="12"></path>
+<!-- Flood Water Inundation Polygon (Danapur & Digha Ghats) -->
+<path d="M220,180 C260,230 380,280 430,240 C460,210 390,170 300,160 Z" fill="#ef4444" fill-opacity="0.35" stroke="#ef4444" stroke-dasharray="4 2" stroke-width="2"></path>
+<path d="M520,170 C580,230 680,260 740,210 C700,160 620,150 540,160 Z" fill="#ef4444" fill-opacity="0.3" stroke="#ef4444" stroke-width="1.5"></path>
+<!-- Flow Velocity Vectors (Dynamic stream particles) -->
+<line stroke="#00f5d4" stroke-dasharray="2 3" stroke-linecap="round" stroke-width="2" x1="180" x2="210" y1="160" y2="170"></line>
+<line stroke="#00f5d4" stroke-dasharray="2 3" stroke-linecap="round" stroke-width="2" x1="340" x2="380" y1="210" y2="215"></line>
+<line stroke="#00f5d4" stroke-dasharray="2 3" stroke-linecap="round" stroke-width="2" x1="560" x2="600" y1="175" y2="180"></line>
+</svg>
+<!-- Interactive Shelter & Hazard Pins Floating on Canvas -->
+<!-- Hazard Hotspot 1 -->
+<div class="absolute top-[38%] left-[32%] transform -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-error/20 flex items-center justify-center animate-ping"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="w-4 h-4 rounded-full bg-error border-2 border-surface flex items-center justify-center text-[8px] font-bold text-white">!</span>
+</div>
+<!-- Tooltip on hover -->
+<div class="hidden group-hover:block absolute bottom-6 left-1/2 -translate-x-1/2 w-48 bg-surface-container-high border border-error p-2 rounded shadow-2xl z-30 text-left">
+<div class="font-label-caps text-[9px] text-error font-bold">BREACH ZONE: DIGHA GHAT</div>
+<div class="text-[11px] text-on-surface">Depth: 2.8m | Inflow: 3.2 m/s</div>
+<div class="text-[10px] text-error">Evacuation Order Active</div>
+</div>
+</div>
+<!-- Shelter Pin 1 -->
+<div class="absolute top-[68%] left-[58%] transform -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer">
+<div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-base" data-icon="home_pin">home_pin</span>
+</div>
+<div class="bg-surface-container-lowest/90 border border-primary-container/60 px-1.5 py-0.5 rounded font-telemetry-sm text-[10px] text-primary-container whitespace-nowrap shadow">
+                Shelter #4 Gandhi Maidan (82% Cap)
+              </div>
+</div>
+<!-- Shelter Pin 2 -->
+<div class="absolute top-[75%] left-[22%] transform -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer">
+<div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-base" data-icon="home_pin">home_pin</span>
+</div>
+<div class="bg-surface-container-lowest/90 border border-primary-container/60 px-1.5 py-0.5 rounded font-telemetry-sm text-[10px] text-primary-container whitespace-nowrap shadow">
+                Shelter #7 IIT Bihta (Open)
+              </div>
+</div>
+<!-- NDRF Rescue Boat Pin -->
+<div class="absolute top-[48%] left-[45%] transform -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer">
+<div class="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-surface shadow-md">
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="sailing">sailing</span>
+</div>
+<div class="hidden group-hover:block absolute bottom-5 left-1/2 -translate-x-1/2 bg-surface-container-high border border-outline px-2 py-1 rounded text-[10px] font-telemetry-sm whitespace-nowrap">
+                NDRF Team 09: 4 Inflatable Rafts Active
+              </div>
+</div>
+<!-- Map HUD Coordinates Overlay (Bottom Left) -->
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/90 border border-outline-variant/60 p-2 rounded text-[10px] font-telemetry-sm space-y-0.5 pointer-events-none">
+<div class="text-on-surface font-semibold">COORDS: 25°37'08"N 85°07'33"E</div>
+<div class="text-outline">GIS Engine: Copernicus Sentinel-1A + CartoDEM</div>
+<div class="text-primary-container">River Surface Flow Velocity: 2.14 m/s</div>
+</div>
+<!-- Map Depth Legend (Bottom Right) -->
+<div class="absolute bottom-3 right-3 bg-surface-container-lowest/90 border border-outline-variant/60 p-2 rounded text-[10px] font-telemetry-sm pointer-events-none">
+<div class="text-outline uppercase text-[9px] mb-1">Water Depth Contour</div>
+<div class="flex items-center gap-1">
+<span class="w-3 h-2 bg-secondary-container"></span>
+<span class="text-on-surface">&lt;0.5m</span>
+<span class="w-3 h-2 bg-primary-container ml-1"></span>
+<span class="text-on-surface">1.5m</span>
+<span class="w-3 h-2 bg-error ml-1"></span>
+<span class="text-error">&gt;3.0m</span>
+</div>
+</div>
+<!-- Map Zoom Controls (Top Right) -->
+<div class="absolute top-3 right-3 flex flex-col gap-1 z-20">
+<button class="w-7 h-7 bg-surface-container border border-outline-variant hover:border-primary-container rounded flex items-center justify-center text-on-surface hover:text-primary-container transition-colors shadow">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+<button class="w-7 h-7 bg-surface-container border border-outline-variant hover:border-primary-container rounded flex items-center justify-center text-on-surface hover:text-primary-container transition-colors shadow">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<button class="w-7 h-7 bg-surface-container border border-outline-variant hover:border-primary-container rounded flex items-center justify-center text-on-surface hover:text-primary-container transition-colors shadow">
+<span class="material-symbols-outlined text-sm" data-icon="my_location">my_location</span>
+</button>
+</div>
+</div>
+<!-- Map Footer Stats -->
+<div class="px-space-md py-2 bg-surface-container border-t border-outline-variant/40 flex flex-wrap items-center justify-between text-body-sm font-telemetry-sm text-outline">
+<div>Inundation Extent: <span class="text-error font-semibold">142.6 km²</span> (+18.4 km² past 6h)</div>
+<div>At-Risk Population: <span class="text-on-surface font-semibold">248,000 residents</span></div>
+<div>Evacuated to Date: <span class="text-primary-container font-semibold">41,200 (16.6%)</span></div>
+</div>
+</div>
+<!-- 7-DAY HYDROLOGIC FORECAST & MONSOON TRAJECTORY (5 COLS) -->
+<div class="lg:col-span-5 bg-surface-container-low border border-outline-variant/60 rounded p-space-md flex flex-col justify-between">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-space-sm border-b border-outline-variant/40">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="insights">insights</span>
+<h3 class="font-headline-md text-title-md font-semibold text-on-surface">7-Day Hydrologic Trajectory</h3>
+</div>
+<div class="font-body-sm text-outline mt-0.5">Ensemble Rainfall vs. Inundation Breach Probability</div>
+</div>
+<span class="font-label-caps text-[10px] bg-surface-container px-2 py-0.5 border border-outline-variant text-primary-container rounded">
+                MODEL: CWC-LSTM-V4
+              </span>
+</div>
+<!-- Monsoon Advisory Note Banner -->
+<div class="mt-space-sm p-space-sm bg-surface-container border-l-2 border-secondary rounded flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-base shrink-0" data-icon="cyclone">cyclone</span>
+<div class="text-[11px] text-on-surface-variant font-body-sm">
+<strong class="text-on-surface">IMD Monsoon Low Depression:</strong> Active over Gangetic Plain. Cloudburst threshold expected between D+2 and D+3 over Patna &amp; Saran catchments.
+              </div>
+</div>
+<!-- Predictive Combo Chart Graphic Representation -->
+<div class="mt-space-md space-y-space-xs">
+<div class="flex justify-between items-center text-[10px] font-telemetry-sm text-outline">
+<span>Predicted Rainfall (mm) &amp; Flood Hazard Probability (%)</span>
+<span class="flex items-center gap-2">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2 bg-secondary-container rounded-xs"></span> Rain mm</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-0.5 bg-error"></span> Risk %</span>
+</span>
+</div>
+<!-- Forecast Bars / Days -->
+<div class="grid grid-cols-7 gap-1 pt-4 pb-2 items-end h-44 bg-surface-container/40 rounded p-2 border border-outline-variant/30">
+<!-- Day 1 (Today) -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-error font-bold">78%</span>
+<div class="w-full bg-secondary-container/80 rounded-t h-[65%] relative group">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-error rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface font-semibold">D+1</span>
+<span class="text-[8px] font-telemetry-sm text-outline">148mm</span>
+</div>
+<!-- Day 2 -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-error font-bold">84%</span>
+<div class="w-full bg-secondary-container/80 rounded-t h-[75%] relative group">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-error rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface font-semibold">D+2</span>
+<span class="text-[8px] font-telemetry-sm text-outline">162mm</span>
+</div>
+<!-- Day 3 (Peak) -->
+<div class="flex flex-col items-center gap-1 h-full justify-end bg-error-container/20 rounded-t border-t border-error">
+<span class="text-[9px] font-telemetry-sm text-error font-extrabold uppercase animate-pulse">88% PEAK</span>
+<div class="w-full bg-error rounded-t h-[92%] relative">
+<div class="absolute -top-1 left-0 right-0 h-1.5 bg-white rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-error font-bold">D+3</span>
+<span class="text-[8px] font-telemetry-sm text-error font-bold">195mm</span>
+</div>
+<!-- Day 4 -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-primary-container font-semibold">68%</span>
+<div class="w-full bg-secondary-container/70 rounded-t h-[55%] relative">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-primary-container rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface">D+4</span>
+<span class="text-[8px] font-telemetry-sm text-outline">98mm</span>
+</div>
+<!-- Day 5 -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-primary-container font-semibold">52%</span>
+<div class="w-full bg-secondary-container/60 rounded-t h-[42%] relative">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-primary-container rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface">D+5</span>
+<span class="text-[8px] font-telemetry-sm text-outline">64mm</span>
+</div>
+<!-- Day 6 -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-on-surface-variant">38%</span>
+<div class="w-full bg-secondary-container/40 rounded-t h-[30%] relative">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-secondary-fixed-dim rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface">D+6</span>
+<span class="text-[8px] font-telemetry-sm text-outline">35mm</span>
+</div>
+<!-- Day 7 -->
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<span class="text-[9px] font-telemetry-sm text-on-surface-variant">24%</span>
+<div class="w-full bg-secondary-container/30 rounded-t h-[20%] relative">
+<div class="absolute -top-1 left-0 right-0 h-1 bg-outline rounded-full"></div>
+</div>
+<span class="text-[10px] font-telemetry-sm text-on-surface">D+7</span>
+<span class="text-[8px] font-telemetry-sm text-outline">18mm</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Warning Analysis -->
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/40 flex items-center justify-between text-body-sm">
+<span class="text-error font-headline-md font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="report">report</span> Peak Inundation Crest Window: D+3 (Aug 24)
+            </span>
+<span class="text-outline font-telemetry-sm text-[11px]">Next Model Iteration: 15:30 IST</span>
+</div>
+</div>
+</div>
+<!-- LOWER ROW: AGRICULTURAL IMPACT & TACTICAL EVACUATION ACTION PLAN -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- AGRICULTURAL IMPACT & CROP INTELLIGENCE PANEL (7 COLS) -->
+<div class="lg:col-span-7 bg-surface-container-low border border-outline-variant/60 rounded p-space-lg flex flex-col justify-between">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-space-sm border-b border-outline-variant/40">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="agriculture">agriculture</span>
+<h3 class="font-headline-md text-title-md font-semibold text-on-surface">Agricultural Intelligence &amp; Kharif Crop Loss Assessment</h3>
+</div>
+<div class="font-body-sm text-outline mt-0.5">Sentinel-2 Multispectral NDVI Vegetation Health Degradation</div>
+</div>
+<span class="font-label-caps text-[10px] bg-error-container/40 text-error border border-error/50 px-2 py-0.5 rounded font-bold">
+                EST. DAMAGE ₹148 CR
+              </span>
+</div>
+<!-- Crop Breakdown Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm mt-space-md">
+<!-- Crop 1: Paddy Rice -->
+<div class="bg-surface-container p-space-sm rounded border border-error/40 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-body-md font-semibold text-on-surface">Paddy (Rice)</span>
+<span class="font-label-caps text-[9px] bg-error text-surface px-1 rounded font-bold">68% RISK</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-error font-bold mt-1">42,300 Hectares</div>
+<div class="text-[11px] text-on-surface-variant font-body-sm mt-0.5">Submergence tolerance: &lt;72h</div>
+</div>
+<div class="mt-2 pt-1 border-t border-outline-variant/30 text-[10px] font-telemetry-sm text-outline">
+                  Stage: Tillering &amp; Panicle
+                </div>
+</div>
+<!-- Crop 2: Maize & Pulses -->
+<div class="bg-surface-container p-space-sm rounded border border-outline-variant/60 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-body-md font-semibold text-on-surface">Maize &amp; Pulses</span>
+<span class="font-label-caps text-[9px] bg-secondary-container text-on-surface px-1 rounded font-bold">54% RISK</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary font-bold mt-1">18,900 Hectares</div>
+<div class="text-[11px] text-on-surface-variant font-body-sm mt-0.5">Root hypoxia alert active</div>
+</div>
+<div class="mt-2 pt-1 border-t border-outline-variant/30 text-[10px] font-telemetry-sm text-outline">
+                  High root-rot vulnerability
+                </div>
+</div>
+<!-- Crop 3: Silt & Agronomy Advisory -->
+<div class="bg-surface-container p-space-sm rounded border border-outline-variant/60 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-body-md font-semibold text-on-surface">Post-Flood Silt</span>
+<span class="font-label-caps text-[9px] bg-surface-container-high text-primary-container px-1 rounded">ADVISORY</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold mt-1">Alluvial Deposit</div>
+<div class="text-[11px] text-on-surface-variant font-body-sm mt-0.5">Fungicide protocol required</div>
+</div>
+<div class="mt-2 pt-1 border-t border-outline-variant/30 text-[10px] font-telemetry-sm text-outline">
+                  Soil aeration recovery plan
+                </div>
+</div>
+</div>
+<!-- PMFBY Fast-Track Claim Banner Card -->
+<div class="mt-space-md p-space-sm bg-surface-container border border-primary-container/30 rounded flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-primary-container/10 border border-primary-container/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container" data-icon="verified">verified</span>
+</div>
+<div>
+<div class="font-headline-md text-body-md font-semibold text-on-surface">PMFBY Instant Geo-Tagged Claim Processing</div>
+<div class="font-body-sm text-[11px] text-outline">Automated crop loss certificates dispatched directly to Bihar State Agriculture Portal.</div>
+</div>
+</div>
+<button class="bg-primary-container hover:bg-primary-fixed text-on-primary-container font-headline-md text-body-sm font-semibold px-3 py-1.5 rounded transition-all whitespace-nowrap shadow-sm">
+                Initiate Digital Claim
+              </button>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant/30 flex justify-between text-body-sm font-telemetry-sm text-outline">
+<span>Aggregated Farmer Infoline: 1800-180-1551</span>
+<span class="text-on-surface">Sentinel-2 Pass: Today 11:20 IST</span>
+</div>
+</div>
+<!-- TACTICAL EVACUATION & INCIDENT ACTION PLAN (5 COLS) -->
+<div class="lg:col-span-5 bg-surface-container-low border border-outline-variant/60 rounded p-space-lg flex flex-col justify-between">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-space-sm border-b border-outline-variant/40">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-lg" data-icon="task_alt">task_alt</span>
+<h3 class="font-headline-md text-title-md font-semibold text-on-surface">Tactical Evacuation SOP Checklist</h3>
+</div>
+<div class="font-body-sm text-outline mt-0.5">District Magistrate Patna Disaster Management Cell</div>
+</div>
+<span class="font-label-caps text-[10px] bg-surface-container border border-outline-variant text-on-surface px-2 py-0.5 rounded">
+                INCIDENT: #FL-2024-08
+              </span>
+</div>
+<!-- Dynamic SOP Checklist -->
+<div class="mt-space-md space-y-space-xs font-body-sm">
+<!-- Item 1: DONE -->
+<div class="p-space-sm bg-surface-container/60 border border-outline-variant/40 rounded flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-base mt-0.5" data-icon="check_circle">check_circle</span>
+<div class="w-full">
+<div class="flex justify-between items-center">
+<span class="text-on-surface font-semibold">Cell Broadcast Alert Siren Broadcast</span>
+<span class="font-label-caps text-[9px] bg-primary-container/20 text-primary-container px-1 rounded">DONE</span>
+</div>
+<div class="text-[11px] text-outline mt-0.5">142,000 residents notified across Patna &amp; Danapur diara.</div>
+</div>
+</div>
+<!-- Item 2: IN PROGRESS -->
+<div class="p-space-sm bg-surface-container/80 border border-secondary/40 rounded flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5 animate-spin" data-icon="sync">sync</span>
+<div class="w-full">
+<div class="flex justify-between items-center">
+<span class="text-on-surface font-semibold">Livestock &amp; Elderly Evacuation (Danapur)</span>
+<span class="font-label-caps text-[9px] bg-secondary-container/40 text-on-surface px-1 rounded">IN PROGRESS</span>
+</div>
+<div class="text-[11px] text-outline mt-0.5">Buses deployed. 3,840 cattle moved to high-altitude embankment.</div>
+</div>
+</div>
+<!-- Item 3: PENDING -->
+<div class="p-space-sm bg-surface-container/40 border border-outline-variant/30 rounded flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-outline text-base mt-0.5" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<div class="w-full">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant font-medium">Power Grid Substation #12 &amp; #14 Controlled Cut</span>
+<span class="font-label-caps text-[9px] bg-surface-container-high text-outline px-1 rounded">PENDING</span>
+</div>
+<div class="text-[11px] text-outline mt-0.5">Scheduled for 16:00 IST to prevent electrocution hazard.</div>
+</div>
+</div>
+<!-- Item 4: PENDING -->
+<div class="p-space-sm bg-surface-container/40 border border-outline-variant/30 rounded flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-outline text-base mt-0.5" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<div class="w-full">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant font-medium">NDRF 9th Battalion Motorboat Flotilla Sector B</span>
+<span class="font-label-caps text-[9px] bg-surface-container-high text-outline px-1 rounded">PENDING</span>
+</div>
+<div class="text-[11px] text-outline mt-0.5">8 Inflatable Gemini craft en route from Bihta headquarters.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Dossier Download -->
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/40 flex items-center justify-between">
+<span class="font-telemetry-sm text-[10px] text-outline">SOP STATUS: 45% EXECUTED</span>
+<button class="bg-surface-container border border-outline hover:border-primary-container text-on-surface hover:text-primary-container font-headline-md text-body-sm font-semibold px-3 py-1.5 rounded transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+              Download NDRF Incident Dossier
+            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
+
