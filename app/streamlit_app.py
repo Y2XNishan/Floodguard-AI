@@ -3697,7 +3697,7 @@ def main():
                 st.markdown("""
                 <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:4px;
                 padding:6px 10px; margin-bottom:8px; font-size:12px; color:#34d399;">
-                Online — Live Telemetry Feeds Active
+                ● Online
                 </div>
                 """, unsafe_allow_html=True)
             else:
