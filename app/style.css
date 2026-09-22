@@ -28,6 +28,31 @@
   font-size: 1rem !important;
   font-weight: 600 !important;
 }
+[data-testid="stSidebar"] label {
+  color: #94a3b8 !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Typography */
+h1 {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+  font-size: 1.75rem !important;
+  letter-spacing: -0.02em !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+h2, h3, h4 {
+  color: #f8fafc !important;
+  font-weight: 600 !important;
+}
+
+/* Clean Cards */
+.glass-card, 
+.tactical-card,
+.stat-card,
+.card-custom {
 
 /* Remaining legacy styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
