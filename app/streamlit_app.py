@@ -2095,11 +2095,17 @@ def page_forecast():
         st.warning("🔧 Forecast module not available. Please check dependencies.")
         return
 
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">📊 7-Day Flood Forecast</h1>
-        <p class="hero-text" style="max-width:600px;margin:0 auto">District-level flood risk prediction for the next 7 days based on weather forecast</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">7-Day Flood Forecast</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">District-level flood risk projections computed from numerical weather prediction feeds.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot green"></span> Live Feeds Active</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     # Get all districts and their states
     all_districts = get_district_coordinates()
@@ -2109,7 +2115,7 @@ def page_forecast():
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        selected_state = st.selectbox("🌍 Select State", states, key="forecast_state")
+        selected_state = st.selectbox("Select State", states, key="forecast_state")
         
         # If state changed, reset district selection
         if selected_state != st.session_state.get('last_forecast_state'):
@@ -2126,7 +2132,7 @@ def page_forecast():
         if current_district and current_district in district_list:
             default_idx = district_list.index(current_district)
         
-        selected_district = st.selectbox("🏘️ Select District", district_list, key="forecast_district", index=default_idx)
+        selected_district = st.selectbox("Select District", district_list, key="forecast_district", index=default_idx)
         
     # Store selected district in session state
     st.session_state['selected_district'] = selected_district
