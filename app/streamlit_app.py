@@ -2473,11 +2473,17 @@ def page_crop_disease():
 
 # ===== PAGE 7: CROP YIELD PREDICTOR =====
 def page_yield_predictor():
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Yield Predictor</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Predict crop yield based on flood risk, rainfall and historical patterns for any district in India</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Yield Predictor</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Agronomic forecast model correlating flood probability, precipitation, and regional harvest records.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot blue"></span> Model: Agronomic Regression</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     import json
 
@@ -2495,7 +2501,7 @@ def page_yield_predictor():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("📋 Input Details")
+        st.subheader("Input Parameters")
 
         selected_state = st.selectbox(
             "Select State",
@@ -2543,7 +2549,7 @@ def page_yield_predictor():
         )
 
         predict_btn = st.button(
-            "🌾 Predict Crop Yield",
+            "Predict Crop Yield",
             type="primary",
             use_container_width=True,
         )
@@ -2552,10 +2558,10 @@ def page_yield_predictor():
         if predict_btn:
             from src.crop_yield_predictor import predict_crop_yield
 
-            with st.spinner("Calculating yield prediction..."):
+            with st.spinner("Calculating expected yield..."):
                 result = predict_crop_yield(
-                    state=selected_state,
                     crop=selected_crop,
+                    state=selected_state,
                     season=selected_season,
                     area_hectares=area,
                     flood_risk_pct=flood_risk,
@@ -2570,19 +2576,19 @@ def page_yield_predictor():
                     "Moderate": "#f59e0b",
                     "High": "#ef4444",
                 }
-                color = colors.get(result["risk_level"], "#06b6d4")
+                color = colors.get(result["risk_level"], "#3b82f6")
 
                 st.markdown(f"""
-                <div style='background: rgba(0,0,0,0.3);
-                border: 2px solid {color};
-                border-radius: 16px;
-                padding: 20px;
-                text-align: center;
+                <div style='background: #1e293b;
+                border: 1px solid #334155;
+                border-left: 4px solid {color};
+                border-radius: 6px;
+                padding: 16px;
+                text-align: left;
                 margin-bottom: 16px;'>
-                <h2 style='color: {color};'>
-                {result['adjusted_yield']} t/ha</h2>
-                <p style='color: #aaa;'>
-                Expected Yield</p>
+                <div style='color: #94a3b8; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;'>Expected Yield Projection</div>
+                <div style='color: {color}; font-size: 24px; font-weight: 700; margin-top: 4px;'>
+                {result['adjusted_yield']} t/ha</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -2632,16 +2638,22 @@ def page_yield_predictor():
 
 # ===== PAGE 8: CROP LOSS ESTIMATOR =====
 def page_crop_loss_estimator():
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌾 Crop Loss Estimator</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Estimate financial loss to your crops due to flooding and get compensation scheme information</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Loss Estimator & Compensation</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Estimate financial loss to regional crops due to flooding and query PMFBY compensation schemes.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot green"></span> PMFBY Scheme Rates: 2024-25</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("### 📋 Farm Details")
+        st.markdown("### Farm Parameters")
 
         crop_data = get_crop_data()
         state = st.selectbox("Select State", sorted(crop_data.keys()))
