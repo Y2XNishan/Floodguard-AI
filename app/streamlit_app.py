@@ -752,8 +752,8 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
                 selected_state,
             )
 
-    line_color = "#06b6d4"
-    point_colors = np.where(forecast_df["rainfall_mm"] > 50, "#ef4444", "#06b6d4")
+    line_color = "#3b82f6"
+    point_colors = np.where(forecast_df["rainfall_mm"] > 50, "#ef4444", "#3b82f6")
 
     fig_rain = go.Figure()
     fig_rain.add_trace(go.Scatter(
