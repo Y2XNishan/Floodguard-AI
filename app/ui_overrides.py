@@ -173,6 +173,76 @@ def inject_ui_overrides() -> None:
 
         .stButton > button:not([kind="primary"]),
         .stDownloadButton > button {
+          background: var(--app-surface) !important;
+          color: var(--app-text) !important;
+          font-family: var(--font-family) !important;
+          font-weight: 500 !important;
+          font-size: 0.875rem !important;
+          border: 1px solid var(--app-border) !important;
+          border-radius: 6px !important;
+          padding: 0.5rem 1.1rem !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          transition: background-color 120ms ease, border-color 120ms ease !important;
+        }
+
+        .stButton > button:not([kind="primary"]):hover,
+        .stDownloadButton > button:hover {
+          background: var(--app-surface-hover) !important;
+          border-color: var(--app-border-light) !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+        /* Metric Cards - Simple, Non-Theatrical */
+        [data-testid="stMetric"] {
+          background: var(--app-surface) !important;
+          border: 1px solid var(--app-border) !important;
+          border-radius: 6px !important;
+          padding: 1rem !important;
+          box-shadow: none !important;
+        }
+
+        [data-testid="stMetricLabel"] {
+          color: var(--app-text-muted) !important;
+          font-family: var(--font-family) !important;
+          font-size: 0.75rem !important;
+          font-weight: 600 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.04em !important;
+        }
+
+        [data-testid="stMetricValue"] {
+          color: var(--app-text) !important;
+          font-family: var(--font-family) !important;
+          font-size: 1.5rem !important;
+          font-weight: 700 !important;
+        }
+
+        /* Generic Container Cards */
+        .glass-card,
+        .metric-card,
+        .weather-card,
+        .chat-window,
+        .ai-summary-card,
+        .rec-box,
+        .stat-card,
+        .bento-card,
+        .tactical-card {
+          background: var(--app-surface) !important;
+          border: 1px solid var(--app-border) !important;
+          border-radius: 6px !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          transform: none !important;
+        }
+
+        .glass-card:hover,
+        .metric-card:hover,
+        .weather-card:hover {
+          border-color: var(--app-border-light) !important;
+          transform: none !important;
+          box-shadow: none !important;
 
 /* Remaining legacy overrides */
 """Focused presentation overrides for the Streamlit application shell."""
