@@ -1680,17 +1680,22 @@ Auto-fetched from {source_label} &middot; Synced
 
 # ===== PAGE 2: RISK MAP =====
 def page_map():
-    st.markdown("""<div style="background:#0f172a;padding:24px;border-radius:12px;border:1px solid #1e293b;text-align:center;margin-bottom:16px;">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px;color:#06b6d4;">🗺️ India Flood Risk Map</h1>
-        <p class="hero-text" style="max-width:760px;margin:0 auto;color:#94a3b8;">Full India flood risk assessment across 736 districts based on historical flood patterns</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">India Flood Risk Map</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Full national flood risk assessment across 736 districts based on historical flood patterns.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot blue"></span> GIS Layer: Folium CartoDB Dark</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     is_online = st.session_state.get("internet_status", True)
     if should_skip_map(is_online):
-        st.info("📡 **Offline Mode**: The interactive map requires internet to load map tiles. Please reconnect to view the full risk map.")
-        render_html('<div class="gradient-divider"></div>')
-        st.markdown("### 📋 India Risk Overview (Offline)")
+        st.info("Offline Mode: The interactive map requires internet connectivity to stream map tiles. Displaying cached tabular overview.")
+        st.markdown("### National Risk Overview (Offline)")
         districts_df = load_india_districts()
         render_risk_overview_table(districts_df)
         return
