@@ -2285,11 +2285,17 @@ DETAILED DATA:
 
 # ===== PAGE 5: FLOOD DAMAGE SEVERITY CLASSIFIER =====
 def page_damage_classifier():
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🛰️ Flood Damage Severity Classifier</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Upload an aerial or ground photo to assess flood damage severity using AI</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Flood Damage Severity Classifier</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Computer vision classification model evaluating structural and surface inundation severity.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot blue"></span> Vision Engine: ResNet CNN</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     if not FLOOD_CLASSIFIER_AVAILABLE:
         st.error("Flood damage classifier is not available.")
@@ -2314,7 +2320,7 @@ def page_damage_classifier():
             st.image(image, caption="Uploaded Image", use_column_width=True)
 
             analyze = st.button(
-                "🔍 Classify Damage Severity",
+                "Classify Damage Severity",
                 type="primary",
                 use_container_width=True,
             )
@@ -2325,12 +2331,12 @@ def page_damage_classifier():
                 result = classify_flood_image(image)
 
             colors = {
-                "No Flooding": "#06b6d4",
+                "No Flooding": "#3b82f6",
                 "Mild": "#22c55e",
                 "Moderate": "#f59e0b",
                 "Severe": "#ef4444",
             }
-            color = colors.get(result["severity"], "blue")
+            color = colors.get(result["severity"], "#3b82f6")
             severity_label = (
                 result["severity"]
                 if result["severity"] == "No Flooding"
@@ -2338,11 +2344,11 @@ def page_damage_classifier():
             )
 
             st.markdown(f"""
-            <div style='background:{color};
-            padding:20px; border-radius:10px;
-            text-align:center; color:white;
-            font-size:24px; font-weight:bold'>
-            {severity_label}
+            <div style='background:#1e293b; border:1px solid #334155; border-left:4px solid {color};
+            padding:16px; border-radius:6px;
+            text-align:left; color:#f8fafc; margin-bottom:12px;'>
+                <div style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">Classification Result</div>
+                <div style="font-size:20px;font-weight:700;color:{color};margin-top:4px;">{severity_label}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -2364,11 +2370,17 @@ def page_damage_classifier():
 
 # ===== PAGE 6: CROP DISEASE DETECTION =====
 def page_crop_disease():
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🌿 Crop Disease Detection</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Upload a crop leaf image to detect diseases using AI</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Disease Detection</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Deep learning pathology model detecting agricultural blights and pathogen infections.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot green"></span> PlantVillage Model: Active</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     if not CROP_DISEASE_AVAILABLE:
         st.error("Crop disease classifier is not available.")
@@ -2379,10 +2391,9 @@ def page_crop_disease():
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("### 📸 Upload Leaf Image")
-        st.warning(
-            "⚠️ Only upload leaves from: Corn, Tomato, Potato, Pepper, Rice, Grape, Apple, Strawberry. "
-            "Other crops will return 'not supported'."
+        st.markdown("### Upload Leaf Image")
+        st.caption(
+            "Supported crops: Corn, Tomato, Potato, Pepper, Rice, Grape, Apple, Strawberry."
         )
         uploaded = st.file_uploader(
             "Choose a leaf image",
@@ -2398,19 +2409,19 @@ def page_crop_disease():
             )
 
             analyze_btn = st.button(
-                "🔍 Detect Disease",
+                "Detect Disease",
                 type="primary",
                 use_container_width=True,
             )
 
             if analyze_btn:
-                with st.spinner("🤖 Analyzing leaf image..."):
+                with st.spinner("Analyzing leaf image..."):
                     result = classify_crop_image(image)
 
                 st.session_state["crop_result"] = result
 
     with col2:
-        st.markdown("### 📊 Analysis Results")
+        st.markdown("### Analysis Results")
 
         st.markdown("**Supported Crops:**")
         crops = [
