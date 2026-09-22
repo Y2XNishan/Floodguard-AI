@@ -153,6 +153,81 @@ h2, h3, h4 {
 .gradient-divider, .clean-divider {
   height: 1px;
   background: #334155;
+  border: none;
+  margin: 18px 0;
+}
+
+/* District Grid */
+.district-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.district-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 14px;
+  text-align: left;
+}
+.district-card:hover {
+  border-color: #475569;
+}
+.district-name {
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin-bottom: 4px;
+}
+.district-score {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2px 0;
+}
+.district-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.dbadge-low { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+.dbadge-med { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
+.dbadge-high { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+
+/* Weather Card */
+.weather-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 16px;
+}
+.weather-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+.weather-title {
+  color: #f8fafc;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.weather-subtitle {
+  color: #94a3b8;
+  font-size: 0.8125rem;
+  margin-top: 2px;
+}
+.weather-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.weather-metrics div {
+  background: #0f172a;
+  border: 1px solid #334155;
 
 /* Remaining legacy styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
