@@ -1,3 +1,70 @@
+"""Clean internal-tool presentation overrides for Streamlit application shell."""
+
+import streamlit as st
+
+
+def inject_ui_overrides() -> None:
+    """Apply clean, human-made developer tool styling to the application."""
+    st.markdown(
+        """
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <style>
+        :root {
+          --app-bg: #0f172a;
+          --app-surface: #1e293b;
+          --app-surface-hover: #243247;
+          --app-border: #334155;
+          --app-border-light: #475569;
+          --app-text: #f8fafc;
+          --app-text-muted: #94a3b8;
+          --app-accent: #3b82f6;
+          --app-accent-hover: #2563eb;
+          --app-success: #10b981;
+          --app-warning: #f59e0b;
+          --app-danger: #ef4444;
+          --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Base Application Layout */
+        body, .stApp, .main, [data-testid="stAppViewContainer"] {
+          background-color: var(--app-bg) !important;
+          color: var(--app-text) !important;
+          font-family: var(--font-family) !important;
+        }
+
+        [data-testid="stMainBlockContainer"] {
+          max-width: 1440px;
+          padding: 1.5rem 2rem 3rem !important;
+        }
+
+        /* Clean Typography - No Gradients or Glows */
+        h1, h2, h3, h4, h5, h6 {
+          font-family: var(--font-family) !important;
+          color: var(--app-text) !important;
+          font-weight: 600 !important;
+          letter-spacing: -0.01em !important;
+          background: none !important;
+          -webkit-text-fill-color: initial !important;
+          text-shadow: none !important;
+        }
+
+        h1 { font-size: 1.875rem !important; line-height: 2.25rem !important; }
+        h2 { font-size: 1.5rem !important; line-height: 2rem !important; }
+        h3 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+        h4, h5, h6 { font-size: 1rem !important; }
+
+        p, span, div, label {
+          font-family: var(--font-family);
+        }
+
+        /* Sidebar - Simple Flat Architecture */
+        [data-testid="stSidebar"] {
+          background: #0b1120 !important;
+
+/* Remaining legacy overrides */
 """Focused presentation overrides for the Streamlit application shell."""
 
 import streamlit as st
