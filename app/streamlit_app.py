@@ -3014,12 +3014,18 @@ def page_trends():
     
     # Heading & Subheading
     st.markdown(f"""
-    <div style="text-align: center; padding: 20px 0 10px 0;">
-        <h1 style="font-size: 2.8rem !important; margin-bottom: 4px;">{get_text("trends_title", lang)}</h1>
-        <p class="hero-text" style="max-width: 600px; margin: 0 auto;">{get_text("trends_subtitle", lang)}</p>
+    <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">{get_text("trends_title", lang)}</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">{get_text("trends_subtitle", lang)}</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot blue"></span> Dataset: NDMA Historical Records</span>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
     
     # Load data
     df = load_ndma_history()
@@ -3128,30 +3134,30 @@ def page_trends():
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border-top: 3px solid #06b6d4 !important; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_total_events", lang)}</div>
-            <div class="metric-value" style="color: #06b6d4; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{total_events}</div>
+            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{total_events}</div>
         </div>
         """, unsafe_allow_html=True)
     with c2:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border-top: 3px solid #06b6d4 !important; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_worst_year", lang)}</div>
-            <div class="metric-value" style="color: #06b6d4; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{worst_year}</div>
+            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{worst_year}</div>
         </div>
         """, unsafe_allow_html=True)
     with c3:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border-top: 3px solid #06b6d4 !important; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_peak_people", lang)}</div>
-            <div class="metric-value" style="color: #06b6d4; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{peak_people:,}</div>
+            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{peak_people:,}</div>
         </div>
         """, unsafe_allow_html=True)
     with c4:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border-top: 3px solid #06b6d4 !important; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_total_damage", lang)}</div>
-            <div class="metric-value" style="color: #06b6d4; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">₹{total_damage:,.0f} Cr</div>
+            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">₹{total_damage:,.0f} Cr</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -3170,33 +3176,33 @@ def page_trends():
     # Render Trend Indicator
     if pct_change > 0:
         trend_html = f"""
-        <div class="rec-box rec-mod" style="background: rgba(245,158,11,0.08); border-left-color: #f59e0b !important; padding: 16px; margin: 16px 0;">
-            <h4 style="color: #f59e0b; margin: 0; display: flex; align-items: center; gap: 8px; font-weight: 700;">
-                ⚠️ {get_text("trend_increasing", lang)} (+{pct_change:.1f}%)
-            </h4>
+        <div class="rec-box rec-mod" style="background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
+            <div style="color: #f59e0b; margin: 0; font-size: 0.9375rem; font-weight: 600;">
+                {get_text("trend_increasing", lang)} (+{pct_change:.1f}%)
+            </div>
         </div>
         """
     elif pct_change < 0:
         trend_html = f"""
-        <div class="rec-box rec-safe" style="background: rgba(16,185,129,0.08); border-left-color: #10b981 !important; padding: 16px; margin: 16px 0;">
-            <h4 style="color: #10b981; margin: 0; display: flex; align-items: center; gap: 8px; font-weight: 700;">
-                ✅ {get_text("trend_decreasing", lang)} ({pct_change:.1f}%)
-            </h4>
+        <div class="rec-box rec-safe" style="background: rgba(16,185,129,0.08); border-left: 3px solid #10b981 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
+            <div style="color: #10b981; margin: 0; font-size: 0.9375rem; font-weight: 600;">
+                {get_text("trend_decreasing", lang)} ({pct_change:.1f}%)
+            </div>
         </div>
         """
     else:
         trend_html = f"""
-        <div class="rec-box rec-safe" style="background: rgba(6,182,212,0.08); border-left-color: #06b6d4 !important; padding: 16px; margin: 16px 0;">
-            <h4 style="color: #06b6d4; margin: 0; display: flex; align-items: center; gap: 8px; font-weight: 700;">
-                ➡️ {get_text("trend_stable", lang)}
-            </h4>
+        <div class="rec-box rec-safe" style="background: rgba(59,130,246,0.08); border: 1px solid #334155; border-left: 3px solid #3b82f6 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
+            <div style="color: #3b82f6; margin: 0; font-size: 0.9375rem; font-weight: 600;">
+                {get_text("trend_stable", lang)}
+            </div>
         </div>
         """
     render_html(trend_html)
     
     # CHART 1 — Year-over-Year Line Chart
     fig1 = go.Figure()
-    colors = ["#06b6d4", "#a855f7", "#ec4899", "#10b981"]
+    colors = ["#3b82f6", "#64748b", "#0284c7", "#10b981"]
     
     for i, (col, display_label) in enumerate(selected_cols):
         fig1.add_trace(go.Scatter(
@@ -3204,15 +3210,15 @@ def page_trends():
             y=filtered[col],
             mode="lines+markers",
             name=display_label,
-            line=dict(color=colors[i % len(colors)], width=3),
-            marker=dict(size=8, symbol="circle"),
+            line=dict(color=colors[i % len(colors)], width=2.5),
+            marker=dict(size=7, symbol="circle"),
             hovertemplate="%{x}: %{y}<extra></extra>"
         ))
         
     fig1.update_layout(
         title=dict(
             text=get_text("chart_yoy_title", lang).format(district=selected_district, state=selected_state),
-            font=dict(size=16, color="#f1f5f9", family="Inter")
+            font=dict(size=15, color="#f1f5f9", family="Inter")
         ),
         paper_bgcolor="#0f172a",
         plot_bgcolor="#1e293b",
@@ -3248,7 +3254,7 @@ def page_trends():
         y=filtered["flood_events"],
         marker=dict(
             color=filtered["flood_events"],
-            colorscale=[[0.0, "#06b6d4"], [1.0, "#ef4444"]],
+            colorscale=[[0.0, "#3b82f6"], [1.0, "#ef4444"]],
             showscale=False
         ),
         hovertemplate="Year %{x}: %{y} events<extra></extra>"
