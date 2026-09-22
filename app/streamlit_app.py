@@ -3649,7 +3649,7 @@ def page_tactical_command():
 # ===== FOOTER =====
 def render_footer():
     st.markdown("""<div class="app-footer">
-        <p style="margin:0"><b style="color:#06b6d4">India Flood Risk & Agricultural Intelligence</b> | Powered by AI · Built with Streamlit</p>
+        <p style="margin:0"><span style="color:#f8fafc;font-weight:600;">FloodGuard AI</span> &middot; Hydrological Telemetry & Emergency Analytics &middot; v2.4</p>
     </div>""", unsafe_allow_html=True)
 
 
@@ -3667,46 +3667,44 @@ def main():
     # --- Show offline banner if no internet ---
     if not is_online:
         st.markdown("""
-        <div style="background:#7c2d12; border:1px solid #ea580c; border-radius:8px;
-        padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; gap:10px;">
-        <span style="font-size:20px;">📡</span>
-        <div>
-        <strong style="color:#fed7aa;">Offline Mode Active</strong><br>
-        <span style="color:#fdba74; font-size:13px;">
-        No internet connection detected. Showing last cached data.
-        Reconnect to get live predictions.</span>
-        </div>
+        <div class="system-alert-banner">
+            <div>
+                <strong style="color:#f87171;">Offline Mode Active</strong><br>
+                <span style="color:#94a3b8;font-size:0.8125rem;">
+                No internet connection detected. Showing cached telemetry data.
+                </span>
+            </div>
+            <span class="status-pill">Offline Cache</span>
         </div>
         """, unsafe_allow_html=True)
 
     # --- Persistent Global Sidebar ---
     with st.sidebar:
         st.markdown(f"""
-<div style='text-align: center; padding: 10px 0;'>
-    <h1 style='color: #06b6d4; font-size: 28px; font-weight: 800; margin-bottom: 4px;'>
-        🌊 {get_text('app_title', lang)}
-    </h1>
-    <p style='color: #8899aa; font-size: 13px; margin: 0;'>
+<div style='padding: 10px 0 16px 0; border-bottom: 1px solid #334155; margin-bottom: 12px;'>
+    <h2 style='color: #f8fafc; font-size: 1.125rem; font-weight: 700; margin: 0 0 4px 0; letter-spacing: -0.01em;'>
+        {get_text('app_title', lang)}
+    </h2>
+    <p style='color: #94a3b8; font-size: 0.8125rem; margin: 0; line-height: 1.4;'>
         {get_text('app_subtitle', lang)}
     </p>
 </div>
 """, unsafe_allow_html=True)
-        st.markdown("---")
 
         # --- System Status Expander ---
-        with st.sidebar.expander("📡 System Status", expanded=True):
+        with st.sidebar.expander("System Status", expanded=True):
             if is_online:
                 st.markdown("""
-                <div style="background:#14532d; border:1px solid #16a34a; border-radius:6px;
-                padding:6px 12px; margin-bottom:8px; font-size:12px; color:#86efac;">
-                🟢 Online — Live data active
+                <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:4px;
+                padding:6px 10px; margin-bottom:8px; font-size:12px; color:#34d399;">
+                Online — Live Telemetry Feeds Active
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
-                <div style="background:#7c2d12; border:1px solid #ea580c; border-radius:6px;
-                padding:6px 12px; margin-bottom:8px; font-size:12px; color:#fdba74;">
-                🔴 Offline — Using cached data
+                <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:4px;
+                padding:6px 10px; margin-bottom:8px; font-size:12px; color:#f87171;">
+                ● Offline
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -3714,7 +3712,7 @@ def main():
         districts_df = load_india_districts()
         ALL_DISTRICTS = sorted(districts_df["district"].dropna().unique().tolist())
 
-        st.sidebar.markdown("### 🔍 Quick District Search")
+        st.sidebar.markdown("### District Search")
         search_query = st.sidebar.text_input(
             "", 
             placeholder="Search district...",
@@ -3723,7 +3721,6 @@ def main():
         )
 
         if search_query and len(search_query) >= 2:
-            # Filter districts matching search
             matches = [d for d in ALL_DISTRICTS 
                        if search_query.lower() in d.lower()][:5]
             
@@ -3733,7 +3730,6 @@ def main():
                     if st.sidebar.button(match, 
                       key=f"search_{match}",
                       use_container_width=True):
-                        # Find corresponding state
                         matched_rows = districts_df[districts_df["district"] == match]
                         if not matched_rows.empty:
                             matched_state = matched_rows.iloc[0]["state"]
@@ -3752,124 +3748,69 @@ def main():
         st.markdown("---")
 
         # --- Language Expander ---
-        with st.sidebar.expander("🌐 Language / भाषा", expanded=True):
+        with st.sidebar.expander("Language / भाषा", expanded=True):
             col1, col2 = st.columns(2)
-            if col1.button("🇬🇧 English", use_container_width=True):
+            if col1.button("English", use_container_width=True):
                 st.session_state.lang = "en"
                 st.rerun()
-            if col2.button("🇮🇳 हिंदी", use_container_width=True):
+            if col2.button("हिंदी", use_container_width=True):
                 st.session_state.lang = "hi"
                 st.rerun()
 
         st.markdown("---")
 
         # --- Cache Settings Expander ---
-        with st.sidebar.expander("💾 Cache Settings", expanded=False):
+        with st.sidebar.expander("Cache & Storage", expanded=False):
             cache_keys = ["prediction", "forecast", "weather", "map_data"]
             for key in cache_keys:
                 if is_cache_available(key):
                     st.markdown(
-                        f"✅ {key.title()} cached ({get_cache_age(key)})"
+                        f"Cached: {key.title()} ({get_cache_age(key)})"
                     )
                 else:
-                    st.markdown(f"❌ {key.title()} — not cached yet")
+                    st.markdown(f"Empty: {key.title()}")
             cache_col1, cache_col2 = st.columns(2)
             with cache_col1:
-                if st.button("🔄 Recheck", key="recheck_internet"):
+                if st.button("Recheck", key="recheck_internet"):
                     st.session_state.internet_status = is_internet_available()
                     st.rerun()
             with cache_col2:
-                if st.button("🗑️ Clear Cache", key="clear_cache"):
+                if st.button("Clear Cache", key="clear_cache"):
                     clear_all_cache()
                     st.success("Cache cleared!")
         st.markdown("---")
 
-    # Generate ticker items from top 10 HIGH risk districts and 5 LOW risk districts
-    try:
-        ticker_df = load_india_districts()
-        type_base = {
-            "Flash / glacial flood": 0.68,
-            "Coastal / river flood": 0.58,
-            "Riverine flood": 0.62,
-            "Urban / river flood": 0.44,
-        }
-
-        
-        results = []
-        for _, row in ticker_df.iterrows():
-            dist = row['district']
-            st_name = row['state']
-            f_type = row.get("flood_type", "Riverine flood")
-            
-            import hashlib as _hl
-            _th = int(_hl.md5(dist.encode()).hexdigest(), 16)
-            score = min(max(type_base.get(f_type, 0.45) + ((_th % 21) - 10) / 100, 0.08), 0.92)
-            level = "HIGH" if score >= 0.6 else "MODERATE" if score >= 0.3 else "LOW"
-            
-            row_risk = row.get("risk_level", row.get("risk", row.get("level", None)))
-            if row_risk is not None:
-                risk_level = str(row_risk).strip().upper()
-            else:
-                risk_level = level
-                
-            if dist in LOW_RISK_DISTRICTS:
-                risk_level = "LOW"
-                score = 0.15
-                
-            results.append({
-                "district": dist,
-                "state": st_name,
-                "score": score,
-                "level": risk_level
-            })
-            
-        res_df = pd.DataFrame(results)
-        high_risks = res_df[res_df["level"] == "HIGH"].sort_values(by=["score", "district"], ascending=[False, True]).head(10)
-        low_risks = res_df[res_df["level"] == "LOW"].sort_values(by=["score", "district"], ascending=[True, True]).head(5)
-        
-        ticker_spans = []
-        for _, row in high_risks.iterrows():
-            ticker_spans.append(f'<span style="color:#ef4444;margin:0 8px;">⚠️ HIGH RISK: {row["district"]}, {row["state"]}</span>')
-        for _, row in low_risks.iterrows():
-            ticker_spans.append(f'<span style="color:#22c55e;margin:0 8px;">✅ LOW RISK: {row["district"]}, {row["state"]}</span>')
-            
-        sep = '<span style="color:#94a3b8;margin:0 8px;">|</span>'
-        ticker_inner_html = sep.join(ticker_spans)
-    except Exception:
-        ticker_inner_html = """
-        <span style="color:#ef4444;margin:0 8px;">⚠️ HIGH RISK: Dhubri, Assam</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#ef4444;margin:0 8px;">⚠️ HIGH RISK: Darbhanga, Bihar</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#f59e0b;margin:0 8px;">🟡 MODERATE: Bhubaneswar, Odisha</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#22c55e;margin:0 8px;">✅ LOW RISK: Jaisalmer, Rajasthan</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#f59e0b;margin:0 8px;">🟡 MODERATE: Kolhapur, Maharashtra</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#ef4444;margin:0 8px;">⚠️ HIGH RISK: Alappuzha, Kerala</span>
-        <span style="color:#94a3b8;margin:0 8px;">|</span>
-        <span style="color:#22c55e;margin:0 8px;">✅ LOW RISK: Leh, Ladakh</span>
-        """
-
     st.markdown("""
-    <div style="background:#1e293b;border-top:2px solid #06b6d4;
-      border-bottom:1px solid #334155;padding:8px 0;
-      overflow:hidden;white-space:nowrap;margin-bottom:16px;">
-      <div style="display:inline-block;animation:ticker 30s linear infinite;">
-    """ + ticker_inner_html + """
-      </div>
+    <div class="status-strip" style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="status-dot blue"></span>
+                <span style="font-weight:600;font-size:0.9375rem;color:#f8fafc;">FloodGuard AI</span>
+            </div>
+            <span class="status-pill">
+                <span class="status-dot green"></span>
+                Hydrologic Feeds Active
+            </span>
+            <span class="status-pill">
+                Sector: Patna, Bihar [Ganga Basin]
+            </span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <a href="tel:1078" style="text-decoration:none;">
+                <span style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:3px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">
+                    NDMA Hotline: 1078
+                </span>
+            </a>
+            <span style="font-size:0.75rem;color:#64748b;">
+                IST Sync (UTC+05:30)
+            </span>
+        </div>
     </div>
-    <style>
-    @keyframes ticker {
-      0% { transform: translateX(100vw); }
-      100% { transform: translateX(-100%); }
-    }
-    </style>
     """, unsafe_allow_html=True)
 
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
+    tab1, tab_stitch, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
         get_text("tab_risk", lang),
+        get_text("tab_stitch", lang),
         get_text("tab_map", lang),
         get_text("tab_trends", lang),
         get_text("tab_forecast", lang),
@@ -3883,6 +3824,8 @@ def main():
     ])
     with tab1:
         page_predictor()
+    with tab_stitch:
+        page_tactical_command()
     with tab2:
         page_map()
     with tab3:
