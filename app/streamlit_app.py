@@ -976,11 +976,12 @@ def show_risk_gauge(risk_score, risk_level):
 def page_predictor():
     lang = st.session_state.get("lang", "en")
     is_online = st.session_state.get("internet_status", True)
-    st.markdown(f"""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">{get_text('hero_title', lang)}</h1>
-        <p class="hero-text" style="max-width:760px;margin:0 auto">{get_text('hero_subtitle', lang)}</p>
-    </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
+    st.markdown(f"""
+    <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <h2 style="margin:0;font-size:1.35rem;font-weight:600;color:#f8fafc;">{get_text('hero_title', lang)}</h2>
+        <p style="margin:2px 0 0 0;font-size:0.875rem;color:#94a3b8;">{get_text('hero_subtitle', lang)}</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     model, scaler, features = load_xgb_model()
     districts_df = load_india_districts()
@@ -990,39 +991,22 @@ def page_predictor():
     n_records = len(real_df) if not real_df.empty else 4695
 
     st.markdown(f"""
-<div style="display:grid; grid-template-columns:repeat(4,1fr); 
-gap:8px; margin-bottom:16px;">
-    <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
-    rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
-    text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_districts}</div>
-        <div style="font-size:10px; color:rgba(255,255,255,0.35); 
-        text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
-        Districts</div>
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;">
+    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_districts}</div>
+        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Districts</div>
     </div>
-    <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
-    rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
-    text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_states}</div>
-        <div style="font-size:10px; color:rgba(255,255,255,0.35); 
-        text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
-        States</div>
+    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_states}</div>
+        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">States</div>
     </div>
-    <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
-    rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
-    text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">{n_records:,}</div>
-        <div style="font-size:10px; color:rgba(255,255,255,0.35); 
-        text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
-        Records</div>
+    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_records:,}</div>
+        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Records</div>
     </div>
-    <div style="background:rgba(255,255,255,0.04); border:0.5px solid 
-    rgba(255,255,255,0.08); border-radius:8px; padding:10px; 
-    text-align:center;">
-        <div style="font-size:18px; font-weight:500; color:#00BCD4;">0.83</div>
-        <div style="font-size:10px; color:rgba(255,255,255,0.35); 
-        text-transform:uppercase; letter-spacing:0.3px; margin-top:2px;">
-        AUC Score</div>
+    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#ffffff;">0.83</div>
+        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">AUC Score</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1233,48 +1217,44 @@ gap:8px; margin-bottom:16px;">
             source_label = live_weather.get("weather_source", "Open-Meteo")
 
             weather_card_html = (
-                '<div style="background: linear-gradient(135deg, #0f2027, '
-                '#203a43, #2c5364); border: 1px solid rgba(0,188,212,0.3); '
-                'border-radius: 16px; padding: 20px; color: white; margin: 12px 0;">'
-                '<div style="background:#00BCD4; color:#003344; font-size:10px; '
-                'font-weight:700; padding:3px 10px; border-radius:20px; '
-                'letter-spacing:1px; display:inline-block; margin-bottom:12px;">'
-                '&#9679; LIVE</div>'
-                f'<div style="font-size:48px; margin-bottom:4px;">{weather_icon}</div>'
-                f'<div style="font-size:22px; font-weight:600; color:white; '
+                '<div style="background: #1e293b; border: 1px solid #334155; '
+                'border-radius: 6px; padding: 16px; color: #f8fafc; margin: 12px 0;">'
+                '<div style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.4); '
+                'font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; '
+                'display:inline-block; margin-bottom:12px;">'
+                'Live Telemetry</div>'
+                f'<div style="font-size:20px; font-weight:600; color:#f8fafc; '
                 f'margin-bottom:2px;">{condition}</div>'
-                f'<div style="font-size:12px; color:rgba(255,255,255,0.5); '
-                f'margin-bottom:14px;">via {source_label} &middot; just now</div>'
+                f'<div style="font-size:12px; color:#94a3b8; '
+                f'margin-bottom:14px;">Source: {source_label} &middot; Synced</div>'
                 '<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">'
-                '<div style="background:rgba(255,255,255,0.08); border-radius:8px; '
+                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#00BCD4;">'
+                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
                 f'{temperature}&deg;C</div>'
-                '<div style="font-size:10px; color:rgba(255,255,255,0.5); '
+                '<div style="font-size:10px; color:#94a3b8; '
                 'margin-top:2px;">Temp</div></div>'
-                '<div style="background:rgba(255,255,255,0.08); border-radius:8px; '
+                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#00BCD4;">'
+                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
                 f'{humidity}%</div>'
-                '<div style="font-size:10px; color:rgba(255,255,255,0.5); '
+                '<div style="font-size:10px; color:#94a3b8; '
                 'margin-top:2px;">Humidity</div></div>'
-                '<div style="background:rgba(255,255,255,0.08); border-radius:8px; '
+                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#00BCD4;">'
+                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
                 f'{rainfall}mm</div>'
-                '<div style="font-size:10px; color:rgba(255,255,255,0.5); '
+                '<div style="font-size:10px; color:#94a3b8; '
                 'margin-top:2px;">Rainfall</div></div>'
                 '</div>'
-                '<div style="font-size:11px; color:rgba(255,255,255,0.3); '
-                'margin-top:10px;">Last updated: just now</div>'
                 '</div>'
             )
             render_html(weather_card_html)
 
             st.markdown(f"""
-<div style="font-size: 11px; color: rgba(255,255,255,0.3); 
+<div style="font-size: 11px; color: #64748b; 
 text-align: center; margin-top: 4px;">
-🔄 Auto-fetched from {source_label} · Refresh to update
+Auto-fetched from {source_label} &middot; Synced
 </div>
 """, unsafe_allow_html=True)
 
@@ -1436,31 +1416,61 @@ text-align: center; margin-top: 4px;">
                              "#ef4444" if risk_level == "HIGH" else "#dc2626"
                 
                 st.markdown(f"""
-                <div style="background:rgba(255,255,255,0.03); border:0.5px solid 
-                rgba(255,255,255,0.08); border-radius:10px; padding:12px; margin-bottom:8px; text-align:center;">
-                    <div style="font-size:11px; color:rgba(255,255,255,0.4); 
-                    text-transform:uppercase; letter-spacing:0.5px;">Risk Assessment</div>
+                <div style="background:#1e293b; border:1px solid #334155; 
+                border-radius:6px; padding:10px 14px; margin-bottom:8px; text-align:left;">
+                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
+                    text-transform:uppercase; letter-spacing:0.5px;">Risk Assessment Gauge</div>
                 </div>
                 """, unsafe_allow_html=True)
                 
                 show_risk_gauge(risk_score, risk_level)
                 
                 st.markdown(f"""
-                <div style="background:rgba(255,255,255,0.03); border:0.5px solid 
-                rgba(255,255,255,0.08); border-radius:10px; padding:12px; margin-top:8px;">
+                <div style="background:#1e293b; border:1px solid #334155; 
+                border-radius:6px; padding:12px; margin-top:8px;">
                     <div style="display:flex; justify-content:space-between; 
-                    font-size:12px; color:rgba(255,255,255,0.4); 
+                    font-size:12px; color:#94a3b8; 
                     margin-bottom:6px;">
-                        <span>XGBoost</span>
-                        <span style="color:{risk_color};">{xgb_score:.1f}%</span>
+                        <span>XGBoost Confidence</span>
+                        <span style="color:{risk_color}; font-weight:600;">{xgb_score:.1f}%</span>
                     </div>
                     <div style="display:flex; justify-content:space-between; 
-                    font-size:12px; color:rgba(255,255,255,0.4);">
-                        <span>LSTM</span>
-                        <span style="color:{risk_color};">{lstm_score:.1f}%</span>
+                    font-size:12px; color:#94a3b8;">
+                        <span>LSTM Confidence</span>
+                        <span style="color:{risk_color}; font-weight:600;">{lstm_score:.1f}%</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+            with col2:
+                st.markdown("""
+                <div style="background:#1e293b; border:1px solid #334155; 
+                border-radius:6px; padding:10px 14px; margin-bottom:8px; text-align:left;">
+                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
+                    text-transform:uppercase; letter-spacing:0.5px;">7-Day Flood Risk Outlook</div>
+                </div>
+                """, unsafe_allow_html=True)
+                if mini_forecast_df is not None and not mini_forecast_df.empty:
+                    x_col = 'day' if 'day' in mini_forecast_df.columns else mini_forecast_df.columns[0]
+                    y_col = 'flood_probability_pct' if 'flood_probability_pct' in mini_forecast_df.columns else mini_forecast_df.columns[1]
+                    fig_mini = go.Figure(go.Bar(
+                        x=mini_forecast_df[x_col],
+                        y=mini_forecast_df[y_col],
+                        marker=dict(color="#3b82f6"),
+                        hovertemplate="%{x}: %{y:.1f}%<extra></extra>"
+                    ))
+                    fig_mini.update_layout(
+                        height=220,
+                        paper_bgcolor="#0f172a",
+                        plot_bgcolor="#0f172a",
+                        font={"color": "#94a3b8", "family": "Inter"},
+                        margin=dict(l=10, r=10, t=10, b=20),
+                        yaxis=dict(range=[0, 100], gridcolor="#1e293b", title="% Risk"),
+                        xaxis=dict(gridcolor="#1e293b")
+                    )
+                    st.plotly_chart(fig_mini, use_container_width=True)
+                else:
+                    st.info("7-day projected telemetry unavailable for this district.")
 
             # 5. SECOND TWO-COLUMN ROW — Weather + Actions:
             col3, col4 = st.columns(2)
@@ -1480,41 +1490,40 @@ text-align: center; margin-top: 4px;">
                     condition.lower().split()[0], "⛅️")
 
                 st.markdown(f"""
-                <div style="background:#0e2a3a; border:0.5px solid 
-                rgba(0,188,212,0.25); border-radius:10px; padding:14px;">
-                    <div style="background:#00BCD4; color:#003344; 
-                    font-size:10px; font-weight:700; padding:2px 8px; 
-                    border-radius:20px; letter-spacing:0.8px; 
-                    display:inline-block; margin-bottom:8px;">LIVE</div>
-                    <div style="font-size:28px; margin-bottom:2px;">{icon}</div>
-                    <div style="font-size:28px; font-weight:500; color:white; 
-                    line-height:1;">{temp}°C</div>
-                    <div style="font-size:13px; color:rgba(255,255,255,0.55); 
+                <div style="background:#1e293b; border:1px solid #334155; 
+                border-radius:6px; padding:14px;">
+                    <div style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.4); 
+                    font-size:10px; font-weight:600; padding:2px 8px; 
+                    border-radius:4px; letter-spacing:0.5px; 
+                    display:inline-block; margin-bottom:8px;">LIVE TELEMETRY</div>
+                    <div style="font-size:24px; font-weight:600; color:#f8fafc; 
+                    line-height:1.1;">{temp}°C</div>
+                    <div style="font-size:12px; color:#94a3b8; 
                     margin-top:3px;">{condition}</div>
                     <div style="display:grid; grid-template-columns:repeat(3,1fr); 
                     gap:6px; margin-top:10px;">
-                        <div style="background:rgba(255,255,255,0.06); 
-                        border-radius:6px; padding:7px; text-align:center;">
-                            <div style="font-size:13px; font-weight:500; 
-                            color:#00BCD4;">{humidity_pct}%</div>
+                        <div style="background:#0f172a; border:1px solid #334155; 
+                        border-radius:4px; padding:7px; text-align:center;">
+                            <div style="font-size:13px; font-weight:600; 
+                            color:#ffffff;">{humidity_pct}%</div>
                             <div style="font-size:10px; 
-                            color:rgba(255,255,255,0.35); margin-top:2px;">
+                            color:#94a3b8; margin-top:2px;">
                             Humidity</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.06); 
-                        border-radius:6px; padding:7px; text-align:center;">
-                            <div style="font-size:13px; font-weight:500; 
-                            color:#00BCD4;">{rainfall_mm}mm</div>
+                        <div style="background:#0f172a; border:1px solid #334155; 
+                        border-radius:4px; padding:7px; text-align:center;">
+                            <div style="font-size:13px; font-weight:600; 
+                            color:#ffffff;">{rainfall_mm}mm</div>
                             <div style="font-size:10px; 
-                            color:rgba(255,255,255,0.35); margin-top:2px;">
+                            color:#94a3b8; margin-top:2px;">
                             Rainfall</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.06); 
-                        border-radius:6px; padding:7px; text-align:center;">
-                            <div style="font-size:13px; font-weight:500; 
-                            color:#00BCD4;">{live_weather.get('weather_source', 'Open-Meteo')}</div>
+                        <div style="background:#0f172a; border:1px solid #334155; 
+                        border-radius:4px; padding:7px; text-align:center;">
+                            <div style="font-size:13px; font-weight:600; 
+                            color:#ffffff;">{live_weather.get('weather_source', 'Open-Meteo')}</div>
                             <div style="font-size:10px; 
-                            color:rgba(255,255,255,0.35); margin-top:2px;">
+                            color:#94a3b8; margin-top:2px;">
                             Source</div>
                         </div>
                     </div>
@@ -1523,12 +1532,10 @@ text-align: center; margin-top: 4px;">
 
             # RIGHT (col4) — Recommended Actions:
             with col4:
-                # Use existing recommendation logic
-                # Wrap the existing rec cards in this panel:
                 st.markdown("""
-                <div style="background:rgba(255,255,255,0.03); border:0.5px solid 
-                rgba(255,255,255,0.08); border-radius:10px; padding:16px;">
-                    <div style="font-size:11px; color:rgba(255,255,255,0.4); 
+                <div style="background:#1e293b; border:1px solid #334155; 
+                border-radius:6px; padding:16px;">
+                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
                     text-transform:uppercase; letter-spacing:0.5px; 
                     margin-bottom:10px;">Recommended Actions</div>
                 """, unsafe_allow_html=True)
@@ -1599,7 +1606,7 @@ text-align: center; margin-top: 4px;">
             top = dict(sorted(feat_dict.items(), key=lambda x: abs(x[1]), reverse=True)[:8])
             labels = [display_names.get(k, k) for k in top.keys()]
             fig2 = go.Figure(go.Bar(x=list(top.values()), y=labels, orientation='h',
-                marker=dict(color=list(top.values()), colorscale=[[0,"#06b6d4"],[1,"#10b981"]])))
+                marker=dict(color="#3b82f6")))
             fig2.update_layout(height=350, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 font={"color":"#e2e8f0","family":"Inter"},
                 xaxis=dict(gridcolor="rgba(255,255,255,0.03)"),
@@ -1626,7 +1633,7 @@ text-align: center; margin-top: 4px;">
             st.download_button(
                 label=get_text("download_pdf", lang),
                 data=pdf_bytes,
-                file_name=f"FloodGuard_{selected_district}_{datetime.now().strftime('%Y%m%d')}.pdf",
+                file_name=f"FloodGuard_AI_{selected_district}_{datetime.now().strftime('%Y%m%d')}.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
