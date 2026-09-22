@@ -3331,282 +3331,112 @@ def page_trends():
 
 # ===== PAGE 10: ABOUT =====
 def page_about():
-    # Redesigned About page using modern Bento Grid layout
+    """Renders the developer-built system architecture and telemetry documentation."""
     st.markdown("""
-<style>
-  .bento-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  }
-  .bento-card {
-    background: #0d1b2a;
-    border: 1px solid rgba(0,188,212,0.2);
-    border-radius: 16px;
-    padding: 18px 20px;
-    box-sizing: border-box;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .bento-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.08);
-  }
-  .bento-card.full-width {
-    grid-column: span 2;
-  }
-  .bento-card.hero-accent {
-    background: #0e2a3a;
-    border: 1px solid rgba(0,188,212,0.3);
-  }
-  .bento-title {
-    font-size: 14px;
-    color: white;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .bento-hero-title {
-    color: #00BCD4;
-    font-size: 26px;
-    font-weight: 700;
-    margin: 0;
-  }
-  .bento-hero-subtitle {
-    color: rgba(255,255,255,0.7);
-    font-size: 13px;
-    margin-top: 4px;
-    margin-bottom: 20px;
-  }
-  .bento-stats-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-  }
-  .bento-stat-item {
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
-  }
-  .bento-stat-number {
-    font-size: 28px;
-    color: #00BCD4;
-    font-weight: 600;
-  }
-  .bento-stat-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-  .bento-metric-number {
-    font-size: 24px;
-    color: #00BCD4;
-    font-weight: 600;
-  }
-  .bento-metric-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-  .bento-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .bento-tag {
-    border: 0.5px solid rgba(0,188,212,0.4);
-    color: #00BCD4;
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 12px;
-    font-weight: 500;
-    background: rgba(0,188,212,0.02);
-    display: inline-block;
-    transition: all 0.2s ease;
-  }
-  .bento-tag:hover {
-    background: rgba(0,188,212,0.1);
-    transform: translateY(-1px);
-    border-color: rgba(0,188,212,0.7);
-  }
-  .bento-inner-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 12px;
-  }
-  .bento-inner-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .bento-inner-icon {
-    font-size: 22px;
-    background: rgba(0,188,212,0.1);
-    border-radius: 10px;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .bento-inner-content {
-    display: flex;
-    flex-direction: column;
-  }
-  .bento-inner-title {
-    font-size: 13px;
-    color: white;
-    font-weight: 600;
-  }
-  .bento-inner-desc {
-    font-size: 11.5px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 2px;
-    line-height: 1.4;
-  }
-  .bento-footer {
-    text-align: center;
-    margin-top: 20px;
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-  
-  @media (max-width: 600px) {
-    .bento-container {
-      grid-template-columns: 1fr;
-    }
-    .bento-card.full-width {
-      grid-column: span 1;
-    }
-    .bento-inner-grid {
-      grid-template-columns: 1fr;
-    }
-    .bento-stats-row {
-      flex-direction: column;
-      gap: 15px;
-    }
-  }
-</style>
-
-<div class="bento-container">
-  
-  <!-- 1. HERO BENTO CARD -->
-  <div class="bento-card full-width hero-accent">
-    <h1 class="bento-hero-title">FloodGuard AI</h1>
-    <div class="bento-hero-subtitle">India's Complete Flood Risk Prediction & Agricultural Intelligence System</div>
-    <div class="bento-stats-row">
-      <div class="bento-stat-item">
-        <div class="bento-stat-number">736</div>
-        <div class="bento-stat-label">Districts</div>
-      </div>
-      <div class="bento-stat-item">
-        <div class="bento-stat-number">36</div>
-        <div class="bento-stat-label">States</div>
-      </div>
-      <div class="bento-stat-item">
-        <div class="bento-stat-number">4,695</div>
-        <div class="bento-stat-label">Records</div>
-      </div>
-      <div class="bento-stat-item">
-        <div class="bento-stat-number">5</div>
-        <div class="bento-stat-label">AI Models</div>
-      </div>
+    <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">System Architecture & Validation</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Platform telemetry pipelines, model benchmark metrics, and data source provenance.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot blue"></span> Build: v2.4 Enterprise</span>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- 2. MODEL METRIC CARDS -->
-  <div class="bento-card">
-    <div class="bento-title">XGBoost Predictor</div>
-    <div class="bento-metric-number">0.83</div>
-    <div class="bento-metric-label">AUC</div>
-  </div>
-  
-  <div class="bento-card">
-    <div class="bento-title">LSTM Attention</div>
-    <div class="bento-metric-number">0.70</div>
-    <div class="bento-metric-label">Recall</div>
-  </div>
-  
-  <div class="bento-card">
-    <div class="bento-title">CNN Classifier</div>
-    <div class="bento-metric-number">89.6%</div>
-    <div class="bento-metric-label">Accuracy</div>
-  </div>
-  
-  <div class="bento-card">
-    <div class="bento-title">Crop Disease CNN</div>
-    <div class="bento-metric-number">98.4%</div>
-    <div class="bento-metric-label">Accuracy</div>
-  </div>
-
-  <!-- 3. TECH STACK CARD -->
-  <div class="bento-card full-width">
-    <div class="bento-title">Tech Stack</div>
-    <div class="bento-tags">
-      <span class="bento-tag">Python</span>
-      <span class="bento-tag">Streamlit</span>
-      <span class="bento-tag">PyTorch</span>
-      <span class="bento-tag">XGBoost</span>
-      <span class="bento-tag">Gemini API</span>
-      <span class="bento-tag">OpenWeatherMap</span>
-      <span class="bento-tag">Folium</span>
-      <span class="bento-tag">SHAP</span>
-      <span class="bento-tag">Open-Meteo</span>
-      <span class="bento-tag">fpdf2</span>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+        <div class="card-custom" style="text-align:center;padding:14px;">
+            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">736</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Districts Covered</div>
+        </div>
+        <div class="card-custom" style="text-align:center;padding:14px;">
+            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">36</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">States & UTs</div>
+        </div>
+        <div class="card-custom" style="text-align:center;padding:14px;">
+            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">4,695</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Historical Records</div>
+        </div>
+        <div class="card-custom" style="text-align:center;padding:14px;">
+            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">5</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Model Pipelines</div>
+        </div>
     </div>
-  </div>
 
-  <!-- 4. DATA SOURCES CARD -->
-  <div class="bento-card full-width">
-    <div class="bento-title">Data Sources</div>
-    <div class="bento-inner-grid">
-      <div class="bento-inner-item">
-        <div class="bento-inner-icon">🌧️</div>
-        <div class="bento-inner-content">
-          <span class="bento-inner-title">IMD Rainfall Data</span>
-          <span class="bento-inner-desc">Daily historical rainfall grids sourced from the Indian Meteorological Department.</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div class="card-custom" style="padding:16px;">
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">Model Benchmarks</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">XGBoost Baseline</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">0.83 AUC</div>
+                </div>
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">LSTM Attention</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">0.70 Recall</div>
+                </div>
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">Damage Classifier</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">89.6% Accuracy</div>
+                </div>
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">Crop Pathology</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">98.4% Accuracy</div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="bento-inner-item">
-        <div class="bento-inner-icon">🚨</div>
-        <div class="bento-inner-content">
-          <span class="bento-inner-title">NDMA Flood Records</span>
-          <span class="bento-inner-desc">Official disaster management archives of flood mappings and logs.</span>
+
+        <div class="card-custom" style="padding:16px;">
+            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">Engineering Stack</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">
+                <span class="status-pill">Python 3.11</span>
+                <span class="status-pill">Streamlit Enterprise</span>
+                <span class="status-pill">PyTorch 2.x</span>
+                <span class="status-pill">XGBoost</span>
+                <span class="status-pill">Folium GIS</span>
+                <span class="status-pill">Open-Meteo ECMWF</span>
+                <span class="status-pill">SHAP Explainability</span>
+                <span class="status-pill">fpdf2 Automated Reports</span>
+                <span class="status-pill">Pandas / NumPy</span>
+            </div>
         </div>
-      </div>
-      <div class="bento-inner-item">
-        <div class="bento-inner-icon">🌿</div>
-        <div class="bento-inner-content">
-          <span class="bento-inner-title">PlantVillage (32,883 images)</span>
-          <span class="bento-inner-desc">Comprehensive dataset for deep learning plant leaf disease classification.</span>
-        </div>
-      </div>
-      <div class="bento-inner-item">
-        <div class="bento-inner-icon">🌾</div>
-        <div class="bento-inner-content">
-          <span class="bento-inner-title">Crop Yield Data</span>
-          <span class="bento-inner-desc">19,689 historical production records spanning 55 Indian agricultural crops.</span>
-        </div>
-      </div>
     </div>
-  </div>
 
-</div>
-
-<!-- 5. FOOTER LINE -->
-<div class="bento-footer">
-  Built with ❤️ for farmers and disaster management teams across India.
-</div>
-""", unsafe_allow_html=True)
+    <div class="card-custom" style="padding:16px;margin-bottom:16px;">
+        <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;">Data Ingestion Sources</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">IMD</div>
+                <div>
+                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">India Meteorological Department</div>
+                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Daily historical and projected precipitation grids.</div>
+                </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">NDMA</div>
+                <div>
+                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">National Disaster Management Authority</div>
+                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Official disaster mapping and emergency inventory archives.</div>
+                </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">DATA</div>
+                <div>
+                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">PlantVillage Dataset (32,883 images)</div>
+                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Standardized agricultural pathology benchmarking corpus.</div>
+                </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">AGRI</div>
+                <div>
+                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">Agricultural Harvest Statistics (19,689 records)</div>
+                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Historical multi-crop yield and acreage records across India.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # ===== FOOTER =====
