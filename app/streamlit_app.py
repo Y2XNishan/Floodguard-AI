@@ -2819,11 +2819,17 @@ def page_crop_loss_estimator():
 
 # ===== PAGE 9: ALERT SYSTEM =====
 def page_alert_system():
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">🔔 Flood Alert System</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Subscribe to receive flood alerts via Email before floods hit your district</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Automated Early Warning & Alert System</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Configure threshold-based regional notification dispatches via SMTP and SMS channels.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot green"></span> Dispatch Daemon: Online</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     stats = get_alert_stats()
     c1, c2, c3 = st.columns(3)
@@ -2842,14 +2848,14 @@ def page_alert_system():
     # STEP 1 - Header:
     st.markdown("""
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-  <div style="width:40px;height:40px;background:#ef444420;
-    border-radius:10px;display:flex;align-items:center;
-    justify-content:center;font-size:20px;">🔔</div>
+  <div style="width:32px;height:32px;background:rgba(59,130,246,0.15);
+    border:1px solid rgba(59,130,246,0.3);border-radius:4px;display:flex;align-items:center;
+    justify-content:center;color:#60a5fa;font-size:11px;font-weight:700;">AL</div>
   <div>
-    <div style="color:#f1f5f9;font-size:15px;font-weight:600;">
-      Flood Alert Subscription</div>
+    <div style="color:#f1f5f9;font-size:14px;font-weight:600;">
+      Notification Dispatch Parameters</div>
     <div style="color:#64748b;font-size:12px;">
-      Get notified before floods hit your area</div>
+      Direct subscriber dispatch before projected crest</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -2879,11 +2885,11 @@ def page_alert_system():
 
     # STEP 3 - Risk threshold selector as 4 visual cards:
     st.markdown("""
-<div style="background:#1e293b;border-radius:10px;
-  padding:16px;margin:16px 0;">
+<div style="background:#1e293b;border:1px solid #334155;border-radius:6px;
+  padding:14px;margin:16px 0;">
   <div style="color:#94a3b8;font-size:11px;text-transform:uppercase;
-    letter-spacing:1px;margin-bottom:12px;">
-    Alert threshold — notify me when risk exceeds</div>
+    letter-spacing:0.04em;font-weight:600;">
+    Alert threshold — notify when risk exceeds:</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -2903,13 +2909,13 @@ def page_alert_system():
         with col:
             is_selected = st.session_state.alert_threshold == val
             st.markdown(f"""
-            <div style="background:#0f172a;
-              border:2px solid {'#06b6d4' if is_selected else color+'60'};
-              border-radius:8px;padding:12px;text-align:center;">
+            <div style="background:#1e293b;
+              border:1px solid {'#3b82f6' if is_selected else '#334155'};
+              border-radius:6px;padding:12px;text-align:center;">
               <div style="font-size:20px;font-weight:600;
-                color:{'#06b6d4' if is_selected else color};">
+                color:{'#3b82f6' if is_selected else color};">
                 {val}%</div>
-              <div style="font-size:11px;color:#64748b;
+              <div style="font-size:11px;color:#94a3b8;
                 margin-top:4px;">{label}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -2927,8 +2933,7 @@ def page_alert_system():
     )
 
     # STEP 4 - Subscribe button:
-    if st.button("🔔 Subscribe to Alerts", 
-        use_container_width=True, key="subscribe_btn"):
+    if st.button("Subscribe to Alerts", type="primary", use_container_width=True, key="subscribe_btn"):
         if email and district and district != "Select your district...":
             name = email.split("@")[0].capitalize()
             selected_state = "Assam"
