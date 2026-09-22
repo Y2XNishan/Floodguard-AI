@@ -63,6 +63,61 @@ def inject_ui_overrides() -> None:
         /* Sidebar - Simple Flat Architecture */
         [data-testid="stSidebar"] {
           background: #0b1120 !important;
+          border-right: 1px solid var(--app-border) !important;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stExpander"] {
+          background: var(--app-surface) !important;
+          border: 1px solid var(--app-border) !important;
+          border-radius: 6px !important;
+        }
+
+        [data-testid="stSidebar"] hr {
+          border-color: var(--app-border) !important;
+        }
+
+        /* Tabs - Professional Flat Developer Tool Navigation */
+        .stTabs [data-baseweb="tab-list"] {
+          gap: 4px;
+          background: transparent !important;
+          border-bottom: 1px solid var(--app-border) !important;
+          padding: 0 0 2px 0 !important;
+          overflow-x: auto;
+        }
+
+        .stTabs [role="tab"] {
+          font-family: var(--font-family) !important;
+          font-weight: 500 !important;
+          font-size: 0.875rem !important;
+          color: var(--app-text-muted) !important;
+          background: transparent !important;
+          border: none !important;
+          border-bottom: 2px solid transparent !important;
+          border-radius: 0 !important;
+          padding: 0.5rem 0.85rem !important;
+          white-space: nowrap;
+          transition: color 150ms ease, border-color 150ms ease !important;
+        }
+
+        .stTabs [role="tab"]:hover {
+          color: var(--app-text) !important;
+          background: transparent !important;
+        }
+
+        .stTabs [role="tab"][aria-selected="true"] {
+          background: transparent !important;
+          color: var(--app-accent) !important;
+          border-bottom: 2px solid var(--app-accent) !important;
+          font-weight: 600 !important;
+          box-shadow: none !important;
+        }
+
+        [data-baseweb="tab-highlight"],
+        [data-baseweb="tab-border"] {
+          display: none !important;
+        }
+
+        /* Inputs, Selectboxes & Textareas */
 
 /* Remaining legacy overrides */
 """Focused presentation overrides for the Streamlit application shell."""
