@@ -3439,6 +3439,213 @@ def page_about():
     """, unsafe_allow_html=True)
 
 
+# ===== PAGE: SYSTEM OVERVIEW =====
+def page_tactical_command():
+    """Renders the clean internal tool System Overview and telemetry dashboard."""
+    lang = st.session_state.get("lang", "en")
+
+    st.markdown("""
+    <div style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="margin:0;font-size:1.25rem;font-weight:600;color:#f8fafc;">Regional Telemetry & Risk Overview</h2>
+                <p style="color:#94a3b8;font-size:0.875rem;margin:2px 0 0 0;">
+                    Hydrologic indicators, model confidence metrics, and regional emergency protocol status for Patna (Ganga Basin).
+                </p>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="status-pill"><span class="status-dot green"></span> Station G-09 Active</span>
+                <span class="status-pill">District ID: PTN-HQ-01</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    view_mode = st.radio(
+        "Overview Mode",
+        [
+            "Telemetry Dashboard",
+            "Agricultural Assessment",
+            "Emergency Protocol Checklist",
+            "Reference UI (HTML Prototype)"
+        ],
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+
+    if view_mode == "Telemetry Dashboard":
+        st.markdown("""
+        <div class="system-alert-banner">
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span style="background:#ef4444;color:#ffffff;font-size:0.6875rem;font-weight:700;padding:2px 6px;border-radius:3px;">
+                    ADVISORY
+                </span>
+                <span style="color:#f87171;font-weight:500;font-size:0.875rem;">
+                    Ganga River discharge crest projected within 12–14 hours. Low-lying riverside sectors on waterlogging watch.
+                </span>
+            </div>
+            <span style="color:#94a3b8;font-size:0.75rem;">Source: CWC / IMD Station G-09</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2 = st.columns([5, 7])
+
+        with col1:
+            st.markdown("""
+            <div class="card-custom">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                    <div>
+                        <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">
+                            Current Assessment
+                        </div>
+                        <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#f8fafc;">
+                            Elevated Runoff Risk
+                        </h3>
+                    </div>
+                    <span class="badge badge-danger">High Risk</span>
+                </div>
+
+                <div style="padding:16px 0;margin:12px 0;border-top:1px solid #334155;border-bottom:1px solid #334155;">
+                    <div style="display:flex;align-items:baseline;gap:8px;">
+                        <span style="font-size:2.25rem;font-weight:700;color:#f8fafc;line-height:1;">78%</span>
+                        <span style="color:#94a3b8;font-size:0.875rem;">Probability of inundation</span>
+                    </div>
+                    <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+                            <span style="color:#94a3b8;">Peak Arrival Window:</span>
+                            <span style="color:#f8fafc;font-weight:600;">~6–7 Hours</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+                            <span style="color:#94a3b8;">Ensemble Confidence:</span>
+                            <span style="color:#f8fafc;font-weight:600;">94.2% (XGBoost + LSTM)</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+                            <span style="color:#94a3b8;">Monitored Basin:</span>
+                            <span style="color:#f8fafc;font-weight:600;">Ganga / Son Confluence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size:0.8125rem;color:#94a3b8;display:flex;align-items:center;justify-content:space-between;">
+                    <span>Action: Pre-position teams in Zones 3 & 4</span>
+                    <span style="color:#3b82f6;font-weight:500;">SOP Active</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col2:
+            m1, m2 = st.columns(2)
+            with m1:
+                st.markdown("""
+                <div class="metric-card">
+                    <div class="metric-label">24h Precipitation</div>
+                    <div class="metric-value">148.0 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">mm</span></div>
+                    <div style="font-size:0.75rem;color:#f87171;margin-top:4px;">+42.8 mm vs 10-yr seasonal mean</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.markdown("""
+                <div class="metric-card" style="margin-top:10px;">
+                    <div class="metric-label">Soil Saturation (0–30 cm)</div>
+                    <div class="metric-value">92.4 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">%</span></div>
+                    <div style="font-size:0.75rem;color:#f87171;margin-top:4px;">Runoff threshold exceeded</div>
+                </div>
+                """, unsafe_allow_html=True)
+            with m2:
+                st.markdown("""
+                <div class="metric-card">
+                    <div class="metric-label">Ganga River Level</div>
+                    <div class="metric-value" style="color:#f87171;">50.24 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">m</span></div>
+                    <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Danger mark: 49.40 m (+0.84 m)</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.markdown("""
+                <div class="metric-card" style="margin-top:10px;">
+                    <div class="metric-label">Dam Discharge Outflow</div>
+                    <div class="metric-value">18,400 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">m³/s</span></div>
+                    <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Sone Barrage (42/48 gates active)</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+    elif view_mode == "Agricultural Assessment":
+        c1, c2 = st.columns([6, 6])
+        with c1:
+            st.markdown("""
+            <div class="card-custom">
+                <h3 style="margin:0 0 8px 0;font-size:1rem;">Kharif Crop Exposure</h3>
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:12px;margin-bottom:10px;">
+                    <div style="display:flex;justify-content:space-between;">
+                        <b style="color:#f8fafc;">Paddy (Rice) Inundation</b>
+                        <span style="color:#f87171;font-weight:600;">68% Vulnerability</span>
+                    </div>
+                    <p style="font-size:0.8125rem;color:#94a3b8;margin:4px 0 0 0;">
+                        Estimated 42,300 hectares submerged or waterlogged. Projected yield impact: ₹148 Crore.
+                    </p>
+                </div>
+                <div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:12px;">
+                    <div style="display:flex;justify-content:space-between;">
+                        <b style="color:#f8fafc;">Post-Flood Silt & Disease Advisory</b>
+                        <span style="color:#fbbf24;font-weight:600;">Advisory</span>
+                    </div>
+                    <p style="font-size:0.8125rem;color:#94a3b8;margin:4px 0 0 0;">
+                        Elevated risk of bacterial leaf blight and root rot once floodwater recedes. Apply copper oxychloride fungicide.
+                    </p>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        with c2:
+            st.markdown("""
+            <div class="card-custom">
+                <h3 style="margin:0 0 8px 0;font-size:1rem;">Crop Insurance Claim Dispatch</h3>
+                <p style="font-size:0.8125rem;color:#94a3b8;margin-bottom:14px;">
+                    Automated claim dossier generation under Pradhan Mantri Fasal Bima Yojana (PMFBY) using satellite imagery and district risk telemetry.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("Generate PMFBY Digital Claim Dossier", key="pmfby_claim_btn", type="primary"):
+                st.success("PMFBY digital damage assessment initiated for Patna sector.")
+
+    elif view_mode == "Emergency Protocol Checklist":
+        st.markdown("""
+        <div class="card-custom">
+            <h3 style="margin:0 0 12px 0;font-size:1rem;">Operational Readiness Checklist</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
+                    <span style="color:#10b981;font-weight:600;font-size:0.8125rem;">[COMPLETED]</span>
+                    <span style="font-size:0.8125rem;color:#f8fafc;">Early warning notification broadcast via Cell Broadcast (142,000 recipients)</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
+                    <span style="color:#fbbf24;font-weight:600;font-size:0.8125rem;">[IN PROGRESS]</span>
+                    <span style="font-size:0.8125rem;color:#f8fafc;">Livestock and resident evacuation to Gandhi Maidan elevated grounds</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
+                    <span style="color:#94a3b8;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
+                    <span style="font-size:0.8125rem;color:#f8fafc;">Substations #12 and #14 grid isolation to prevent electrical hazard</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
+                    <span style="color:#94a3b8;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
+                    <span style="font-size:0.8125rem;color:#f8fafc;">Deployment of NDRF rescue boats to Sector-4 confluence</span>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    elif view_mode == "Reference UI (HTML Prototype)":
+        st.markdown("""
+        <div style="background:#1e293b;border:1px solid #334155;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-weight:500;font-size:0.8125rem;color:#94a3b8;">High-Density Standalone Prototype</span>
+            <span style="font-size:0.75rem;color:#64748b;">Generated via Stitch MCP</span>
+        </div>
+        """, unsafe_allow_html=True)
+        html_file = APP_DIR / "stitch_dashboard.html"
+        if html_file.exists():
+            with open(html_file, "r", encoding="utf-8") as f:
+                html_code = f.read()
+            import streamlit.components.v1 as components
+            components.html(html_code, height=800, scrolling=True)
+        else:
+            st.info("HTML prototype not found.")
+
+
 # ===== FOOTER =====
 def render_footer():
     st.markdown("""<div class="app-footer">
