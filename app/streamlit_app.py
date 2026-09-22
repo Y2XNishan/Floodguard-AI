@@ -1920,11 +1920,17 @@ def page_chatbot():
     risk_level = st.session_state.get("risk_level", "LOW")
     state = st.session_state.get("selected_state", None)
 
-    st.markdown("""<div style="text-align:center;padding:20px 0 10px 0">
-        <h1 style="font-size:2.8rem !important;margin-bottom:4px">FloodGuard AI</h1>
-        <p class="hero-text" style="max-width:650px;margin:0 auto">Ask flood safety questions with your latest district and risk score already in context.</p>
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Hydrological Operations Assistant</h2>
+                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Query local flood safety and contingency actions with live district telemetry pre-loaded.</p>
+            </div>
+            <div>
+                <span class="status-pill"><span class="status-dot green"></span> Engine: Active</span>
+            </div>
+        </div>
     </div>""", unsafe_allow_html=True)
-    render_html('<div class="gradient-divider"></div>')
 
     # Set API keys if available (optional — KB works without any API key)
     gemini_key = _get_gemini_key_for_app()
@@ -1991,21 +1997,23 @@ def page_chatbot():
 
     # STEP 1 - Chat container with header:
     st.markdown("""
-<div style="background:#0f172a;border-radius:14px;padding:20px;
-  border:1px solid #1e293b;">
+<div style="background:#0f172a;border-radius:6px;padding:16px;
+  border:1px solid #334155;">
   <div style="display:flex;align-items:center;gap:10px;
-    padding-bottom:12px;border-bottom:1px solid #1e293b;margin-bottom:16px;">
-    <div style="width:36px;height:36px;background:#06b6d420;
-      border-radius:50%;display:flex;align-items:center;
-      justify-content:center;font-size:18px;">🌊</div>
+    padding-bottom:12px;border-bottom:1px solid #334155;margin-bottom:16px;">
+    <div style="width:30px;height:30px;background:rgba(59,130,246,0.15);
+      border:1px solid rgba(59,130,246,0.3);border-radius:4px;display:flex;
+      align-items:center;justify-content:center;color:#60a5fa;font-weight:700;font-size:11px;">FG</div>
     <div>
-      <div style="color:#06b6d4;font-size:14px;font-weight:600;">
-        FloodGuard AI</div>
-      <div style="color:#475569;font-size:11px;">
-        Powered by Groq · LLaMA 3.3</div>
+      <div style="color:#f8fafc;font-size:13px;font-weight:600;">
+        FloodGuard AI Operations Assistant</div>
+      <div style="color:#94a3b8;font-size:11px;">
+        Hydrological Intelligence Model &middot; Online</div>
     </div>
-    <div style="margin-left:auto;width:8px;height:8px;
-      background:#22c55e;border-radius:50%;"></div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
+      <span class="status-dot green"></span>
+      <span style="font-size:11px;color:#94a3b8;">Active</span>
+    </div>
   </div>
 """, unsafe_allow_html=True)
 
@@ -2013,27 +2021,28 @@ def page_chatbot():
     for msg in st.session_state.chat_history:
         if msg["role"] == "user":
             st.markdown(f"""
-            <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
-              <div style="background:#06b6d4;color:#0f172a;
-                border-radius:18px 18px 4px 18px;padding:10px 14px;
+            <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+              <div style="background:#3b82f6;color:#ffffff;
+                border-radius:6px;padding:8px 12px;
                 font-size:13px;max-width:80%;">{msg["content"]}</div>
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"""
-            <div style="display:flex;gap:8px;margin-bottom:12px;">
-              <div style="width:28px;height:28px;background:#1e293b;
-                border:1px solid #06b6d430;border-radius:50%;
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <div style="width:24px;height:24px;background:#1e293b;
+                border:1px solid #334155;border-radius:4px;
                 display:flex;align-items:center;justify-content:center;
-                font-size:14px;flex-shrink:0;margin-top:2px;">🤖</div>
+                font-size:10px;font-weight:600;color:#94a3b8;flex-shrink:0;margin-top:2px;">AI</div>
               <div>
-                <div style="background:#06b6d415;color:#06b6d4;
-                  border-radius:4px;padding:2px 7px;font-size:10px;
-                  display:inline-block;margin-bottom:6px;">
+                <div style="background:rgba(59,130,246,0.1);color:#60a5fa;
+                  border:1px solid rgba(59,130,246,0.25);
+                  border-radius:3px;padding:1px 6px;font-size:10px;
+                  display:inline-block;margin-bottom:4px;">
                   {msg.get("q_type","General")}</div>
-                <div style="background:#1e293b;color:#e2e8f0;
-                  border-radius:4px 18px 18px 18px;padding:10px 14px;
-                  font-size:13px;line-height:1.6;max-width:85%;">
+                <div style="background:#1e293b;border:1px solid #334155;color:#f8fafc;
+                  border-radius:6px;padding:10px 14px;
+                  font-size:13px;line-height:1.55;max-width:85%;">
                   {msg["content"]}</div>
               </div>
             </div>
