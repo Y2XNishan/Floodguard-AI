@@ -211,7 +211,13 @@ Rules:
         }
 
     except Exception as e:
-        return f"FloodGuard AI is temporarily unavailable. Please try again.\nError: {str(e)}"
+        logger.warning(f"Groq API error: {e}")
+        return {
+            "answer": "AI Assistant unavailable. Check API configuration.",
+            "question_type": "Info",
+            "is_unavailable": True,
+            "location_detected": detect_location(question),
+        }
 
 
 # ── Legacy API (backward compatible with streamlit_app.py) ──────────
