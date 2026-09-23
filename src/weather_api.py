@@ -341,6 +341,40 @@ def get_rainfall_forecast(district_name: str, base_risk: float = None) -> list:
 
             if i < len(precipitation_sums):
                 precip_mm = _nonnegative_float(precipitation_sums[i], precip_mm)
+            rain_accum += precip_mm
+
+            # Calibrate flood probability dynamically
+            t_var = temporal_variance[i % 7]
+            if base_risk is not None:
+                anchor = max(float(base_risk), 0.5)
+                if i == 0:
+                    flood_prob = round(anchor, 1)
+                else:
+                    if precip_mm < 2.0:
+                        rain_comp = precip_mm * 0.8
+                    elif precip_mm < 15.0:
+                        rain_comp = 1.6 + (precip_mm - 2.0) * 1.4
+                    elif precip_mm < 40.0:
+                        rain_comp = 19.8 + (precip_mm - 15.0) * 1.2
+                    elif precip_mm < 80.0:
+                        rain_comp = 49.8 + (precip_mm - 40.0) * 0.6
+                    else:
+                        rain_comp = 73.8 + min((precip_mm - 80.0) * 0.2, 18.0)
+                    accum_comp = min(rain_accum * 0.15, 12.0)
+                    flood_prob = min(max(round(anchor * 0.35 + rain_comp * 0.55 + accum_comp + t_var, 1), 0.8), 98.0)
+            else:
+                if precip_mm < 1.0:
+                    rain_comp = 1.0 + precip_mm * 1.5
+                elif precip_mm < 10.0:
+                    rain_comp = 2.5 + (precip_mm - 1.0) * 1.8
+                elif precip_mm < 35.0:
+                    rain_comp = 18.7 + (precip_mm - 10.0) * 1.3
+                elif precip_mm < 70.0:
+                    rain_comp = 51.2 + (precip_mm - 35.0) * 0.7
+                else:
+                    rain_comp = 75.7 + min((precip_mm - 70.0) * 0.25, 18.0)
+                accum_comp = min(rain_accum * 0.18, 12.0)
+                flood_prob = min(max(round(rain_comp + accum_comp + t_var, 1), 0.8), 98.0)
                 
             t_max = _finite_float(temp_maxs[i], 28.0) if i < len(temp_maxs) else 28.0
             t_min = _finite_float(temp_mins[i], 20.0) if i < len(temp_mins) else 20.0
@@ -348,6 +382,7 @@ def get_rainfall_forecast(district_name: str, base_risk: float = None) -> list:
             
             forecast.append({
                 "date": date_str,
+                "day": day_name,
                 "date_display": date_display,
                 "rainfall_mm": precip_mm,
                 "rainfall": precip_mm,
@@ -355,8 +390,8 @@ def get_rainfall_forecast(district_name: str, base_risk: float = None) -> list:
                 "description": desc,
                 "temp_avg": temp_avg,
                 "flood_probability": round(flood_prob / 100.0, 3),
-                "flood_probability_pct": round(flood_prob, 1),
-                "risk_probability": round(flood_prob, 1),
+                "flood_probability_pct": flood_prob,
+                "risk_probability": flood_prob,
                 "risk_level": get_daily_risk_level(flood_prob),
             })
             
@@ -392,20 +427,20 @@ def get_river_level_estimate(rainfall_mm: float, district_name: str) -> float:
 
 
 def get_weather_emoji(weather_main: str) -> str:
-    """Map OpenWeatherMap weather groups to a compact display emoji."""
+    """Map OpenWeatherMap weather groups to Font Awesome icon HTML."""
     mapping = {
-        "Clear": "☀️",
-        "Clouds": "☁️",
-        "Rain": "🌧️",
-        "Drizzle": "🌦️",
-        "Thunderstorm": "⛈️",
-        "Snow": "❄️",
-        "Mist": "🌫️",
-        "Fog": "🌫️",
-        "Haze": "🌫️",
-        "Smoke": "🌫️",
+        "Clear": '<i class="fa-solid fa-sun" style="color:#f97316;"></i>',
+        "Clouds": '<i class="fa-solid fa-cloud" style="color:#71717a;"></i>',
+        "Rain": '<i class="fa-solid fa-cloud-rain" style="color:#f97316;"></i>',
+        "Drizzle": '<i class="fa-solid fa-cloud-rain" style="color:#f97316;"></i>',
+        "Thunderstorm": '<i class="fa-solid fa-cloud-bolt" style="color:#f97316;"></i>',
+        "Snow": '<i class="fa-solid fa-snowflake" style="color:#71717a;"></i>',
+        "Mist": '<i class="fa-solid fa-smog" style="color:#71717a;"></i>',
+        "Fog": '<i class="fa-solid fa-smog" style="color:#71717a;"></i>',
+        "Haze": '<i class="fa-solid fa-smog" style="color:#71717a;"></i>',
+        "Smoke": '<i class="fa-solid fa-smog" style="color:#71717a;"></i>',
     }
-    return mapping.get(weather_main, "🌤️")
+    return mapping.get(weather_main, '<i class="fa-solid fa-cloud-sun" style="color:#f97316;"></i>')
 
 
 if __name__ == "__main__":
