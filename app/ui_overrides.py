@@ -10,19 +10,20 @@ def inject_ui_overrides() -> None:
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <style>
         :root {
-          --app-bg: #0f172a;
-          --app-surface: #1e293b;
-          --app-surface-hover: #243247;
-          --app-border: #334155;
-          --app-border-light: #475569;
-          --app-text: #f8fafc;
-          --app-text-muted: #94a3b8;
-          --app-accent: #3b82f6;
-          --app-accent-hover: #2563eb;
-          --app-success: #10b981;
+          --app-bg: #18181b;
+          --app-surface: #27272a;
+          --app-surface-hover: #323238;
+          --app-border: #3f3f46;
+          --app-border-light: #52525b;
+          --app-text: #fafafa;
+          --app-text-muted: #71717a;
+          --app-accent: #f97316;
+          --app-accent-hover: #ea580c;
+          --app-success: #4ade80;
           --app-warning: #f59e0b;
           --app-danger: #ef4444;
           --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -62,7 +63,7 @@ def inject_ui_overrides() -> None:
 
         /* Sidebar - Simple Flat Architecture */
         [data-testid="stSidebar"] {
-          background: #0b1120 !important;
+          background: #27272a !important;
           border-right: 1px solid var(--app-border) !important;
         }
 
@@ -122,7 +123,7 @@ def inject_ui_overrides() -> None:
         [data-testid="stTextArea"] textarea,
         [data-baseweb="select"] > div,
         [data-testid="stNumberInput"] input {
-          background: #0b1120 !important;
+          background: #18181b !important;
           color: var(--app-text) !important;
           border: 1px solid var(--app-border) !important;
           border-radius: 6px !important;
