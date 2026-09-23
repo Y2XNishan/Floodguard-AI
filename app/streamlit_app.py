@@ -3599,22 +3599,23 @@ def page_tactical_command():
     state = st.session_state.get("selected_state", "Bihar")
     district_profile = get_district_profile(state, district)
 
-    st.markdown("""
-    <div style="margin-bottom:16px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-            <div>
-                <h2 style="margin:0;font-size:1.25rem;font-weight:600;color:#fafafa;">Regional Telemetry & Risk Overview</h2>
-                <p style="color:#71717a;font-size:0.875rem;margin:2px 0 0 0;">
-                    Hydrologic indicators, model confidence metrics, and regional emergency protocol status for Patna (Ganga Basin).
-                </p>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                <span class="status-pill"><span class="status-dot green"></span> Station G-09 Active</span>
-                <span class="status-pill">District ID: PTN-HQ-01</span>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        f"""<div style="margin-bottom:16px;">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+<div>
+<h2 style="margin:0;font-size:1.25rem;font-weight:600;color:#fafafa;"><i class="fa-solid fa-water" style="color:#f97316;margin-right:8px;"></i>System Telemetry & Sensor Overview</h2>
+<p style="color:#71717a;font-size:0.875rem;margin:2px 0 0 0;">
+Hydrologic indicators, model confidence metrics, and regional sensor status for {district} ({state}).
+</p>
+</div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+<span class="status-pill"><span class="status-dot green"></span> Station G-09 Active</span>
+<span class="status-pill">District ID: PTN-HQ-01</span>
+</div>
+</div>
+</div>""",
+        unsafe_allow_html=True
+    )
 
     view_mode = st.radio(
         "Overview Mode",
