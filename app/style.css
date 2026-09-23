@@ -1,6 +1,7 @@
 /* ==========================================================================
    FloodGuard AI — Internal Operations & Risk Management Theme
-   Clean, human-made developer tool interface. Single #3b82f6 accent.
+   Clean, human-made developer tool interface. Single #f97316 accent.
+   Charcoal + Orange Theme
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -12,30 +13,30 @@
 
 /* Base Canvas */
 .main {
-  background: #0f172a;
+  background: #18181b;
   min-height: 100vh;
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-  background: #0b1120 !important;
-  border-right: 1px solid #334155 !important;
+  background: #27272a !important;
+  border-right: 1px solid #3f3f46 !important;
 }
 [data-testid="stSidebar"] h1, 
 [data-testid="stSidebar"] h2, 
 [data-testid="stSidebar"] h3 {
-  color: #f8fafc !important;
+  color: #fafafa !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
 }
 [data-testid="stSidebar"] label {
-  color: #94a3b8 !important;
+  color: #71717a !important;
   font-size: 0.8125rem !important;
 }
 
 /* Typography */
 h1 {
-  color: #f8fafc !important;
+  color: #fafafa !important;
   font-weight: 700 !important;
   font-size: 1.75rem !important;
   letter-spacing: -0.02em !important;
@@ -44,7 +45,7 @@ h1 {
 }
 
 h2, h3, h4 {
-  color: #f8fafc !important;
+  color: #fafafa !important;
   font-weight: 600 !important;
 }
 
@@ -53,8 +54,8 @@ h2, h3, h4 {
 .tactical-card,
 .stat-card,
 .card-custom {
-  background: #1e293b !important;
-  border: 1px solid #334155 !important;
+  background: #27272a !important;
+  border: 1px solid #3f3f46 !important;
   border-radius: 6px !important;
   padding: 16px 18px;
   margin: 10px 0;
@@ -64,13 +65,13 @@ h2, h3, h4 {
 .glass-card:hover, 
 .tactical-card:hover,
 .card-custom:hover {
-  border-color: #475569 !important;
+  border-color: #52525b !important;
 }
 
 /* Metric Cards */
 .metric-card {
-  background: #1e293b !important;
-  border: 1px solid #334155 !important;
+  background: #27272a !important;
+  border: 1px solid #3f3f46 !important;
   border-radius: 6px !important;
   padding: 16px;
   text-align: left;
@@ -78,7 +79,7 @@ h2, h3, h4 {
 }
 
 .metric-card:hover {
-  border-color: #475569 !important;
+  border-color: #52525b !important;
 }
 
 .metric-value {
