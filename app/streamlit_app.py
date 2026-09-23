@@ -3669,21 +3669,21 @@ Sensor Gateway Status
 <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
 <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
 <span style="color:#71717a;">Peak Arrival Window:</span>
-<span style="color:#fafafa;font-weight:600;">~6–7 Hours</span>
+<span style="color:#71717a;font-style:italic;">Data unavailable — connect live API</span>
 </div>
 <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
 <span style="color:#71717a;">Ensemble Confidence:</span>
-<span style="color:#fafafa;font-weight:600;">94.2% (XGBoost + LSTM)</span>
+<span style="color:#71717a;font-style:italic;">Data unavailable — connect live API</span>
 </div>
 <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
 <span style="color:#71717a;">Monitored Basin:</span>
-<span style="color:#fafafa;font-weight:600;">Ganga / Son Confluence</span>
+<span style="color:#fafafa;font-weight:600;">{district_profile.get("flood_type", "Riverine flood")}</span>
 </div>
 </div>
 </div>
 <div style="font-size:0.8125rem;color:#71717a;display:flex;align-items:center;justify-content:space-between;">
-<span>Action: Pre-position teams in Zones 3 & 4</span>
-<span style="color:#f97316;font-weight:500;">SOP Active</span>
+<span>Automated Emergency Dispatch: Standby</span>
+<span style="color:#71717a;font-weight:500;">Feed Offline</span>
 </div>
 </div>""",
                 unsafe_allow_html=True
