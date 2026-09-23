@@ -62,7 +62,7 @@ def risk_level(score: float) -> str:
     elif score < 0.7:
         return "High Risk"
     else:
-        return "🔴 Very High Risk"
+        return "Very High Risk"
 
 
 def compute_district_risk() -> dict:
@@ -129,10 +129,10 @@ def create_flood_map(output_path: str = None) -> folium.Map:
     # Title
     title_html = """
     <div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-                z-index: 1000; background: rgba(0,0,0,0.8); color: white;
-                padding: 12px 24px; border-radius: 8px; font-size: 18px;
+                z-index: 1000; background: #27272a; color: #fafafa; border: 1px solid #3f3f46;
+                padding: 10px 20px; border-radius: 6px; font-size: 16px;
                 font-family: Arial, sans-serif; font-weight: bold;">
-        🌊 Assam Flood Risk Map — Brahmaputra Basin
+        Assam Flood Risk Map — Brahmaputra Basin
     </div>
     """
     m.get_root().html.add_child(folium.Element(title_html))
@@ -165,7 +165,7 @@ def create_flood_map(output_path: str = None) -> folium.Map:
             location=[lat, lon],
             icon=folium.DivIcon(
                 html=f'<div style="font-size:11px; font-weight:bold; '
-                     f'color:#333; text-align:center;">{district}</div>',
+                     f'color:#fafafa; text-shadow: 0 0 3px #18181b; text-align:center;">{district}</div>',
                 icon_size=(80, 20),
                 icon_anchor=(40, -15),
             ),
@@ -174,13 +174,14 @@ def create_flood_map(output_path: str = None) -> folium.Map:
     # Legend
     legend_html = """
     <div style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;
-                background: white; padding: 15px; border-radius: 8px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3); font-family: Arial;">
-        <h4 style="margin:0 0 8px 0;">Risk Level</h4>
-        <p style="margin:3px 0;"><span style="color:#2ecc71;">●</span> Low (&lt;30%)</p>
-        <p style="margin:3px 0;"><span style="color:#f1c40f;">●</span> Moderate (30-50%)</p>
-        <p style="margin:3px 0;"><span style="color:#e67e22;">●</span> High (50-70%)</p>
-        <p style="margin:3px 0;"><span style="color:#e74c3c;">●</span> Very High (&gt;70%)</p>
+                background: #27272a; color: #fafafa; border: 1px solid #3f3f46;
+                padding: 15px; border-radius: 6px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.4); font-family: Arial, sans-serif;">
+        <h4 style="margin:0 0 8px 0; color:#fafafa;">Risk Level</h4>
+        <p style="margin:3px 0; color:#fafafa;"><span style="color:#4ade80;">●</span> Low (&lt;30%)</p>
+        <p style="margin:3px 0; color:#fafafa;"><span style="color:#f59e0b;">●</span> Moderate (30-50%)</p>
+        <p style="margin:3px 0; color:#fafafa;"><span style="color:#f97316;">●</span> High (50-70%)</p>
+        <p style="margin:3px 0; color:#fafafa;"><span style="color:#ef4444;">●</span> Very High (&gt;70%)</p>
     </div>
     """
     m.get_root().html.add_child(folium.Element(legend_html))
