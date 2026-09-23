@@ -999,8 +999,8 @@ def page_predictor():
     is_online = st.session_state.get("internet_status", True)
     st.markdown(f"""
     <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
-        <h2 style="margin:0;font-size:1.35rem;font-weight:600;color:#f8fafc;">{get_text('hero_title', lang)}</h2>
-        <p style="margin:2px 0 0 0;font-size:0.875rem;color:#94a3b8;">{get_text('hero_subtitle', lang)}</p>
+        <h2 style="margin:0;font-size:1.35rem;font-weight:600;color:#fafafa;"><i class="fa-solid fa-water" style="color:#f97316; margin-right:8px;"></i>{get_text('hero_title', lang)}</h2>
+        <p style="margin:2px 0 0 0;font-size:0.875rem;color:#71717a;">{get_text('hero_subtitle', lang)}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1013,21 +1013,21 @@ def page_predictor():
 
     st.markdown(f"""
 <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;">
-    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_districts}</div>
-        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Districts</div>
+    <div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#fafafa;">{n_districts}</div>
+        <div style="font-size:11px; color:#71717a; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Districts</div>
     </div>
-    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_states}</div>
-        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">States</div>
+    <div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#fafafa;">{n_states}</div>
+        <div style="font-size:11px; color:#71717a; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">States</div>
     </div>
-    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-size:18px; font-weight:600; color:#ffffff;">{n_records:,}</div>
-        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Records</div>
+    <div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#fafafa;">{n_records:,}</div>
+        <div style="font-size:11px; color:#71717a; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">Records</div>
     </div>
-    <div style="background:#1e293b; border:1px solid #334155; border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-size:18px; font-weight:600; color:#ffffff;">0.83</div>
-        <div style="font-size:11px; color:#94a3b8; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">AUC Score</div>
+    <div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; padding:12px; text-align:center;">
+        <div style="font-size:18px; font-weight:600; color:#fafafa;">0.83</div>
+        <div style="font-size:11px; color:#71717a; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px;">AUC Score</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1063,8 +1063,8 @@ def page_predictor():
         if WEATHER_API_AVAILABLE and api_key:
             set_openweathermap_api_key(api_key)
 
-        # --- Fetch Live Weather Button ---
-        fetch_btn = st.button("🔄 Refresh: Fetch Live Weather", use_container_width=True)
+        # --- Fetch Weather Data Button ---
+        fetch_btn = st.button("Fetch Weather Data", use_container_width=True)
         if fetch_btn:
             with st.spinner(f"Fetching weather for {weather_location}..."):
                 import requests as _req
