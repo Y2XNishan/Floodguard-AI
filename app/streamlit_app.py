@@ -3709,13 +3709,14 @@ Sensor Gateway Status
                     unsafe_allow_html=True
                 )
             with m2:
-                st.markdown("""
-                <div class="metric-card">
-                    <div class="metric-label">Ganga River Level</div>
-                    <div class="metric-value" style="color:#f87171;">50.24 <span style="font-size:1rem;color:#71717a;font-weight:400;">m</span></div>
-                    <div style="font-size:0.75rem;color:#71717a;margin-top:4px;">Danger mark: 49.40 m (+0.84 m)</div>
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    """<div class="metric-card" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;">
+<div class="metric-label">River Gauging Level</div>
+<div class="metric-value" style="color:#71717a;font-size:0.95rem;font-weight:600;margin:6px 0;">Data unavailable — connect live API</div>
+<div style="font-size:0.75rem;color:#71717a;margin-top:4px;">No live CWC river gauge feed connected</div>
+</div>""",
+                    unsafe_allow_html=True
+                )
                 st.markdown("""
                 <div class="metric-card" style="margin-top:10px;">
                     <div class="metric-label">Dam Discharge Outflow</div>
