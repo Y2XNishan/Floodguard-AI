@@ -1,0 +1,13 @@
+diff --git a/app/streamlit_app.py b/app/streamlit_app.py
+index f689cf3b..9e53d583 100644
+--- a/app/streamlit_app.py
++++ b/app/streamlit_app.py
+@@ -140,7 +140,7 @@ TRANSLATIONS = {
+         "district_label": "District",
+         "download_pdf": "Download PDF Report",
+         "report_ready": "Flood risk assessment report ready",
+-        "low_risk": "All Clear - No Worry",
++        "low_risk": "Low Risk — No Action Required",
+         "medium_risk": "Moderate Risk - Stay Alert",
+         "high_risk": "High Risk - Take Precautions",
+         "critical_risk": "CRITICAL - Evacuate Now",
