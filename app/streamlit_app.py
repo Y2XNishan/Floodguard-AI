@@ -2251,8 +2251,8 @@ def page_forecast():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">7-Day Flood Forecast</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">District-level flood risk projections computed from numerical weather prediction feeds.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">7-Day Flood Forecast</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">District-level flood risk projections computed from numerical weather prediction feeds.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot green"></span> Live Feeds Active</span>
@@ -2293,11 +2293,11 @@ def page_forecast():
 
     # Show forecast button only if district is selected
     if st.session_state.get('selected_district'):
-        generate_btn = st.button("🔮 Generate 7-Day Forecast", type="primary", use_container_width=True)
+        generate_btn = st.button("Generate 7-Day Forecast", type="primary", use_container_width=True)
     else:
         st.markdown("""<div class="glass-card" style="text-align:center;padding:50px 30px">
-            <h3 style="color:#e2e8f0 !important;font-size:1.3rem !important">Select a Location</h3>
-            <p style="color:#94a3b8;margin-top:8px">Choose a state and district above to generate a 7-day flood forecast</p>
+            <h3 style="color:#fafafa !important;font-size:1.3rem !important">Select a Location</h3>
+            <p style="color:#71717a;margin-top:8px">Choose a state and district above to generate a 7-day flood forecast</p>
         </div>""", unsafe_allow_html=True)
         generate_btn = False
 
@@ -2317,7 +2317,7 @@ def page_forecast():
 
     if generate_btn or (forecast_session is not None):
         if generate_btn and selected_district:
-            with st.spinner(f"📡 Fetching weather data and generating forecast for {selected_district}..."):
+            with st.spinner(f"Fetching weather data and generating forecast for {selected_district}..."):
                 try:
                     forecast_df = generate_7day_forecast(selected_district, selected_state)
                     st.session_state.current_forecast = {
@@ -2335,13 +2335,13 @@ def page_forecast():
                     except Exception:
                         pass
                 except Exception as e:
-                    st.error(f"❌ Error generating forecast: {str(e)}")
+                    st.error(f"Error generating forecast: {str(e)}")
                     st.session_state.current_forecast = None
                     # --- Offline: try cached forecast ---
                     if not is_online:
                         cached_forecast = load_from_cache("forecast")
                         if cached_forecast:
-                            st.warning(f"📦 Showing forecast cached {get_cache_age('forecast')}")
+                            st.warning(f"Showing forecast cached {get_cache_age('forecast')}")
                             try:
                                 cached_df = pd.DataFrame(cached_forecast["forecast_data"])
                                 st.session_state.current_forecast = {
@@ -2368,9 +2368,9 @@ def page_forecast():
             try:
                 fig = plot_forecast_chart(forecast_df, dist_name)
                 st.plotly_chart(fig, use_container_width=True)
-                st.caption("📡 Rainfall forecast from Open-Meteo. Accuracy improves during monsoon season (June–September).")
+                st.caption("Rainfall forecast from Open-Meteo. Accuracy improves during monsoon season (June–September).")
             except Exception as e:
-                st.warning(f"⚠️ Could not render chart: {str(e)}")
+                st.warning(f"Could not render chart: {str(e)}")
 
             st.markdown("---")
 
@@ -2378,16 +2378,16 @@ def page_forecast():
             try:
                 summary = get_forecast_summary(forecast_df, dist_name)
                 st.markdown(f"""<div class="ai-summary-card">
-                    <div class="ai-summary-title">📋 Forecast Summary</div>
+                    <div class="ai-summary-title"><i class="fa-solid fa-clipboard-list" style="color:#f97316;"></i> Forecast Summary</div>
                     <div class="ai-summary-body" style="white-space: pre-wrap;">{summary}</div>
                 </div>""", unsafe_allow_html=True)
             except Exception as e:
-                st.warning(f"⚠️ Could not generate summary: {str(e)}")
+                st.warning(f"Could not generate summary: {str(e)}")
 
             st.markdown("---")
 
             # Display detailed table
-            st.subheader("📅 Day-by-Day Breakdown")
+            st.subheader("Day-by-Day Breakdown")
             display_cols = ["date", "precipitation_mm", "flood_probability", "risk_level"]
             
             # Format dataframe for display
@@ -2409,7 +2409,7 @@ def page_forecast():
             with col1:
                 csv = forecast_df.to_csv(index=False)
                 st.download_button(
-                    label="📥 Download CSV",
+                    label="Download CSV",
                     data=csv,
                     file_name=f"forecast_{dist_name}_{pd.Timestamp.now().strftime('%Y%m%d')}.csv",
                     mime="text/csv"
@@ -2428,21 +2428,21 @@ DETAILED DATA:
 {table_df.to_string(index=False)}
 """
                 st.download_button(
-                    label="📄 Download Report",
+                    label="Download Report",
                     data=report_text,
                     file_name=f"report_{dist_name}_{pd.Timestamp.now().strftime('%Y%m%d')}.txt",
                     mime="text/plain"
                 )
 
-            st.info("💡 **Tip**: Forecasts update every hour. Check back regularly for the latest predictions.")
+            st.info("**Tip**: Forecasts update every hour. Check back regularly for the latest predictions.")
 
 # ===== PAGE 5: FLOOD DAMAGE SEVERITY CLASSIFIER =====
 def page_damage_classifier():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Flood Damage Severity Classifier</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Computer vision classification model evaluating structural and surface inundation severity.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Flood Damage Severity Classifier</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Computer vision classification model evaluating structural and surface inundation severity.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot blue"></span> Vision Engine: ResNet CNN</span>
@@ -2484,12 +2484,12 @@ def page_damage_classifier():
                 result = classify_flood_image(image)
 
             colors = {
-                "No Flooding": "#3b82f6",
-                "Mild": "#22c55e",
+                "No Flooding": "#f97316",
+                "Mild": "#4ade80",
                 "Moderate": "#f59e0b",
                 "Severe": "#ef4444",
             }
-            color = colors.get(result["severity"], "#3b82f6")
+            color = colors.get(result["severity"], "#f97316")
             severity_label = (
                 result["severity"]
                 if result["severity"] == "No Flooding"
@@ -2497,10 +2497,10 @@ def page_damage_classifier():
             )
 
             st.markdown(f"""
-            <div style='background:#1e293b; border:1px solid #334155; border-left:4px solid {color};
+            <div style='background:#27272a; border:1px solid #3f3f46; border-left:4px solid {color};
             padding:16px; border-radius:6px;
-            text-align:left; color:#f8fafc; margin-bottom:12px;'>
-                <div style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">Classification Result</div>
+            text-align:left; color:#fafafa; margin-bottom:12px;'>
+                <div style="font-size:11px;color:#71717a;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">Classification Result</div>
                 <div style="font-size:20px;font-weight:700;color:{color};margin-top:4px;">{severity_label}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -2526,8 +2526,8 @@ def page_crop_disease():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Disease Detection</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Deep learning pathology model detecting agricultural blights and pathogen infections.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Disease Detection</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Deep learning pathology model detecting agricultural blights and pathogen infections.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot green"></span> PlantVillage Model: Active</span>
@@ -2594,11 +2594,11 @@ def page_crop_disease():
             result = st.session_state["crop_result"]
 
             if result["status"] == "Healthy":
-                st.success(f"✅ **{result['crop']}** — HEALTHY")
+                st.success(f"**{result['crop']}** — HEALTHY")
             elif result["status"] == "Error":
-                st.error("❌ Model not trained yet")
+                st.error("Model not trained yet")
             else:
-                st.error(f"⚠️ **{result['crop']}** — {result['disease']} DETECTED")
+                st.error(f"**{result['crop']}** — {result['disease']} DETECTED")
 
             col_a, col_b = st.columns(2)
             with col_a:
@@ -2607,17 +2607,17 @@ def page_crop_disease():
                 st.metric("Severity", result["severity"])
 
             st.markdown("---")
-            st.markdown("**📋 Description:**")
+            st.markdown("**Description:**")
             st.info(result["description"])
 
-            st.markdown("**💊 Treatment:**")
+            st.markdown("**Treatment:**")
             for treatment in result["treatment"]:
                 st.markdown(f"- {treatment}")
 
-            st.markdown("**🌊 Flood Connection:**")
+            st.markdown("**Flood Connection:**")
             st.warning(result["flood_connection"])
 
-            st.markdown("**🛡️ Prevention:**")
+            st.markdown("**Prevention:**")
             for prevention in result["prevention"]:
                 st.markdown(f"- {prevention}")
         else:
@@ -2629,8 +2629,8 @@ def page_yield_predictor():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Yield Predictor</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Agronomic forecast model correlating flood probability, precipitation, and regional harvest records.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Yield Predictor</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Agronomic forecast model correlating flood probability, precipitation, and regional harvest records.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot blue"></span> Model: Agronomic Regression</span>
@@ -2725,21 +2725,21 @@ def page_yield_predictor():
                 st.error(result["error"])
             else:
                 colors = {
-                    "Low": "#10b981",
+                    "Low": "#4ade80",
                     "Moderate": "#f59e0b",
                     "High": "#ef4444",
                 }
-                color = colors.get(result["risk_level"], "#3b82f6")
+                color = colors.get(result["risk_level"], "#f97316")
 
                 st.markdown(f"""
-                <div style='background: #1e293b;
-                border: 1px solid #334155;
+                <div style='background: #27272a;
+                border: 1px solid #3f3f46;
                 border-left: 4px solid {color};
                 border-radius: 6px;
                 padding: 16px;
                 text-align: left;
                 margin-bottom: 16px;'>
-                <div style='color: #94a3b8; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;'>Expected Yield Projection</div>
+                <div style='color: #71717a; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;'>Expected Yield Projection</div>
                 <div style='color: {color}; font-size: 24px; font-weight: 700; margin-top: 4px;'>
                 {result['adjusted_yield']} t/ha</div>
                 </div>
