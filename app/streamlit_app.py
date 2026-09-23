@@ -3648,47 +3648,46 @@ Regional hydrologic advisory: Data unavailable — connect live API
         col1, col2 = st.columns([5, 7])
 
         with col1:
-            st.markdown("""
-            <div class="card-custom">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                    <div>
-                        <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">
-                            Current Assessment
-                        </div>
-                        <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#fafafa;">
-                            Elevated Runoff Risk
-                        </h3>
-                    </div>
-                    <span class="badge badge-danger">High Risk</span>
-                </div>
-
-                <div style="padding:16px 0;margin:12px 0;border-top:1px solid #3f3f46;border-bottom:1px solid #3f3f46;">
-                    <div style="display:flex;align-items:baseline;gap:8px;">
-                        <span style="font-size:2.25rem;font-weight:700;color:#fafafa;line-height:1;">78%</span>
-                        <span style="color:#71717a;font-size:0.875rem;">Probability of inundation</span>
-                    </div>
-                    <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#71717a;">Peak Arrival Window:</span>
-                            <span style="color:#fafafa;font-weight:600;">~6–7 Hours</span>
-                        </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#71717a;">Ensemble Confidence:</span>
-                            <span style="color:#fafafa;font-weight:600;">94.2% (XGBoost + LSTM)</span>
-                        </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#71717a;">Monitored Basin:</span>
-                            <span style="color:#fafafa;font-weight:600;">Ganga / Son Confluence</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="font-size:0.8125rem;color:#71717a;display:flex;align-items:center;justify-content:space-between;">
-                    <span>Action: Pre-position teams in Zones 3 & 4</span>
-                    <span style="color:#f97316;font-weight:500;">SOP Active</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                f"""<div class="card-custom" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;">
+<div>
+<div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">
+Current Telemetry Assessment
+</div>
+<h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#fafafa;">
+Elevated Runoff Risk
+</h3>
+</div>
+<span class="badge badge-danger">High Risk</span>
+</div>
+<div style="padding:16px 0;margin:12px 0;border-top:1px solid #3f3f46;border-bottom:1px solid #3f3f46;">
+<div style="display:flex;align-items:baseline;gap:8px;">
+<span style="font-size:2.25rem;font-weight:700;color:#fafafa;line-height:1;">78%</span>
+<span style="color:#71717a;font-size:0.875rem;">Probability of inundation</span>
+</div>
+<div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+<span style="color:#71717a;">Peak Arrival Window:</span>
+<span style="color:#fafafa;font-weight:600;">~6–7 Hours</span>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+<span style="color:#71717a;">Ensemble Confidence:</span>
+<span style="color:#fafafa;font-weight:600;">94.2% (XGBoost + LSTM)</span>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
+<span style="color:#71717a;">Monitored Basin:</span>
+<span style="color:#fafafa;font-weight:600;">Ganga / Son Confluence</span>
+</div>
+</div>
+</div>
+<div style="font-size:0.8125rem;color:#71717a;display:flex;align-items:center;justify-content:space-between;">
+<span>Action: Pre-position teams in Zones 3 & 4</span>
+<span style="color:#f97316;font-weight:500;">SOP Active</span>
+</div>
+</div>""",
+                unsafe_allow_html=True
+            )
 
         with col2:
             m1, m2 = st.columns(2)
