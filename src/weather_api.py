@@ -323,21 +323,21 @@ def get_rainfall_forecast(district_name: str, base_risk: float = None) -> list:
             elif wmo_code in (45, 48):
                 precip_mm, desc = 0.0, "Foggy"
             elif wmo_code in (51, 53, 55):
-                precip_mm, desc = 6.0, "Drizzle 🌦️"
+                precip_mm, desc = 6.0, "Drizzle"
             elif wmo_code in (61, 63, 65):
-                precip_mm, desc = 25.0, "Rainy 🌧️"
+                precip_mm, desc = 25.0, "Rainy"
             elif wmo_code in (66, 67):
-                precip_mm, desc = 25.0, "Freezing Rain 🌧️"
+                precip_mm, desc = 25.0, "Freezing Rain"
             elif wmo_code in (71, 73, 75, 77):
-                precip_mm, desc = 10.0, "Snowy ❄️"
+                precip_mm, desc = 10.0, "Snowy"
             elif wmo_code in (80, 81, 82):
-                precip_mm, desc = 25.0, "Rain Showers 🌧️"
+                precip_mm, desc = 25.0, "Rain Showers"
             elif wmo_code in (85, 86):
-                precip_mm, desc = 10.0, "Snow Showers ❄️"
+                precip_mm, desc = 10.0, "Snow Showers"
             elif wmo_code in (95, 96, 99):
-                precip_mm, desc = 50.0, "Thunderstorm ⛈️"
+                precip_mm, desc = 50.0, "Thunderstorm"
             else:
-                precip_mm, desc = 0.0, "Cloudy ☁️"
+                precip_mm, desc = 0.0, "Cloudy"
 
             if i < len(precipitation_sums):
                 precip_mm = _nonnegative_float(precipitation_sums[i], precip_mm)
