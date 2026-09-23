@@ -3037,9 +3037,9 @@ def page_alert_system():
 
     # STEP 3 - Risk threshold selector as 4 visual cards:
     st.markdown("""
-<div style="background:#1e293b;border:1px solid #334155;border-radius:6px;
+<div style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;
   padding:14px;margin:16px 0;">
-  <div style="color:#94a3b8;font-size:11px;text-transform:uppercase;
+  <div style="color:#71717a;font-size:11px;text-transform:uppercase;
     letter-spacing:0.04em;font-weight:600;">
     Alert threshold — notify when risk exceeds:</div>
 </div>
@@ -3051,7 +3051,7 @@ def page_alert_system():
     t1, t2, t3, t4 = st.columns(4)
 
     thresholds = [
-        (t1, 20, "Low", "#22c55e"),
+        (t1, 20, "Low", "#4ade80"),
         (t2, 40, "Moderate", "#f59e0b"),
         (t3, 60, "High", "#f97316"),
         (t4, 80, "Very High", "#ef4444"),
@@ -3061,13 +3061,13 @@ def page_alert_system():
         with col:
             is_selected = st.session_state.alert_threshold == val
             st.markdown(f"""
-            <div style="background:#1e293b;
-              border:1px solid {'#3b82f6' if is_selected else '#334155'};
+            <div style="background:#27272a;
+              border:1px solid {'#f97316' if is_selected else '#3f3f46'};
               border-radius:6px;padding:12px;text-align:center;">
               <div style="font-size:20px;font-weight:600;
-                color:{'#3b82f6' if is_selected else color};">
+                color:{'#f97316' if is_selected else color};">
                 {val}%</div>
-              <div style="font-size:11px;color:#94a3b8;
+              <div style="font-size:11px;color:#71717a;
                 margin-top:4px;">{label}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -3107,7 +3107,7 @@ def page_alert_system():
                 send_daily=daily,
             )
             st.success(f"""
-            ✅ Subscribed successfully!
+            <i class="fa-solid fa-check-circle" style="color:#4ade80;"></i> Subscribed successfully!
             You will receive alerts when flood
             risk in {district} exceeds {threshold}%
             via Email.
@@ -3134,13 +3134,13 @@ def page_alert_system():
                     st.error("Subscription ID not found.")
 
     with bottom_col2:
-        st.markdown("### 🧪 Test Alert")
+        st.markdown("### Test Alert")
         test_email = st.text_input(
             "Test email address",
             placeholder="Send test alert to this email",
             key="test_alert_email",
         )
-        if st.button("📧 Send Test Email", use_container_width=True):
+        if st.button("Send Test Email", use_container_width=True):
             if test_email:
                 risk_score_val = round(float(st.session_state.get("risk_score", 0)) * 100, 1)
                 target_district = district if (district and district != "Select your district...") else st.session_state.get("selected_district", "Unknown")
@@ -3154,9 +3154,9 @@ def page_alert_system():
                     forecast_data=[],
                 )
                 if sent:
-                    st.success(f"✅ {message}")
+                    st.success(f"{message}")
                 else:
-                    st.error(f"❌ Email failed: {message}")
+                    st.error(f"Email failed: {message}")
             else:
                 st.warning("Enter a test email address.")
 
@@ -3169,8 +3169,8 @@ def page_trends():
     <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">{get_text("trends_title", lang)}</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">{get_text("trends_subtitle", lang)}</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">{get_text("trends_title", lang)}</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">{get_text("trends_subtitle", lang)}</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot blue"></span> Dataset: NDMA Historical Records</span>
@@ -3286,30 +3286,30 @@ def page_trends():
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #3f3f46; border-top: 2px solid #f97316 !important; background: #27272a; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_total_events", lang)}</div>
-            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{total_events}</div>
+            <div class="metric-value" style="color: #fafafa; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{total_events}</div>
         </div>
         """, unsafe_allow_html=True)
     with c2:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #3f3f46; border-top: 2px solid #f97316 !important; background: #27272a; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_worst_year", lang)}</div>
-            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{worst_year}</div>
+            <div class="metric-value" style="color: #fafafa; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{worst_year}</div>
         </div>
         """, unsafe_allow_html=True)
     with c3:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #3f3f46; border-top: 2px solid #f97316 !important; background: #27272a; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_peak_people", lang)}</div>
-            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{peak_people:,}</div>
+            <div class="metric-value" style="color: #fafafa; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">{peak_people:,}</div>
         </div>
         """, unsafe_allow_html=True)
     with c4:
         st.markdown(f"""
-        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #334155; border-top: 2px solid #3b82f6 !important; background: #1e293b; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
+        <div class="metric-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 130px; padding: 16px 12px; text-align: center; border: 1px solid #3f3f46; border-top: 2px solid #f97316 !important; background: #27272a; border-radius: 6px; box-sizing: border-box; overflow: hidden;">
             <div class="metric-label" style="margin-bottom: 6px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 28px; width: 100%;">{get_text("stat_total_damage", lang)}</div>
-            <div class="metric-value" style="color: #ffffff; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">₹{total_damage:,.0f} Cr</div>
+            <div class="metric-value" style="color: #fafafa; font-size: 1.8rem !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; line-height: 1.1;">₹{total_damage:,.0f} Cr</div>
         </div>
         """, unsafe_allow_html=True)
 
