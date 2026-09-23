@@ -3622,8 +3622,7 @@ Hydrologic indicators, model confidence metrics, and regional sensor status for 
         [
             "Telemetry Dashboard",
             "Agricultural Assessment",
-            "Emergency Protocol Checklist",
-            "Reference UI (HTML Prototype)"
+            "Emergency Protocol Checklist"
         ],
         horizontal=True,
         label_visibility="collapsed"
