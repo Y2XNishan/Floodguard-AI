@@ -1778,18 +1778,18 @@ Auto-fetched from {source_label} &middot; Synced
         if not is_online:
             cached = load_from_cache("prediction")
             if cached:
-                st.warning(f"📦 Showing cached prediction from {cached.get('_cached_at', 'unknown time')}")
+                st.warning(f"Showing cached prediction from {cached.get('_cached_at', 'unknown time')}")
                 st.info(f"District: {cached['district']}, State: {cached['state']}")
                 cached_prob = cached["risk_score"]
                 cached_level = cached["risk_level"]
-                bar_color = "#ef4444" if cached_prob > 0.6 else "#f59e0b" if cached_prob > 0.3 else "#10b981"
+                bar_color = "#ef4444" if cached_prob > 0.6 else "#f59e0b" if cached_prob > 0.3 else "#4ade80"
                 fig = go.Figure(go.Indicator(mode="gauge+number", value=cached_prob*100,
                     number={"suffix":"%", "font":{"size":56,"color":"white","family":"Inter"}},
-                    title={"text":f"Flood Risk Gauge - {cached['district']} (Cached)", "font":{"size":16,"color":"#94a3b8","family":"Inter"}},
-                    gauge={"axis":{"range":[0,100],"tickcolor":"#334155","tickwidth":1},
+                    title={"text":f"Flood Risk Gauge - {cached['district']} (Cached)", "font":{"size":16,"color":"#71717a","family":"Inter"}},
+                    gauge={"axis":{"range":[0,100],"tickmode":"array","tickvals":[0, 20, 40, 60, 80, 100],"ticktext":["0", "20", "40", "60", "80", "100"],"tickcolor":"#3f3f46","tickwidth":1},
                            "bar":{"color":bar_color,"thickness":0.75},
-                           "bgcolor":"rgba(15,23,42,0.5)", "bordercolor":"rgba(0,210,255,0.1)", "borderwidth":2,
-                           "steps":[{"range":[0,30],"color":"rgba(16,185,129,0.1)"},
+                           "bgcolor":"rgba(24,24,27,0.5)", "bordercolor":"rgba(249,115,22,0.1)", "borderwidth":2,
+                           "steps":[{"range":[0,30],"color":"rgba(74,222,128,0.1)"},
                                     {"range":[30,60],"color":"rgba(245,158,11,0.1)"},
                                     {"range":[60,100],"color":"rgba(239,68,68,0.1)"}],
                            "threshold":{"line":{"color":bar_color,"width":4},"thickness":0.85,"value":cached_prob*100}}))
@@ -1797,16 +1797,16 @@ Auto-fetched from {source_label} &middot; Synced
                                   margin=dict(t=80,b=20,l=50,r=50))
                 st.plotly_chart(fig, use_container_width=True)
                 st.markdown(f"""
-                <div class="rec-box" style="border-left:4px solid {bar_color};padding:16px;background:#1e293b;border-radius:8px;">
+                <div class="rec-box" style="border-left:4px solid {bar_color};padding:16px;background:#27272a;border-radius:8px;">
                     <strong style="color:{bar_color};">{cached_level}</strong> — Cached risk score: <strong>{cached_prob:.0%}</strong>
                 </div>""", unsafe_allow_html=True)
             else:
                 st.error("No cached prediction available. Please connect to internet and run a prediction first.")
         else:
             st.markdown(f"""<div class="glass-card" style="text-align:center;padding:70px 40px">
-                <h3 style="color:#e2e8f0 !important;font-size:1.5rem !important">{get_text('ready_to_predict', lang)}</h3>
-                <p style="color:#94a3b8;font-size:1.1rem;margin-top:12px">{get_text('ready_to_predict_desc', lang)}</p>
-                <p style="color:#475569;font-size:0.85rem;margin-top:20px">{get_text('weather_auto_note', lang)}</p>
+                <h3 style="color:#fafafa !important;font-size:1.5rem !important">{get_text('ready_to_predict', lang)}</h3>
+                <p style="color:#71717a;font-size:1.1rem;margin-top:12px">{get_text('ready_to_predict_desc', lang)}</p>
+                <p style="color:#52525b;font-size:0.85rem;margin-top:20px">{get_text('weather_auto_note', lang)}</p>
             </div>""", unsafe_allow_html=True)
 
 # ===== PAGE 2: RISK MAP =====
@@ -1814,8 +1814,8 @@ def page_map():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">India Flood Risk Map</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Full national flood risk assessment across 736 districts based on historical flood patterns.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">India Flood Risk Map</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Full national flood risk assessment across 736 districts based on historical flood patterns.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot blue"></span> GIS Layer: Folium CartoDB Dark</span>
@@ -1846,13 +1846,13 @@ def page_map():
     # Accessible legend: color-coded risk levels for screen readers
     legend_html = """
     <div style="position:fixed;bottom:30px;left:30px;z-index:1000;
-      background:#1e293b;padding:12px 16px;border-radius:10px;
-      border:1px solid #334155;font-family:Arial;">
-      <p style="color:#f1f5f9;font-size:13px;font-weight:bold;
+      background:#27272a;padding:12px 16px;border-radius:10px;
+      border:1px solid #3f3f46;font-family:Arial;">
+      <p style="color:#fafafa;font-size:13px;font-weight:bold;
         margin:0 0 8px;">Flood Risk Level</p>
-      <p style="margin:4px 0;color:#ef4444;">🔴 High / Very High</p>
-      <p style="margin:4px 0;color:#f59e0b;">🟡 Moderate</p>
-      <p style="margin:4px 0;color:#22c55e;">🟢 Low</p>
+      <p style="margin:4px 0;color:#ef4444;"><i class="fa-solid fa-circle" style="color:#ef4444;font-size:10px;"></i> High / Very High</p>
+      <p style="margin:4px 0;color:#f59e0b;"><i class="fa-solid fa-circle" style="color:#f59e0b;font-size:10px;"></i> Moderate</p>
+      <p style="margin:4px 0;color:#4ade80;"><i class="fa-solid fa-circle" style="color:#4ade80;font-size:10px;"></i> Low</p>
     </div>
     """
     m.get_root().html.add_child(folium.Element(legend_html))
@@ -1889,7 +1889,7 @@ def page_map():
             score = risk_score / 100.0
             
         risk_color = {
-            "LOW": "#22c55e",
+            "LOW": "#4ade80",
             "MODERATE": "#f59e0b",
             "HIGH": "#ef4444",
             "VERY HIGH": "#ef4444",
@@ -1927,7 +1927,7 @@ def page_map():
         st.components.v1.html(m._repr_html_(), height=600, scrolling=True)
 
     render_html('<div class="gradient-divider"></div>')
-    st.markdown("### 📋 India Risk Overview")
+    st.markdown('### <i class=\"fa-solid fa-clipboard-list\" style=\"color:#f97316;\"></i> India Risk Overview', unsafe_allow_html=True)
     render_risk_overview_table(districts_df)
 
 # ===== PAGE 3: FLOODGUARD AI =====
