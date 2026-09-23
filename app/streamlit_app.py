@@ -1574,39 +1574,93 @@ Auto-fetched from {source_label} &middot; Synced
 
             # RIGHT (col4) — Recommended Actions:
             with col4:
-                st.markdown("""
-                <div style="background:#1e293b; border:1px solid #334155; 
-                border-radius:6px; padding:16px;">
-                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
-                    text-transform:uppercase; letter-spacing:0.5px; 
-                    margin-bottom:10px;">Recommended Actions</div>
-                """, unsafe_allow_html=True)
-                
                 if prob < 0.3:
-                    st.markdown(f"""<div class="rec-box rec-safe">
-                        <h4 style="color:#10b981;margin:0">{get_text('low_risk', lang)}</h4>
-                        <ul style="color:#94a3b8;margin:8px 0 0 0">
-                        <li>{get_text('conditions_normal', lang)}</li><li>{get_text('no_flood_expected', lang)}</li>
-                        <li>{get_text('stay_updated', lang)}</li></ul></div>""", unsafe_allow_html=True)
+                    title_text = get_text('low_risk', lang)
+                    box_class = "rec-safe"
+                    title_color = "#4ade80"
+                    icon_html = '<i class="fa-solid fa-check-circle" style="color:#4ade80;margin-right:6px;"></i>'
+                    if lang == "hi":
+                        items_list = [
+                            "जल निकासी नालियों का नियमित निरीक्षण करें और रुकावटें हटाएं",
+                            "72 घंटे की आपातकालीन किट (टॉर्च, दवाएं, सूखा राशन) तैयार रखें",
+                            "दैनिक मौसम एवं IMD रडार अपडेट पर नजर बनाए रखें",
+                            "फसल व कृषि उपकरणों को सुरक्षित ऊंचे स्थान पर व्यवस्थित करें",
+                        ]
+                    else:
+                        items_list = [
+                            "Inspect local stormwater drainage channels & clear debris",
+                            "Maintain a 72-hour family emergency kit (flashlights, first aid, dry rations)",
+                            "Monitor daily IMD hydrological bulletins & local telemetry updates",
+                            "Secure agricultural equipment & store harvest on elevated platforms",
+                        ]
                 elif prob < 0.6:
-                    st.markdown(f"""<div class="rec-box rec-mod">
-                        <h4 style="color:#f59e0b;margin:0">{get_text('be_careful', lang)}</h4>
-                        <ul style="color:#94a3b8;margin:8px 0 0 0">
-                        <li>{get_text('keep_watching', lang)}</li>
-                        <li>{get_text('keep_documents', lang)}</li>
-                        <li>{get_text('know_safe_ground', lang)}</li>
-                        <li>{get_text('charge_phone', lang)}</li>
-                        {get_emergency_contacts_html(state)}</ul></div>""", unsafe_allow_html=True)
+                    title_text = get_text('be_careful', lang)
+                    box_class = "rec-mod"
+                    title_color = "#f59e0b"
+                    icon_html = '<i class="fa-solid fa-exclamation-triangle" style="color:#f97316;margin-right:6px;"></i>'
+                    if lang == "hi":
+                        items_list = [
+                            "नदी तटबंधों और जलद्वारों की निगरानी करें; किसी भी रिसाव की सूचना SDMA को दें",
+                            "बिजली के उपकरण, इन्वर्टर और महत्वपूर्ण दस्तावेज ऊपरी मंजिलों पर ले जाएं",
+                            "पशुधन को सुरक्षित ऊंचे सामुदायिक आश्रयों में स्थानांतरित करें",
+                            "मोबाइल फोन, पावर बैंक चार्ज रखें और आपातकालीन नंबर संभाल कर रखें",
+                            "निकटतम सुरक्षित बाढ़ राहत आश्रय और सूखे रास्तों की पहचान करें",
+                            f"{state} हेल्पलाइन: <b>{get_state_helpline(state)}</b>",
+                            "NDRF: <b>011-24363260</b>",
+                            "आपातकालीन: <b>112</b>",
+                        ]
+                    else:
+                        items_list = [
+                            "Inspect river embankments & sluice gates; report seepage to SDMA",
+                            "Relocate electrical appliances, power units, and vital documents to upper floors",
+                            "Move livestock to elevated ground & secure emergency fodder reserves",
+                            "Keep smartphones & power banks fully charged; keep emergency contacts handy",
+                            "Map out designated local relief shelters and unflooded evacuation routes",
+                            f"{state}: <b>{get_state_helpline(state)}</b>",
+                            "NDRF: <b>011-24363260</b>",
+                            "Emergency: <b>112</b>",
+                        ]
                 else:
-                    st.markdown(f"""<div class="rec-box rec-danger">
-                        <h4 style="color:#ef4444;margin:0">{get_text('danger_move', lang)}</h4>
-                        <ul style="color:#94a3b8;margin:8px 0 0 0">
-                        <li><b>{get_text('move_higher_ground', lang)}</b></li>
-                        <li>{get_text('take_family_first', lang)}</li>
-                        <li>{get_text('no_flooded_roads', lang)}</li>
-                        {get_emergency_contacts_html(state)}</ul></div>""", unsafe_allow_html=True)
-                
-                st.markdown("</div>", unsafe_allow_html=True)
+                    title_text = get_text('danger_move', lang)
+                    box_class = "rec-danger"
+                    title_color = "#ef4444"
+                    icon_html = '<i class="fa-solid fa-exclamation-triangle" style="color:#ef4444;margin-right:6px;"></i>'
+                    if lang == "hi":
+                        items_list = [
+                            "<b>तत्काल ऊंचे स्थान या NDMA नामित राहत शिविर में सुरक्षित जाएं</b>",
+                            "परिवार, बुजुर्गों, बच्चों और बीमार सदस्यों को प्राथमिकता से निकालें",
+                            "निकलने से पहले मुख्य बिजली का स्विच (MCB) और गैस सिलेंडर वाल्व बंद करें",
+                            '<i class="fa-solid fa-road" style="color:#ef4444;margin-right:4px;"></i><b>बाढ़ के पानी से भरी सड़कों या पुलों को बिल्कुल पार न करें</b>',
+                            "आपातकालीन रेडियो या जिला आपदा प्रबंधन नियंत्रण कक्ष (1078) के संपर्क में रहें",
+                            f"{state} हेल्पलाइन: <b>{get_state_helpline(state)}</b>",
+                            "NDRF: <b>011-24363260</b>",
+                            "आपातकालीन: <b>112</b>",
+                        ]
+                    else:
+                        items_list = [
+                            "<b>Initiate immediate evacuation to designated high-ground NDMA shelters</b>",
+                            "Prioritize family members, elders, young children, and medical dependents",
+                            "Disconnect main electrical breaker (MCB) & shut domestic gas supply before exit",
+                            '<i class="fa-solid fa-road" style="color:#ef4444;margin-right:4px;"></i><b>NEVER drive or walk across flooded roadways or submerged culverts</b>',
+                            "Tune into district disaster emergency broadcast & NDMA emergency hotline 1078",
+                            f"{state}: <b>{get_state_helpline(state)}</b>",
+                            "NDRF: <b>011-24363260</b>",
+                            "Emergency: <b>112</b>",
+                        ]
+
+                list_html = "".join(f"<li style='margin-bottom:4px;'>{it}</li>" for it in items_list)
+                rec_card_html = (
+                    f'<div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; padding:16px;">'
+                    f'<div style="font-size:11px; color:#71717a; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">Recommended Actions</div>'
+                    f'<div class="rec-box {box_class}">'
+                    f'<h4 style="color:{title_color};margin:0;font-size:14px;font-weight:600;">{icon_html}{title_text}</h4>'
+                    f'<ul style="color:#fafafa;margin:8px 0 0 0;padding-left:18px;font-size:12px;line-height:1.5;">'
+                    f'{list_html}'
+                    f'</ul>'
+                    f'</div>'
+                    f'</div>'
+                )
+                st.markdown(rec_card_html, unsafe_allow_html=True)
 
         except Exception as display_err:
             st.error(f"Error rendering premium display: {display_err}")
