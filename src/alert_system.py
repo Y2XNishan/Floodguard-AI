@@ -57,20 +57,20 @@ def _ensure_csv(path: Path, headers: list[str]) -> None:
 
 def _risk_color(risk_level: str) -> str:
     return {
-        "low": "#00C853",
-        "moderate": "#FFD600",
-        "high": "#FF6D00",
-        "severe": "#D50000",
-    }.get(risk_level.lower(), "#FFD600")
+        "low": "#4ade80",
+        "moderate": "#f59e0b",
+        "high": "#f97316",
+        "severe": "#ef4444",
+    }.get(risk_level.lower(), "#f59e0b")
 
 
 def _risk_emoji(risk_level: str) -> str:
     return {
-        "low": "🟢",
-        "moderate": "🟡",
-        "high": "🟠",
-        "severe": "🔴",
-    }.get(risk_level.lower(), "🟡")
+        "low": "[LOW]",
+        "moderate": "[MODERATE]",
+        "high": "[HIGH]",
+        "severe": "[SEVERE]",
+    }.get(risk_level.lower(), "[MODERATE]")
 
 
 def _actions_for_risk(risk_level: str) -> list[str]:
@@ -173,8 +173,8 @@ def _forecast_text(forecast_data: Any) -> str:
         risk = _to_float(risk)
         risk = risk * 100 if risk <= 1 else risk
         rain = _to_float(rain)
-        emoji = "🌧️" if rain >= 20 else "☁️"
-        lines.append(f"{emoji} {day}: {rain:.1f} mm rain, {risk:.1f}% risk")
+        emoji = "-" if rain >= 20 else "-"
+        lines.append(f"{day}: {rain:.1f} mm rain, {risk:.1f}% risk")
     return "\n".join(lines)
 
 
@@ -218,7 +218,7 @@ def send_email_alert(
         return False, "Gmail credentials not configured in .env"
 
     try:
-        subject = f"🚨 FLOOD ALERT: {district}, {state} - {risk_level} RISK"
+        subject = f"FLOOD ALERT: {district}, {state} - {risk_level} RISK"
 
         risk_key = str(risk_level).strip().upper()
         if risk_key in {"VERY HIGH", "EXTREME", "SEVERE"}:
@@ -228,9 +228,9 @@ def send_email_alert(
         elif risk_key == "MODERATE":
             badge_color = "#f59e0b"
         else:
-            badge_color = "#22c55e"
+            badge_color = "#4ade80"
         actions = _actions_for_risk(str(risk_level))
-        actions_html = "".join([f'<p style="color:#cbd5e1;margin:6px 0;font-family:Arial,sans-serif;">✅ {a}</p>' for a in actions])
+        actions_html = "".join([f'<p style="color:#fafafa;margin:6px 0;font-family:Arial,sans-serif;">{a}</p>' for a in actions])
 
         html_body = f"""
 <html>
