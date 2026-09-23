@@ -3595,6 +3595,9 @@ def page_about():
 def page_tactical_command():
     """Renders the clean internal tool System Overview and telemetry dashboard."""
     lang = st.session_state.get("lang", "en")
+    district = st.session_state.get("selected_district") or st.session_state.get("current_district", "Patna")
+    state = st.session_state.get("selected_state", "Bihar")
+    district_profile = get_district_profile(state, district)
 
     st.markdown("""
     <div style="margin-bottom:16px;">
