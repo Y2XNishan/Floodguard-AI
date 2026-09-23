@@ -3609,7 +3609,7 @@ Hydrologic indicators, model confidence metrics, and regional sensor status for 
 </p>
 </div>
 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-<span class="status-pill"><span class="status-dot green"></span> Station G-09 Active</span>
+<span class="status-pill"><span class="status-dot amber"></span> Telemetry Gateway: Standby</span>
 <span class="status-pill">District ID: PTN-HQ-01</span>
 </div>
 </div>
