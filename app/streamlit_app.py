@@ -672,7 +672,8 @@ def predict_risk(model, scaler, features, feat_dict):
 
 def get_top_shap_drivers(scaler, features, feat_dict, fallback_count=5):
     """Return current-prediction SHAP drivers when the explainer artifact exists."""
-    fallback = dict(sorted(feat_dict.items(), key=lambda x: abs(x[1]), reverse=True)[:fallback_count])
+    filtered_feat = {k: v for k, v in feat_dict.items() if k.lower() != 'year' and not k.lower().startswith('year')}
+    fallback = dict(sorted(filtered_feat.items(), key=lambda x: abs(x[1]), reverse=True)[:fallback_count])
     explainer = load_shap_explainer()
     if explainer is None or scaler is None or not features:
         return fallback
@@ -683,7 +684,8 @@ def get_top_shap_drivers(scaler, features, feat_dict, fallback_count=5):
         if isinstance(shap_values, list):
             shap_values = shap_values[-1]
         shap_row = np.array(shap_values).reshape(-1)
-        top_idx = np.argsort(np.abs(shap_row))[::-1][:fallback_count]
+        valid_indices = [i for i, f in enumerate(features) if f.lower() != 'year' and not f.lower().startswith('year')]
+        top_idx = sorted(valid_indices, key=lambda i: abs(shap_row[i]), reverse=True)[:fallback_count]
         return {
             features[i]: {
                 "value": round(float(feat_dict.get(features[i], 0)), 3),
@@ -700,7 +702,7 @@ def weather_severity(rainfall, wind_speed, weather_main):
         return "Danger", "weather-danger", "#ef4444"
     if weather_main in ["Rain", "Drizzle"] or rainfall >= 20 or wind_speed >= 25:
         return "Watch", "weather-watch", "#f59e0b"
-    return "Normal", "weather-normal", "#10b981"
+    return "Normal", "weather-normal", "#4ade80"
 
 def minutes_since(timestamp):
     """Convert an ISO timestamp into a small relative age string."""
@@ -726,17 +728,17 @@ def render_current_weather_card(weather):
     st.markdown(f"""<div class="weather-card">
         <div class="weather-card-head">
             <div>
-                <div class="weather-emoji">{emoji}</div>
+                <div class="weather-emoji"><i class="fa-solid fa-cloud-sun" style="color:#f97316;font-size:2rem;"></i></div>
                 <div class="weather-title">{weather.get("weather_description", "Live Weather")}</div>
                 <div class="weather-subtitle">Last updated: {minutes_since(weather.get("fetched_at"))}</div>
             </div>
             <span class="live-badge">LIVE</span>
         </div>
         <div class="weather-metrics">
-            <div><span class="weather-icon">🌡️</span><b>{weather.get("temperature_c", 0):.1f}°C</b><small>Temperature</small></div>
-            <div><span class="weather-icon">💧</span><b>{weather.get("humidity_pct", 0)}%</b><small>Humidity</small></div>
-            <div><span class="weather-icon">💨</span><b>{wind_speed:.1f} km/h</b><small>Wind Speed</small></div>
-            <div><span class="weather-icon">🌧️</span><b>{rainfall:.1f} mm</b><small>Rainfall</small></div>
+            <div><span class="weather-icon"><i class="fa-solid fa-thermometer-half" style="color:#f97316;"></i></span><b>{weather.get("temperature_c", 0):.1f}°C</b><small>Temperature</small></div>
+            <div><span class="weather-icon"><i class="fa-solid fa-droplet" style="color:#f97316;"></i></span><b>{weather.get("humidity_pct", 0)}%</b><small>Humidity</small></div>
+            <div><span class="weather-icon"><i class="fa-solid fa-wind" style="color:#f97316;"></i></span><b>{wind_speed:.1f} km/h</b><small>Wind Speed</small></div>
+            <div><span class="weather-icon"><i class="fa-solid fa-cloud-rain" style="color:#f97316;"></i></span><b>{rainfall:.1f} mm</b><small>Rainfall</small></div>
         </div>
         <div style="margin-top:14px"><span class="weather-badge {severity_cls}">{severity}</span></div>
     </div>""", unsafe_allow_html=True)
@@ -764,8 +766,8 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
                 selected_state,
             )
 
-    line_color = "#3b82f6"
-    point_colors = np.where(forecast_df["rainfall_mm"] > 50, "#ef4444", "#3b82f6")
+    line_color = "#f97316"
+    point_colors = np.where(forecast_df["rainfall_mm"] > 50, "#ef4444", "#f97316")
 
     fig_rain = go.Figure()
     fig_rain.add_trace(go.Scatter(
@@ -787,9 +789,9 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
     )
     fig_rain.update_layout(
         height=300,
-        paper_bgcolor="#0f172a",
-        plot_bgcolor="#1e293b",
-        font={"color":"#e2e8f0","family":"Inter"},
+        paper_bgcolor="#18181b",
+        plot_bgcolor="#27272a",
+        font={"color":"#fafafa","family":"Inter"},
         yaxis_title="Rainfall (mm)",
         xaxis_title="",
         xaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
@@ -800,7 +802,7 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
 
     risk_colors = np.where(forecast_df["risk_probability"] > 60, "#ef4444",
                    np.where(forecast_df["risk_probability"] >= 40, "#f59e0b",
-                   np.where(forecast_df["risk_probability"] >= 20, "#eab308", "#10b981")))
+                   np.where(forecast_df["risk_probability"] >= 20, "#eab308", "#4ade80")))
     fig_risk = go.Figure(go.Bar(
         x=forecast_df["date_display"],
         y=forecast_df["risk_probability"],
@@ -809,9 +811,9 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
     ))
     fig_risk.update_layout(
         height=240,
-        paper_bgcolor="#0f172a",
-        plot_bgcolor="#1e293b",
-        font={"color":"#e2e8f0","family":"Inter"},
+        paper_bgcolor="#18181b",
+        plot_bgcolor="#27272a",
+        font={"color":"#fafafa","family":"Inter"},
         yaxis=dict(title="Flood Risk (%)", range=[0, 100], gridcolor="rgba(255,255,255,0.05)"),
         xaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
         xaxis_title="",
@@ -822,15 +824,15 @@ def render_forecast_section(forecast, district, date, model, scaler, features, b
 
 def render_mini_forecast_preview(forecast_df, district):
     if forecast_df is None or forecast_df.empty:
-        st.markdown("<div style='color:#94a3b8;'>7-day forecast preview unavailable.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='color:#71717a;'>7-day forecast preview unavailable.</div>", unsafe_allow_html=True)
         return
 
     def _weather_icon(precip_mm):
         if precip_mm >= 20:
-            return "🌧️"
+            return '<i class="fa-solid fa-cloud-rain" style="color:#f97316;"></i>'
         if precip_mm >= 5:
-            return "🌦️"
-        return "☀️"
+            return '<i class="fa-solid fa-cloud-sun" style="color:#f97316;"></i>'
+        return '<i class="fa-solid fa-sun" style="color:#f97316;"></i>' 
 
     row_items = []
     for _, row in forecast_df.head(7).iterrows():
@@ -839,7 +841,7 @@ def render_mini_forecast_preview(forecast_df, district):
         precip_mm = float(row.get("precipitation_mm", 0.0))
         icon = _weather_icon(precip_mm)
         if prob_pct <= 30:
-            color = "#22c55e"
+            color = "#4ade80"
         elif prob_pct <= 60:
             color = "#f59e0b"
         else:
