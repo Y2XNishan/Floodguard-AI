@@ -1404,14 +1404,14 @@ Auto-fetched from {source_label} &middot; Synced
 
         # 7-day forecast logic
         mini_forecast_df = None
-        if st.session_state.using_live_weather and st.session_state.live_forecast:
+        if FORECAST_AVAILABLE:
             try:
-                mini_forecast_df = pd.DataFrame(st.session_state.live_forecast)
+                mini_forecast_df = generate_7day_forecast(district, state, base_risk=risk_score)
             except Exception:
                 mini_forecast_df = None
-        elif FORECAST_AVAILABLE:
+        elif st.session_state.using_live_weather and st.session_state.live_forecast:
             try:
-                mini_forecast_df = generate_7day_forecast(district, state)
+                mini_forecast_df = pd.DataFrame(st.session_state.live_forecast)
             except Exception:
                 mini_forecast_df = None
 
@@ -1420,10 +1420,34 @@ Auto-fetched from {source_label} &middot; Synced
             days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
             start_day = dt.now().weekday()
             ordered_days = [days[(start_day + i) % 7] for i in range(7)]
+            day_vars = [0.0, 0.8, -0.6, 1.1, -0.5, 0.7, -0.4]
             mini_forecast_df = pd.DataFrame({
                 'day': ordered_days,
-                'flood_probability_pct': [max(0.0, min(100.0, float(prob * 100) + ((int(__import__('hashlib').md5(district.encode()).hexdigest(), 16) * (i+1)) % 21) - 10)) for i in range(7)]
+                'flood_probability_pct': [
+                    round(max(0.8, min(98.0, risk_score if i == 0 else (risk_score * 0.75 + day_vars[i]))), 1)
+                    for i in range(7)
+                ]
             })
+
+        # Standardize day column and ensure Day 0 aligns with today's gauge value
+        if mini_forecast_df is not None and not mini_forecast_df.empty:
+            if 'day' not in mini_forecast_df.columns:
+                if 'date' in mini_forecast_df.columns:
+                    mini_forecast_df['day'] = pd.to_datetime(mini_forecast_df['date']).dt.strftime('%a')
+                elif 'date_display' in mini_forecast_df.columns:
+                    mini_forecast_df['day'] = mini_forecast_df['date_display']
+                else:
+                    days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                    start_day = datetime.now().weekday()
+                    mini_forecast_df['day'] = [days[(start_day + i) % 7] for i in range(len(mini_forecast_df))]
+            else:
+                mini_forecast_df['day'] = mini_forecast_df['day'].astype(str).str[:3]
+
+            y_col = 'flood_probability_pct' if 'flood_probability_pct' in mini_forecast_df.columns else ('risk_probability' if 'risk_probability' in mini_forecast_df.columns else mini_forecast_df.columns[1])
+            vals = [float(v) for v in mini_forecast_df[y_col]]
+            if len(vals) > 0:
+                vals[0] = round(risk_score, 1)
+            mini_forecast_df[y_col] = vals
 
         # Try/except block to wrap the HTML rendering as instructed
         try:
