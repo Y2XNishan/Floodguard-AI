@@ -3633,14 +3633,14 @@ Hydrologic indicators, model confidence metrics, and regional sensor status for 
         st.markdown(
             """<div class="system-alert-banner" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
 <div style="display:flex;align-items:center;gap:8px;">
-<span style="background:#ef4444;color:#ffffff;font-size:0.6875rem;font-weight:700;padding:2px 6px;border-radius:3px;">
-<i class="fa-solid fa-exclamation-triangle" style="color:#fafafa;margin-right:4px;"></i>ADVISORY
+<span style="background:#3f3f46;color:#fafafa;font-size:0.6875rem;font-weight:700;padding:2px 8px;border-radius:3px;">
+<i class="fa-solid fa-circle-info" style="color:#71717a;margin-right:4px;"></i>TELEMETRY STATUS
 </span>
-<span style="color:#f87171;font-weight:500;font-size:0.875rem;">
-<i class="fa-solid fa-road" style="color:#71717a;margin-right:6px;"></i><i class="fa-solid fa-road" style="color:#71717a;margin-right:6px;"></i>Ganga River discharge crest projected within 12–14 hours. Low-lying riverside sectors on waterlogging watch.
+<span style="color:#71717a;font-weight:500;font-size:0.875rem;">
+Regional hydrologic advisory: Data unavailable — connect live API
 </span>
 </div>
-<span style="color:#71717a;font-size:0.75rem;">Source: CWC / IMD Station G-09</span>
+<span style="color:#71717a;font-size:0.75rem;">Source: CWC / IMD Telemetry Network (Offline)</span>
 </div>""",
             unsafe_allow_html=True
         )
