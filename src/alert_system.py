@@ -281,8 +281,8 @@ def send_email_alert(
   <tr><td height="12"></td></tr>
 
   <!-- Actions -->
-  <tr><td bgcolor="#1e293b" style="border-radius:12px;padding:24px;">
-    <p style="color:#94a3b8;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">📋 Recommended Actions</p>
+  <tr><td bgcolor="#27272a" style="border-radius:12px;padding:24px;">
+    <p style="color:#71717a;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">Recommended Actions</p>
     {actions_html}
   </td></tr>
 
@@ -290,8 +290,8 @@ def send_email_alert(
 
   <!-- Footer -->
   <tr><td style="text-align:center;padding:16px;">
-    <p style="color:#64748b;font-size:12px;font-family:Arial,sans-serif;margin:0;">Stay safe 🙏 — FloodGuard AI Team</p>
-    <p style="color:#475569;font-size:11px;font-family:Arial,sans-serif;margin:4px 0 0;">Emergency: 1070 | 112 | Powered by FloodGuard AI</p>
+    <p style="color:#71717a;font-size:12px;font-family:Arial,sans-serif;margin:0;">Stay safe — FloodGuard AI Team</p>
+    <p style="color:#71717a;font-size:11px;font-family:Arial,sans-serif;margin:4px 0 0;">Emergency: 1070 | 112 | Powered by FloodGuard AI</p>
   </td></tr>
 
 </table>
@@ -332,13 +332,13 @@ def send_telegram_alert(
         return False, "Telegram credentials not configured"
 
     message = f"""
-🚨 *FLOOD ALERT - FloodGuard AI*
+*FLOOD ALERT - FloodGuard AI*
 
-📍 *District:* {district}, {state}
-⚠️ *Risk Level:* {risk_level}
-📊 *Risk Score:* {risk_score}%
+*District:* {district}, {state}
+*Risk Level:* {risk_level}
+*Risk Score:* {risk_score}%
 
-{"🔴 IMMEDIATE ACTION REQUIRED!" if float(risk_score) > 60 else "⚠️ Please take precautions."}
+{"IMMEDIATE ACTION REQUIRED!" if float(risk_score) > 60 else "Please take precautions."}
 
 Emergency: 1070, 112
     """
