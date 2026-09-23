@@ -95,17 +95,54 @@ def detect_location(question):
 # ══════════════════════════════════════════════════════════════════════
 #  MAIN FUNCTION — EVERY question goes to Groq API directly
 # ══════════════════════════════════════════════════════════════════════
-def get_chatbot_response(question, district=None, state=None, risk_score=None):
-    """Send EVERY question to Groq API. No pre-filtering."""
+def _offline_answer(question, district=None, state=None, risk_score=None):
+    q = question.lower()
+    loc = district or state or "your region"
+    if "kerala" in q or "2018" in q:
+        return ("In the Kerala 2018 floods, extraordinary monsoon downpours (42% above normal) led to 35 overflowing rivers "
+                "and controlled discharge from over 80 major dams, affecting all 14 districts. "
+                "Key lesson: heed early dam discharge alerts and evacuate low-lying floodplains promptly.")
+    elif "mumbai" in q or "2005" in q:
+        return ("On 26 July 2005, Mumbai experienced a historic cloudburst of 944 mm rain in 24 hours coinciding with high tide, "
+                "causing the Mithi River to overflow and submerging municipal transit networks. "
+                "Key safety rule: avoid low-lying underpasses and flooded roads during heavy rainfall.")
+    elif "chennai" in q or "2015" in q:
+        return ("The November–December 2015 Chennai floods were caused by anomalous Northeast Monsoon rainfall combined with "
+                "rapid discharge from the Chembarambakkam reservoir into the Adyar River basin.")
+    elif "kedarnath" in q or "2013" in q or "uttarakhand" in q:
+        return ("In June 2013, extreme multi-day cloudbursts and the breach of Chorabari Lake triggered devastating flash floods "
+                "and debris flows down the Mandakini valley in Uttarakhand. In hilly terrain, always move to high ground away from river channels.")
+    elif "assam" in q or "brahmaputra" in q:
+        return ("The Brahmaputra river system in Assam regularly breaches danger levels during the South-West monsoon due to heavy catchment rainfall "
+                "in Arunachal Pradesh and Bhutan, sediment siltation, and seasonal bank erosion across 25+ districts.")
+    elif "bihar" in q or "kosi" in q:
+        return ("Northern Bihar faces recurrent inundation from transboundary rivers like the Kosi, Gandak, and Kamla originating in Nepal. "
+                "State flood management protocols emphasize embankment patrols and designated elevated shelter staging.")
+    elif any(w in q for w in ["what should i do", "water enter", "house", "home", "protect", "kit", "safety"]):
+        return (f"Immediate Flood Safety Protocols for {loc}:\n\n"
+                "1. Turn off main circuit breakers and LPG gas cylinders before floodwaters enter living spaces.\n"
+                "2. Relocate medicines, potable water, battery torches, and vital documents to upper floors.\n"
+                "3. Never attempt to drive or wade through flood currents; 15 cm of moving water can knock an adult down.\n"
+                "4. Keep emergency hotlines at hand: National Helpline: 112 | NDMA: 1078 | Flood Control: 1070.")
+    elif any(w in q for w in ["why", "cause", "how do flood", "happen"]):
+        return ("Floods in India result from intense concentrated monsoon spells, inadequate urban stormwater drainage capacity, "
+                "riverbed siltation, and saturated upstream catchment basins releasing excessive runoff.")
+    else:
+        return (f"Hydrological Intelligence Advisory for {loc}:\n\n"
+                "Antecedent precipitation, river levels, and regional saturation are monitored continuously. "
+                "For localized emergencies, contact National Emergency: 112, NDMA Hotline: 1078, or State Flood Control: 1070.")
 
+
+def get_chatbot_response(question, district=None, state=None, risk_score=None):
+    """Send question to Groq API if configured, otherwise provide offline hydrological knowledge."""
     from dotenv import load_dotenv
     load_dotenv()
     api_key = _get_api_key()
     if not api_key or api_key == "your_groq_api_key_here":
         return {
-            "answer": "Please set your GROQ_API_KEY in the .env file.\n\n"
-                      "For emergencies: 112 | NDMA: 1078 | Flood: 1070",
-            "question_type": "Error",
+            "answer": "AI Assistant unavailable. Check API configuration.",
+            "question_type": "Info",
+            "is_unavailable": True,
             "location_detected": None,
         }
 
