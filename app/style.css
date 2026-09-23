@@ -291,13 +291,13 @@ h2, h3, h4 {
   font-size: 0.875rem;
 }
 .user-bubble {
-  background: #2563eb;
+  background: #f97316;
   color: #ffffff;
 }
 .ai-bubble {
-  background: #1e293b;
-  color: #f8fafc;
-  border: 1px solid #334155;
+  background: #27272a;
+  color: #fafafa;
+  border: 1px solid #3f3f46;
 }
 .bot-avatar {
   min-width: 28px;
@@ -306,9 +306,9 @@ h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1e293b;
-  color: #3b82f6;
-  border: 1px solid #334155;
+  background: #27272a;
+  color: #f97316;
+  border: 1px solid #3f3f46;
   font-size: 0.6875rem;
   font-weight: 700;
   margin-top: 2px;
@@ -319,12 +319,12 @@ h2, h3, h4 {
   text-align: center;
   padding: 24px 16px;
   margin-top: 40px;
-  border-top: 1px solid #334155;
-  color: #64748b;
+  border-top: 1px solid #3f3f46;
+  color: #71717a;
   font-size: 0.8125rem;
 }
 .app-footer a {
-  color: #3b82f6;
+  color: #f97316;
   text-decoration: none;
 }
 .app-footer a:hover {
@@ -338,9 +338,9 @@ h2, h3, h4 {
   gap: 6px;
   padding: 2px 8px;
   border-radius: 4px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #94a3b8;
+  border: 1px solid #3f3f46;
+  background: #18181b;
+  color: #71717a;
   font-size: 0.75rem;
 }
 .status-dot {
@@ -349,7 +349,20 @@ h2, h3, h4 {
   border-radius: 50%;
   display: inline-block;
 }
-.status-dot.green { background: #10b981; }
-.status-dot.blue { background: #3b82f6; }
+.status-dot.green { background: #4ade80; }
+.status-dot.orange { background: #f97316; }
+.status-dot.blue { background: #f97316; }
 .status-dot.amber { background: #f59e0b; }
+
+/* Hide Streamlit Status Widget (RUNNING... and Stop button) */
+[data-testid="stStatusWidget"],
+.stStatusWidget,
+div[data-testid="stStatusWidget"],
+header [data-testid="stToolbar"] [data-testid="stStatusWidget"],
+header button[kind="header"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 .status-dot.red { background: #ef4444; }
