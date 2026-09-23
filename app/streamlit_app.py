@@ -1121,7 +1121,7 @@ def page_predictor():
                             weather_data = {"error": f"OpenWeatherMap error (HTTP {status}). Falling back to Open-Meteo..."}
                             weather_data = None  # allow fallback
                     except Exception as e:
-                        st.info(f"⚠️ OpenWeatherMap failed ({e}). Trying Open-Meteo...")
+                        st.info(f"OpenWeatherMap failed ({e}). Trying Open-Meteo...")
                         weather_data = None  # allow fallback
 
                 # ── SOURCE 2: Open-Meteo fallback (free, no key) ──
@@ -1160,27 +1160,27 @@ def page_predictor():
                             # Decode Open-Meteo weather code to description
                             wmo_code = int(cw.get("weathercode", 0))
                             if wmo_code == 0:
-                                om_desc, om_main = "Clear Sky ☀️", "Clear"
+                                om_desc, om_main = "Clear Sky", "Clear"
                             elif wmo_code in (1, 2, 3):
-                                om_desc, om_main = "Partly Cloudy ⛅", "Clouds"
+                                om_desc, om_main = "Partly Cloudy", "Clouds"
                             elif wmo_code in (45, 48):
-                                om_desc, om_main = "Foggy 🌫️", "Mist"
+                                om_desc, om_main = "Foggy", "Mist"
                             elif wmo_code in (51, 53, 55):
-                                om_desc, om_main = "Drizzle 🌦️", "Drizzle"
+                                om_desc, om_main = "Drizzle", "Drizzle"
                             elif wmo_code in (61, 63, 65):
-                                om_desc, om_main = "Rainy 🌧️", "Rain"
+                                om_desc, om_main = "Rainy", "Rain"
                             elif wmo_code in (66, 67):
-                                om_desc, om_main = "Freezing Rain 🌧️", "Rain"
+                                om_desc, om_main = "Freezing Rain", "Rain"
                             elif wmo_code in (71, 73, 75, 77):
-                                om_desc, om_main = "Snowy ❄️", "Snow"
+                                om_desc, om_main = "Snowy", "Snow"
                             elif wmo_code in (80, 81, 82):
-                                om_desc, om_main = "Rain Showers 🌧️", "Rain"
+                                om_desc, om_main = "Rain Showers", "Rain"
                             elif wmo_code in (85, 86):
-                                om_desc, om_main = "Snow Showers ❄️", "Snow"
+                                om_desc, om_main = "Snow Showers", "Snow"
                             elif wmo_code in (95, 96, 99):
-                                om_desc, om_main = "Thunderstorm ⛈️", "Thunderstorm"
+                                om_desc, om_main = "Thunderstorm", "Thunderstorm"
                             else:
-                                om_desc, om_main = "Cloudy ☁️", "Clouds"
+                                om_desc, om_main = "Cloudy", "Clouds"
 
                             weather_data = {
                                 "rainfall_mm": round(float(precip), 1),
@@ -1201,7 +1201,7 @@ def page_predictor():
                         else:
                             weather_data = {"error": f"No coordinates found for {district}. Select a valid district."}
                     except Exception as e:
-                        st.warning(f"⚠️ Could not fetch weather: {e}")
+                        st.warning(f"Could not fetch weather: {e}")
 
                 # ── Apply result ──
                 if weather_data and not weather_data.get("error"):
@@ -1224,7 +1224,7 @@ def page_predictor():
                         st.session_state.exp_river = float(river_est)
 
                     source = weather_data.get("weather_source", "Live")
-                    st.success(f"✅ Weather loaded via {source}!")
+                    st.success(f"Weather loaded via {source}!")
 
         if st.session_state.using_live_weather and st.session_state.live_weather:
             live_weather = st.session_state.live_weather
@@ -1233,39 +1233,39 @@ def page_predictor():
             humidity = live_weather.get("humidity") or live_weather.get("humidity_pct") or "--"
             rainfall = live_weather.get("rainfall") or live_weather.get("rainfall_mm") or live_weather.get("rain") or 0
             weather_icon = WEATHER_EMOJI_MAP.get(
-                condition.lower().split()[0], "⛅️"
+                condition.lower().split()[0], ""
             )
             source_label = live_weather.get("weather_source", "Open-Meteo")
 
             weather_card_html = (
-                '<div style="background: #1e293b; border: 1px solid #334155; '
-                'border-radius: 6px; padding: 16px; color: #f8fafc; margin: 12px 0;">'
-                '<div style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.4); '
+                '<div style="background: #27272a; border: 1px solid #3f3f46; '
+                'border-radius: 6px; padding: 16px; color: #fafafa; margin: 12px 0;">'
+                '<div style="background:rgba(249,115,22,0.15); color:#f97316; border:1px solid rgba(249,115,22,0.4); '
                 'font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; '
                 'display:inline-block; margin-bottom:12px;">'
                 'Live Telemetry</div>'
-                f'<div style="font-size:20px; font-weight:600; color:#f8fafc; '
+                f'<div style="font-size:20px; font-weight:600; color:#fafafa; '
                 f'margin-bottom:2px;">{condition}</div>'
-                f'<div style="font-size:12px; color:#94a3b8; '
+                f'<div style="font-size:12px; color:#71717a; '
                 f'margin-bottom:14px;">Source: {source_label} &middot; Synced</div>'
                 '<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">'
-                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
+                '<div style="background:#18181b; border:1px solid #3f3f46; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
+                f'<div style="font-size:16px; font-weight:600; color:#fafafa;">'
                 f'{temperature}&deg;C</div>'
-                '<div style="font-size:10px; color:#94a3b8; '
+                '<div style="font-size:10px; color:#71717a; '
                 'margin-top:2px;">Temp</div></div>'
-                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
+                '<div style="background:#18181b; border:1px solid #3f3f46; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
+                f'<div style="font-size:16px; font-weight:600; color:#fafafa;">'
                 f'{humidity}%</div>'
-                '<div style="font-size:10px; color:#94a3b8; '
+                '<div style="font-size:10px; color:#71717a; '
                 'margin-top:2px;">Humidity</div></div>'
-                '<div style="background:#0f172a; border:1px solid #334155; border-radius:4px; '
+                '<div style="background:#18181b; border:1px solid #3f3f46; border-radius:4px; '
                 'padding:8px; text-align:center;">'
-                f'<div style="font-size:16px; font-weight:600; color:#ffffff;">'
+                f'<div style="font-size:16px; font-weight:600; color:#fafafa;">'
                 f'{rainfall}mm</div>'
-                '<div style="font-size:10px; color:#94a3b8; '
+                '<div style="font-size:10px; color:#71717a; '
                 'margin-top:2px;">Rainfall</div></div>'
                 '</div>'
                 '</div>'
@@ -1273,7 +1273,7 @@ def page_predictor():
             render_html(weather_card_html)
 
             st.markdown(f"""
-<div style="font-size: 11px; color: #64748b; 
+<div style="font-size: 11px; color: #71717a; 
 text-align: center; margin-top: 4px;">
 Auto-fetched from {source_label} &middot; Synced
 </div>
@@ -1281,13 +1281,14 @@ Auto-fetched from {source_label} &middot; Synced
 
         st.session_state.manual_override = True
         st.markdown("---")
+        st.markdown('<div style="font-size:0.75rem;color:#71717a;font-weight:600;margin-bottom:6px;"><i class="fa-solid fa-cog" style="color:#71717a;margin-right:6px;"></i>Input Mode</div>', unsafe_allow_html=True)
         col1, col2 = st.columns(2)
 
-        if col1.button("🟢 Simple", key="mode_simple", 
+        if col1.button("Simple", key="mode_simple", 
             use_container_width=True):
             st.session_state.input_mode = "simple"
 
-        if col2.button("⚙️ Expert", key="mode_expert",
+        if col2.button("Expert", key="mode_expert",
             use_container_width=True):
             st.session_state.input_mode = "expert"
 
