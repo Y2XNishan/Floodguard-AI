@@ -850,10 +850,10 @@ def render_mini_forecast_preview(forecast_df, district):
 
         row_items.append(f"""
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-                <div style="min-width:72px;color:#cbd5e1;font-size:0.95rem;font-weight:600;">{day_label}</div>
+                <div style="min-width:72px;color:#fafafa;font-size:0.95rem;font-weight:600;">{day_label}</div>
                 <div style="display:flex;align-items:center;gap:10px;flex:1;">
                     <span style="font-size:1.1rem;">{icon}</span>
-                    <div style="flex:1;background:#0f172a;border-radius:999px;height:14px;overflow:hidden;">
+                    <div style="flex:1;background:#18181b;border-radius:999px;height:14px;overflow:hidden;">
                         <div style="width:{width_pct}%;background:{color};height:100%;border-radius:999px;"></div>
                     </div>
                 </div>
@@ -884,10 +884,11 @@ def render_ai_summary_card(summary):
 def render_risk_overview_table(df):
     """Render searchable district risk metadata."""
     df = df[["state", "district", "flood_type", "lat", "lon"]].copy()
-    search_query = st.text_input("🔍 Search state or district", placeholder="e.g. Assam, Dibrugarh...", key="risk_overview_search")
+    st.markdown('<div style="font-size:0.8125rem;color:#71717a;margin-bottom:4px;"><i class="fa-solid fa-search" style="color:#71717a;margin-right:6px;"></i>Search State or District</div>', unsafe_allow_html=True)
+    search_query = st.text_input("Search state or district", placeholder="e.g. Assam, Dibrugarh...", key="risk_overview_search", label_visibility="collapsed")
     filtered_df = df[df['state'].str.contains(search_query, case=False, na=False, regex=False) | df['district'].str.contains(search_query, case=False, na=False, regex=False)] if search_query else df
     filtered_df = filtered_df.copy()
-    filtered_df['Risk Level'] = filtered_df['flood_type'].apply(lambda x: '🔴 High' if 'coastal' in str(x).lower() else ('🟡 Moderate' if 'river' in str(x).lower() else '🟢 Low'))
+    filtered_df['Risk Level'] = filtered_df['flood_type'].apply(lambda x: 'High' if 'coastal' in str(x).lower() else ('Moderate' if 'river' in str(x).lower() else 'Low'))
     st.markdown(f"Showing **{len(filtered_df)}** of **{len(df)}** districts")
     st.dataframe(filtered_df[['state','district','Risk Level','flood_type','lat','lon']], use_container_width=True, hide_index=True, height=400)
 
@@ -918,32 +919,32 @@ def render_chat_bubble(message):
 
 # ===== SIMPLE MODE OPTIONS =====
 RAIN_OPTIONS = {
-    "☀️ No rain — sky is clear": 0,
-    "🌤️ Very light drizzle / few drops": 5,
-    "🌦️ Light rain — ground is getting wet": 20,
-    "🌧️ Steady rain — been raining for hours": 60,
-    "⛈️ Heavy rain — hard to see outside": 120,
-    "🌊 Nonstop heavy rain — roads getting flooded": 250,
-    "🚨 Worst rain I've ever seen": 400,
+    "No rain — sky is clear": 0,
+    "Very light drizzle / few drops": 5,
+    "Light rain — ground is getting wet": 20,
+    "Steady rain — been raining for hours": 60,
+    "Heavy rain — hard to see outside": 120,
+    "Nonstop heavy rain — roads getting flooded": 250,
+    "Worst rain I've ever seen": 400,
 }
 WATER_SITUATION = {
-    "🟢 Everything is dry and normal": 3.0,
-    "🔵 Drains & ditches have more water than usual": 5.0,
-    "🟡 Low-lying fields and roads are waterlogged": 7.0,
-    "🟠 Water is reaching near houses / compound walls": 9.5,
-    "🔴 Water is entering houses / streets are flooded": 12.0,
+    "Everything is dry and normal": 3.0,
+    "Drains & ditches have more water than usual": 5.0,
+    "Low-lying fields and roads are waterlogged": 7.0,
+    "Water is reaching near houses / compound walls": 9.5,
+    "Water is entering houses / streets are flooded": 12.0,
 }
 GROUND_OPTIONS = {
-    "🏜️ Ground is dry, no puddles": 40,
-    "💧 Ground is damp, small puddles around": 65,
-    "💦 Mud everywhere, ground is fully soaked": 82,
-    "🌫️ Standing water everywhere, ground is saturated": 95,
+    "Ground is dry, no puddles": 40,
+    "Ground is damp, small puddles around": 65,
+    "Mud everywhere, ground is fully soaked": 82,
+    "Standing water everywhere, ground is saturated": 95,
 }
 TEMP_OPTIONS = {
-    "❄️ Cold — need a jacket": 15,
-    "🌤️ Comfortable — pleasant weather": 25,
-    "☀️ Hot — feeling sweaty": 32,
-    "🔥 Very hot and sticky — hard to stay outside": 35,
+    "Cold — need a jacket": 15,
+    "Comfortable — pleasant weather": 25,
+    "Hot — feeling sweaty": 32,
+    "Very hot and sticky — hard to stay outside": 35,
 }
 
 # ===== PAGE 1: RISK PREDICTOR GAUGE =====
@@ -953,19 +954,25 @@ def show_risk_gauge(risk_score, risk_level):
     elif risk_level.upper() == "MODERATE":
         color = "#f59e0b"
     else:
-        color = "#22c55e"
+        color = "#4ade80"
     
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=risk_score,
-        number={"suffix": "%", "font": {"color": "#f1f5f9", "size": 36}},
+        number={"suffix": "%", "font": {"color": "#fafafa", "size": 36}},
         gauge={
-            "axis": {"range": [0, 100], "tickcolor": "#475569"},
+            "axis": {
+                "range": [0, 100],
+                "tickmode": "array",
+                "tickvals": [0, 20, 40, 60, 80, 100],
+                "ticktext": ["0", "20", "40", "60", "80", "100"],
+                "tickcolor": "#52525b"
+            },
             "bar": {"color": color},
-            "bgcolor": "#1e293b",
-            "bordercolor": "#334155",
+            "bgcolor": "#27272a",
+            "bordercolor": "#3f3f46",
             "steps": [
-                {"range": [0, 30], "color": "rgba(34,197,94,0.12)"},
+                {"range": [0, 30], "color": "rgba(74,222,128,0.12)"},
                 {"range": [30, 60], "color": "rgba(245,158,11,0.12)"},
                 {"range": [60, 100], "color": "rgba(239,68,68,0.12)"},
             ],
@@ -976,11 +983,11 @@ def show_risk_gauge(risk_score, risk_level):
             }
         },
         title={"text": f"Flood Risk: {risk_level}", 
-               "font": {"color": "#94a3b8", "size": 14}}
+               "font": {"color": "#71717a", "size": 14}}
     ))
     fig.update_layout(
-        paper_bgcolor="#0f172a",
-        font={"color": "#f1f5f9"},
+        paper_bgcolor="#18181b",
+        font={"color": "#fafafa"},
         height=300,
         margin=dict(l=20, r=20, t=40, b=20)
     )
