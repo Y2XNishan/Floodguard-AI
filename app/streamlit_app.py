@@ -1457,62 +1457,58 @@ Auto-fetched from {source_label} &middot; Synced
             # LEFT COLUMN (col1) — Risk Assessment Panel:
             with col1:
                 # Determine color based on risk level
-                risk_color = "#22c55e" if risk_level == "LOW" else \
+                risk_color = "#4ade80" if risk_level == "LOW" else \
                              "#f97316" if risk_level in ("MEDIUM", "MODERATE") else \
-                             "#ef4444" if risk_level == "HIGH" else "#dc2626"
+                             "#ef4444" if risk_level == "HIGH" else "#ef4444"
                 
                 st.markdown(f"""
-                <div style="background:#1e293b; border:1px solid #334155; 
+                <div style="background:#27272a; border:1px solid #3f3f46; 
                 border-radius:6px; padding:10px 14px; margin-bottom:8px; text-align:left;">
-                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
-                    text-transform:uppercase; letter-spacing:0.5px;">Risk Assessment Gauge</div>
+                    <div style="font-size:12px; color:#71717a; font-weight:600;">Risk assessment gauge</div>
                 </div>
                 """, unsafe_allow_html=True)
                 
                 show_risk_gauge(risk_score, risk_level)
                 
                 st.markdown(f"""
-                <div style="background:#1e293b; border:1px solid #334155; 
+                <div style="background:#27272a; border:1px solid #3f3f46; 
                 border-radius:6px; padding:12px; margin-top:8px;">
                     <div style="display:flex; justify-content:space-between; 
-                    font-size:12px; color:#94a3b8; 
-                    margin-bottom:6px;">
-                        <span>XGBoost Confidence</span>
+                    font-size:12px; color:#71717a;">
+                        <span>Model Confidence</span>
                         <span style="color:{risk_color}; font-weight:600;">{xgb_score:.1f}%</span>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; 
-                    font-size:12px; color:#94a3b8;">
-                        <span>LSTM Confidence</span>
-                        <span style="color:{risk_color}; font-weight:600;">{lstm_score:.1f}%</span>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
 
             with col2:
                 st.markdown("""
-                <div style="background:#1e293b; border:1px solid #334155; 
+                <div style="background:#27272a; border:1px solid #3f3f46; 
                 border-radius:6px; padding:10px 14px; margin-bottom:8px; text-align:left;">
-                    <div style="font-size:11px; color:#94a3b8; font-weight:600; 
-                    text-transform:uppercase; letter-spacing:0.5px;">7-Day Flood Risk Outlook</div>
+                    <div style="font-size:12px; color:#71717a; font-weight:600;">7-day flood risk outlook</div>
                 </div>
                 """, unsafe_allow_html=True)
                 if mini_forecast_df is not None and not mini_forecast_df.empty:
                     x_col = 'day' if 'day' in mini_forecast_df.columns else mini_forecast_df.columns[0]
-                    y_col = 'flood_probability_pct' if 'flood_probability_pct' in mini_forecast_df.columns else mini_forecast_df.columns[1]
+                    y_col = 'flood_probability_pct' if 'flood_probability_pct' in mini_forecast_df.columns else ('risk_probability' if 'risk_probability' in mini_forecast_df.columns else mini_forecast_df.columns[1])
+                    bar_colors = [
+                        '#ef4444' if float(v) >= 60.0 else '#f97316' if float(v) >= 30.0 else '#4ade80'
+                        for v in mini_forecast_df[y_col]
+                    ]
                     fig_mini = go.Figure(go.Bar(
                         x=mini_forecast_df[x_col],
                         y=mini_forecast_df[y_col],
-                        marker=dict(color="#3b82f6"),
+                        marker=dict(color=bar_colors),
                         hovertemplate="%{x}: %{y:.1f}%<extra></extra>"
                     ))
                     fig_mini.update_layout(
                         height=220,
-                        paper_bgcolor="#0f172a",
-                        plot_bgcolor="#0f172a",
-                        font={"color": "#94a3b8", "family": "Inter"},
+                        paper_bgcolor="#18181b",
+                        plot_bgcolor="#18181b",
+                        font={"color": "#71717a", "family": "Inter"},
                         margin=dict(l=10, r=10, t=10, b=20),
-                        yaxis=dict(range=[0, 100], gridcolor="#1e293b", title="% Risk"),
-                        xaxis=dict(gridcolor="#1e293b")
+                        yaxis=dict(range=[0, 100], gridcolor="#27272a", title="% Risk"),
+                        xaxis=dict(gridcolor="#27272a")
                     )
                     st.plotly_chart(fig_mini, use_container_width=True)
                 else:
@@ -1533,43 +1529,43 @@ Auto-fetched from {source_label} &middot; Synced
                            live_weather.get('description', 
                            'Partly Cloudy')).title()
                 icon = WEATHER_EMOJI_MAP.get(
-                    condition.lower().split()[0], "⛅️")
+                    condition.lower().split()[0], "")
 
                 st.markdown(f"""
-                <div style="background:#1e293b; border:1px solid #334155; 
+                <div style="background:#27272a; border:1px solid #3f3f46; 
                 border-radius:6px; padding:14px;">
-                    <div style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.4); 
+                    <div style="background:rgba(249,115,22,0.15); color:#f97316; border:1px solid rgba(249,115,22,0.4); 
                     font-size:10px; font-weight:600; padding:2px 8px; 
                     border-radius:4px; letter-spacing:0.5px; 
-                    display:inline-block; margin-bottom:8px;">LIVE TELEMETRY</div>
-                    <div style="font-size:24px; font-weight:600; color:#f8fafc; 
-                    line-height:1.1;">{temp}°C</div>
-                    <div style="font-size:12px; color:#94a3b8; 
+                    display:inline-block; margin-bottom:8px;">Live Weather</div>
+                    <div style="font-size:24px; font-weight:600; color:#fafafa; 
+                    line-height:1.1;"><i class="fa-solid fa-thermometer-half" style="color:#f97316; margin-right:8px;"></i>{temp}°C</div>
+                    <div style="font-size:12px; color:#71717a; 
                     margin-top:3px;">{condition}</div>
                     <div style="display:grid; grid-template-columns:repeat(3,1fr); 
                     gap:6px; margin-top:10px;">
-                        <div style="background:#0f172a; border:1px solid #334155; 
+                        <div style="background:#18181b; border:1px solid #3f3f46; 
                         border-radius:4px; padding:7px; text-align:center;">
                             <div style="font-size:13px; font-weight:600; 
-                            color:#ffffff;">{humidity_pct}%</div>
+                            color:#fafafa;">{humidity_pct}%</div>
                             <div style="font-size:10px; 
-                            color:#94a3b8; margin-top:2px;">
+                            color:#71717a; margin-top:2px;">
                             Humidity</div>
                         </div>
-                        <div style="background:#0f172a; border:1px solid #334155; 
+                        <div style="background:#18181b; border:1px solid #3f3f46; 
                         border-radius:4px; padding:7px; text-align:center;">
                             <div style="font-size:13px; font-weight:600; 
-                            color:#ffffff;">{rainfall_mm}mm</div>
+                            color:#fafafa;">{rainfall_mm}mm</div>
                             <div style="font-size:10px; 
-                            color:#94a3b8; margin-top:2px;">
+                            color:#71717a; margin-top:2px;">
                             Rainfall</div>
                         </div>
-                        <div style="background:#0f172a; border:1px solid #334155; 
+                        <div style="background:#18181b; border:1px solid #3f3f46; 
                         border-radius:4px; padding:7px; text-align:center;">
                             <div style="font-size:13px; font-weight:600; 
-                            color:#ffffff;">{live_weather.get('weather_source', 'Open-Meteo')}</div>
+                            color:#fafafa;">{live_weather.get('weather_source', 'Open-Meteo')}</div>
                             <div style="font-size:10px; 
-                            color:#94a3b8; margin-top:2px;">
+                            color:#71717a; margin-top:2px;">
                             Source</div>
                         </div>
                     </div>
