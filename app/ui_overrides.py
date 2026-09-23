@@ -272,9 +272,9 @@ def inject_ui_overrides() -> None:
           text-transform: uppercase;
         }
         .badge-safe {
-          background: rgba(16, 185, 129, 0.12);
-          color: #34d399;
-          border: 1px solid rgba(16, 185, 129, 0.3);
+          background: rgba(74, 222, 128, 0.12);
+          color: #4ade80;
+          border: 1px solid rgba(74, 222, 128, 0.3);
         }
         .badge-moderate {
           background: rgba(245, 158, 11, 0.12);
@@ -353,8 +353,16 @@ def inject_ui_overrides() -> None:
         .clean-divider {
           height: 1px;
           background: var(--app-border);
-          border: none;
-          margin: 20px 0;
+        /* Hide Streamlit Status Widget (RUNNING... and Stop button) */
+        [data-testid="stStatusWidget"],
+        .stStatusWidget,
+        div[data-testid="stStatusWidget"],
+        header [data-testid="stToolbar"] [data-testid="stStatusWidget"],
+        header button[kind="header"] {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
         }
         </style>
         """,
