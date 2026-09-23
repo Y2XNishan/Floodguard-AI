@@ -2760,20 +2760,20 @@ def page_yield_predictor():
 
                 if result["vs_average"] >= 0:
                     st.success(
-                        f"✅ {result['adjusted_yield']} t/ha is "
+                        f"{result['adjusted_yield']} t/ha is "
                         f"{abs(result['vs_average']):.2f} t/ha ABOVE district average"
                     )
                 else:
                     st.warning(
-                        f"⚠️ {result['adjusted_yield']} t/ha is "
+                        f"{result['adjusted_yield']} t/ha is "
                         f"{abs(result['vs_average']):.2f} t/ha BELOW district average"
                     )
 
-                st.info(f"💡 {result['recommendation']}")
+                st.info(f"{result['recommendation']}")
 
                 if flood_risk > 50:
                     st.error(
-                        "🛡️ Apply for PMFBY Crop Insurance immediately!\n"
+                        "Apply for PMFBY Crop Insurance immediately!\n"
                         "Call: 1800-180-1551 (Toll Free)"
                     )
 
@@ -2794,8 +2794,8 @@ def page_crop_loss_estimator():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Crop Loss Estimator & Compensation</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Estimate financial loss to regional crops due to flooding and query PMFBY compensation schemes.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Loss Estimator & Compensation</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Estimate financial loss to regional crops due to flooding and query PMFBY compensation schemes.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot green"></span> PMFBY Scheme Rates: 2024-25</span>
@@ -2873,7 +2873,7 @@ def page_crop_loss_estimator():
         flood_duration = flood_days
 
         calculate_btn = st.button(
-            "💰 Calculate Crop Loss",
+            "Calculate Crop Loss",
             type="primary",
             use_container_width=True,
         )
@@ -2898,19 +2898,18 @@ def page_crop_loss_estimator():
                 loss_str = f"₹{results['total_loss_crores']:.2f} Crores"
 
             st.markdown(f"""
-            <div style='background: linear-gradient(
-                135deg, #1a1a2e, #16213e);
-                border: 2px solid #ff4444;
+            <div style='background: #27272a;
+                border: 2px solid #ef4444;
                 border-radius: 15px;
                 padding: 25px;
                 text-align: center;
                 margin-bottom: 20px'>
-                <h2 style='color: #ff4444; margin:0'>
+                <h2 style='color: #ef4444; margin:0'>
                 Estimated Loss</h2>
-                <h1 style='color: white;
+                <h1 style='color: #fafafa;
                     font-size: 2.5em; margin:10px 0'>
                 {loss_str}</h1>
-                <p style='color: #aaa; margin:0'>
+                <p style='color: #71717a; margin:0'>
                 Across {results['total_area_ha']:.1f}
                 hectares — Avg damage:
                 {results['avg_damage_pct']:.1f}%</p>
@@ -2925,7 +2924,7 @@ def page_crop_loss_estimator():
             with m3:
                 st.metric("Total Area", f"{results['total_area_ha']:.1f} ha")
 
-            st.markdown("### 📊 Crop-wise Breakdown")
+            st.markdown("### Crop-wise Breakdown")
             df = pd.DataFrame(results["crops"])
             df = df.rename(columns={
                 "crop": "Crop",
@@ -2940,14 +2939,14 @@ def page_crop_loss_estimator():
                 use_container_width=True,
             )
 
-            st.markdown("### 📈 Loss Visualization")
+            st.markdown("### Loss Visualization")
             fig = plot_loss_chart(results["crops"])
             st.plotly_chart(fig, use_container_width=True)
 
-            st.markdown("### 🏛️ Government Compensation")
+            st.markdown("### Government Compensation")
             schemes = get_compensation_schemes()
             for key, scheme in schemes.items():
-                with st.expander(f"📋 {scheme['name']}"):
+                with st.expander(f"{scheme['name']}"):
                     st.markdown(f"**Coverage:** {scheme['coverage']}")
                     if "premium" in scheme:
                         st.markdown(f"**Premium:** {scheme['premium']}")
@@ -2960,7 +2959,7 @@ def page_crop_loss_estimator():
 
         else:
             st.info("""
-            👈 Fill in your farm details and click
+            Fill in your farm details and click
             'Calculate Crop Loss' to see estimated
             financial impact of flooding on your crops.
 
@@ -2975,8 +2974,8 @@ def page_alert_system():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Automated Early Warning & Alert System</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Configure threshold-based regional notification dispatches via SMTP and SMS channels.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Automated Early Warning & Alert System</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Configure threshold-based regional notification dispatches via SMTP and SMS channels.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot green"></span> Dispatch Daemon: Online</span>
@@ -3001,13 +3000,13 @@ def page_alert_system():
     # STEP 1 - Header:
     st.markdown("""
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-  <div style="width:32px;height:32px;background:rgba(59,130,246,0.15);
-    border:1px solid rgba(59,130,246,0.3);border-radius:4px;display:flex;align-items:center;
-    justify-content:center;color:#60a5fa;font-size:11px;font-weight:700;">AL</div>
+  <div style="width:32px;height:32px;background:rgba(249,115,22,0.15);
+    border:1px solid rgba(249,115,22,0.3);border-radius:4px;display:flex;align-items:center;
+    justify-content:center;color:#f97316;font-size:11px;font-weight:700;">AL</div>
   <div>
-    <div style="color:#f1f5f9;font-size:14px;font-weight:600;">
+    <div style="color:#fafafa;font-size:14px;font-weight:600;">
       Notification Dispatch Parameters</div>
-    <div style="color:#64748b;font-size:12px;">
+    <div style="color:#71717a;font-size:12px;">
       Direct subscriber dispatch before projected crest</div>
   </div>
 </div>
