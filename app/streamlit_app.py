@@ -3777,22 +3777,6 @@ No automated digital claim dossier feed connected. Use the dedicated <b>Crop Los
             unsafe_allow_html=True
         )
 
-    elif view_mode == "Reference UI (HTML Prototype)":
-        st.markdown("""
-        <div style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-weight:500;font-size:0.8125rem;color:#71717a;">High-Density Standalone Prototype</span>
-            <span style="font-size:0.75rem;color:#71717a;">Generated via Stitch MCP</span>
-        </div>
-        """, unsafe_allow_html=True)
-        html_file = APP_DIR / "stitch_dashboard.html"
-        if html_file.exists():
-            with open(html_file, "r", encoding="utf-8") as f:
-                html_code = f.read()
-            import streamlit.components.v1 as components
-            components.html(html_code, height=800, scrolling=True)
-        else:
-            st.info("HTML prototype not found.")
-
 
 # ===== FOOTER =====
 def render_footer():
