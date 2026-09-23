@@ -2051,14 +2051,18 @@ def page_chatbot():
     risk_level = st.session_state.get("risk_level", "LOW")
     state = st.session_state.get("selected_state", None)
 
-    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+    has_groq = bool(os.environ.get("GROQ_API_KEY", "").strip() and os.environ.get("GROQ_API_KEY", "").strip() != "your_groq_api_key_here")
+    status_dot_style = "background:#4ade80;" if has_groq else "background:#71717a;"
+    engine_text = "Engine: Active" if has_groq else "Engine: Offline"
+
+    st.markdown(f"""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">Hydrological Operations Assistant</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Query local flood safety and contingency actions with live district telemetry pre-loaded.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Hydrological Operations Assistant</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Query local flood safety and contingency actions with live district telemetry pre-loaded.</p>
             </div>
             <div>
-                <span class="status-pill"><span class="status-dot green"></span> Engine: Active</span>
+                <span class="status-pill" style="color:{'#fafafa' if has_groq else '#71717a'};"><span class="status-dot" style="{status_dot_style}"></span> {engine_text}</span>
             </div>
         </div>
     </div>""", unsafe_allow_html=True)
@@ -2073,11 +2077,11 @@ def page_chatbot():
         if anthropic_key and anthropic_key != "your_anthropic_api_key_here":
             set_anthropic_api_key(anthropic_key)
 
-    context_color = "#ef4444" if risk_level == "HIGH" else "#f59e0b" if risk_level == "MODERATE" else "#10b981"
+    context_color = "#ef4444" if risk_level == "HIGH" else "#f59e0b" if risk_level == "MODERATE" else "#4ade80"
     st.markdown(f"""<div class="chat-context-card">
         <div>
             <div class="metric-label">Current Context</div>
-            <div style="color:#e2e8f0;font-size:1.1rem;font-weight:800">{district}</div>
+            <div style="color:#fafafa;font-size:1.1rem;font-weight:800">{district}</div>
         </div>
         <div>
             <div class="metric-label">Risk Score</div>
@@ -2090,7 +2094,7 @@ def page_chatbot():
     </div>""", unsafe_allow_html=True)
 
     # STEP 6 - Clear chat button in sidebar or above chat:
-    if st.button("🗑️ Clear Chat", key="clear_chat"):
+    if st.button("Clear Chat", key="clear_chat"):
         st.session_state.chat_history = []
         st.rerun()
 
@@ -2128,22 +2132,22 @@ def page_chatbot():
 
     # STEP 1 - Chat container with header:
     st.markdown("""
-<div style="background:#0f172a;border-radius:6px;padding:16px;
-  border:1px solid #334155;">
+<div style="background:#18181b;border-radius:6px;padding:16px;
+  border:1px solid #3f3f46;">
   <div style="display:flex;align-items:center;gap:10px;
-    padding-bottom:12px;border-bottom:1px solid #334155;margin-bottom:16px;">
-    <div style="width:30px;height:30px;background:rgba(59,130,246,0.15);
-      border:1px solid rgba(59,130,246,0.3);border-radius:4px;display:flex;
-      align-items:center;justify-content:center;color:#60a5fa;font-weight:700;font-size:11px;">FG</div>
+    padding-bottom:12px;border-bottom:1px solid #3f3f46;margin-bottom:16px;">
+    <div style="width:30px;height:30px;background:rgba(249,115,22,0.15);
+      border:1px solid rgba(249,115,22,0.3);border-radius:4px;display:flex;
+      align-items:center;justify-content:center;color:#f97316;font-weight:700;font-size:11px;">FG</div>
     <div>
-      <div style="color:#f8fafc;font-size:13px;font-weight:600;">
+      <div style="color:#fafafa;font-size:13px;font-weight:600;">
         FloodGuard AI Operations Assistant</div>
-      <div style="color:#94a3b8;font-size:11px;">
+      <div style="color:#71717a;font-size:11px;">
         Hydrological Intelligence Model &middot; Online</div>
     </div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
       <span class="status-dot green"></span>
-      <span style="font-size:11px;color:#94a3b8;">Active</span>
+      <span style="font-size:11px;color:#71717a;">Active</span>
     </div>
   </div>
 """, unsafe_allow_html=True)
@@ -2153,31 +2157,42 @@ def page_chatbot():
         if msg["role"] == "user":
             st.markdown(f"""
             <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
-              <div style="background:#3b82f6;color:#ffffff;
+              <div style="background:#f97316;color:#ffffff;
                 border-radius:6px;padding:8px 12px;
                 font-size:13px;max-width:80%;">{msg["content"]}</div>
             </div>
             """, unsafe_allow_html=True)
         else:
-            st.markdown(f"""
-            <div style="display:flex;gap:8px;margin-bottom:10px;">
-              <div style="width:24px;height:24px;background:#1e293b;
-                border:1px solid #334155;border-radius:4px;
-                display:flex;align-items:center;justify-content:center;
-                font-size:10px;font-weight:600;color:#94a3b8;flex-shrink:0;margin-top:2px;">AI</div>
-              <div>
-                <div style="background:rgba(59,130,246,0.1);color:#60a5fa;
-                  border:1px solid rgba(59,130,246,0.25);
-                  border-radius:3px;padding:1px 6px;font-size:10px;
-                  display:inline-block;margin-bottom:4px;">
-                  {msg.get("q_type","General")}</div>
-                <div style="background:#1e293b;border:1px solid #334155;color:#f8fafc;
-                  border-radius:6px;padding:10px 14px;
-                  font-size:13px;line-height:1.55;max-width:85%;">
-                  {msg["content"]}</div>
-              </div>
-            </div>
-            """, unsafe_allow_html=True)
+            content = msg.get("content", "")
+            is_unavail = msg.get("is_unavailable", False) or "AI Assistant unavailable" in content or "GROQ_API_KEY" in content
+            if is_unavail:
+                st.markdown("""
+                <div style="background:#27272a; border:1px solid #3f3f46; border-radius:6px; 
+                padding:10px 14px; color:#71717a; font-size:12px; max-width:85%; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-circle-info" style="color:#71717a; font-size:13px;"></i>
+                    <span>AI Assistant unavailable. Check API configuration.</span>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                <div style="display:flex;gap:8px;margin-bottom:10px;">
+                  <div style="width:24px;height:24px;background:#27272a;
+                    border:1px solid #3f3f46;border-radius:4px;
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:10px;font-weight:600;color:#71717a;flex-shrink:0;margin-top:2px;">AI</div>
+                  <div>
+                    <div style="background:rgba(249,115,22,0.1);color:#f97316;
+                      border:1px solid rgba(249,115,22,0.25);
+                      border-radius:3px;padding:1px 6px;font-size:10px;
+                      display:inline-block;margin-bottom:4px;">
+                      {msg.get("q_type","General")}</div>
+                    <div style="background:#27272a;border:1px solid #3f3f46;color:#fafafa;
+                      border-radius:6px;padding:10px 14px;
+                      font-size:13px;line-height:1.55;max-width:85%;">
+                      {content}</div>
+                  </div>
+                </div>
+                """, unsafe_allow_html=True)
 
     # Close the STEP 1 chat container div opened above
     st.markdown("</div>", unsafe_allow_html=True)
@@ -2190,7 +2205,7 @@ def page_chatbot():
             placeholder="Ask about floods, crops, weather...",
             key="chat_input", label_visibility="collapsed")
     with col2:
-        send = st.button("Send ➤", use_container_width=True)
+        send = st.button("Send", use_container_width=True)
 
     # STEP 5 - On send:
     prompt = selected_prompt or user_input
@@ -2207,14 +2222,21 @@ def page_chatbot():
             if isinstance(res, dict):
                 response = res.get("answer", "")
                 q_type = res.get("question_type", "General")
+                is_unavail = res.get("is_unavailable", False)
             else:
                 response = str(res)
                 q_type = "General"
+                is_unavail = False
+
+        if "GROQ_API_KEY" in response or "AI Assistant unavailable" in response:
+            response = "AI Assistant unavailable. Check API configuration."
+            is_unavail = True
 
         st.session_state.chat_history.append({
             "role": "assistant",
             "content": response,
-            "q_type": q_type
+            "q_type": q_type,
+            "is_unavailable": is_unavail
         })
         st.rerun()
 
@@ -2223,7 +2245,7 @@ def page_forecast():
     """Display 7-day flood forecast for selected district."""
     is_online = st.session_state.get("internet_status", True)
     if not FORECAST_AVAILABLE:
-        st.warning("🔧 Forecast module not available. Please check dependencies.")
+        st.warning("Forecast module not available. Please check dependencies.")
         return
 
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
