@@ -1921,21 +1921,14 @@ def classify_risk(prob_pct):
     return 'Severe', 'Red'
 
 
-def calculate_daily_flood_risk(rainfall_mm, state):
-    """Rule-based daily forecast risk using IMD daily rainfall thresholds."""
+def calculate_daily_flood_risk(rainfall_mm, state, rain_accum=0.0, day_idx=0, base_risk=None):
+    """Dynamic continuous daily forecast risk using rainfall, accumulation, and day variation.
+    
+    If base_risk (e.g. today's gauge risk) is provided, Day 0 aligns with it,
+    and subsequent days project realistically from actual weather forecast data.
+    """
     rainfall_mm = max(float(rainfall_mm or 0), 0.0)
     state = str(state).strip().title()
-
-    if rainfall_mm < 7.5:
-        base_risk = 5
-    elif rainfall_mm < 35.5:
-        base_risk = 20
-    elif rainfall_mm < 64.5:
-        base_risk = 45
-    elif rainfall_mm < 115.5:
-        base_risk = 65
-    else:
-        base_risk = 85
 
     flood_prone = {
         "Assam": 1.4, "Bihar": 1.3,
