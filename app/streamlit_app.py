@@ -1665,51 +1665,86 @@ Auto-fetched from {source_label} &middot; Synced
         except Exception as display_err:
             st.error(f"Error rendering premium display: {display_err}")
 
-        # AI summary card explanation
+        # Cache AI summary explanation for chatbot context without rendering redundant card
         top_drivers = get_top_shap_drivers(scaler, features, feat_dict)
         if CHATBOT_AVAILABLE:
-            with st.spinner(get_text("ai_preparing", lang)):
+            try:
                 ai_summary = generate_risk_explanation(district, prob, top_drivers, live_weather or {})
+            except Exception:
+                ai_summary = (
+                    f"{district} is at {risk_level_from_score(prob)} flood risk ({prob:.0%}) based on rainfall, "
+                    "river level, and soil conditions."
+                )
         else:
             ai_summary = (
                 f"{district} is at {risk_level_from_score(prob)} flood risk ({prob:.0%}) based on rainfall, "
-                "river level, and soil conditions. Residents should use this as a planning signal and watch "
-                "local alerts. The most important action is to avoid flooded roads and prepare essentials."
+                "river level, and soil conditions."
             )
         st.session_state.latest_ai_summary = ai_summary
         st.session_state.floodguard_pending_summary = ai_summary
-        render_ai_summary_card(ai_summary)
 
-        render_html('<div class="gradient-divider"></div>')
-
-        # 6. SHAP FEATURE IMPORTANCE:
+        # 6. XGBOOST FEATURE IMPORTANCE (excluding 'year'):
         try:
             st.markdown("""
-            <div style="font-size:11px; color:rgba(255,255,255,0.4); 
+            <div style="font-size:11px; color:#71717a; 
             text-transform:uppercase; letter-spacing:0.5px; 
-            margin:16px 0 8px;">Feature Importance</div>
+            margin:16px 0 8px; font-weight:600;">Model Feature Importance</div>
             """, unsafe_allow_html=True)
 
             display_names = {
-                "rainfall_mm":"Rainfall","river_level_m":"Water Level",
-                "temperature_c":"Temperature","humidity_pct":"Ground Moisture",
-                "elevation_m":"Elevation","soil_moisture":"Soil Moisture",
-                "rainfall_7day_cumsum":"7-Day Rain","rainfall_30day_cumsum":"30-Day Rain",
-                "api":"Saturation","river_rise_rate":"Rise Speed",
-                "rainfall_river_interaction":"Rain x Water","is_monsoon":"Monsoon",
-                "ndvi":"Vegetation","month_sin":"Season","month_cos":"Season",
+                "rainfall_30day": "30-Day Cumulative Rain",
+                "terrain_rain_risk": "Terrain Drainage Risk",
+                "api": "Soil Saturation (API)",
+                "rainfall_intensity": "Rainfall Intensity",
+                "is_monsoon": "Monsoon Active Factor",
+                "rainfall_mm": "Current Rainfall",
+                "rainfall_7day": "7-Day Cumulative Rain",
+                "month_cos": "Seasonal Cycle",
+                "water_level_m": "River Water Level",
+                "discharge_per_water_level": "River Discharge Rate",
+                "elevation_m": "Elevation",
+                "humidity_pct": "Relative Humidity",
+                "temperature_c": "Temperature",
+                "population_density": "Vulnerability Density",
             }
-            top = dict(sorted(feat_dict.items(), key=lambda x: abs(x[1]), reverse=True)[:8])
-            labels = [display_names.get(k, k) for k in top.keys()]
-            fig2 = go.Figure(go.Bar(x=list(top.values()), y=labels, orientation='h',
-                marker=dict(color="#3b82f6")))
-            fig2.update_layout(height=350, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                font={"color":"#e2e8f0","family":"Inter"},
-                xaxis=dict(gridcolor="rgba(255,255,255,0.03)"),
-                yaxis=dict(gridcolor="rgba(255,255,255,0.03)"), margin=dict(l=10,r=10,t=10,b=10))
+            if hasattr(model, 'feature_importances_') and features:
+                imp_pairs = [
+                    (f, float(imp))
+                    for f, imp in zip(features, model.feature_importances_)
+                    if f.lower() != 'year' and not f.lower().startswith('year') and imp > 0
+                ]
+                total_imp = sum(imp for _, imp in imp_pairs) or 1.0
+                sorted_imp = sorted(imp_pairs, key=lambda x: x[1], reverse=True)[:8]
+                sorted_imp.reverse()
+                y_labels = [display_names.get(k, k.replace('_', ' ').title()) for k, _ in sorted_imp]
+                x_vals = [round((v / total_imp) * 100, 1) for _, v in sorted_imp]
+            else:
+                filtered_feat = {k: abs(v) for k, v in feat_dict.items() if k.lower() != 'year' and not k.lower().startswith('year')}
+                top = dict(sorted(filtered_feat.items(), key=lambda x: x[1], reverse=True)[:8])
+                sorted_items = list(top.items())
+                sorted_items.reverse()
+                y_labels = [display_names.get(k, k.replace('_', ' ').title()) for k, _ in sorted_items]
+                x_vals = [v for _, v in sorted_items]
+
+            fig2 = go.Figure(go.Bar(
+                x=x_vals,
+                y=y_labels,
+                orientation='h',
+                marker=dict(color="#f97316"),
+                hovertemplate="%{y}: %{x:.1f}%<extra></extra>"
+            ))
+            fig2.update_layout(
+                height=300,
+                paper_bgcolor="#18181b",
+                plot_bgcolor="#18181b",
+                font={"color": "#fafafa", "family": "Inter"},
+                xaxis=dict(gridcolor="#27272a", title="% Relative Impact"),
+                yaxis=dict(gridcolor="#27272a"),
+                margin=dict(l=10, r=10, t=10, b=20)
+            )
             st.plotly_chart(fig2, use_container_width=True)
         except Exception as shap_err:
-            st.error(f"Error rendering SHAP chart: {shap_err}")
+            st.error(f"Error rendering feature importance chart: {shap_err}")
 
         # --- PDF Report Download Button ---
         try:
