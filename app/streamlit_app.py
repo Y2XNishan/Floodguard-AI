@@ -3650,37 +3650,37 @@ def page_tactical_command():
                         <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">
                             Current Assessment
                         </div>
-                        <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#f8fafc;">
+                        <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#fafafa;">
                             Elevated Runoff Risk
                         </h3>
                     </div>
                     <span class="badge badge-danger">High Risk</span>
                 </div>
 
-                <div style="padding:16px 0;margin:12px 0;border-top:1px solid #334155;border-bottom:1px solid #334155;">
+                <div style="padding:16px 0;margin:12px 0;border-top:1px solid #3f3f46;border-bottom:1px solid #3f3f46;">
                     <div style="display:flex;align-items:baseline;gap:8px;">
-                        <span style="font-size:2.25rem;font-weight:700;color:#f8fafc;line-height:1;">78%</span>
-                        <span style="color:#94a3b8;font-size:0.875rem;">Probability of inundation</span>
+                        <span style="font-size:2.25rem;font-weight:700;color:#fafafa;line-height:1;">78%</span>
+                        <span style="color:#71717a;font-size:0.875rem;">Probability of inundation</span>
                     </div>
                     <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
                         <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#94a3b8;">Peak Arrival Window:</span>
-                            <span style="color:#f8fafc;font-weight:600;">~6–7 Hours</span>
+                            <span style="color:#71717a;">Peak Arrival Window:</span>
+                            <span style="color:#fafafa;font-weight:600;">~6–7 Hours</span>
                         </div>
                         <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#94a3b8;">Ensemble Confidence:</span>
-                            <span style="color:#f8fafc;font-weight:600;">94.2% (XGBoost + LSTM)</span>
+                            <span style="color:#71717a;">Ensemble Confidence:</span>
+                            <span style="color:#fafafa;font-weight:600;">94.2% (XGBoost + LSTM)</span>
                         </div>
                         <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
-                            <span style="color:#94a3b8;">Monitored Basin:</span>
-                            <span style="color:#f8fafc;font-weight:600;">Ganga / Son Confluence</span>
+                            <span style="color:#71717a;">Monitored Basin:</span>
+                            <span style="color:#fafafa;font-weight:600;">Ganga / Son Confluence</span>
                         </div>
                     </div>
                 </div>
 
-                <div style="font-size:0.8125rem;color:#94a3b8;display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:0.8125rem;color:#71717a;display:flex;align-items:center;justify-content:space-between;">
                     <span>Action: Pre-position teams in Zones 3 & 4</span>
-                    <span style="color:#3b82f6;font-weight:500;">SOP Active</span>
+                    <span style="color:#f97316;font-weight:500;">SOP Active</span>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -3690,15 +3690,15 @@ def page_tactical_command():
             with m1:
                 st.markdown("""
                 <div class="metric-card">
-                    <div class="metric-label">24h Precipitation</div>
-                    <div class="metric-value">148.0 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">mm</span></div>
+                    <div class="metric-label"><i class="fa-solid fa-cloud-rain" style="color:#f97316; margin-right:6px;"></i>24h Precipitation</div>
+                    <div class="metric-value">148.0 <span style="font-size:1rem;color:#71717a;font-weight:400;">mm</span></div>
                     <div style="font-size:0.75rem;color:#f87171;margin-top:4px;">+42.8 mm vs 10-yr seasonal mean</div>
                 </div>
                 """, unsafe_allow_html=True)
                 st.markdown("""
                 <div class="metric-card" style="margin-top:10px;">
                     <div class="metric-label">Soil Saturation (0–30 cm)</div>
-                    <div class="metric-value">92.4 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">%</span></div>
+                    <div class="metric-value">92.4 <span style="font-size:1rem;color:#71717a;font-weight:400;">%</span></div>
                     <div style="font-size:0.75rem;color:#f87171;margin-top:4px;">Runoff threshold exceeded</div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -3706,15 +3706,15 @@ def page_tactical_command():
                 st.markdown("""
                 <div class="metric-card">
                     <div class="metric-label">Ganga River Level</div>
-                    <div class="metric-value" style="color:#f87171;">50.24 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">m</span></div>
-                    <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Danger mark: 49.40 m (+0.84 m)</div>
+                    <div class="metric-value" style="color:#f87171;">50.24 <span style="font-size:1rem;color:#71717a;font-weight:400;">m</span></div>
+                    <div style="font-size:0.75rem;color:#71717a;margin-top:4px;">Danger mark: 49.40 m (+0.84 m)</div>
                 </div>
                 """, unsafe_allow_html=True)
                 st.markdown("""
                 <div class="metric-card" style="margin-top:10px;">
                     <div class="metric-label">Dam Discharge Outflow</div>
-                    <div class="metric-value">18,400 <span style="font-size:1rem;color:#94a3b8;font-weight:400;">m³/s</span></div>
-                    <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Sone Barrage (42/48 gates active)</div>
+                    <div class="metric-value">18,400 <span style="font-size:1rem;color:#71717a;font-weight:400;">m³/s</span></div>
+                    <div style="font-size:0.75rem;color:#71717a;margin-top:4px;">Sone Barrage (42/48 gates active)</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -3724,21 +3724,21 @@ def page_tactical_command():
             st.markdown("""
             <div class="card-custom">
                 <h3 style="margin:0 0 8px 0;font-size:1rem;">Kharif Crop Exposure</h3>
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:12px;margin-bottom:10px;">
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:12px;margin-bottom:10px;">
                     <div style="display:flex;justify-content:space-between;">
-                        <b style="color:#f8fafc;">Paddy (Rice) Inundation</b>
+                        <b style="color:#fafafa;">Paddy (Rice) Inundation</b>
                         <span style="color:#f87171;font-weight:600;">68% Vulnerability</span>
                     </div>
-                    <p style="font-size:0.8125rem;color:#94a3b8;margin:4px 0 0 0;">
+                    <p style="font-size:0.8125rem;color:#71717a;margin:4px 0 0 0;">
                         Estimated 42,300 hectares submerged or waterlogged. Projected yield impact: ₹148 Crore.
                     </p>
                 </div>
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:12px;">
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:12px;">
                     <div style="display:flex;justify-content:space-between;">
-                        <b style="color:#f8fafc;">Post-Flood Silt & Disease Advisory</b>
+                        <b style="color:#fafafa;">Post-Flood Silt & Disease Advisory</b>
                         <span style="color:#fbbf24;font-weight:600;">Advisory</span>
                     </div>
-                    <p style="font-size:0.8125rem;color:#94a3b8;margin:4px 0 0 0;">
+                    <p style="font-size:0.8125rem;color:#71717a;margin:4px 0 0 0;">
                         Elevated risk of bacterial leaf blight and root rot once floodwater recedes. Apply copper oxychloride fungicide.
                     </p>
                 </div>
@@ -3748,7 +3748,7 @@ def page_tactical_command():
             st.markdown("""
             <div class="card-custom">
                 <h3 style="margin:0 0 8px 0;font-size:1rem;">Crop Insurance Claim Dispatch</h3>
-                <p style="font-size:0.8125rem;color:#94a3b8;margin-bottom:14px;">
+                <p style="font-size:0.8125rem;color:#71717a;margin-bottom:14px;">
                     Automated claim dossier generation under Pradhan Mantri Fasal Bima Yojana (PMFBY) using satellite imagery and district risk telemetry.
                 </p>
             </div>
@@ -3761,21 +3761,21 @@ def page_tactical_command():
         <div class="card-custom">
             <h3 style="margin:0 0 12px 0;font-size:1rem;">Operational Readiness Checklist</h3>
             <div style="display:flex;flex-direction:column;gap:8px;">
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
-                    <span style="color:#10b981;font-weight:600;font-size:0.8125rem;">[COMPLETED]</span>
-                    <span style="font-size:0.8125rem;color:#f8fafc;">Early warning notification broadcast via Cell Broadcast (142,000 recipients)</span>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+                    <span style="color:#4ade80;font-weight:600;font-size:0.8125rem;"><i class="fa-solid fa-check-circle" style="color:#4ade80;margin-right:4px;"></i>[COMPLETED]</span>
+                    <span style="font-size:0.8125rem;color:#fafafa;">Early warning notification broadcast via Cell Broadcast (142,000 recipients)</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
                     <span style="color:#fbbf24;font-weight:600;font-size:0.8125rem;">[IN PROGRESS]</span>
-                    <span style="font-size:0.8125rem;color:#f8fafc;">Livestock and resident evacuation to Gandhi Maidan elevated grounds</span>
+                    <span style="font-size:0.8125rem;color:#fafafa;">Livestock and resident evacuation to Gandhi Maidan elevated grounds</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
-                    <span style="color:#94a3b8;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
-                    <span style="font-size:0.8125rem;color:#f8fafc;">Substations #12 and #14 grid isolation to prevent electrical hazard</span>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+                    <span style="color:#71717a;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
+                    <span style="font-size:0.8125rem;color:#fafafa;">Substations #12 and #14 grid isolation to prevent electrical hazard</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0f172a;border-radius:4px;border:1px solid #334155;">
-                    <span style="color:#94a3b8;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
-                    <span style="font-size:0.8125rem;color:#f8fafc;">Deployment of NDRF rescue boats to Sector-4 confluence</span>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+                    <span style="color:#71717a;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
+                    <span style="font-size:0.8125rem;color:#fafafa;">Deployment of NDRF rescue boats to Sector-4 confluence</span>
                 </div>
             </div>
         </div>
@@ -3783,9 +3783,9 @@ def page_tactical_command():
 
     elif view_mode == "Reference UI (HTML Prototype)":
         st.markdown("""
-        <div style="background:#1e293b;border:1px solid #334155;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-weight:500;font-size:0.8125rem;color:#94a3b8;">High-Density Standalone Prototype</span>
-            <span style="font-size:0.75rem;color:#64748b;">Generated via Stitch MCP</span>
+        <div style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-weight:500;font-size:0.8125rem;color:#71717a;">High-Density Standalone Prototype</span>
+            <span style="font-size:0.75rem;color:#71717a;">Generated via Stitch MCP</span>
         </div>
         """, unsafe_allow_html=True)
         html_file = APP_DIR / "stitch_dashboard.html"
@@ -3801,7 +3801,14 @@ def page_tactical_command():
 # ===== FOOTER =====
 def render_footer():
     st.markdown("""<div class="app-footer">
-        <p style="margin:0"><span style="color:#f8fafc;font-weight:600;">FloodGuard AI</span> &middot; Hydrological Telemetry & Emergency Analytics &middot; v2.4</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+            <p style="margin:0"><span style="color:#fafafa;font-weight:600;">FloodGuard AI</span> &middot; Hydrological Telemetry & Emergency Analytics &middot; v2.4</p>
+            <a href="tel:1078" style="text-decoration:none;">
+                <span style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;">
+                    NDMA Hotline: 1078
+                </span>
+            </a>
+        </div>
     </div>""", unsafe_allow_html=True)
 
 
@@ -3821,8 +3828,8 @@ def main():
         st.markdown("""
         <div class="system-alert-banner">
             <div>
-                <strong style="color:#f87171;">Offline Mode Active</strong><br>
-                <span style="color:#94a3b8;font-size:0.8125rem;">
+                <strong style="color:#f87171;"><i class="fa-solid fa-exclamation-triangle" style="color:#ef4444;margin-right:6px;"></i>Offline Mode Active</strong><br>
+                <span style="color:#71717a;font-size:0.8125rem;">
                 No internet connection detected. Showing cached telemetry data.
                 </span>
             </div>
@@ -3833,11 +3840,11 @@ def main():
     # --- Persistent Global Sidebar ---
     with st.sidebar:
         st.markdown(f"""
-<div style='padding: 10px 0 16px 0; border-bottom: 1px solid #334155; margin-bottom: 12px;'>
-    <h2 style='color: #f8fafc; font-size: 1.125rem; font-weight: 700; margin: 0 0 4px 0; letter-spacing: -0.01em;'>
-        {get_text('app_title', lang)}
+<div style='padding: 10px 0 16px 0; border-bottom: 1px solid #3f3f46; margin-bottom: 12px;'>
+    <h2 style='color: #fafafa; font-size: 1.125rem; font-weight: 700; margin: 0 0 4px 0; letter-spacing: -0.01em;'>
+        <i class="fa-solid fa-water" style="color:#f97316; margin-right:8px;"></i>{get_text('app_title', lang)}
     </h2>
-    <p style='color: #94a3b8; font-size: 0.8125rem; margin: 0; line-height: 1.4;'>
+    <p style='color: #71717a; font-size: 0.8125rem; margin: 0; line-height: 1.4;'>
         {get_text('app_subtitle', lang)}
     </p>
 </div>
@@ -3847,16 +3854,16 @@ def main():
         with st.sidebar.expander("System Status", expanded=True):
             if is_online:
                 st.markdown("""
-                <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:4px;
-                padding:6px 10px; margin-bottom:8px; font-size:12px; color:#34d399;">
-                ● Online
+                <div style="background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3); border-radius:4px;
+                padding:6px 10px; margin-bottom:8px; font-size:12px; color:#4ade80;">
+                <i class="fa-solid fa-circle" style="font-size:8px;color:#4ade80;"></i> Online
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown("""
                 <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:4px;
                 padding:6px 10px; margin-bottom:8px; font-size:12px; color:#f87171;">
-                ● Offline
+                <i class="fa-solid fa-circle" style="font-size:8px;color:#ef4444;"></i> Offline
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -3864,7 +3871,7 @@ def main():
         districts_df = load_india_districts()
         ALL_DISTRICTS = sorted(districts_df["district"].dropna().unique().tolist())
 
-        st.sidebar.markdown("### District Search")
+        st.sidebar.markdown('### <i class="fa-solid fa-search" style="color:#71717a;font-size:0.9rem;margin-right:6px;"></i>District Search', unsafe_allow_html=True)
         search_query = st.sidebar.text_input(
             "", 
             placeholder="Search district...",
@@ -3899,63 +3906,46 @@ def main():
 
         st.markdown("---")
 
-        # --- Language Expander ---
-        with st.sidebar.expander("Language / भाषा", expanded=True):
-            col1, col2 = st.columns(2)
-            if col1.button("English", use_container_width=True):
-                st.session_state.lang = "en"
-                st.rerun()
-            if col2.button("हिंदी", use_container_width=True):
-                st.session_state.lang = "hi"
-                st.rerun()
+        # --- Language Toggle ---
+        st.sidebar.markdown('<div style="font-size:0.75rem;color:#71717a;font-weight:600;margin-top:12px;margin-bottom:6px;">Language / भाषा</div>', unsafe_allow_html=True)
+        current_lang = st.session_state.get("lang", "en")
+        selected_lang = st.sidebar.radio(
+            "Select Language",
+            options=["English", "हिंदी"],
+            index=0 if current_lang == "en" else 1,
+            horizontal=True,
+            label_visibility="collapsed",
+            key="app_lang_radio"
+        )
+        new_lang = "hi" if selected_lang == "हिंदी" else "en"
+        if new_lang != current_lang:
+            st.session_state.lang = new_lang
+            st.rerun()
 
         st.markdown("---")
 
-        # --- Cache Settings Expander ---
-        with st.sidebar.expander("Cache & Storage", expanded=False):
-            cache_keys = ["prediction", "forecast", "weather", "map_data"]
-            for key in cache_keys:
-                if is_cache_available(key):
-                    st.markdown(
-                        f"Cached: {key.title()} ({get_cache_age(key)})"
-                    )
-                else:
-                    st.markdown(f"Empty: {key.title()}")
-            cache_col1, cache_col2 = st.columns(2)
-            with cache_col1:
-                if st.button("Recheck", key="recheck_internet"):
-                    st.session_state.internet_status = is_internet_available()
-                    st.rerun()
-            with cache_col2:
-                if st.button("Clear Cache", key="clear_cache"):
-                    clear_all_cache()
-                    st.success("Cache cleared!")
+        # --- Settings Expander ---
+        st.sidebar.markdown('<div style="font-size:0.75rem;color:#71717a;font-weight:600;margin-top:14px;margin-bottom:4px;"><i class="fa-solid fa-cog" style="color:#71717a;margin-right:6px;"></i>Settings</div>', unsafe_allow_html=True)
+        with st.sidebar.expander("System Configuration", expanded=False):
+            groq_key = os.environ.get("GROQ_API_KEY", "").strip()
+            if not groq_key or groq_key == "your_groq_api_key_here":
+                st.markdown("""
+                <div style="background:#18181b; border:1px solid #3f3f46; border-radius:4px; 
+                padding:8px 10px; font-size:12px; color:#71717a; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-circle-info" style="color:#71717a; font-size:12px;"></i>
+                    <span>AI Assistant unavailable. Check API configuration.</span>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.caption("AI Assistant: Configured & Active")
+            st.caption("Environment: Operational • Local Inference")
         st.markdown("---")
 
     st.markdown("""
     <div class="status-strip" style="margin-bottom:16px;">
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:8px;">
-                <span class="status-dot blue"></span>
-                <span style="font-weight:600;font-size:0.9375rem;color:#f8fafc;">FloodGuard AI</span>
-            </div>
-            <span class="status-pill">
-                <span class="status-dot green"></span>
-                Hydrologic Feeds Active
-            </span>
-            <span class="status-pill">
-                Sector: Patna, Bihar [Ganga Basin]
-            </span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <a href="tel:1078" style="text-decoration:none;">
-                <span style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:3px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">
-                    NDMA Hotline: 1078
-                </span>
-            </a>
-            <span style="font-size:0.75rem;color:#64748b;">
-                IST Sync (UTC+05:30)
-            </span>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <span class="status-dot blue"></span>
+            <span style="font-weight:600;font-size:0.9375rem;color:#fafafa;"><i class="fa-solid fa-water" style="color:#f97316;margin-right:6px;"></i>FloodGuard AI</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
