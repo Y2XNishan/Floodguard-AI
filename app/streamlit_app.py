@@ -3692,13 +3692,14 @@ Sensor Gateway Status
         with col2:
             m1, m2 = st.columns(2)
             with m1:
-                st.markdown("""
-                <div class="metric-card">
-                    <div class="metric-label"><i class="fa-solid fa-cloud-rain" style="color:#f97316; margin-right:6px;"></i>24h Precipitation</div>
-                    <div class="metric-value">148.0 <span style="font-size:1rem;color:#71717a;font-weight:400;">mm</span></div>
-                    <div style="font-size:0.75rem;color:#f87171;margin-top:4px;">+42.8 mm vs 10-yr seasonal mean</div>
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    """<div class="metric-card" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;">
+<div class="metric-label"><i class="fa-solid fa-cloud-rain" style="color:#f97316;margin-right:6px;"></i>24h Precipitation</div>
+<div class="metric-value" style="color:#71717a;font-size:0.95rem;font-weight:600;margin:6px 0;">Data unavailable — connect live API</div>
+<div style="font-size:0.75rem;color:#71717a;margin-top:4px;">No in-situ rain gauge feed connected</div>
+</div>""",
+                    unsafe_allow_html=True
+                )
                 st.markdown("""
                 <div class="metric-card" style="margin-top:10px;">
                     <div class="metric-label">Soil Saturation (0–30 cm)</div>
