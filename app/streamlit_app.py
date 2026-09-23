@@ -413,12 +413,16 @@ STATE_HELPLINES = {
 }
 
 WEATHER_EMOJI_MAP = {
-    "clear": "\u2600\ufe0f", "clouds": "\u26c5", "rain": "\ud83c\udf27\ufe0f",
-    "thunderstorm": "\u26c8\ufe0f", "drizzle": "\ud83c\udf26\ufe0f", "snow": "\u2744\ufe0f",
-    "mist": "\ud83c\udf2b\ufe0f", "fog": "\ud83c\udf2b\ufe0f",
+    "clear": "", "clouds": "", "rain": "",
+    "thunderstorm": "", "drizzle": "", "snow": "",
+    "mist": "", "fog": "",
 }
 
 st.set_page_config(page_title="FloodGuard AI", layout="wide", initial_sidebar_state="expanded")
+
+# Font Awesome 6 CDN
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
+
 
 # ===== THEME & UI LOADER =====
 def inject_custom_css():
@@ -490,7 +494,7 @@ def load_ndma_history():
     ]
 
     for path in possible_paths:
-        normalized = path.replace("\\", "/")
+        normalized = path.replace(chr(92), "/")
         if os.path.exists(normalized):
             try:
                 df = pd.read_csv(normalized)
