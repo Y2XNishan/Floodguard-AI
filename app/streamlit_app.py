@@ -3610,7 +3610,7 @@ Hydrologic indicators, model confidence metrics, and regional sensor status for 
 </div>
 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
 <span class="status-pill"><span class="status-dot amber"></span> Telemetry Gateway: Standby</span>
-<span class="status-pill">District ID: PTN-HQ-01</span>
+<span class="status-pill" style="color:#71717a;">Station Feed: Data unavailable — connect live API</span>
 </div>
 </div>
 </div>""",
