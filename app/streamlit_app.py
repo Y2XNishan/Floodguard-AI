@@ -3753,29 +3753,30 @@ No automated digital claim dossier feed connected. Use the dedicated <b>Crop Los
         )
 
     elif view_mode == "Emergency Protocol Checklist":
-        st.markdown("""
-        <div class="card-custom">
-            <h3 style="margin:0 0 12px 0;font-size:1rem;">Operational Readiness Checklist</h3>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
-                    <span style="color:#4ade80;font-weight:600;font-size:0.8125rem;"><i class="fa-solid fa-check-circle" style="color:#4ade80;margin-right:4px;"></i>[COMPLETED]</span>
-                    <span style="font-size:0.8125rem;color:#fafafa;">Early warning notification broadcast via Cell Broadcast (142,000 recipients)</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
-                    <span style="color:#fbbf24;font-weight:600;font-size:0.8125rem;">[IN PROGRESS]</span>
-                    <span style="font-size:0.8125rem;color:#fafafa;">Livestock and resident evacuation to Gandhi Maidan elevated grounds</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
-                    <span style="color:#71717a;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
-                    <span style="font-size:0.8125rem;color:#fafafa;">Substations #12 and #14 grid isolation to prevent electrical hazard</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
-                    <span style="color:#71717a;font-weight:600;font-size:0.8125rem;">[SCHEDULED]</span>
-                    <span style="font-size:0.8125rem;color:#fafafa;">Deployment of NDRF rescue boats to Sector-4 confluence</span>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(
+            """<div class="card-custom" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;">
+<h3 style="margin:0 0 12px 0;font-size:1rem;color:#fafafa;">Operational Readiness & Emergency Protocols</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+<span style="font-size:0.8125rem;color:#fafafa;">Early Warning Cell Broadcast Gateway</span>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+<span style="font-size:0.8125rem;color:#fafafa;">Shelter Evacuation Transit Telemetry</span>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+<span style="font-size:0.8125rem;color:#fafafa;">Substation Power Grid SCADA Telemetry</span>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#18181b;border-radius:4px;border:1px solid #3f3f46;">
+<span style="font-size:0.8125rem;color:#fafafa;">Rescue Vessel Fleet Tracking</span>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+</div>
+</div>""",
+            unsafe_allow_html=True
+        )
 
     elif view_mode == "Reference UI (HTML Prototype)":
         st.markdown("""
