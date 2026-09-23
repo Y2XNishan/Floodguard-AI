@@ -269,12 +269,12 @@ def get_current_weather(district_name: str) -> dict:
         return {"error": "Live weather response was incomplete. Manual input is still available."}
 
 
-def get_rainfall_forecast(district_name: str) -> list:
+def get_rainfall_forecast(district_name: str, base_risk: float = None) -> list:
     """
     Get 7-day rainfall forecast from keyless Open-Meteo API.
     
     Returns a list of daily summaries:
-    {date, date_display, rainfall_mm, rainfall, precipitation_mm, description, flood_probability, flood_probability_pct}
+    {date, day, date_display, rainfall_mm, rainfall, precipitation_mm, description, flood_probability, flood_probability_pct}
     """
     coords = _find_district_coords(district_name)
     if not coords:
@@ -305,26 +305,23 @@ def get_rainfall_forecast(district_name: str) -> list:
         temp_mins = daily.get("temperature_2m_min", [])
         
         forecast = []
+        rain_accum = 0.0
+        temporal_variance = [0.0, 0.8, -0.6, 1.1, -0.5, 0.7, -0.4]
         for i in range(min(7, len(times))):
             date_str = times[i]
             dt = datetime.strptime(date_str, "%Y-%m-%d")
+            day_name = dt.strftime("%a")
             date_display = dt.strftime("%b %d")
-            
-            # Get precip probability
-            precip_prob = float(precip_prob_max[i]) if i < len(precip_prob_max) and precip_prob_max[i] is not None else 0.0
-            
-            # Calculate flood probability
-            flood_prob = min(precip_prob * 1.2, 100.0)
             
             # Decode weathercode
             wmo_code = int(weathercodes[i]) if i < len(weathercodes) and weathercodes[i] is not None else 0
             
             if wmo_code == 0:
-                precip_mm, desc = 0.0, "Clear Sky ☀️"
+                precip_mm, desc = 0.0, "Clear Sky"
             elif wmo_code in (1, 2, 3):
-                precip_mm, desc = 0.0, "Partly Cloudy ⛅"
+                precip_mm, desc = 0.0, "Partly Cloudy"
             elif wmo_code in (45, 48):
-                precip_mm, desc = 0.0, "Foggy 🌫️"
+                precip_mm, desc = 0.0, "Foggy"
             elif wmo_code in (51, 53, 55):
                 precip_mm, desc = 6.0, "Drizzle 🌦️"
             elif wmo_code in (61, 63, 65):
