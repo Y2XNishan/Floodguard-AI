@@ -44,23 +44,23 @@ def risk_color(score: float) -> str:
         Hex color string.
     """
     if score < 0.3:
-        return "#2ecc71"  # green
+        return "#4ade80"  # low risk green
     elif score < 0.5:
-        return "#f1c40f"  # yellow
+        return "#f59e0b"  # moderate amber
     elif score < 0.7:
-        return "#e67e22"  # orange
+        return "#f97316"  # high risk orange
     else:
-        return "#e74c3c"  # red
+        return "#ef4444"  # very high danger red
 
 
 def risk_level(score: float) -> str:
     """Map risk score to human-readable level."""
     if score < 0.3:
-        return "🟢 Low Risk"
+        return "Low Risk"
     elif score < 0.5:
-        return "🟡 Moderate Risk"
+        return "Moderate Risk"
     elif score < 0.7:
-        return "🟠 High Risk"
+        return "High Risk"
     else:
         return "🔴 Very High Risk"
 
