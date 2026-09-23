@@ -343,7 +343,7 @@ def check_all_downloads() -> dict[str, dict[str, str]]:
     for label, info in datasets.items():
         path = info["path"]
         ready = info["loader"](path)
-        status = "✅ Ready" if ready else "❌ Missing"
+        status = "Ready" if ready else "Missing"
         records = "-"
         if ready:
             try:
