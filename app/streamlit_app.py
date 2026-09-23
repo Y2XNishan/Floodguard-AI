@@ -3656,15 +3656,15 @@ Regional hydrologic advisory: Data unavailable — connect live API
 Current Telemetry Assessment
 </div>
 <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#fafafa;">
-Elevated Runoff Risk
+Sensor Gateway Status
 </h3>
 </div>
-<span class="badge badge-danger">High Risk</span>
+<span class="badge" style="background:#3f3f46;color:#fafafa;padding:3px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">Feed Offline</span>
 </div>
 <div style="padding:16px 0;margin:12px 0;border-top:1px solid #3f3f46;border-bottom:1px solid #3f3f46;">
 <div style="display:flex;align-items:baseline;gap:8px;">
-<span style="font-size:2.25rem;font-weight:700;color:#fafafa;line-height:1;">78%</span>
-<span style="color:#71717a;font-size:0.875rem;">Probability of inundation</span>
+<span style="font-size:1.75rem;font-weight:700;color:#71717a;line-height:1;">--</span>
+<span style="color:#71717a;font-size:0.875rem;">Data unavailable — connect live API</span>
 </div>
 <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
 <div style="display:flex;justify-content:space-between;font-size:0.8125rem;">
