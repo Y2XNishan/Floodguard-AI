@@ -234,26 +234,26 @@ def send_email_alert(
 
         html_body = f"""
 <html>
-<body style="margin:0;padding:0;background-color:#0f172a;">
-<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0f172a">
+<body style="margin:0;padding:0;background-color:#18181b;">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#18181b">
 <tr><td align="center" style="padding:24px;">
 <table width="600" cellpadding="0" cellspacing="0">
 
   <!-- Header -->
-  <tr><td bgcolor="#1e293b" style="border-top:4px solid #06b6d4;border-radius:12px;padding:24px;text-align:center;">
-    <h1 style="color:#06b6d4;margin:0;font-size:24px;font-family:Arial,sans-serif;">🌊 FloodGuard AI</h1>
-    <p style="color:#94a3b8;margin:8px 0 0;font-family:Arial,sans-serif;">India Flood Risk Prediction & Agricultural Intelligence</p>
+  <tr><td bgcolor="#27272a" style="border-top:4px solid #f97316;border-radius:12px;padding:24px;text-align:center;">
+    <h1 style="color:#f97316;margin:0;font-size:24px;font-family:Arial,sans-serif;">FloodGuard AI</h1>
+    <p style="color:#71717a;margin:8px 0 0;font-family:Arial,sans-serif;">India Flood Risk Prediction & Agricultural Intelligence</p>
   </td></tr>
 
   <tr><td height="12"></td></tr>
 
   <!-- Alert Badge -->
-  <tr><td bgcolor="#1e293b" style="border-radius:12px;padding:20px;text-align:center;">
+  <tr><td bgcolor="#27272a" style="border-radius:12px;padding:20px;text-align:center;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 16px 0;">
       <tr>
         <td align="center">
-          <div style="display: inline-block; background-color: #e53e3e; color: #ffffff; font-size: 13px; font-weight: bold; padding: 8px 20px; border-radius: 4px; font-family: Arial, sans-serif; letter-spacing: 1px;">
-            🚨 FLOOD ALERT NOTIFICATION
+          <div style="display: inline-block; background-color: #ef4444; color: #ffffff; font-size: 13px; font-weight: bold; padding: 8px 20px; border-radius: 4px; font-family: Arial, sans-serif; letter-spacing: 1px;">
+            FLOOD ALERT NOTIFICATION
           </div>
         </td>
       </tr>
@@ -263,19 +263,19 @@ def send_email_alert(
   <tr><td height="12"></td></tr>
 
   <!-- Location -->
-  <tr><td bgcolor="#1e293b" style="border-radius:12px;padding:24px;">
-    <p style="color:#94a3b8;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">Location Details</p>
-    <p style="color:#f1f5f9;margin:8px 0;font-family:Arial,sans-serif;">📍 <b>District:</b> <span style="color:#06b6d4;">{district}</span></p>
-    <p style="color:#f1f5f9;margin:8px 0;font-family:Arial,sans-serif;">🗺️ <b>State:</b> <span style="color:#06b6d4;">{state}</span></p>
+  <tr><td bgcolor="#27272a" style="border-radius:12px;padding:24px;">
+    <p style="color:#71717a;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">Location Details</p>
+    <p style="color:#fafafa;margin:8px 0;font-family:Arial,sans-serif;"><b>District:</b> <span style="color:#f97316;">{district}</span></p>
+    <p style="color:#fafafa;margin:8px 0;font-family:Arial,sans-serif;"><b>State:</b> <span style="color:#f97316;">{state}</span></p>
   </td></tr>
 
   <tr><td height="12"></td></tr>
 
   <!-- Risk -->
-  <tr><td bgcolor="#1e293b" style="border-radius:12px;padding:24px;">
-    <p style="color:#94a3b8;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">Risk Assessment</p>
-    <p style="color:#f1f5f9;margin:8px 0;font-family:Arial,sans-serif;">🎯 <b>Risk Score:</b> <span style="color:#06b6d4;font-size:22px;font-weight:bold;">{risk_score}%</span></p>
-    <p style="color:#f1f5f9;margin:8px 0;font-family:Arial,sans-serif;">⚠️ <b>Risk Level:</b> <span style="background-color:{badge_color};color:#ffffff;padding:4px 14px;border-radius:12px;font-weight:bold;">{risk_level}</span></p>
+  <tr><td bgcolor="#27272a" style="border-radius:12px;padding:24px;">
+    <p style="color:#71717a;margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;">Risk Assessment</p>
+    <p style="color:#fafafa;margin:8px 0;font-family:Arial,sans-serif;"><b>Risk Score:</b> <span style="color:#f97316;font-size:22px;font-weight:bold;">{risk_score}%</span></p>
+    <p style="color:#fafafa;margin:8px 0;font-family:Arial,sans-serif;"><b>Risk Level:</b> <span style="background-color:{badge_color};color:#ffffff;padding:4px 14px;border-radius:12px;font-weight:bold;">{risk_level}</span></p>
   </td></tr>
 
   <tr><td height="12"></td></tr>
