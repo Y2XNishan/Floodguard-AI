@@ -3456,9 +3456,9 @@ def page_trends():
         )
         
         fig3.update_layout(
-            paper_bgcolor="#0f172a",
-            plot_bgcolor="#1e293b",
-            font=dict(color="#94a3b8", family="Inter"),
+            paper_bgcolor="#18181b",
+            plot_bgcolor="#27272a",
+            font=dict(color="#71717a", family="Inter"),
             xaxis=dict(
                 tickmode="linear",
                 tick0=2015,
@@ -3474,8 +3474,8 @@ def page_trends():
             ),
             margin=dict(l=40, r=40, t=60, b=40),
             legend=dict(
-                title=dict(text="", font=dict(color="#f1f5f9")),
-                font=dict(color="#cbd5e1")
+                title=dict(text="", font=dict(color="#fafafa")),
+                font=dict(color="#fafafa")
             )
         )
         st.plotly_chart(fig3, use_container_width=True)
@@ -3488,8 +3488,8 @@ def page_about():
     <div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#f8fafc;">System Architecture & Validation</h2>
-                <p style="margin:0;color:#94a3b8;font-size:0.875rem;">Platform telemetry pipelines, model benchmark metrics, and data source provenance.</p>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;"><i class="fa-solid fa-cog" style="color:#f97316;margin-right:8px;"></i>System Architecture & Validation</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Platform telemetry pipelines, model benchmark metrics, and data source provenance.</p>
             </div>
             <div>
                 <span class="status-pill"><span class="status-dot blue"></span> Build: v2.4 Enterprise</span>
@@ -3499,48 +3499,48 @@ def page_about():
 
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
         <div class="card-custom" style="text-align:center;padding:14px;">
-            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">736</div>
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Districts Covered</div>
+            <div style="font-size:1.5rem;font-weight:700;color:#fafafa;">736</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Districts Covered</div>
         </div>
         <div class="card-custom" style="text-align:center;padding:14px;">
-            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">36</div>
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">States & UTs</div>
+            <div style="font-size:1.5rem;font-weight:700;color:#fafafa;">36</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">States & UTs</div>
         </div>
         <div class="card-custom" style="text-align:center;padding:14px;">
-            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">4,695</div>
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Historical Records</div>
+            <div style="font-size:1.5rem;font-weight:700;color:#fafafa;">4,695</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Historical Records</div>
         </div>
         <div class="card-custom" style="text-align:center;padding:14px;">
-            <div style="font-size:1.5rem;font-weight:700;color:#ffffff;">5</div>
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Model Pipelines</div>
+            <div style="font-size:1.5rem;font-weight:700;color:#fafafa;">5</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px;">Model Pipelines</div>
         </div>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
         <div class="card-custom" style="padding:16px;">
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">Model Benchmarks</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">Model Benchmarks</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
-                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">XGBoost Baseline</div>
-                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">0.83 AUC</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#fafafa;font-weight:500;">XGBoost Baseline</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#fafafa;margin-top:2px;">0.83 AUC</div>
                 </div>
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
-                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">LSTM Attention</div>
-                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">0.70 Recall</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#fafafa;font-weight:500;">LSTM Attention</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#fafafa;margin-top:2px;">0.70 Recall</div>
                 </div>
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
-                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">Damage Classifier</div>
-                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">89.6% Accuracy</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#fafafa;font-weight:500;">Damage Classifier</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#fafafa;margin-top:2px;">89.6% Accuracy</div>
                 </div>
-                <div style="background:#0f172a;border:1px solid #334155;border-radius:4px;padding:10px;">
-                    <div style="font-size:0.8125rem;color:#cbd5e1;font-weight:500;">Crop Pathology</div>
-                    <div style="font-size:1.25rem;font-weight:700;color:#ffffff;margin-top:2px;">98.4% Accuracy</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:4px;padding:10px;">
+                    <div style="font-size:0.8125rem;color:#fafafa;font-weight:500;">Crop Pathology</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#fafafa;margin-top:2px;">98.4% Accuracy</div>
                 </div>
             </div>
         </div>
 
         <div class="card-custom" style="padding:16px;">
-            <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">Engineering Stack</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">Engineering Stack</div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">
                 <span class="status-pill">Python 3.11</span>
                 <span class="status-pill">Streamlit Enterprise</span>
@@ -3556,34 +3556,34 @@ def page_about():
     </div>
 
     <div class="card-custom" style="padding:16px;margin-bottom:16px;">
-        <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;">Data Ingestion Sources</div>
+        <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;">Data Ingestion Sources</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">IMD</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;color:#f97316;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">IMD</div>
                 <div>
-                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">India Meteorological Department</div>
-                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Daily historical and projected precipitation grids.</div>
+                    <div style="color:#fafafa;font-size:0.875rem;font-weight:600;">India Meteorological Department</div>
+                    <div style="color:#71717a;font-size:0.75rem;margin-top:1px;">Daily historical and projected precipitation grids.</div>
                 </div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">NDMA</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;color:#f97316;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">NDMA</div>
                 <div>
-                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">National Disaster Management Authority</div>
-                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Official disaster mapping and emergency inventory archives.</div>
+                    <div style="color:#fafafa;font-size:0.875rem;font-weight:600;">National Disaster Management Authority</div>
+                    <div style="color:#71717a;font-size:0.75rem;margin-top:1px;">Official disaster mapping and emergency inventory archives.</div>
                 </div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">DATA</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;color:#f97316;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">DATA</div>
                 <div>
-                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">PlantVillage Dataset (32,883 images)</div>
-                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Standardized agricultural pathology benchmarking corpus.</div>
+                    <div style="color:#fafafa;font-size:0.875rem;font-weight:600;">PlantVillage Dataset (32,883 images)</div>
+                    <div style="color:#71717a;font-size:0.75rem;margin-top:1px;">Standardized agricultural pathology benchmarking corpus.</div>
                 </div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="background:#0f172a;border:1px solid #334155;color:#3b82f6;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">AGRI</div>
+                <div style="background:#18181b;border:1px solid #3f3f46;color:#f97316;padding:4px 8px;border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;">AGRI</div>
                 <div>
-                    <div style="color:#f8fafc;font-size:0.875rem;font-weight:600;">Agricultural Harvest Statistics (19,689 records)</div>
-                    <div style="color:#94a3b8;font-size:0.75rem;margin-top:1px;">Historical multi-crop yield and acreage records across India.</div>
+                    <div style="color:#fafafa;font-size:0.875rem;font-weight:600;">Agricultural Harvest Statistics (19,689 records)</div>
+                    <div style="color:#71717a;font-size:0.75rem;margin-top:1px;">Historical multi-crop yield and acreage records across India.</div>
                 </div>
             </div>
         </div>
@@ -3600,8 +3600,8 @@ def page_tactical_command():
     <div style="margin-bottom:16px;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="margin:0;font-size:1.25rem;font-weight:600;color:#f8fafc;">Regional Telemetry & Risk Overview</h2>
-                <p style="color:#94a3b8;font-size:0.875rem;margin:2px 0 0 0;">
+                <h2 style="margin:0;font-size:1.25rem;font-weight:600;color:#fafafa;">Regional Telemetry & Risk Overview</h2>
+                <p style="color:#71717a;font-size:0.875rem;margin:2px 0 0 0;">
                     Hydrologic indicators, model confidence metrics, and regional emergency protocol status for Patna (Ganga Basin).
                 </p>
             </div>
@@ -3630,13 +3630,13 @@ def page_tactical_command():
         <div class="system-alert-banner">
             <div style="display:flex;align-items:center;gap:8px;">
                 <span style="background:#ef4444;color:#ffffff;font-size:0.6875rem;font-weight:700;padding:2px 6px;border-radius:3px;">
-                    ADVISORY
+                    <i class="fa-solid fa-exclamation-triangle" style="color:#fafafa;margin-right:4px;"></i>ADVISORY
                 </span>
                 <span style="color:#f87171;font-weight:500;font-size:0.875rem;">
-                    Ganga River discharge crest projected within 12–14 hours. Low-lying riverside sectors on waterlogging watch.
+                    <i class="fa-solid fa-road" style="color:#71717a;margin-right:6px;"></i><i class="fa-solid fa-road" style="color:#71717a;margin-right:6px;"></i>Ganga River discharge crest projected within 12–14 hours. Low-lying riverside sectors on waterlogging watch.
                 </span>
             </div>
-            <span style="color:#94a3b8;font-size:0.75rem;">Source: CWC / IMD Station G-09</span>
+            <span style="color:#71717a;font-size:0.75rem;">Source: CWC / IMD Station G-09</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -3647,7 +3647,7 @@ def page_tactical_command():
             <div class="card-custom">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;">
                     <div>
-                        <div style="font-size:0.75rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;">
+                        <div style="font-size:0.75rem;font-weight:600;color:#71717a;text-transform:uppercase;letter-spacing:0.04em;">
                             Current Assessment
                         </div>
                         <h3 style="margin:4px 0 0 0;font-size:1.125rem;font-weight:600;color:#f8fafc;">
