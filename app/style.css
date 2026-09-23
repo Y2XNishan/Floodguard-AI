@@ -193,14 +193,14 @@ h2, h3, h4 {
   font-size: 0.6875rem;
   font-weight: 600;
 }
-.dbadge-low { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+.dbadge-low { background: rgba(74, 222, 128, 0.12); color: #4ade80; }
 .dbadge-med { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
 .dbadge-high { background: rgba(239, 68, 68, 0.12); color: #f87171; }
 
 /* Weather Card */
 .weather-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: #27272a;
+  border: 1px solid #3f3f46;
   border-radius: 6px;
   padding: 16px;
 }
@@ -211,12 +211,12 @@ h2, h3, h4 {
   align-items: flex-start;
 }
 .weather-title {
-  color: #f8fafc;
+  color: #fafafa;
   font-size: 1.05rem;
   font-weight: 600;
 }
 .weather-subtitle {
-  color: #94a3b8;
+  color: #71717a;
   font-size: 0.8125rem;
   margin-top: 2px;
 }
@@ -227,19 +227,19 @@ h2, h3, h4 {
   margin-top: 14px;
 }
 .weather-metrics div {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: #18181b;
+  border: 1px solid #3f3f46;
   border-radius: 4px;
   padding: 10px;
 }
 .weather-metrics b {
   display: block;
-  color: #f8fafc;
+  color: #fafafa;
   font-size: 1.1rem;
   margin: 2px 0;
 }
 .weather-metrics small {
-  color: #94a3b8;
+  color: #71717a;
   text-transform: uppercase;
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
@@ -248,22 +248,22 @@ h2, h3, h4 {
 
 /* AI Summary & Assistant */
 .ai-summary-card {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-left: 3px solid #3b82f6;
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  border-left: 3px solid #f97316;
   border-radius: 6px;
   padding: 16px;
   margin: 10px 0 16px 0;
 }
 .ai-summary-title {
-  color: #3b82f6;
+  color: #f97316;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 .ai-summary-body {
-  color: #f8fafc;
+  color: #fafafa;
   font-size: 0.875rem;
   line-height: 1.55;
   margin-top: 6px;
@@ -271,8 +271,8 @@ h2, h3, h4 {
 
 /* Chat Interface */
 .chat-window {
-  background: #0b1120;
-  border: 1px solid #334155;
+  background: #18181b;
+  border: 1px solid #3f3f46;
   border-radius: 6px;
   padding: 14px;
   min-height: 320px;
