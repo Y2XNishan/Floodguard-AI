@@ -3336,16 +3336,16 @@ def page_trends():
         """
     elif pct_change < 0:
         trend_html = f"""
-        <div class="rec-box rec-safe" style="background: rgba(16,185,129,0.08); border-left: 3px solid #10b981 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
-            <div style="color: #10b981; margin: 0; font-size: 0.9375rem; font-weight: 600;">
+        <div class="rec-box rec-safe" style="background: rgba(74,222,128,0.08); border-left: 3px solid #4ade80 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
+            <div style="color: #4ade80; margin: 0; font-size: 0.9375rem; font-weight: 600;">
                 {get_text("trend_decreasing", lang)} ({pct_change:.1f}%)
             </div>
         </div>
         """
     else:
         trend_html = f"""
-        <div class="rec-box rec-safe" style="background: rgba(59,130,246,0.08); border: 1px solid #334155; border-left: 3px solid #3b82f6 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
-            <div style="color: #3b82f6; margin: 0; font-size: 0.9375rem; font-weight: 600;">
+        <div class="rec-box rec-safe" style="background: rgba(249,115,22,0.08); border: 1px solid #3f3f46; border-left: 3px solid #f97316 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
+            <div style="color: #f97316; margin: 0; font-size: 0.9375rem; font-weight: 600;">
                 {get_text("trend_stable", lang)}
             </div>
         </div>
@@ -3354,7 +3354,7 @@ def page_trends():
     
     # CHART 1 — Year-over-Year Line Chart
     fig1 = go.Figure()
-    colors = ["#3b82f6", "#64748b", "#0284c7", "#10b981"]
+    colors = ["#f97316", "#71717a", "#f97316", "#4ade80"]
     
     for i, (col, display_label) in enumerate(selected_cols):
         fig1.add_trace(go.Scatter(
@@ -3370,11 +3370,11 @@ def page_trends():
     fig1.update_layout(
         title=dict(
             text=get_text("chart_yoy_title", lang).format(district=selected_district, state=selected_state),
-            font=dict(size=15, color="#f1f5f9", family="Inter")
+            font=dict(size=15, color="#fafafa", family="Inter")
         ),
-        paper_bgcolor="#0f172a",
-        plot_bgcolor="#1e293b",
-        font=dict(color="#94a3b8", family="Inter"),
+        paper_bgcolor="#18181b",
+        plot_bgcolor="#27272a",
+        font=dict(color="#71717a", family="Inter"),
         xaxis=dict(
             tickmode="linear",
             tick0=2015,
@@ -3406,7 +3406,7 @@ def page_trends():
         y=filtered["flood_events"],
         marker=dict(
             color=filtered["flood_events"],
-            colorscale=[[0.0, "#3b82f6"], [1.0, "#ef4444"]],
+            colorscale=[[0.0, "#f97316"], [1.0, "#ef4444"]],
             showscale=False
         ),
         hovertemplate="Year %{x}: %{y} events<extra></extra>"
@@ -3415,11 +3415,11 @@ def page_trends():
     fig2.update_layout(
         title=dict(
             text=get_text("chart_annual_title", lang),
-            font=dict(size=16, color="#f1f5f9", family="Inter")
+            font=dict(size=16, color="#fafafa", family="Inter")
         ),
-        paper_bgcolor="#0f172a",
-        plot_bgcolor="#1e293b",
-        font=dict(color="#94a3b8", family="Inter"),
+        paper_bgcolor="#18181b",
+        plot_bgcolor="#27272a",
+        font=dict(color="#71717a", family="Inter"),
         xaxis=dict(
             tickmode="linear",
             tick0=2015,
