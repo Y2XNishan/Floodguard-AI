@@ -3727,42 +3727,30 @@ Sensor Gateway Status
                 )
 
     elif view_mode == "Agricultural Assessment":
-        c1, c2 = st.columns([6, 6])
-        with c1:
-            st.markdown("""
-            <div class="card-custom">
-                <h3 style="margin:0 0 8px 0;font-size:1rem;">Kharif Crop Exposure</h3>
-                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:12px;margin-bottom:10px;">
-                    <div style="display:flex;justify-content:space-between;">
-                        <b style="color:#fafafa;">Paddy (Rice) Inundation</b>
-                        <span style="color:#f87171;font-weight:600;">68% Vulnerability</span>
-                    </div>
-                    <p style="font-size:0.8125rem;color:#71717a;margin:4px 0 0 0;">
-                        Estimated 42,300 hectares submerged or waterlogged. Projected yield impact: ₹148 Crore.
-                    </p>
-                </div>
-                <div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:12px;">
-                    <div style="display:flex;justify-content:space-between;">
-                        <b style="color:#fafafa;">Post-Flood Silt & Disease Advisory</b>
-                        <span style="color:#fbbf24;font-weight:600;">Advisory</span>
-                    </div>
-                    <p style="font-size:0.8125rem;color:#71717a;margin:4px 0 0 0;">
-                        Elevated risk of bacterial leaf blight and root rot once floodwater recedes. Apply copper oxychloride fungicide.
-                    </p>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        with c2:
-            st.markdown("""
-            <div class="card-custom">
-                <h3 style="margin:0 0 8px 0;font-size:1rem;">Crop Insurance Claim Dispatch</h3>
-                <p style="font-size:0.8125rem;color:#71717a;margin-bottom:14px;">
-                    Automated claim dossier generation under Pradhan Mantri Fasal Bima Yojana (PMFBY) using satellite imagery and district risk telemetry.
-                </p>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("Generate PMFBY Digital Claim Dossier", key="pmfby_claim_btn", type="primary"):
-                st.success("PMFBY digital damage assessment initiated for Patna sector.")
+        st.markdown(
+            """<div class="card-custom" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;">
+<h3 style="margin:0 0 12px 0;font-size:1rem;color:#fafafa;">Automated Agricultural Satellite Telemetry</h3>
+<div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:14px;margin-bottom:12px;">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<b style="color:#fafafa;">Kharif Crop Inundation Satellite Feed</b>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+<p style="font-size:0.8125rem;color:#71717a;margin:6px 0 0 0;">
+Real-time satellite radar and multispectral flood extent feeds require an active ISRO Bhuvan or Sentinel-1 telemetry gateway subscription.
+</p>
+</div>
+<div style="background:#18181b;border:1px solid #3f3f46;border-radius:6px;padding:14px;">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<b style="color:#fafafa;">PMFBY Automated Loss Estimation</b>
+<span style="color:#71717a;font-weight:600;font-size:0.8125rem;">Data unavailable — connect live API</span>
+</div>
+<p style="font-size:0.8125rem;color:#71717a;margin:6px 0 0 0;">
+No automated digital claim dossier feed connected. Use the dedicated <b>Crop Loss Estimator</b> and <b>Yield Predictor</b> tabs in the navigation menu for manual farm-level calculations.
+</p>
+</div>
+</div>""",
+            unsafe_allow_html=True
+        )
 
     elif view_mode == "Emergency Protocol Checklist":
         st.markdown("""
