@@ -3717,13 +3717,14 @@ Sensor Gateway Status
 </div>""",
                     unsafe_allow_html=True
                 )
-                st.markdown("""
-                <div class="metric-card" style="margin-top:10px;">
-                    <div class="metric-label">Dam Discharge Outflow</div>
-                    <div class="metric-value">18,400 <span style="font-size:1rem;color:#71717a;font-weight:400;">m³/s</span></div>
-                    <div style="font-size:0.75rem;color:#71717a;margin-top:4px;">Sone Barrage (42/48 gates active)</div>
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    """<div class="metric-card" style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;padding:16px;margin-top:10px;">
+<div class="metric-label">Dam Discharge Outflow</div>
+<div class="metric-value" style="color:#71717a;font-size:0.95rem;font-weight:600;margin:6px 0;">Data unavailable — connect live API</div>
+<div style="font-size:0.75rem;color:#71717a;margin-top:4px;">No live barrage telemetry feed connected</div>
+</div>""",
+                    unsafe_allow_html=True
+                )
 
     elif view_mode == "Agricultural Assessment":
         c1, c2 = st.columns([6, 6])
