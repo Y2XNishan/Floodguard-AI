@@ -1999,18 +1999,13 @@ def generate_7day_forecast(district, state, base_risk=None):
         date = row.date
         day = pd.Timestamp(date).strftime('%A')
 
-        # Use real precipitation_probability from Open-Meteo if available
-        # otherwise fall back to rule-based calculation from rainfall
-        raw_precip_prob = getattr(row, 'precipitation_probability', None)
-        if raw_precip_prob is not None and not pd.isna(raw_precip_prob):
-            # Convert precipitation probability to flood risk
-            # Higher rainfall + high precip probability = higher flood risk
-            rain_factor = calculate_daily_flood_risk(rainfall, state)
-            # Blend: 60% weight on precip probability, 40% on rainfall-based risk
-            prob_pct = round(float(raw_precip_prob) * 0.6 + rain_factor * 0.4, 1)
-            prob_pct = min(prob_pct, 95.0)
-        else:
-            prob_pct = calculate_daily_flood_risk(rainfall, state)
+        prob_pct = calculate_daily_flood_risk(
+            rainfall_mm=rainfall,
+            state=state,
+            rain_accum=rain_accum,
+            day_idx=day_idx,
+            base_risk=base_risk
+        )
         prob = round(prob_pct / 100.0, 3)
         risk_level, risk_color = classify_risk(prob_pct)
 
