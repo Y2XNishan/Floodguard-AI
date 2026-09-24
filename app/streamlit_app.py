@@ -4112,9 +4112,8 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    tab1, tab_stitch, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
         get_text("tab_risk", lang),
-        get_text("tab_stitch", lang),
         get_text("tab_map", lang),
         get_text("tab_trends", lang),
         get_text("tab_forecast", lang),
@@ -4128,8 +4127,6 @@ def main():
     ])
     with tab1:
         page_predictor()
-    with tab_stitch:
-        page_tactical_command()
     with tab2:
         page_map()
     with tab3:
