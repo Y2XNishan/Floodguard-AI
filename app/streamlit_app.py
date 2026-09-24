@@ -2481,26 +2481,34 @@ def page_forecast():
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        selected_state = st.selectbox("Select State", states, key="forecast_state")
-        
-        # If state changed, reset district selection
-        if selected_state != st.session_state.get('last_forecast_state'):
-            st.session_state.forecast_district = None
-            st.session_state.last_forecast_state = selected_state
+        default_f_state = st.session_state.get("selected_state") or st.session_state.get("state_select", "Bihar")
+        default_f_state_idx = states.index(default_f_state) if default_f_state in states else 0
+        selected_state = st.selectbox("Select State", states, index=default_f_state_idx, key="forecast_state")
         
         # Filter districts by selected state
         district_list = sorted([d for d, info in all_districts.items() if info.get('state') == selected_state])
+
+        # If state changed, update forecast_district before widget instantiation
+        if selected_state != st.session_state.get('last_forecast_state'):
+            st.session_state['last_forecast_state'] = selected_state
+            if district_list:
+                st.session_state['forecast_district'] = district_list[0]
+            elif 'forecast_district' in st.session_state:
+                del st.session_state['forecast_district']
         
     with col2:
-        # Set index: if current session district is in list, use it; otherwise use 0
+        # Set index: if current session district is in list, use it; otherwise use global selected_district
         current_district = st.session_state.get('forecast_district')
+        global_district = st.session_state.get('selected_district')
         default_idx = 0
         if current_district and current_district in district_list:
             default_idx = district_list.index(current_district)
+        elif global_district and global_district in district_list:
+            default_idx = district_list.index(global_district)
         
         selected_district = st.selectbox("Select District", district_list, key="forecast_district", index=default_idx)
         
-    # Store selected district in session state
+    # Store selected district in session state (widget keys are managed automatically by Streamlit)
     st.session_state['selected_district'] = selected_district
     st.session_state['selected_state'] = selected_state
 
