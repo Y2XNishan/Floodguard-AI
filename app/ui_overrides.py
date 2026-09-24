@@ -57,6 +57,13 @@ def inject_ui_overrides() -> None:
         h3 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
         h4, h5, h6 { font-size: 1rem !important; }
 
+        /* Hide Streamlit header anchor / link icons */
+        [data-testid="stHeaderActionElements"],
+        a.anchorjs-link,
+        .stHeadingAnchor {
+          display: none !important;
+        }
+
         p, span, div, label {
           font-family: var(--font-family);
         }
