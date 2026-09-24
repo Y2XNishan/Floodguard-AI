@@ -2354,10 +2354,7 @@ div[data-testid="stVerticalBlock"]:has(.chat-context-card) div[data-testid="stHo
       border:1px solid rgba(249,115,22,0.3);border-radius:4px;display:flex;
       align-items:center;justify-content:center;color:#f97316;font-weight:700;font-size:11px;">FG</div>
     <div>
-      <div style="color:#fafafa;font-size:13px;font-weight:600;">
-        FloodGuard AI Operations Assistant</div>
-      <div style="color:#71717a;font-size:11px;">
-        Hydrological Intelligence Model &middot; Online</div>
+      <div style="color:#fafafa;font-size:13px;font-weight:600;">FloodGuard Assistant</div>
     </div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
       <span class="status-dot green"></span>
