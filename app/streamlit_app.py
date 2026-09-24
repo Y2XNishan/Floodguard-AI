@@ -2699,7 +2699,28 @@ def page_forecast():
 
             st.markdown("---")
 
-            # Download buttons
+            # Download buttons styled with orange border and dark background
+            st.markdown("""
+            <style>
+            div.stDownloadButton > button,
+            div[data-testid="stDownloadButton"] > button {
+                border: 1px solid #f97316 !important;
+                background: #18181b !important;
+                background-color: #18181b !important;
+                color: #fafafa !important;
+                border-radius: 6px !important;
+                font-weight: 500 !important;
+                transition: all 0.15s ease !important;
+            }
+            div.stDownloadButton > button:hover,
+            div[data-testid="stDownloadButton"] > button:hover {
+                border-color: #fb923c !important;
+                background: rgba(249, 115, 22, 0.12) !important;
+                background-color: rgba(249, 115, 22, 0.12) !important;
+                color: #ffffff !important;
+            }
+            </style>
+            """, unsafe_allow_html=True)
             col1, col2, col3 = st.columns([1, 1, 2])
             
             with col1:
@@ -2708,7 +2729,8 @@ def page_forecast():
                     label="Download CSV",
                     data=csv,
                     file_name=f"forecast_{dist_name}_{pd.Timestamp.now().strftime('%Y%m%d')}.csv",
-                    mime="text/csv"
+                    mime="text/csv",
+                    key="forecast_download_csv"
                 )
             
             with col2:
@@ -2727,10 +2749,9 @@ DETAILED DATA:
                     label="Download Report",
                     data=report_text,
                     file_name=f"report_{dist_name}_{pd.Timestamp.now().strftime('%Y%m%d')}.txt",
-                    mime="text/plain"
+                    mime="text/plain",
+                    key="forecast_download_report"
                 )
-
-            st.info("**Tip**: Forecasts update every hour. Check back regularly for the latest predictions.")
 
 # ===== PAGE 5: FLOOD DAMAGE SEVERITY CLASSIFIER =====
 def page_damage_classifier():
