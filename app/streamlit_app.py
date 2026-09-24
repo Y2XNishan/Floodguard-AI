@@ -3730,7 +3730,7 @@ def page_trends():
         font=dict(color="#71717a", family="Inter"),
         xaxis=dict(
             tickmode="linear",
-            tick0=2015,
+            tick0=start_year,
             dtick=1,
             gridcolor="rgba(255,255,255,0.05)",
             linecolor="rgba(255,255,255,0.1)",
@@ -3739,7 +3739,11 @@ def page_trends():
         yaxis=dict(
             gridcolor="rgba(255,255,255,0.05)",
             linecolor="rgba(255,255,255,0.1)",
-            title=""
+            title="",
+            tickformat="d",
+            tickmode="linear" if y_dtick else "auto",
+            dtick=y_dtick,
+            tick0=0 if y_dtick else None
         ),
         hovermode="x unified",
         margin=dict(l=40, r=40, t=60, b=40),
