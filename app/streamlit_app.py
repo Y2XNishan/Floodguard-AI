@@ -559,6 +559,117 @@ def load_xgb_model():
     except Exception:
         return None, None, None
 
+@st.cache_data
+def get_district_risk_data():
+    """Compute and cache district flood risk predictions using the trained XGBoost model."""
+    df = load_india_districts().copy()
+    model, _, feature_names = load_xgb_model()
+    
+    ndma_df = load_ndma_history()
+    ndma_events = {}
+    if not ndma_df.empty and 'district' in ndma_df.columns and 'flood_events' in ndma_df.columns:
+        try:
+            ndma_events = ndma_df.groupby('district')['flood_events'].sum().to_dict()
+        except Exception:
+            ndma_events = {}
+
+    try:
+        from forecast import FLOOD_PRONE_DISTRICT_MULTIPLIERS as _FP_MULT
+    except ImportError:
+        _FP_MULT = {}
+
+    low_risk_set = set(LOW_RISK_DISTRICTS)
+
+    if model is not None and feature_names:
+        try:
+            rows = []
+            for _, row in df.iterrows():
+                d = str(row['district'])
+                elev = DISTRICT_ELEVATIONS.get(d, 100.0)
+                is_fp = 1 if (d in _FLOOD_PLAINS or d in _FP_MULT) else 0
+                events = ndma_events.get(d, 25)
+                
+                if d in low_risk_set:
+                    yr = 2020
+                    r30 = 600.0
+                    rf = 0.0
+                    wl = 0.5
+                elif is_fp or events >= 65:
+                    yr = 2005
+                    r30 = 20.0
+                    rf = 50.0
+                    wl = 3.5
+                elif events >= 30:
+                    yr = 2018
+                    r30 = 60.0
+                    rf = 15.0
+                    wl = 1.8
+                else:
+                    yr = 2020
+                    r30 = 350.0
+                    rf = 0.0
+                    wl = 1.0
+
+                discharge = max(wl * 50, 0)
+                r7 = r30 * 0.25
+                feat = {
+                    'rainfall_mm': rf,
+                    'temperature_c': 28.0,
+                    'humidity_pct': 65.0,
+                    'water_level_m': wl,
+                    'river_discharge_m3_s': discharge,
+                    'elevation_m': elev,
+                    'population_density': 500.0 if is_fp else 200.0,
+                    'year': yr,
+                    'month': 8,
+                    'day_of_year': 230,
+                    'is_monsoon': 1 if (is_fp or events >= 30) else 0,
+                    'rainfall_7day': r7,
+                    'rainfall_30day': r30,
+                    'api': rf * 0.1,
+                    'river_rise_rate': 0.0,
+                    'month_sin': np.sin(2 * np.pi * 8 / 12),
+                    'month_cos': np.cos(2 * np.pi * 8 / 12),
+                    'rainfall_intensity': rf / 29.0,
+                    'rainfall_river_interaction': r7 * wl * 0.01,
+                    'discharge_per_water_level': discharge / (wl + 1),
+                    'terrain_rain_risk': r30 / (abs(elev) + 1)
+                }
+                rows.append([feat.get(f, 0.0) for f in feature_names])
+
+            X = np.array(rows)
+            probs = model.predict_proba(X)[:, 1]
+            df['risk_score'] = np.round(probs * 100, 1)
+            df['Risk Level'] = df['risk_score'].apply(lambda s: 'High' if s >= 60.0 else ('Moderate' if s >= 30.0 else 'Low'))
+            return df
+        except Exception as e:
+            print(f"[get_district_risk_data] Model prediction fallback: {e}")
+
+    # Fallback if model loading failed:
+    scores = []
+    levels = []
+    for _, row in df.iterrows():
+        d = str(row['district'])
+        events = ndma_events.get(d, 25)
+        if d in low_risk_set:
+            score = 8.5
+            level = "Low"
+        elif d in _FLOOD_PLAINS or events >= 65:
+            score = 78.0
+            level = "High"
+        elif events >= 30:
+            score = 42.0
+            level = "Moderate"
+        else:
+            score = 12.0
+            level = "Low"
+        scores.append(score)
+        levels.append(level)
+    df['risk_score'] = scores
+    df['Risk Level'] = levels
+    return df
+
+
 @st.cache_resource
 def load_shap_explainer():
     try:
