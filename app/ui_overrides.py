@@ -179,8 +179,7 @@ def inject_ui_overrides() -> None:
           box-shadow: none !important;
         }
 
-        .stButton > button:not([kind="primary"]),
-        .stDownloadButton > button {
+        .stButton > button:not([kind="primary"]) {
           background: var(--app-surface) !important;
           color: var(--app-text) !important;
           font-family: var(--font-family) !important;
