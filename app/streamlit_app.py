@@ -3777,7 +3777,7 @@ def page_trends():
         font=dict(color="#71717a", family="Inter"),
         xaxis=dict(
             tickmode="linear",
-            tick0=2015,
+            tick0=start_year,
             dtick=1,
             gridcolor="rgba(255,255,255,0.05)",
             linecolor="rgba(255,255,255,0.1)",
@@ -3787,19 +3787,29 @@ def page_trends():
             gridcolor="rgba(255,255,255,0.05)",
             linecolor="rgba(255,255,255,0.1)",
             title=get_text("metric_flood_events", lang),
+            tickformat="d",
             tickmode="linear",
             tick0=0,
             dtick=1
         ),
         margin=dict(l=40, r=40, t=60, b=40)
     )
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
     
     # CHART 3 — State Comparison (optional toggle)
     compare_state = st.checkbox(get_text("compare_checkbox", lang), value=False)
     if compare_state:
-        df_state = df[df["state"] == selected_state].sort_values(["year", "district"])
+        df_state = df[
+            (df["state"] == selected_state) &
+            (df["year"] >= start_year) &
+            (df["year"] <= end_year)
+        ].sort_values(["year", "district"])
         
+        orange_shades = [
+            "#f97316", "#fb923c", "#ea580c", "#fdba74", "#c2410c",
+            "#f59e0b", "#9a3412", "#d97706", "#fed7aa", "#b45309",
+            "#7c2d12", "#ffedd5"
+        ]
         fig3 = px.bar(
             df_state,
             x="year",
