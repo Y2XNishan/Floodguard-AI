@@ -2468,10 +2468,7 @@ def page_forecast():
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
                 <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">7-Day Flood Forecast</h2>
-                <p style="margin:0;color:#71717a;font-size:0.875rem;">District-level flood risk projections computed from numerical weather prediction feeds.</p>
-            </div>
-            <div>
-                <span class="status-pill"><span class="status-dot green"></span> Live Feeds Active</span>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Based on Open-Meteo weather forecast data</p>
             </div>
         </div>
     </div>""", unsafe_allow_html=True)
