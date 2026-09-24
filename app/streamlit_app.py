@@ -3847,7 +3847,7 @@ def page_trends():
                 font=dict(color="#fafafa")
             )
         )
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
 
 
 # ===== PAGE 10: ABOUT =====
