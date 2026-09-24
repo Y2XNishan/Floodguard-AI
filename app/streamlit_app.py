@@ -3570,9 +3570,22 @@ def page_trends():
             key="trends_metrics"
         )
         
-    # If no metrics are selected, fall back to "Flood Events" to prevent empty chart errors
-    if not selected_labels:
-        selected_labels = default_metric
+    # Year Range Slider (2015-2024)
+    min_year = 2015
+    max_year = 2024
+    if not df.empty and "year" in df.columns:
+        min_year = int(df["year"].min())
+        max_year = int(df["year"].max())
+
+    year_range = st.slider(
+        "Year Range (2015–2024)",
+        min_value=min_year,
+        max_value=max_year,
+        value=(min_year, max_year),
+        step=1,
+        key="trends_year_slider"
+    )
+    start_year, end_year = year_range
         
     # Map selected translated metric labels to column names and translations
     selected_cols = []
@@ -3586,8 +3599,11 @@ def page_trends():
         elif label == get_text("metric_damage", lang):
             selected_cols.append(("damage_cr", get_text("metric_damage", lang)))
 
-    # Filter df to selected district
-    filtered = df_trends[(df_trends['state'] == selected_state) & (df_trends['district'] == selected_district)].sort_values("year")
+    # District data for trends and calculations
+    df_district = df_trends[(df_trends['state'] == selected_state) & (df_trends['district'] == selected_district)].sort_values("year")
+
+    # Filter df to selected district and year range
+    filtered = df_district[(df_district['year'] >= start_year) & (df_district['year'] <= end_year)]
     
     # Calculate stats
     if filtered.empty:
