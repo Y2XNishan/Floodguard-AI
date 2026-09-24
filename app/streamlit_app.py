@@ -3861,7 +3861,7 @@ def page_about():
                 <p style="margin:0;color:#71717a;font-size:0.875rem;">Platform telemetry pipelines, model benchmark metrics, and data source provenance.</p>
             </div>
             <div>
-                <span class="status-pill"><span class="status-dot blue"></span> Build: v2.4 Enterprise</span>
+                <span class="status-pill"><span class="status-dot blue"></span> Build: v1.0 Enterprise</span>
             </div>
         </div>
     </div>
