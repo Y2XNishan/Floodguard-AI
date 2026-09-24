@@ -2131,20 +2131,20 @@ def get_forecast_summary(forecast_df, district):
         recommendation = 'Moderate flood risk is expected. Monitor local weather and avoid risky travel.'
     else:
         recommendation = 'Low flood risk is expected. Continue routine precautions.'
-    return (
-        f"7-Day Forecast Summary for {district}:\n"
-        f"- Highest risk day: {peak_day} with {peak_prob:.1f}% probability ({risk_label})\n"
-        f"- Total rainfall expected: {total_rain:.1f} mm\n"
-        f"- High risk days (>60%): {high_days}\n"
-        f"- Severe risk days (>80%): {severe_days}\n"
-        f"\nRisk for {district} is {peak_prob:.1f}% on {peak_day} because:\n"
-        f"- {peak_rain:.1f} mm rainfall ({rain_label})\n"
-        f"- {season_text}\n"
-        f"- Historically flood-prone district (+{district_boost_pct}% boost)\n"
-        f"- 7-day cumulative: {rain_7day:.1f} mm\n"
-        f"- Recommendation: {recommendation}\n"
-        f"- Emergency numbers: 1070, 112"
-    )
+
+    summary_lines = [
+        f"7-Day Forecast Summary for {district}:",
+        f"- Highest risk day: {peak_day} with {peak_prob:.1f}% probability ({risk_label})",
+        f"- Total rainfall expected: {total_rain:.1f} mm",
+        f"- High risk days (>60%): {high_days}",
+    ]
+    if severe_days > 0:
+        summary_lines.append(f"- Severe risk days (>80%): {severe_days}")
+    summary_lines.append(f"\nRisk for {district} is {peak_prob:.1f}% on {peak_day} because:")
+    summary_lines.extend(reasons)
+    summary_lines.append(f"- Recommendation: {recommendation}")
+    summary_lines.append("- Emergency numbers: 1070, 112")
+    return "\n".join(summary_lines)
 
 if __name__ == '__main__':
     forecast = generate_7day_forecast('Kamrup', 'Assam')
