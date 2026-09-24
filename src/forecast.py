@@ -2054,19 +2054,37 @@ def plot_forecast_chart(forecast_df, district):
             '<extra></extra>'
         )
     ))
-    fig.add_hline(
-        y=40,
-        line_dash='dash',
-        line_color='#f97316',
-        annotation_text='Danger threshold: 40%',
-        annotation_position='top left',
-    )
+    if y_max >= 40:
+        fig.add_hline(
+            y=40,
+            line_dash='dash',
+            line_color='#ef4444',
+            annotation_text='Danger threshold: 40%',
+            annotation_position='top left',
+            annotation_font_color='#ef4444'
+        )
     fig.update_layout(
-        title=f'7-Day Flood Risk Forecast for {district}',
-        xaxis_title='',
-        yaxis_title='Flood Risk (%)',
-        yaxis=dict(range=[0, 100]),
+        title=dict(
+            text=f'7-Day Flood Risk Forecast for {district}',
+            font=dict(size=15, color='#fafafa', family='Inter')
+        ),
+        paper_bgcolor="#18181b",
+        plot_bgcolor="#27272a",
+        font=dict(color="#71717a", family="Inter"),
+        xaxis=dict(
+            gridcolor="rgba(255,255,255,0.05)",
+            linecolor="rgba(255,255,255,0.1)",
+            title=""
+        ),
+        yaxis=dict(
+            range=[0, y_max],
+            autorange=False,
+            gridcolor="rgba(255,255,255,0.05)",
+            linecolor="rgba(255,255,255,0.1)",
+            title="Flood Risk (%)"
+        ),
         showlegend=False,
+        margin=dict(l=40, r=40, t=50, b=40)
     )
     return fig
 
