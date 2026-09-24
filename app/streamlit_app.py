@@ -3755,16 +3755,14 @@ def page_trends():
             x=1
         )
     )
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, use_container_width=True, config={"displayModeBar": False})
     
     # CHART 2 — Bar Chart (Flood Events by Year)
     fig2 = go.Figure(go.Bar(
         x=filtered["year"],
         y=filtered["flood_events"],
         marker=dict(
-            color=filtered["flood_events"],
-            colorscale=[[0.0, "#f97316"], [1.0, "#ef4444"]],
-            showscale=False
+            color="#f97316"
         ),
         hovertemplate="Year %{x}: %{y} events<extra></extra>"
     ))
