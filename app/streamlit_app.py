@@ -2010,7 +2010,7 @@ def page_map():
             "VERY HIGH": "#ef4444",
             "EXTREME": "#ef4444",
             "SEVERE": "#ef4444"
-        }.get(str(risk_level).strip().upper(), "#f59e0b")
+        }.get(risk_level.strip().upper(), "#4ade80")
         
         popup = (
             f"<b>{district}, {state}</b><br>"
