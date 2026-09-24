@@ -2115,11 +2115,14 @@ def get_forecast_summary(forecast_df, district):
         rain_label = 'light'
     else:
         rain_label = 'minimal'
-    season_text = (
-        f"Monsoon season active (+{season_boost_pct}% boost)"
-        if season_boost > 1.15
-        else f"Seasonal boost: {season_boost:.1f}x"
-    )
+    reasons = [f"- {peak_rain:.1f} mm rainfall ({rain_label})"]
+    if season_boost > 1.15:
+        reasons.append(f"- Monsoon season active (+{season_boost_pct}% boost)")
+    if district_boost_pct > 0:
+        reasons.append(f"- Historically flood-prone district (+{district_boost_pct}% boost)")
+    reasons.append(f"- 7-day cumulative: {rain_7day:.1f} mm")
+    reasons_str = "\n".join(reasons)
+
     if peak_prob > 80.0:
         recommendation = 'Severe flooding is likely. Evacuate low-lying areas and follow official orders.'
     elif peak_prob > 60.0:
