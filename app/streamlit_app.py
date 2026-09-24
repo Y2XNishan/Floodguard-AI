@@ -2588,7 +2588,7 @@ def page_forecast():
             # Display chart
             try:
                 fig = plot_forecast_chart(forecast_df, dist_name)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
                 st.caption("Rainfall forecast from Open-Meteo. Accuracy improves during monsoon season (June–September).")
             except Exception as e:
                 st.warning(f"Could not render chart: {str(e)}")
