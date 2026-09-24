@@ -1967,16 +1967,15 @@ def page_map():
     if should_skip_map(is_online):
         st.info("Offline Mode: The interactive map requires internet connectivity to stream map tiles. Displaying cached tabular overview.")
         st.markdown("### National Risk Overview (Offline)")
-        districts_df = load_india_districts()
+        districts_df = get_district_risk_data()
         render_risk_overview_table(districts_df)
         return
 
-    districts_df = load_india_districts()
+    districts_df = get_district_risk_data()
     m = folium.Map(
-        location=[22.5937, 82.9629],
+        location=[22.0, 82.0],
         zoom_start=5,
-        tiles="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        attr="© OpenStreetMap contributors © CARTO",
+        tiles="OpenStreetMap",
         prefer_canvas=True,
         min_zoom=4,
         max_zoom=10
