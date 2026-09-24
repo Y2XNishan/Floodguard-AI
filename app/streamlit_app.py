@@ -1960,9 +1960,6 @@ def page_map():
                 <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">India Flood Risk Map</h2>
                 <p style="margin:0;color:#71717a;font-size:0.875rem;">Full national flood risk assessment across 736 districts based on historical flood patterns.</p>
             </div>
-            <div>
-                <span class="status-pill"><span class="status-dot blue"></span> GIS Layer: Folium CartoDB Dark</span>
-            </div>
         </div>
     </div>""", unsafe_allow_html=True)
 
