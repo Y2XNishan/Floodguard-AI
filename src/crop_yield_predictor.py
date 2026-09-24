@@ -10,11 +10,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 
-CROP_YIELD_DATA = "data/raw/crop_yield/crop_yield.csv"
-RAINFALL_DATA = "data/raw/crop_yield/rainfall in india 1901-2015.csv"
-MODEL_PATH = "models/crop_yield_model.pkl"
-ENCODERS_PATH = "models/crop_yield_encoders.pkl"
-METADATA_PATH = "models/crop_yield_metadata.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CROP_YIELD_DATA = os.path.join(BASE_DIR, "data", "raw", "crop_yield", "crop_yield.csv")
+RAINFALL_DATA = os.path.join(BASE_DIR, "data", "raw", "crop_yield", "rainfall in india 1901-2015.csv")
+MODEL_PATH = os.path.join(BASE_DIR, "models", "crop_yield_model.pkl")
+ENCODERS_PATH = os.path.join(BASE_DIR, "models", "crop_yield_encoders.pkl")
+METADATA_PATH = os.path.join(BASE_DIR, "models", "crop_yield_metadata.json")
 
 
 def load_and_preprocess():
