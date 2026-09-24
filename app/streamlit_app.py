@@ -3658,12 +3658,17 @@ def page_trends():
     else:
         pct_change = 0.0
         
+    expl_text = "Change in flood frequency vs previous 5-year period"
+
     # Render Trend Indicator
     if pct_change > 0:
         trend_html = f"""
         <div class="rec-box rec-mod" style="background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
             <div style="color: #f59e0b; margin: 0; font-size: 0.9375rem; font-weight: 600;">
                 {get_text("trend_increasing", lang)} (+{pct_change:.1f}%)
+            </div>
+            <div style="color: #71717a; font-size: 0.75rem; margin-top: 4px;">
+                {expl_text}
             </div>
         </div>
         """
@@ -3673,6 +3678,9 @@ def page_trends():
             <div style="color: #4ade80; margin: 0; font-size: 0.9375rem; font-weight: 600;">
                 {get_text("trend_decreasing", lang)} ({pct_change:.1f}%)
             </div>
+            <div style="color: #71717a; font-size: 0.75rem; margin-top: 4px;">
+                {expl_text}
+            </div>
         </div>
         """
     else:
@@ -3680,6 +3688,9 @@ def page_trends():
         <div class="rec-box rec-safe" style="background: rgba(249,115,22,0.08); border: 1px solid #3f3f46; border-left: 3px solid #f97316 !important; padding: 14px; margin: 16px 0; border-radius: 6px;">
             <div style="color: #f97316; margin: 0; font-size: 0.9375rem; font-weight: 600;">
                 {get_text("trend_stable", lang)}
+            </div>
+            <div style="color: #71717a; font-size: 0.75rem; margin-top: 4px;">
+                {expl_text}
             </div>
         </div>
         """
