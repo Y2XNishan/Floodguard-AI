@@ -1996,37 +1996,13 @@ def page_map():
     """
     m.get_root().html.add_child(folium.Element(legend_html))
 
-    type_base = {
-        "Flash / glacial flood": 0.68,
-        "Coastal / river flood": 0.58,
-        "Riverine flood": 0.62,
-        "Urban / river flood": 0.44,
-    }
     for _, row in districts_df.iterrows():
-        score = min(max(type_base.get(row.get("flood_type"), 0.45) + ((hash(row["district"]) % 21) - 10) / 100, 0.08), 0.92)
-        level = "High" if score >= 0.6 else "Moderate" if score >= 0.3 else "Low"
-        
         district = row['district']
         state = row['state']
+        risk_score = float(row.get('risk_score', 15.0))
+        score = risk_score / 100.0
+        risk_level = str(row.get('Risk Level', 'Low'))
         
-        # Support pre-defined risk level fields in row if present, with fallback to calculated level
-        row_risk = row.get("risk_level", row.get("risk", row.get("level", None)))
-        if row_risk is not None:
-            risk_level = str(row_risk).strip()
-        else:
-            risk_level = level
-            
-        risk_score = score * 100
-        
-
-
-        import hashlib as _hl
-        if district in LOW_RISK_DISTRICTS:
-            risk_level = "LOW"
-            _seed = int(_hl.md5(district.encode()).hexdigest(), 16)
-            risk_score = round(5 + (_seed % 1500) / 100.0, 1)
-            score = risk_score / 100.0
-            
         risk_color = {
             "LOW": "#4ade80",
             "MODERATE": "#f59e0b",
