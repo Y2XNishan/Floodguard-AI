@@ -2154,28 +2154,76 @@ def page_chatbot():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    st.session_state.setdefault("selected_district", st.session_state.get("current_district", "Guwahati"))
-    st.session_state.setdefault("risk_score", st.session_state.get("current_risk_score", 0.0))
-    st.session_state.setdefault("risk_level", st.session_state.get("current_risk_level", "LOW"))
     st.session_state.setdefault("floodguard_pending_summary", None)
 
-    district = st.session_state.get("selected_district", "Guwahati")
-    risk_score = st.session_state.get("risk_score", 0.0)
-    risk_level = st.session_state.get("risk_level", "LOW")
-    state = st.session_state.get("selected_state", None)
+    district = (
+        st.session_state.get("selected_district")
+        or st.session_state.get("forecast_district")
+        or st.session_state.get("trends_district")
+        or st.session_state.get("district_select")
+        or "Patna"
+    )
+    state = (
+        st.session_state.get("selected_state")
+        or st.session_state.get("forecast_state")
+        or st.session_state.get("trends_state")
+        or st.session_state.get("state_select")
+        or "Bihar"
+    )
 
-    has_groq = bool(os.environ.get("GROQ_API_KEY", "").strip() and os.environ.get("GROQ_API_KEY", "").strip() != "your_groq_api_key_here")
-    status_dot_style = "background:#4ade80;" if has_groq else "background:#71717a;"
-    engine_text = "Engine: Active" if has_groq else "Engine: Offline"
+    # Pull actual risk score from session state
+    risk_score = None
+    if "current_risk_score" in st.session_state and st.session_state["current_risk_score"]:
+        risk_score = float(st.session_state["current_risk_score"])
+    elif "risk_score" in st.session_state and st.session_state["risk_score"]:
+        risk_score = float(st.session_state["risk_score"])
+    elif "last_risk_score" in st.session_state and st.session_state["last_risk_score"]:
+        risk_score = float(st.session_state["last_risk_score"]) / 100.0
+    elif "current_forecast" in st.session_state and st.session_state["current_forecast"]:
+        fc_df = st.session_state["current_forecast"].get("df")
+        if fc_df is not None and not fc_df.empty and "flood_probability_pct" in fc_df.columns:
+            risk_score = float(fc_df["flood_probability_pct"].max()) / 100.0
 
-    st.markdown(f"""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
+    # If still None or 0, pull actual risk score for the selected district from get_district_risk_data()
+    if risk_score is None or risk_score == 0.0:
+        try:
+            dist_data = get_district_risk_data()
+            row = dist_data[dist_data['district'].astype(str).str.lower() == str(district).lower()]
+            if not row.empty:
+                risk_score = float(row.iloc[0]['risk_score']) / 100.0
+                st.session_state["risk_score"] = risk_score
+                st.session_state["risk_level"] = str(row.iloc[0]['Risk Level'])
+        except Exception:
+            pass
+
+    if risk_score is None:
+        risk_score = 0.42
+
+    if risk_score > 1.0:
+        risk_score = risk_score / 100.0
+
+    # Determine risk level in normal case
+    risk_level = st.session_state.get("risk_level") or st.session_state.get("current_risk_level")
+    if not risk_level or str(risk_level).upper() in ["LOW", "UNKNOWN"]:
+        if risk_score >= 0.6:
+            risk_level = "High"
+        elif risk_score >= 0.3:
+            risk_level = "Moderate"
+        else:
+            risk_level = "Low"
+    else:
+        risk_level = str(risk_level).title()
+
+    st.session_state["risk_score"] = risk_score
+    st.session_state["risk_level"] = risk_level
+    st.session_state["selected_district"] = district
+    st.session_state["selected_state"] = state
+
+    st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Hydrological Operations Assistant</h2>
-                <p style="margin:0;color:#71717a;font-size:0.875rem;">Query local flood safety and contingency actions with live district telemetry pre-loaded.</p>
-            </div>
-            <div>
-                <span class="status-pill" style="color:{'#fafafa' if has_groq else '#71717a'};"><span class="status-dot" style="{status_dot_style}"></span> {engine_text}</span>
+                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Flood Assistant</h2>
+                <p style="margin:0;color:#71717a;font-size:0.875rem;">Ask flood safety questions for your selected district</p>
             </div>
         </div>
     </div>""", unsafe_allow_html=True)
