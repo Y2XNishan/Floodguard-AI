@@ -2018,8 +2018,6 @@ def page_map():
             f"Flood type: {row.get('flood_type', 'Riverine flood')}"
         )
         
-        # 2. TOOLTIPS — for each CircleMarker, add tooltip
-        # 3. CIRCLE MARKERS — update colors to match app theme
         folium.CircleMarker(
             location=[float(row["lat"]), float(row["lon"])],
             radius=4 + score * 6,
