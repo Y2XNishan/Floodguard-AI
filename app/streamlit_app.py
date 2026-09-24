@@ -3646,9 +3646,9 @@ def page_trends():
         </div>
         """, unsafe_allow_html=True)
 
-    # Trend Indicator Calculation
-    df_recent = filtered[filtered["year"] >= 2020]
-    df_old = filtered[filtered["year"] < 2020]
+    # Trend Indicator Calculation (5-year baseline: 2020-2024 vs 2015-2019)
+    df_recent = df_district[df_district["year"] >= 2020]
+    df_old = df_district[(df_district["year"] >= 2015) & (df_district["year"] < 2020)]
     
     avg_recent = df_recent["flood_events"].mean() if not df_recent.empty else 0.0
     avg_old = df_old["flood_events"].mean() if not df_old.empty else 0.0
