@@ -140,10 +140,10 @@ def get_chatbot_response(question, district=None, state=None, risk_score=None):
     api_key = _get_api_key()
     if not api_key or api_key == "your_groq_api_key_here":
         return {
-            "answer": "AI Assistant unavailable. Check API configuration.",
-            "question_type": "Info",
-            "is_unavailable": True,
-            "location_detected": None,
+            "answer": _offline_answer(question, district=district, state=state, risk_score=risk_score),
+            "question_type": detect_question_type(question).replace("_", " ").title(),
+            "is_unavailable": False,
+            "location_detected": detect_location(question),
         }
 
     client = Groq(api_key=api_key)
