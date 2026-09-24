@@ -990,16 +990,40 @@ def render_ai_summary_card(summary):
         <div class="ai-summary-body">{summary}</div>
     </div>""", unsafe_allow_html=True)
 
+def style_risk_level(val):
+    """Color code Risk Level column: High = red, Moderate = orange, Low = green."""
+    v = str(val).strip().lower()
+    if v == "high":
+        return "color: #ef4444; font-weight: 700; background-color: rgba(239, 68, 68, 0.15);"
+    elif v == "moderate":
+        return "color: #f97316; font-weight: 700; background-color: rgba(249, 115, 22, 0.15);"
+    elif v == "low":
+        return "color: #22c55e; font-weight: 700; background-color: rgba(34, 197, 94, 0.15);"
+    return ""
+
 def render_risk_overview_table(df):
-    """Render searchable district risk metadata."""
-    df = df[["state", "district", "flood_type", "lat", "lon"]].copy()
+    """Render searchable district risk metadata with model-predicted risk levels."""
+    if "Risk Level" not in df.columns:
+        df = get_district_risk_data()
+    cols_to_use = [c for c in ["state", "district", "Risk Level", "flood_type"] if c in df.columns]
+    table_df = df[cols_to_use].copy()
+    if "flood_type" in table_df.columns:
+        table_df = table_df.rename(columns={"flood_type": "Flood Type"})
     st.markdown('<div style="font-size:0.8125rem;color:#71717a;margin-bottom:4px;"><i class="fa-solid fa-search" style="color:#71717a;margin-right:6px;"></i>Search State or District</div>', unsafe_allow_html=True)
     search_query = st.text_input("Search state or district", placeholder="e.g. Assam, Dibrugarh...", key="risk_overview_search", label_visibility="collapsed")
-    filtered_df = df[df['state'].str.contains(search_query, case=False, na=False, regex=False) | df['district'].str.contains(search_query, case=False, na=False, regex=False)] if search_query else df
+    filtered_df = table_df[table_df['state'].str.contains(search_query, case=False, na=False, regex=False) | table_df['district'].str.contains(search_query, case=False, na=False, regex=False)] if search_query else table_df
     filtered_df = filtered_df.copy()
-    filtered_df['Risk Level'] = filtered_df['flood_type'].apply(lambda x: 'High' if 'coastal' in str(x).lower() else ('Moderate' if 'river' in str(x).lower() else 'Low'))
-    st.markdown(f"Showing **{len(filtered_df)}** of **{len(df)}** districts")
-    st.dataframe(filtered_df[['state','district','Risk Level','flood_type','lat','lon']], use_container_width=True, hide_index=True, height=400)
+    display_cols = [c for c in ['state', 'district', 'Risk Level', 'Flood Type'] if c in filtered_df.columns]
+    display_df = filtered_df[display_cols]
+    st.markdown(f"Showing **{len(filtered_df)}** of **{len(table_df)}** districts")
+
+    styled = display_df.style
+    if hasattr(styled, "map"):
+        styled = styled.map(style_risk_level, subset=["Risk Level"])
+    else:
+        styled = styled.applymap(style_risk_level, subset=["Risk Level"])
+
+    st.dataframe(styled, use_container_width=True, hide_index=True, height=400)
 
 def add_chat_message(role, content):
     """Append a timestamped chat message and keep history bounded."""
