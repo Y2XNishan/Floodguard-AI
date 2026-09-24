@@ -2040,7 +2040,7 @@ def page_map():
         st.components.v1.html(m._repr_html_(), height=600, scrolling=True)
 
     render_html('<div class="gradient-divider"></div>')
-    st.markdown('### <i class=\"fa-solid fa-clipboard-list\" style=\"color:#f97316;\"></i> India Risk Overview', unsafe_allow_html=True)
+    st.markdown('<h3 style="font-size:1.25rem;font-weight:600;margin:16px 0 12px 0;color:#fafafa;">India Risk Overview</h3>', unsafe_allow_html=True)
     render_risk_overview_table(districts_df)
 
 # ===== PAGE 3: FLOODGUARD AI =====
