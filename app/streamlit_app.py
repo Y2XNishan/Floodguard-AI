@@ -2440,8 +2440,13 @@ div[data-testid="stVerticalBlock"]:has(.chat-context-card) div[data-testid="stHo
                 is_unavail = False
 
         if "GROQ_API_KEY" in response or "AI Assistant unavailable" in response:
-            response = "AI Assistant unavailable. Check API configuration."
-            is_unavail = True
+            try:
+                from chatbot import _offline_answer
+                response = _offline_answer(prompt, district=district, state=state, risk_score=risk_score)
+                is_unavail = False
+            except Exception:
+                response = "AI Assistant unavailable. Check API configuration."
+                is_unavail = True
 
         st.session_state.chat_history.append({
             "role": "assistant",
