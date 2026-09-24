@@ -2319,13 +2319,17 @@ div[data-testid="stVerticalBlock"]:has(.chat-context-card) div[data-testid="stHo
         "How does the Brahmaputra cause floods in Assam?",
         "What causes floods in India?",
         "Tell me about Chennai 2015 floods",
+        "Tell me about Bihar 2017 floods",
     ]
     selected_prompt = None
-    chip_cols = st.columns(3)
-    for idx, question in enumerate(suggestions):
-        with chip_cols[idx % 3]:
-            if st.button(question, key=f"fixed_suggested_question_{idx}", use_container_width=True):
-                selected_prompt = question
+    for r in range(0, len(suggestions), 3):
+        chunk = suggestions[r:r+3]
+        row_cols = st.columns(len(chunk))
+        for c, question in enumerate(chunk):
+            idx = r + c
+            with row_cols[c]:
+                if st.button(question, key=f"fixed_suggested_question_{idx}", use_container_width=True):
+                    selected_prompt = question
 
     # Handle floodguard pending summary if it exists
     if st.session_state.floodguard_pending_summary:
