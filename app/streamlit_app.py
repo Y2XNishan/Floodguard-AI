@@ -3817,7 +3817,7 @@ def page_trends():
             color="district",
             barmode="group",
             title=get_text("chart_compare_title", lang).format(state=selected_state),
-            color_discrete_sequence=px.colors.qualitative.Safe
+            color_discrete_sequence=orange_shades
         )
         
         fig3.update_layout(
