@@ -3490,7 +3490,7 @@ def page_trends():
                 <p style="margin:0;color:#71717a;font-size:0.875rem;">{get_text("trends_subtitle", lang)}</p>
             </div>
             <div>
-                <span class="status-pill"><span class="status-dot blue"></span> Dataset: NDMA Historical Records</span>
+                <span class="status-pill">Dataset: NDMA Historical Records</span>
             </div>
         </div>
     </div>
