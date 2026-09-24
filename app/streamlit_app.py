@@ -2238,28 +2238,77 @@ def page_chatbot():
         if anthropic_key and anthropic_key != "your_anthropic_api_key_here":
             set_anthropic_api_key(anthropic_key)
 
-    context_color = "#ef4444" if risk_level == "HIGH" else "#f59e0b" if risk_level == "MODERATE" else "#4ade80"
+    context_color = "#ef4444" if str(risk_level).upper() == "HIGH" else "#f59e0b" if str(risk_level).upper() == "MODERATE" else "#4ade80"
     st.markdown(f"""<div class="chat-context-card">
         <div>
-            <div class="metric-label">Current Context</div>
+            <div class="metric-label" style="text-transform:none !important;letter-spacing:normal;">Current context</div>
             <div style="color:#fafafa;font-size:1.1rem;font-weight:800">{district}</div>
         </div>
         <div>
-            <div class="metric-label">Risk Score</div>
+            <div class="metric-label" style="text-transform:none !important;letter-spacing:normal;">Risk score</div>
             <div style="color:{context_color};font-size:1.4rem;font-weight:900">{risk_score:.0%}</div>
         </div>
         <div>
-            <div class="metric-label">Risk Level</div>
+            <div class="metric-label" style="text-transform:none !important;letter-spacing:normal;">Risk level</div>
             <div style="color:{context_color};font-size:1.1rem;font-weight:800">{risk_level}</div>
         </div>
     </div>""", unsafe_allow_html=True)
 
-    # STEP 6 - Clear chat button in sidebar or above chat:
+    # STEP 6 - Clear chat button styled with orange border and dark background
+    st.markdown("""
+<style>
+/* Clear Chat button: orange border and dark background */
+.st-key-clear_chat button,
+div[class*="st-key-clear_chat"] button,
+div[data-testid="stVerticalBlock"]:has(.chat-context-card) .stButton button[kind="secondary"]:not(div[data-testid="stHorizontalBlock"] button) {
+    border: 1px solid #f97316 !important;
+    background: #18181b !important;
+    background-color: #18181b !important;
+    color: #f97316 !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    transition: all 0.15s ease !important;
+}
+.st-key-clear_chat button:hover,
+div[class*="st-key-clear_chat"] button:hover,
+div[data-testid="stVerticalBlock"]:has(.chat-context-card) .stButton button[kind="secondary"]:not(div[data-testid="stHorizontalBlock"] button):hover {
+    border-color: #fb923c !important;
+    background: rgba(249, 115, 22, 0.12) !important;
+    background-color: rgba(249, 115, 22, 0.12) !important;
+    color: #ffffff !important;
+}
+
+/* Suggested Questions equal height buttons */
+div[data-testid="stVerticalBlock"]:has(.chat-context-card) div[data-testid="stHorizontalBlock"]:not(:has(input)) button:not([kind="primary"]) {
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 6px 12px !important;
+    line-height: 1.25 !important;
+    font-size: 0.8125rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+div[data-testid="stVerticalBlock"]:has(.chat-context-card) div[data-testid="stHorizontalBlock"]:not(:has(input)) button:not([kind="primary"]) p {
+    font-size: 0.8125rem !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+</style>
+""", unsafe_allow_html=True)
     if st.button("Clear Chat", key="clear_chat"):
         st.session_state.chat_history = []
         st.rerun()
 
-    # Suggested Questions (chips)
+    # Suggested Questions (chips with equal height, complete 3x3 grid)
     st.markdown("### Suggested Questions")
     suggestions = [
         "How did the Kerala 2018 floods happen?",
