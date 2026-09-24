@@ -213,9 +213,9 @@ Rules:
     except Exception as e:
         logger.warning(f"Groq API error: {e}")
         return {
-            "answer": "AI Assistant unavailable. Check API configuration.",
-            "question_type": "Info",
-            "is_unavailable": True,
+            "answer": _offline_answer(question, district=district, state=state, risk_score=risk_score),
+            "question_type": detect_question_type(question).replace("_", " ").title(),
+            "is_unavailable": False,
             "location_detected": detect_location(question),
         }
 
