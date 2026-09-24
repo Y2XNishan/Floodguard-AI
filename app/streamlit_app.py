@@ -3710,6 +3710,15 @@ def page_trends():
             marker=dict(size=7, symbol="circle"),
             hovertemplate="%{x}: %{y}<extra></extra>"
         ))
+
+    # Determine integer dtick if values are small to avoid fractional ticks
+    max_val = 0
+    for col, _ in selected_cols:
+        if not filtered.empty and col in filtered.columns:
+            col_max = filtered[col].max()
+            if pd.notna(col_max) and col_max > max_val:
+                max_val = float(col_max)
+    y_dtick = 1 if max_val <= 10 else None
         
     fig1.update_layout(
         title=dict(
