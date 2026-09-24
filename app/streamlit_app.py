@@ -2597,11 +2597,86 @@ def page_forecast():
 
             # Display summary
             try:
-                summary = get_forecast_summary(forecast_df, dist_name)
-                st.markdown(f"""<div class="ai-summary-card">
-                    <div class="ai-summary-title"><i class="fa-solid fa-clipboard-list" style="color:#f97316;"></i> Forecast Summary</div>
-                    <div class="ai-summary-body" style="white-space: pre-wrap;">{summary}</div>
-                </div>""", unsafe_allow_html=True)
+                peak_idx = int(forecast_df['flood_probability_pct'].idxmax()) if not forecast_df.empty else 0
+                peak_row = forecast_df.loc[peak_idx] if not forecast_df.empty else {}
+                peak_day = peak_row.get('day', 'N/A')
+                peak_prob = float(peak_row.get('flood_probability_pct', 0.0))
+                peak_risk_level = peak_row.get('risk_level', 'Low')
+                total_rain = float(forecast_df['precipitation_mm'].sum()) if not forecast_df.empty else 0.0
+                high_days = int((forecast_df['flood_probability_pct'] > 60.0).sum()) if not forecast_df.empty else 0
+
+                if peak_prob > 80.0:
+                    recommendation = "Severe flooding is likely. Evacuate low-lying areas and follow official orders."
+                elif peak_prob > 60.0:
+                    recommendation = "High flood risk is expected. Prepare emergency supplies and stay alert."
+                elif peak_prob > 30.0:
+                    recommendation = "Moderate flood risk is expected. Monitor local weather and avoid risky travel."
+                else:
+                    recommendation = "Low flood risk is expected. Continue routine precautions."
+
+                st.subheader("Forecast Summary")
+
+                # Stat cards
+                sc1, sc2, sc3 = st.columns(3)
+                with sc1:
+                    st.markdown(f"""
+                    <div class="metric-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:105px; padding:16px 12px; text-align:center; border:1px solid #3f3f46; border-top:2px solid #f97316 !important; background:#27272a; border-radius:6px; box-sizing:border-box;">
+                        <div class="metric-label" style="margin-bottom:6px; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#a1a1aa; font-weight:600;">Peak Risk Day</div>
+                        <div class="metric-value" style="color:#fafafa; font-size:1.5rem !important; font-weight:700; line-height:1.2;">{peak_day} <span style="font-size:1rem;color:#f97316;">({peak_prob:.1f}%)</span></div>
+                        <div style="font-size:11px; color:#71717a; margin-top:4px;">Risk Level: {peak_risk_level}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with sc2:
+                    st.markdown(f"""
+                    <div class="metric-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:105px; padding:16px 12px; text-align:center; border:1px solid #3f3f46; border-top:2px solid #f97316 !important; background:#27272a; border-radius:6px; box-sizing:border-box;">
+                        <div class="metric-label" style="margin-bottom:6px; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#a1a1aa; font-weight:600;">Total Rainfall</div>
+                        <div class="metric-value" style="color:#fafafa; font-size:1.5rem !important; font-weight:700; line-height:1.2;">{total_rain:.1f} mm</div>
+                        <div style="font-size:11px; color:#71717a; margin-top:4px;">7-Day Cumulative Total</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with sc3:
+                    st.markdown(f"""
+                    <div class="metric-card" style="display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:105px; padding:16px 12px; text-align:center; border:1px solid #3f3f46; border-top:2px solid #f97316 !important; background:#27272a; border-radius:6px; box-sizing:border-box;">
+                        <div class="metric-label" style="margin-bottom:6px; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#a1a1aa; font-weight:600;">High Risk Days</div>
+                        <div class="metric-value" style="color:#fafafa; font-size:1.5rem !important; font-weight:700; line-height:1.2;">{high_days} <span style="font-size:1rem;color:#71717a;">/ 7</span></div>
+                        <div style="font-size:11px; color:#71717a; margin-top:4px;">Days exceeding 60% probability</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                # Recommendation dark card with orange left border (#f97316)
+                st.markdown(f"""
+                <div style="background:#27272a; border:1px solid #3f3f46; border-left:4px solid #f97316; border-radius:6px; padding:14px 18px; margin:14px 0;">
+                    <div style="display:flex; align-items:flex-start; gap:10px;">
+                        <i class="fa-solid fa-circle-info" style="color:#f97316; font-size:1rem; margin-top:2px;"></i>
+                        <div>
+                            <span style="font-weight:600; color:#fafafa; font-size:0.9rem;">Recommendation: </span>
+                            <span style="color:#d4d4d8; font-size:0.875rem; line-height:1.5;">{recommendation}</span>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+
+                # Emergency Numbers Alert Card
+                curr_state = forecast_data.get('state') or selected_state or 'National'
+                state_hl = get_state_helpline(curr_state)
+                st.markdown(f"""
+                <div style="background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.25); border-radius:6px; padding:14px 18px; margin-top:8px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-phone-volume" style="color:#ef4444; font-size:1.1rem;"></i>
+                        <div>
+                            <span style="font-size:0.875rem; font-weight:600; color:#fafafa;">Emergency Helplines</span>
+                            <span style="font-size:0.775rem; color:#71717a; margin-left:8px;">Emergency contacts</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; font-size:0.85rem;">
+                        <span style="color:#d4d4d8;">State Disaster Helpline: <b style="color:#fafafa; font-family:monospace; font-size:0.95rem;">{state_hl}</b></span>
+                        <span style="color:#3f3f46;">|</span>
+                        <span style="color:#d4d4d8;">National Emergency: <b style="color:#fafafa; font-family:monospace; font-size:0.95rem;">112</b></span>
+                        <span style="color:#3f3f46;">|</span>
+                        <span style="color:#d4d4d8;">NDMA Helpline: <b style="color:#fafafa; font-family:monospace; font-size:0.95rem;">1078</b></span>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
             except Exception as e:
                 st.warning(f"Could not generate summary: {str(e)}")
 
