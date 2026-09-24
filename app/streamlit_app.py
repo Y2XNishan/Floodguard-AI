@@ -1179,11 +1179,21 @@ def page_predictor():
     with st.sidebar:
         state_options = sorted(districts_df["state"].dropna().unique().tolist())
         st.markdown('<p class="sidebar-field-label">State</p>', unsafe_allow_html=True)
-        state = st.selectbox(" ", state_options, label_visibility="collapsed", key="state_select")
+        default_state = st.session_state.get("selected_state") or st.session_state.get("state_select", "Bihar")
+        default_state_idx = state_options.index(default_state) if default_state in state_options else 0
+        state = st.selectbox(" ", state_options, index=default_state_idx, label_visibility="collapsed", key="state_select")
         
         district_options = sorted(districts_df.loc[districts_df["state"] == state, "district"].dropna().unique().tolist())
         st.markdown('<p class="sidebar-field-label">District</p>', unsafe_allow_html=True)
-        district = st.selectbox(" ", district_options, label_visibility="collapsed", key="district_select")
+        default_dist = st.session_state.get("selected_district") or st.session_state.get("district_select", "Patna")
+        default_dist_idx = district_options.index(default_dist) if default_dist in district_options else 0
+        district = st.selectbox(" ", district_options, index=default_dist_idx, label_visibility="collapsed", key="district_select")
+        
+        # Always maintain synchronized state & district globally across session state
+        st.session_state["selected_state"] = state
+        st.session_state["selected_district"] = district
+        st.session_state["current_state"] = state
+        st.session_state["current_district"] = district
         
         district_profile = get_district_profile(state, district)
         weather_location = f"{district}, {state}"
