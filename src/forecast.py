@@ -2030,21 +2030,20 @@ def plot_forecast_chart(forecast_df, district):
     chart_df = forecast_df.copy()
     if 'rainfall_7day' not in chart_df.columns:
         chart_df['rainfall_7day'] = chart_df['precipitation_mm'].cumsum()
-    bar_colors = [
-        '#22c55e' if prob < 20 else '#facc15' if prob < 40 else '#f97316' if prob <= 60 else '#ef4444'
-        for prob in chart_df['flood_probability_pct']
-    ]
     day_labels = [pd.Timestamp(date).strftime('%a') for date in chart_df['date']]
     prob_text = [f"{prob:.1f}%" for prob in chart_df['flood_probability_pct']]
     
+    max_risk = float(pd.to_numeric(chart_df['flood_probability_pct'], errors='coerce').fillna(0).max()) if not chart_df.empty else 0.0
+    y_max = max_risk + 15.0
+
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=day_labels,
         y=chart_df['flood_probability_pct'],
-        marker_color=bar_colors,
+        marker_color='#f97316',
         text=prob_text,
         textposition='auto',
-        textfont=dict(size=12, color='black'),
+        textfont=dict(size=12, color='#fafafa'),
         customdata=chart_df[['precipitation_mm', 'rainfall_7day']].round(1),
         name='Flood Risk (%)',
         hovertemplate=(
