@@ -192,12 +192,48 @@ def inject_ui_overrides() -> None:
           transition: background-color 120ms ease, border-color 120ms ease !important;
         }
 
-        .stButton > button:not([kind="primary"]):hover,
-        .stDownloadButton > button:hover {
+        .stButton > button:not([kind="primary"]):hover {
           background: var(--app-surface-hover) !important;
           border-color: var(--app-border-light) !important;
           transform: none !important;
           box-shadow: none !important;
+        }
+
+        /* Download buttons: orange border, dark background */
+        .stDownloadButton > button,
+        div[data-testid="stDownloadButton"] > button {
+          background: #18181b !important;
+          background-color: #18181b !important;
+          color: #fafafa !important;
+          font-family: var(--font-family) !important;
+          font-weight: 500 !important;
+          font-size: 0.875rem !important;
+          border: 1px solid #f97316 !important;
+          border-radius: 6px !important;
+          padding: 0.5rem 1.1rem !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          transition: background-color 120ms ease, border-color 120ms ease !important;
+        }
+
+        .stDownloadButton > button:hover,
+        div[data-testid="stDownloadButton"] > button:hover {
+          background: rgba(249, 115, 22, 0.12) !important;
+          background-color: rgba(249, 115, 22, 0.12) !important;
+          border-color: #fb923c !important;
+          color: #ffffff !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+
+        /* Hide Plotly Toolbar Modebar */
+        .modebar-container,
+        .modebar,
+        .modebar--hover,
+        .js-plotly-plot .plotly .modebar {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
         }
 
         /* Metric Cards - Simple, Non-Theatrical */
