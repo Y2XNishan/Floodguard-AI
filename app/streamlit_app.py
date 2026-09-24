@@ -3826,7 +3826,7 @@ def page_trends():
             font=dict(color="#71717a", family="Inter"),
             xaxis=dict(
                 tickmode="linear",
-                tick0=2015,
+                tick0=start_year,
                 dtick=1,
                 gridcolor="rgba(255,255,255,0.05)",
                 linecolor="rgba(255,255,255,0.1)",
@@ -3835,7 +3835,11 @@ def page_trends():
             yaxis=dict(
                 gridcolor="rgba(255,255,255,0.05)",
                 linecolor="rgba(255,255,255,0.1)",
-                title=get_text("metric_flood_events", lang)
+                title=get_text("metric_flood_events", lang),
+                tickformat="d",
+                tickmode="linear",
+                tick0=0,
+                dtick=1
             ),
             margin=dict(l=40, r=40, t=60, b=40),
             legend=dict(
