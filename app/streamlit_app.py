@@ -2798,6 +2798,29 @@ def page_damage_classifier():
             with st.spinner("Analyzing image..."):
                 result = classify_flood_image(image)
 
+            # Standardize descriptions and recommendations formatting
+            severity_key = str(result.get("severity", "")).lower()
+            if "severe" in severity_key:
+                result["description"] = "Severe flooding detected. Immediate action required."
+                result["recommendations"] = [
+                    "Evacuate immediately",
+                    "Call 112",
+                    "Document property damage for insurance claims",
+                    "Do not return until local authorities confirm safety",
+                ]
+            elif "moderate" in severity_key:
+                result["description"] = "Moderate flooding indicators detected. Significant water accumulation visible."
+                result["recommendations"] = [
+                    "Prepare evacuation kit",
+                    "Contact authorities",
+                ]
+            elif "mild" in severity_key:
+                result["description"] = "Minor flooding detected. Water levels are low. Roads may be waterlogged."
+                result["recommendations"] = [
+                    "Document damage",
+                    "Monitor water levels",
+                ]
+
             colors = {
                 "No Flooding": "#f97316",
                 "Mild": "#4ade80",
@@ -2815,7 +2838,7 @@ def page_damage_classifier():
             <div style='background:#27272a; border:1px solid #3f3f46; border-left:4px solid {color};
             padding:16px; border-radius:6px;
             text-align:left; color:#fafafa; margin-bottom:12px;'>
-                <div style="font-size:11px;color:#71717a;font-weight:600;letter-spacing:0.02em;">Classification Result</div>
+                <div style="font-size:11px;color:#71717a;font-weight:600;text-transform:none;letter-spacing:0.02em;">Classification Result</div>
                 <div style="font-size:20px;font-weight:700;color:{color};margin-top:4px;">{severity_label}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -2823,11 +2846,16 @@ def page_damage_classifier():
             st.metric("Confidence", f"{result['confidence']:.1f}%")
 
             st.markdown("**Probability Breakdown:**")
-            sorted_probs = sorted(result["probabilities"].items(), key=lambda x: x[1], reverse=True)
+            sorted_probs = sorted(result["probabilities"].items(), key=lambda item: item[1], reverse=True)
             for cls, prob in sorted_probs:
                 st.progress(prob / 100, text=f"{cls}: {prob:.1f}%")
 
-            st.info(result["description"])
+            st.markdown(f"""
+            <div style="background:#27272a;border:1px solid #3f3f46;border-left:4px solid #f97316;
+            padding:12px 16px;border-radius:6px;margin:12px 0 16px 0;color:#fafafa;font-size:0.875rem;line-height:1.5;">
+                {result['description']}
+            </div>
+            """, unsafe_allow_html=True)
 
             st.markdown("**Recommended Actions:**")
             for rec in result["recommendations"]:
