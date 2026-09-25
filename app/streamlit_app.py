@@ -2993,7 +2993,7 @@ def page_crop_disease():
             image = Image.open(uploaded).convert("RGB")
             st.image(
                 image,
-                caption="Uploaded Leaf Image",
+                
                 use_container_width=True,
             )
 
