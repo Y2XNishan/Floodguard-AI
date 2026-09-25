@@ -379,6 +379,37 @@ def resume_training(start_epoch=RESUME_START_EPOCH, end_epoch=EPOCHS, checkpoint
     return best_acc
 
 
+_CACHED_MODEL = None
+_CACHED_DEVICE = None
+
+
+def get_loaded_classifier():
+    """Load and cache the trained CNN model singleton, or return None if unavailable."""
+    global _CACHED_MODEL, _CACHED_DEVICE
+    if _CACHED_MODEL is not None:
+        return _CACHED_MODEL, _CACHED_DEVICE
+
+    if not MODEL_PATH.exists():
+        return None, None
+
+    try:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model = build_model(num_classes=len(CLASSES), pretrained=False).to(device)
+        try:
+            state_dict = torch.load(MODEL_PATH, map_location=device, weights_only=True)
+        except Exception:
+            state_dict = torch.load(MODEL_PATH, map_location=device, weights_only=False)
+        model.load_state_dict(state_dict)
+        model.eval()
+        _CACHED_MODEL = model
+        _CACHED_DEVICE = device
+        return _CACHED_MODEL, _CACHED_DEVICE
+    except Exception as exc:
+        import logging
+        logging.warning("Failed to load flood classifier model from %s: %s", MODEL_PATH, exc)
+        return None, None
+
+
 def classify_flood_image(image):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
