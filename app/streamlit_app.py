@@ -3012,15 +3012,14 @@ def page_crop_disease():
     with col2:
         st.markdown("### Analysis Results")
 
-        st.markdown("**Supported Crops:**")
+        st.markdown("**Supported Crops & Diseases:**")
         crops = [
-            "Corn/Maize",
-            "Tomato",
-            "Potato",
-            "Pepper",
-            "Apple",
-            "Grape",
-            "Strawberry",
+            "Apple (Apple Scab, Black Rot, Cedar Apple Rust, Healthy)",
+            "Corn / Maize (Common Rust, Healthy)",
+            "Grape (Black Rot, Healthy)",
+            "Pepper Bell (Healthy)",
+            "Potato (Early Blight, Late Blight, Healthy)",
+            "Strawberry (Leaf Scorch)",
         ]
         for crop in crops:
             st.markdown(f"- {crop}")
@@ -3030,11 +3029,11 @@ def page_crop_disease():
             result = st.session_state["crop_result"]
 
             if result["status"] == "Healthy":
-                st.success(f"**{result['crop']}** — HEALTHY")
+                st.success(f"**{result['crop']}** — Healthy")
             elif result["status"] == "Error":
                 st.error("Model not trained yet")
             else:
-                st.error(f"**{result['crop']}** — {result['disease']} DETECTED")
+                st.error(f"**{result['crop']}** — {result['disease']} Detected")
 
             col_a, col_b = st.columns(2)
             with col_a:
