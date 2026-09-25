@@ -2761,7 +2761,7 @@ def page_damage_classifier():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div>
             <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Flood Damage Severity Classifier</h2>
-            <p style="margin:0;color:#71717a;font-size:0.875rem;">Computer vision classification model evaluating structural and surface inundation severity.</p>
+            <p style="margin:0;color:#71717a;font-size:0.875rem;">Upload a flood image to assess damage severity</p>
         </div>
     </div>""", unsafe_allow_html=True)
 
