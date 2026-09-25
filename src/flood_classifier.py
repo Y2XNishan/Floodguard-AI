@@ -471,11 +471,10 @@ def classify_flood_image(image):
                 "Contact authorities",
             ],
             "severe": [
-                "EVACUATE IMMEDIATELY",
-                "Call 112 or NDMA: 1078",
-                "Move to nearest relief camp",
-                "Do NOT enter floodwater",
-                "Alert neighbors",
+                "Evacuate immediately",
+                "Call 112",
+                "Document property damage for insurance claims",
+                "Do not return until local authorities confirm safety",
             ],
         }
 
