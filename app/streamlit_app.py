@@ -2815,7 +2815,7 @@ def page_damage_classifier():
             <div style='background:#27272a; border:1px solid #3f3f46; border-left:4px solid {color};
             padding:16px; border-radius:6px;
             text-align:left; color:#fafafa; margin-bottom:12px;'>
-                <div style="font-size:11px;color:#71717a;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">Classification Result</div>
+                <div style="font-size:11px;color:#71717a;font-weight:600;letter-spacing:0.02em;">Classification Result</div>
                 <div style="font-size:20px;font-weight:700;color:{color};margin-top:4px;">{severity_label}</div>
             </div>
             """, unsafe_allow_html=True)
