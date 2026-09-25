@@ -492,63 +492,115 @@ def classify_flood_image(image):
 
 
 def rule_based_classify(image):
+    """
+    Intelligent rule-based flood classification fallback based on:
+    - Multi-band color analysis (blue water, turbid/muddy flood runoff, dark inundation)
+    - ITU-R BT.601 perceived luminance/brightness analysis
+    - Continuous probability distribution modeling across all 4 severity classes
+    """
     import numpy as np
 
-    img_array = np.array(image.convert("RGB"))
+    img_array = np.array(image.convert("RGB"), dtype=np.float32)
+    total_pixels = img_array.shape[0] * img_array.shape[1]
 
-    # PIL arrays are RGB.
-    red = img_array[:, :, 0].mean()
-    green = img_array[:, :, 1].mean()
-    blue = img_array[:, :, 2].mean()
-    brightness = img_array.mean()
+    red = img_array[:, :, 0]
+    green = img_array[:, :, 1]
+    blue = img_array[:, :, 2]
 
-    if blue > red + 20 and brightness < 100:
-        severity = "severe"
-    elif blue > red + 10 or brightness < 130:
-        severity = "moderate"
-    elif brightness > 150 and abs(red - blue) < 35:
-        severity = "no_flood"
-    else:
-        severity = "mild"
+    # Perceived brightness (luminance formula ITU-R BT.601)
+    luminance = 0.299 * red + 0.587 * green + 0.114 * blue
+    mean_brightness = float(luminance.mean())
+
+    # Water indicators:
+    # 1. Blue-dominant standing/flowing water
+    blue_water = (blue > red + 15) & (blue > green - 10) & (luminance < 190)
+
+    # 2. Turbid / muddy floodwater (brown/tan/ochre river inundation)
+    turbid_water = (
+        (red > 60)
+        & (green > 50)
+        & (blue < 120)
+        & (red > blue + 12)
+        & (np.abs(red - green) < 40)
+        & (luminance < 160)
+    )
+
+    # 3. Dark flooded areas / submerged terrain
+    max_c = np.maximum(np.maximum(red, green), blue)
+    min_c = np.minimum(np.minimum(red, green), blue)
+    saturation = np.where(max_c > 0, (max_c - min_c) / (max_c + 1e-5), 0.0)
+    dark_inundation = (luminance < 85) & (saturation < 0.35)
+
+    # Combined water mask and coverage fraction
+    water_mask = blue_water | turbid_water | dark_inundation
+    water_fraction = float(np.count_nonzero(water_mask)) / max(total_pixels, 1)
+
+    # Dry / vegetation indicators
+    green_veg = (green > red + 15) & (green > blue + 10)
+    bright_dry = (luminance > 140) & (red > 120) & (green > 110) & (~blue_water)
+    dry_fraction = float(np.count_nonzero(green_veg | bright_dry)) / max(total_pixels, 1)
+
+    wf = np.clip(water_fraction, 0.0, 1.0)
+
+    # Continuous soft scoring
+    s_no_flood = 4.0 * ((1.0 - wf) ** 2) + 1.5 * dry_fraction - 2.5 * wf
+    s_mild = 3.5 * np.exp(-(((wf - 0.20) / 0.14) ** 2))
+    s_moderate = 3.8 * np.exp(-(((wf - 0.45) / 0.16) ** 2))
+    s_severe = 4.2 * (wf ** 1.5) + (1.0 if mean_brightness < 90 and wf > 0.35 else 0.0)
+
+    scores = np.array([s_mild, s_moderate, s_no_flood, s_severe], dtype=np.float64)
+    exp_scores = np.exp(scores - np.max(scores))
+    raw_probs = (exp_scores / np.sum(exp_scores)) * 100.0
+
+    probs_dict = {
+        "Mild": round(float(raw_probs[0]), 1),
+        "Moderate": round(float(raw_probs[1]), 1),
+        "No Flood": round(float(raw_probs[2]), 1),
+        "Severe": round(float(raw_probs[3]), 1),
+    }
+    diff = round(100.0 - sum(probs_dict.values()), 1)
+    max_k = max(probs_dict, key=probs_dict.get)
+    probs_dict[max_k] = round(probs_dict[max_k] + diff, 1)
+
+    predicted_class = max(probs_dict, key=probs_dict.get)
+    confidence = probs_dict[predicted_class]
 
     descriptions = {
-        "mild": "Minor flooding indicators detected.",
-        "moderate": "Moderate flooding indicators detected.",
-        "severe": "Severe flooding indicators detected!",
-        "no_flood": "No flood detected in this image.",
+        "Mild": "Minor flooding detected. Water levels are low. Roads may be waterlogged.",
+        "Moderate": "Moderate flooding indicators detected. Significant water accumulation visible.",
+        "Severe": "Severe flooding detected. Immediate action required.",
+        "No Flood": "No flood detected in this image.",
     }
 
-    if severity == "no_flood":
-        return {
-            "severity": "No Flooding",
-            "confidence": 65.0,
-            "probabilities": {
-                "Mild": 11.7,
-                "Moderate": 11.7,
-                "Severe": 11.6,
-                "No Flood": 65.0,
-            },
-            "description": descriptions[severity],
-            "recommendations": [
-                "Area appears safe",
-                "Continue monitoring weather",
-            ],
-        }
+    recommendations = {
+        "Mild": [
+            "Document damage",
+            "Monitor water levels",
+        ],
+        "Moderate": [
+            "Prepare evacuation kit",
+            "Contact authorities",
+        ],
+        "Severe": [
+            "Evacuate immediately",
+            "Call 112",
+            "Document property damage for insurance claims",
+            "Do not return until local authorities confirm safety",
+        ],
+        "No Flood": [
+            "Area appears safe",
+            "Continue monitoring weather",
+        ],
+    }
+
+    severity_label = "No Flooding" if predicted_class == "No Flood" else predicted_class
 
     return {
-        "severity": severity.title(),
-        "confidence": 65.0,
-        "probabilities": {
-            "Mild": 33.3,
-            "Moderate": 33.3,
-            "Severe": 33.3,
-            "No Flood": 0.1,
-        },
-        "description": descriptions[severity],
-        "recommendations": [
-            "Contact local authorities",
-            "Call 112 for emergency",
-        ],
+        "severity": severity_label,
+        "confidence": confidence,
+        "probabilities": probs_dict,
+        "description": descriptions[predicted_class],
+        "recommendations": recommendations[predicted_class],
     }
 
 
