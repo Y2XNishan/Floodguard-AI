@@ -48,7 +48,6 @@ INDIAN_CROPS = [
 ]
 
 
-
 def get_crop_disease_classes():
     """Load class list from crop_disease_classes.json, with default fallback."""
     if CLASSES_PATH.exists():
@@ -72,6 +71,7 @@ def get_crop_disease_classes():
         "Potato___healthy",
         "Strawberry___Leaf_scorch",
     ]
+
 
 def build_model(num_classes, pretrained=False):
     """Build PyTorch EfficientNet_B0 model with customized classifier head."""
@@ -142,6 +142,7 @@ def get_crop_classifier_bundle():
         import logging
         logging.warning("Failed to load crop disease classifier bundle: %s", exc)
         return None, None, None, None
+
 
 def get_transforms():
     train_transform = transforms.Compose([
@@ -356,6 +357,19 @@ DISEASE_INFO = {
         "flood_connection": "Heavy rain events cause rust galls to swell and discharge spores onto wet foliage.",
         "prevention": ["Plant rust-resistant cultivars", "Manage nearby alternate juniper hosts", "Protective spring sprays"],
     },
+    "leaf_scorch": {
+        "status": "Diseased",
+        "severity": "Moderate",
+        "description": "Leaf Scorch caused by Diplocarpon earlianum. Dark purplish spots enlarging until leaf edges dry up.",
+        "treatment": [
+            "Apply copper or captan fungicides",
+            "Remove severely blighted foliage",
+            "Improve drainage around beds",
+            "Avoid overhead sprinkler irrigation",
+        ],
+        "flood_connection": "Standing floodwater and waterlogged roots impair nutrient uptake, worsening scorch symptoms.",
+        "prevention": ["Use certified disease-free runners", "Mulch beds to reduce water splash", "Ensure furrow drainage"],
+    },
     "early_blight": {
         "status": "Diseased",
         "severity": "Moderate",
@@ -446,57 +460,37 @@ def get_disease_flood_connection():
     }
 
 
-def classify_crop_image(image):
-    device = torch.device("cpu")
+def classify_crop_image(image, model=None, class_names=None, transform=None, device=None):
+    """Classify crop leaf disease using PyTorch EfficientNet_B0."""
+    if model is None or class_names is None or transform is None or device is None:
+        bundled_model, bundled_classes, bundled_transform, bundled_device = get_crop_classifier_bundle()
+        model = model or bundled_model
+        class_names = class_names or bundled_classes
+        transform = transform or bundled_transform
+        device = device or bundled_device
 
-    if not MODEL_PATH.exists():
+    if model is None or class_names is None or transform is None:
         return {
             "crop": "Unknown",
-            "disease": "Model not trained",
+            "disease": "Model unavailable",
             "status": "Error",
             "confidence": 0,
             "severity": "N/A",
-            "description": "Please train the model first.",
-            "treatment": ["Run training script"],
+            "description": f"Model file not found or failed to load from {MODEL_PATH}.",
+            "treatment": ["Ensure models/crop_disease_classifier.pth is present"],
             "flood_connection": "N/A",
             "prevention": [],
         }
 
-    checkpoint = torch.load(MODEL_PATH, map_location=device)
-    class_names = checkpoint["class_names"]
-    num_classes = checkpoint["num_classes"]
-
-    model = build_model(num_classes)
-    model.load_state_dict(checkpoint["model_state"])
-    model.eval()
-
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-    ])
-
-    img_tensor = transform(image.convert("RGB")).unsqueeze(0)
+    device = device or torch.device("cpu")
+    img_tensor = transform(image.convert("RGB")).unsqueeze(0).to(device)
 
     with torch.no_grad():
         outputs = model(img_tensor)
         probs = torch.softmax(outputs, dim=1)[0]
 
     predicted_idx = probs.argmax().item()
-    confidence = float(probs.max()) * 100
-
-    if confidence < 80.0:
-        return {
-            "crop": "Unknown",
-            "disease": "Crop not supported",
-            "status": "Error",
-            "confidence": confidence,
-            "severity": "N/A",
-            "description": "This crop is not supported. Supported crops: Corn/Maize, Tomato, Potato, Pepper, Rice, Grape, Apple, Strawberry.",
-            "treatment": ["Please upload a leaf from a supported crop"],
-            "flood_connection": "N/A",
-            "prevention": [],
-        }
+    confidence = float(probs.max().item()) * 100
 
     predicted_class = class_names[predicted_idx]
 
@@ -517,6 +511,22 @@ def classify_crop_image(image):
         else:
             info = DISEASE_INFO["default"]
 
+    # Top 3 predictions for probability breakdown
+    top_k = min(3, len(class_names))
+    top_probs, top_indices = torch.topk(probs, k=top_k)
+    top_predictions = []
+    for p, idx in zip(top_probs, top_indices):
+        c_name = class_names[idx.item()]
+        c_parts = c_name.split("___")
+        c_crop = c_parts[0].replace("_", " ").replace("(maize)", "").replace(",", "").strip().title()
+        c_dis = (c_parts[1] if len(c_parts) > 1 else "Unknown").replace("_", " ").strip().title()
+        label = f"{c_crop} - {c_dis}"
+        top_predictions.append({
+            "class": c_name,
+            "label": label,
+            "probability": round(float(p.item()) * 100, 1),
+        })
+
     return {
         "crop": crop.title(),
         "disease": disease.title(),
@@ -527,6 +537,7 @@ def classify_crop_image(image):
         "treatment": info["treatment"],
         "flood_connection": info["flood_connection"],
         "prevention": info["prevention"],
+        "top_predictions": top_predictions,
     }
 
 
