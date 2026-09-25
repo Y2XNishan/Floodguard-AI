@@ -2785,7 +2785,7 @@ def page_damage_classifier():
 
         if uploaded_file:
             image = Image.open(uploaded_file).convert("RGB")
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            st.image(image, caption="Uploaded Image", use_container_width=True)
 
             analyze = st.button(
                 "Classify Damage Severity",
