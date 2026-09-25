@@ -2965,14 +2965,9 @@ def load_crop_disease_model():
 
 def page_crop_disease():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-            <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Disease Detection</h2>
-                <p style="margin:0;color:#71717a;font-size:0.875rem;">Deep learning pathology model detecting agricultural blights and pathogen infections.</p>
-            </div>
-            <div>
-                <span class="status-pill"><span class="status-dot green"></span> PlantVillage Model: Active</span>
-            </div>
+        <div>
+            <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Disease Detection</h2>
+            <p style="margin:0;color:#71717a;font-size:0.875rem;">Deep learning pathology model detecting agricultural blights and pathogen infections.</p>
         </div>
     </div>""", unsafe_allow_html=True)
 
