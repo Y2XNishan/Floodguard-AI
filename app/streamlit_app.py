@@ -2977,12 +2977,14 @@ def page_crop_disease():
             st.caption(CROP_DISEASE_ERROR)
         return
 
+    crop_model, class_names, crop_transform, crop_device = load_crop_disease_model()
+
     col1, col2 = st.columns([1, 1])
 
     with col1:
         st.markdown("### Upload Leaf Image")
         st.caption(
-            "Supported crops: Corn, Tomato, Potato, Pepper, Rice, Grape, Apple, Strawberry."
+            "Supported crops: Apple, Corn/Maize, Grape, Pepper, Potato, Strawberry."
         )
         uploaded = st.file_uploader(
             "Choose a leaf image",
@@ -2993,7 +2995,6 @@ def page_crop_disease():
             image = Image.open(uploaded).convert("RGB")
             st.image(
                 image,
-                
                 use_container_width=True,
             )
 
@@ -3005,7 +3006,13 @@ def page_crop_disease():
 
             if analyze_btn:
                 with st.spinner("Analyzing leaf image..."):
-                    result = classify_crop_image(image)
+                    result = classify_crop_image(
+                        image,
+                        model=crop_model,
+                        class_names=class_names,
+                        transform=crop_transform,
+                        device=crop_device,
+                    )
 
                 st.session_state["crop_result"] = result
 
@@ -3028,10 +3035,10 @@ def page_crop_disease():
         if "crop_result" in st.session_state:
             result = st.session_state["crop_result"]
 
-            if result["status"] == "Healthy":
+            if result.get("status") == "Healthy":
                 st.success(f"**{result['crop']}** — Healthy")
-            elif result["status"] == "Error":
-                st.error("Model not trained yet")
+            elif result.get("status") == "Error":
+                st.error(result.get("description", "Error analyzing image"))
             else:
                 st.error(f"**{result['crop']}** — {result['disease']} Detected")
 
@@ -3040,6 +3047,11 @@ def page_crop_disease():
                 st.metric("Confidence", f"{result['confidence']}%")
             with col_b:
                 st.metric("Severity", result["severity"])
+
+            if "top_predictions" in result and result["top_predictions"]:
+                with st.expander("Probability Breakdown", expanded=False):
+                    for pred in result["top_predictions"]:
+                        st.progress(min(1.0, max(0.0, pred["probability"] / 100.0)), text=f"{pred['label']}: {pred['probability']}%")
 
             st.markdown("---")
             st.markdown("**Description:**")
@@ -3051,14 +3063,19 @@ def page_crop_disease():
             """, unsafe_allow_html=True)
 
             st.markdown("**Treatment:**")
-            for treatment in result["treatment"]:
+            for treatment in result.get("treatment", []):
                 st.markdown(f"- {treatment}")
 
             st.markdown("**Flood Connection:**")
-            st.warning(result["flood_connection"])
+            st.markdown(f"""
+            <div style="background:#27272a;border:1px solid #3f3f46;border-left:4px solid #f97316;
+            padding:12px 16px;border-radius:6px;margin:8px 0 16px 0;color:#fafafa;font-size:0.875rem;line-height:1.5;">
+                {result.get('flood_connection', 'N/A')}
+            </div>
+            """, unsafe_allow_html=True)
 
             st.markdown("**Prevention:**")
-            for prevention in result["prevention"]:
+            for prevention in result.get("prevention", []):
                 st.markdown(f"- {prevention}")
         else:
             st.info("Upload a leaf image and click Detect Disease to see results")
