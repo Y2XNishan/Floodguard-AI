@@ -73,9 +73,13 @@ def get_crop_disease_classes():
         "Strawberry___Leaf_scorch",
     ]
 
-def build_model(num_classes):
-    weights = EfficientNet_B0_Weights.IMAGENET1K_V1
-    model = efficientnet_b0(weights=weights)
+def build_model(num_classes, pretrained=False):
+    """Build PyTorch EfficientNet_B0 model with customized classifier head."""
+    if pretrained:
+        weights = EfficientNet_B0_Weights.IMAGENET1K_V1
+        model = efficientnet_b0(weights=weights)
+    else:
+        model = efficientnet_b0(weights=None)
 
     for param in model.parameters():
         param.requires_grad = False
