@@ -330,6 +330,32 @@ DISEASE_INFO = {
         "flood_connection": "Prolonged leaf wetness after heavy rains and floods accelerates spore germination.",
         "prevention": ["Plant scab-resistant varieties", "Ensure proper tree spacing", "Dormant season sprays"],
     },
+    "black_rot": {
+        "status": "Diseased",
+        "severity": "High",
+        "description": "Black Rot caused by fungal pathogens (Diplodia / Guignardia). Frog-eye leaf spots and rotting.",
+        "treatment": [
+            "Apply copper-based or systemic fungicide",
+            "Prune infected twigs and mummified fruits",
+            "Sanitize pruning equipment",
+            "Clear debris beneath the canopy",
+        ],
+        "flood_connection": "High humidity and standing water from floods create optimal conditions for rapid spread.",
+        "prevention": ["Remove infected canes/twigs in winter", "Good canopy airflow", "Pre-monsoon fungicide spray"],
+    },
+    "cedar_apple_rust": {
+        "status": "Diseased",
+        "severity": "Moderate",
+        "description": "Cedar Apple Rust caused by Gymnosporangium fungus. Bright yellow-orange spots on upper leaf surfaces.",
+        "treatment": [
+            "Apply myclobutanil or immunox fungicide at pink bud stage",
+            "Prune out galls from nearby juniper hosts",
+            "Remove heavily infected leaves",
+            "Improve field air circulation",
+        ],
+        "flood_connection": "Heavy rain events cause rust galls to swell and discharge spores onto wet foliage.",
+        "prevention": ["Plant rust-resistant cultivars", "Manage nearby alternate juniper hosts", "Protective spring sprays"],
+    },
     "early_blight": {
         "status": "Diseased",
         "severity": "Moderate",
