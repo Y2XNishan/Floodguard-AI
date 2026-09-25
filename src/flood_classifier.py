@@ -463,10 +463,8 @@ def classify_flood_image(image):
 
         recommendations = {
             "mild": [
-                "Monitor water levels closely",
-                "Avoid low-lying areas",
-                "Keep emergency kit ready",
-                "Stay updated with local alerts",
+                "Document damage",
+                "Monitor water levels",
             ],
             "moderate": [
                 "Move valuables to higher floors",
