@@ -314,8 +314,21 @@ DISEASE_INFO = {
         "severity": "None",
         "description": "Plant appears healthy with no visible disease symptoms.",
         "treatment": ["Continue regular care", "Monitor regularly", "Maintain good drainage"],
-        "flood_connection": "Keep monitoring during flood season as waterlogging weakens plants.",
+        "flood_connection": "Keep monitoring during flood season as waterlogging weakens plant immunity.",
         "prevention": ["Ensure good drainage", "Avoid overwatering", "Regular inspection"],
+    },
+    "apple_scab": {
+        "status": "Diseased",
+        "severity": "Moderate",
+        "description": "Apple Scab caused by Venturia inaequalis fungus. Dull olive-green to black velvety spots on leaves.",
+        "treatment": [
+            "Apply protective fungicide (captan or mancozeb)",
+            "Prune canopy to improve air circulation",
+            "Rake and destroy fallen leaves",
+            "Avoid overhead irrigation",
+        ],
+        "flood_connection": "Prolonged leaf wetness after heavy rains and floods accelerates spore germination.",
+        "prevention": ["Plant scab-resistant varieties", "Ensure proper tree spacing", "Dormant season sprays"],
     },
     "early_blight": {
         "status": "Diseased",
