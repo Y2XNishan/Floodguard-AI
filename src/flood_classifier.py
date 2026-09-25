@@ -457,8 +457,8 @@ def classify_flood_image(image):
 
         descriptions = {
             "mild": "Minor flooding detected. Water levels are low. Roads may be waterlogged.",
-            "moderate": "Moderate flooding detected. Significant water accumulation visible. Take precautions.",
-            "severe": "SEVERE flooding detected! Extensive water coverage. Immediate action required!",
+            "moderate": "Moderate flooding indicators detected. Significant water accumulation visible.",
+            "severe": "Severe flooding detected. Immediate action required.",
         }
 
         recommendations = {
