@@ -250,7 +250,7 @@ def inject_ui_overrides() -> None:
           font-family: var(--font-family) !important;
           font-size: 0.75rem !important;
           font-weight: 600 !important;
-          text-transform: uppercase !important;
+          text-transform: none !important;
           letter-spacing: 0.04em !important;
         }
 
