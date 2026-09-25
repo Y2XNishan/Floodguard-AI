@@ -2866,6 +2866,103 @@ def page_damage_classifier():
             st.info("Upload a flood image to start damage severity classification.")
 
 # ===== PAGE 6: CROP DISEASE DETECTION =====
+@st.cache_resource
+def load_crop_disease_model():
+    """Load and cache PyTorch EfficientNet_B0 crop disease model bundle."""
+    try:
+        import json
+        import torch
+        import torch.nn as nn
+        from torchvision import transforms
+        from torchvision.models import efficientnet_b0
+
+        base_dir = Path(__file__).resolve().parent.parent
+        model_path = base_dir / "models" / "crop_disease_classifier.pth"
+        if not model_path.exists():
+            for cand in [
+                Path.cwd() / "models" / "crop_disease_classifier.pth",
+                Path.cwd().parent / "models" / "crop_disease_classifier.pth",
+                Path("models/crop_disease_classifier.pth"),
+            ]:
+                if cand.exists():
+                    model_path = cand.resolve()
+                    break
+
+        classes_path = base_dir / "models" / "crop_disease_classes.json"
+        if not classes_path.exists():
+            for cand in [
+                Path.cwd() / "models" / "crop_disease_classes.json",
+                Path.cwd().parent / "models" / "crop_disease_classes.json",
+                Path("models/crop_disease_classes.json"),
+            ]:
+                if cand.exists():
+                    classes_path = cand.resolve()
+                    break
+
+        if not model_path.exists():
+            print(f"[load_crop_disease_model] Model file not found at {model_path}")
+            return None, None, None, None
+
+        if classes_path.exists():
+            with open(classes_path, "r", encoding="utf-8") as f:
+                class_names = json.load(f)
+        else:
+            class_names = [
+                "Apple___Apple_scab",
+                "Apple___Black_rot",
+                "Apple___Cedar_apple_rust",
+                "Apple___healthy",
+                "Corn_(maize)___Common_rust_",
+                "Corn_(maize)___healthy",
+                "Grape___Black_rot",
+                "Grape___healthy",
+                "Pepper,_bell___healthy",
+                "Potato___Early_blight",
+                "Potato___Late_blight",
+                "Potato___healthy",
+                "Strawberry___Leaf_scorch",
+            ]
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        num_classes = len(class_names)
+
+        model = efficientnet_b0(weights=None)
+        for param in model.parameters():
+            param.requires_grad = False
+        in_features = model.classifier[1].in_features
+        model.classifier = nn.Sequential(
+            nn.Dropout(p=0.3, inplace=True),
+            nn.Linear(in_features, num_classes),
+        )
+
+        try:
+            checkpoint = torch.load(model_path, map_location=device, weights_only=True)
+        except Exception:
+            checkpoint = torch.load(model_path, map_location=device, weights_only=False)
+
+        if isinstance(checkpoint, dict) and "model_state" in checkpoint:
+            state_dict = checkpoint["model_state"]
+        elif isinstance(checkpoint, dict):
+            state_dict = checkpoint
+        else:
+            state_dict = checkpoint
+
+        model.load_state_dict(state_dict)
+        model.to(device)
+        model.eval()
+
+        transform = transforms.Compose([
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
+
+        return model, class_names, transform, device
+    except Exception as exc:
+        print(f"[load_crop_disease_model] Error: {exc}")
+        return None, None, None, None
+
+
 def page_crop_disease():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
