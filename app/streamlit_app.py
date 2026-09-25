@@ -73,7 +73,10 @@ except ImportError:
 # Flood Damage Classifier
 try:
     from PIL import Image
-    from flood_classifier import classify_flood_image
+    try:
+        from src.flood_classifier import classify_flood_image
+    except ImportError:
+        from flood_classifier import classify_flood_image
     FLOOD_CLASSIFIER_AVAILABLE = True
     FLOOD_CLASSIFIER_ERROR = ""
 except Exception as exc:
