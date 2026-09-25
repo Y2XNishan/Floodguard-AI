@@ -101,6 +101,48 @@ def get_imagenet_transforms():
     ])
 
 
+_CROP_MODEL_BUNDLE = None
+
+
+def get_crop_classifier_bundle():
+    """Load and cache PyTorch EfficientNet_B0 crop disease model bundle singleton."""
+    global _CROP_MODEL_BUNDLE
+    if _CROP_MODEL_BUNDLE is not None:
+        return _CROP_MODEL_BUNDLE
+
+    if not MODEL_PATH.exists():
+        return None, None, None, None
+
+    try:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        class_names = get_crop_disease_classes()
+        num_classes = len(class_names)
+
+        model = build_model(num_classes, pretrained=False)
+        try:
+            checkpoint = torch.load(MODEL_PATH, map_location=device, weights_only=True)
+        except Exception:
+            checkpoint = torch.load(MODEL_PATH, map_location=device, weights_only=False)
+
+        if isinstance(checkpoint, dict) and "model_state" in checkpoint:
+            state_dict = checkpoint["model_state"]
+        elif isinstance(checkpoint, dict):
+            state_dict = checkpoint
+        else:
+            state_dict = checkpoint
+
+        model.load_state_dict(state_dict)
+        model.to(device)
+        model.eval()
+
+        transform = get_imagenet_transforms()
+        _CROP_MODEL_BUNDLE = (model, class_names, transform, device)
+        return _CROP_MODEL_BUNDLE
+    except Exception as exc:
+        import logging
+        logging.warning("Failed to load crop disease classifier bundle: %s", exc)
+        return None, None, None, None
+
 def get_transforms():
     train_transform = transforms.Compose([
         transforms.Resize((224, 224)),
