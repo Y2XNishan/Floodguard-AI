@@ -8,8 +8,29 @@ from torch.utils.data import DataLoader, WeightedRandomSampler
 
 
 CLASSES = ["mild", "moderate", "no_flood", "severe"]
-MODEL_PATH = Path("models/flood_classifier.pth")
-DATA_DIR = Path("data/processed/flood_classified")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODEL_PATH = BASE_DIR / "models" / "flood_classifier.pth"
+if not MODEL_PATH.exists():
+    for _cand in [
+        Path.cwd() / "models" / "flood_classifier.pth",
+        Path.cwd().parent / "models" / "flood_classifier.pth",
+        Path("models/flood_classifier.pth"),
+    ]:
+        if _cand.exists():
+            MODEL_PATH = _cand.resolve()
+            break
+
+DATA_DIR = BASE_DIR / "data" / "processed" / "flood_classified"
+if not DATA_DIR.exists():
+    for _cand in [
+        Path.cwd() / "data" / "processed" / "flood_classified",
+        Path.cwd().parent / "data" / "processed" / "flood_classified",
+        Path("data/processed/flood_classified"),
+    ]:
+        if _cand.exists():
+            DATA_DIR = _cand.resolve()
+            break
 EPOCHS = 20
 RESUME_START_EPOCH = 8
 RESUME_CLASS_COUNTS = {
