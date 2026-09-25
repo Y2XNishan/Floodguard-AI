@@ -92,6 +92,15 @@ def build_model(num_classes, pretrained=False):
     return model
 
 
+def get_imagenet_transforms():
+    """Standard ImageNet evaluation transforms: resize to 224x224 and normalize."""
+    return transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
+
+
 def get_transforms():
     train_transform = transforms.Compose([
         transforms.Resize((224, 224)),
