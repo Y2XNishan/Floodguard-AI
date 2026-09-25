@@ -11,9 +11,30 @@ from torchvision import datasets, transforms
 from torchvision.models import EfficientNet_B0_Weights, efficientnet_b0
 
 
-DATA_DIR = Path("data/raw/crop_disease/New Plant Diseases Dataset(Augmented)/New Plant Diseases Dataset(Augmented)/train")
-MODEL_PATH = Path("models/crop_disease_classifier.pth")
-CLASSES_PATH = Path("models/crop_disease_classes.json")
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODEL_PATH = BASE_DIR / "models" / "crop_disease_classifier.pth"
+if not MODEL_PATH.exists():
+    for _cand in [
+        Path.cwd() / "models" / "crop_disease_classifier.pth",
+        Path.cwd().parent / "models" / "crop_disease_classifier.pth",
+        Path("models/crop_disease_classifier.pth"),
+    ]:
+        if _cand.exists():
+            MODEL_PATH = _cand.resolve()
+            break
+
+CLASSES_PATH = BASE_DIR / "models" / "crop_disease_classes.json"
+if not CLASSES_PATH.exists():
+    for _cand in [
+        Path.cwd() / "models" / "crop_disease_classes.json",
+        Path.cwd().parent / "models" / "crop_disease_classes.json",
+        Path("models/crop_disease_classes.json"),
+    ]:
+        if _cand.exists():
+            CLASSES_PATH = _cand.resolve()
+            break
+
+DATA_DIR = BASE_DIR / "data" / "raw" / "crop_disease" / "New Plant Diseases Dataset(Augmented)" / "New Plant Diseases Dataset(Augmented)" / "train"
 
 INDIAN_CROPS = [
     "Corn_(maize)",
