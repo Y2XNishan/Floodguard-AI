@@ -2823,7 +2823,8 @@ def page_damage_classifier():
             st.metric("Confidence", f"{result['confidence']:.1f}%")
 
             st.markdown("**Probability Breakdown:**")
-            for cls, prob in result["probabilities"].items():
+            sorted_probs = sorted(result["probabilities"].items(), key=lambda x: x[1], reverse=True)
+            for cls, prob in sorted_probs:
                 st.progress(prob / 100, text=f"{cls}: {prob:.1f}%")
 
             st.info(result["description"])
