@@ -48,6 +48,31 @@ INDIAN_CROPS = [
 ]
 
 
+
+def get_crop_disease_classes():
+    """Load class list from crop_disease_classes.json, with default fallback."""
+    if CLASSES_PATH.exists():
+        try:
+            with open(CLASSES_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return [
+        "Apple___Apple_scab",
+        "Apple___Black_rot",
+        "Apple___Cedar_apple_rust",
+        "Apple___healthy",
+        "Corn_(maize)___Common_rust_",
+        "Corn_(maize)___healthy",
+        "Grape___Black_rot",
+        "Grape___healthy",
+        "Pepper,_bell___healthy",
+        "Potato___Early_blight",
+        "Potato___Late_blight",
+        "Potato___healthy",
+        "Strawberry___Leaf_scorch",
+    ]
+
 def build_model(num_classes):
     weights = EfficientNet_B0_Weights.IMAGENET1K_V1
     model = efficientnet_b0(weights=weights)
