@@ -467,10 +467,8 @@ def classify_flood_image(image):
                 "Monitor water levels",
             ],
             "moderate": [
-                "Move valuables to higher floors",
-                "Avoid unnecessary travel",
-                "Contact local authorities",
-                "Prepare for possible evacuation",
+                "Prepare evacuation kit",
+                "Contact authorities",
             ],
             "severe": [
                 "EVACUATE IMMEDIATELY",
