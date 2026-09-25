@@ -411,81 +411,89 @@ def get_loaded_classifier():
 
 
 def classify_flood_image(image):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    """
+    Classify flood image using fine-tuned EfficientNetB0 CNN model.
+    Falls back to intelligent rule-based brightness and color analysis if model unavailable.
+    """
+    model, device = get_loaded_classifier()
 
-    if not MODEL_PATH.exists():
+    if model is None:
         return rule_based_classify(image)
 
-    model = build_model(num_classes=len(CLASSES), pretrained=False).to(device)
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
-    model.eval()
+    try:
+        transform = transforms.Compose([
+            transforms.Resize((224, 224)),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        ])
 
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-    ])
+        img_tensor = transform(image.convert("RGB")).unsqueeze(0).to(device)
 
-    img_tensor = transform(image.convert("RGB")).unsqueeze(0).to(device)
+        with torch.no_grad():
+            outputs = model(img_tensor)
+            probs = torch.softmax(outputs, dim=1)[0]
 
-    with torch.no_grad():
-        outputs = model(img_tensor)
-        probs = torch.softmax(outputs, dim=1)[0]
+        probs_dict = {
+            CLASSES[i].replace("_", " ").title(): float(probs[i]) * 100
+            for i in range(len(CLASSES))
+        }
+        if "No_Flood" in probs_dict:
+            probs_dict["No Flood"] = probs_dict.pop("No_Flood")
 
-    probs_dict = {
-        CLASSES[i].replace("_", " ").title(): float(probs[i]) * 100
-        for i in range(len(CLASSES))
-    }
-    predicted_class = CLASSES[probs.argmax().item()]
-    confidence = float(probs.max()) * 100
+        predicted_class = CLASSES[probs.argmax().item()]
+        confidence = float(probs.max()) * 100
 
-    if predicted_class == "no_flood":
-        return {
-            "severity": "No Flooding",
-            "confidence": confidence,
-            "probabilities": probs_dict,
-            "description": "No flood detected in this image.",
-            "recommendations": [
-                "Area appears safe",
-                "Continue monitoring weather",
+        if predicted_class == "no_flood":
+            return {
+                "severity": "No Flooding",
+                "confidence": confidence,
+                "probabilities": probs_dict,
+                "description": "No flood detected in this image.",
+                "recommendations": [
+                    "Area appears safe",
+                    "Continue monitoring weather",
+                ],
+            }
+
+        descriptions = {
+            "mild": "Minor flooding detected. Water levels are low. Roads may be waterlogged.",
+            "moderate": "Moderate flooding detected. Significant water accumulation visible. Take precautions.",
+            "severe": "SEVERE flooding detected! Extensive water coverage. Immediate action required!",
+        }
+
+        recommendations = {
+            "mild": [
+                "Monitor water levels closely",
+                "Avoid low-lying areas",
+                "Keep emergency kit ready",
+                "Stay updated with local alerts",
+            ],
+            "moderate": [
+                "Move valuables to higher floors",
+                "Avoid unnecessary travel",
+                "Contact local authorities",
+                "Prepare for possible evacuation",
+            ],
+            "severe": [
+                "EVACUATE IMMEDIATELY",
+                "Call 112 or NDMA: 1078",
+                "Move to nearest relief camp",
+                "Do NOT enter floodwater",
+                "Alert neighbors",
             ],
         }
 
-    descriptions = {
-        "mild": "Minor flooding detected. Water levels are low. Roads may be waterlogged.",
-        "moderate": "Moderate flooding detected. Significant water accumulation visible. Take precautions.",
-        "severe": "SEVERE flooding detected! Extensive water coverage. Immediate action required!",
-    }
-
-    recommendations = {
-        "mild": [
-            "Monitor water levels closely",
-            "Avoid low-lying areas",
-            "Keep emergency kit ready",
-            "Stay updated with local alerts",
-        ],
-        "moderate": [
-            "Move valuables to higher floors",
-            "Avoid unnecessary travel",
-            "Contact local authorities",
-            "Prepare for possible evacuation",
-        ],
-        "severe": [
-            "EVACUATE IMMEDIATELY",
-            "Call 112 or NDMA: 1078",
-            "Move to nearest relief camp",
-            "Do NOT enter floodwater",
-            "Alert neighbors",
-        ],
-    }
-
-    return {
-        "severity": predicted_class.title(),
-        "confidence": confidence,
-        "probabilities": probs_dict,
-        "description": descriptions[predicted_class],
-        "recommendations": recommendations[predicted_class],
-    }
+        return {
+            "severity": predicted_class.title(),
+            "confidence": confidence,
+            "probabilities": probs_dict,
+            "description": descriptions[predicted_class],
+            "recommendations": recommendations[predicted_class],
+        }
+    except Exception as exc:
+        import logging
+        logging.warning("CNN model inference failed (%s), falling back to rule-based classification.", exc)
+        return rule_based_classify(image)
 
 
 def rule_based_classify(image):
