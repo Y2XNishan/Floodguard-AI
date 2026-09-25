@@ -3043,7 +3043,12 @@ def page_crop_disease():
 
             st.markdown("---")
             st.markdown("**Description:**")
-            st.info(result["description"])
+            st.markdown(f"""
+            <div style="background:#27272a;border:1px solid #3f3f46;border-left:4px solid #f97316;
+            padding:12px 16px;border-radius:6px;margin:8px 0 16px 0;color:#fafafa;font-size:0.875rem;line-height:1.5;">
+                {result['description']}
+            </div>
+            """, unsafe_allow_html=True)
 
             st.markdown("**Treatment:**")
             for treatment in result["treatment"]:
