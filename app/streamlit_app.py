@@ -1936,20 +1936,22 @@ Auto-fetched from {source_label} &middot; Synced
                 st.info(f"District: {cached['district']}, State: {cached['state']}")
                 cached_prob = cached["risk_score"]
                 cached_level = cached["risk_level"]
-                bar_color = "#ef4444" if cached_prob > 0.6 else "#f59e0b" if cached_prob > 0.3 else "#4ade80"
-                fig = go.Figure(go.Indicator(mode="gauge+number", value=cached_prob*100,
+                cached_score = float(cached_prob) * 100.0 if float(cached_prob) <= 1.0 else float(cached_prob)
+                cached_score = round(cached_score, 1)
+                bar_color = "#ef4444" if cached_score > 60 else "#f59e0b" if cached_score > 30 else "#4ade80"
+                fig = go.Figure(go.Indicator(mode="gauge+number", value=cached_score,
                     number={"suffix":"%", "font":{"size":56,"color":"white","family":"Inter"}},
                     title={"text":f"Flood Risk Gauge - {cached['district']} (Cached)", "font":{"size":16,"color":"#71717a","family":"Inter"}},
-                    gauge={"axis":{"range":[0,100],"tickmode":"array","tickvals":[0, 20, 40, 60, 80, 100],"ticktext":["0", "20", "40", "60", "80", "100"],"tickcolor":"#3f3f46","tickwidth":1},
+                    gauge={"axis":{"range":[0,100],"tickmode":"array","tickvals":[0, 20, 40, 60, 80, 100],"ticktext":["0", "20", "40", "60", "80", "100"],"tickcolor":"#3f3f46","tickwidth":1,"dtick":20},
                            "bar":{"color":bar_color,"thickness":0.75},
                            "bgcolor":"rgba(24,24,27,0.5)", "bordercolor":"rgba(249,115,22,0.1)", "borderwidth":2,
                            "steps":[{"range":[0,30],"color":"rgba(74,222,128,0.1)"},
                                     {"range":[30,60],"color":"rgba(245,158,11,0.1)"},
                                     {"range":[60,100],"color":"rgba(239,68,68,0.1)"}],
-                           "threshold":{"line":{"color":bar_color,"width":4},"thickness":0.85,"value":cached_prob*100}}))
+                           "threshold":{"line":{"color":bar_color,"width":4},"thickness":0.85,"value":cached_score}}))
                 fig.update_layout(height=340, paper_bgcolor="rgba(0,0,0,0)", font={"color":"white","family":"Inter"},
                                   margin=dict(t=80,b=20,l=50,r=50))
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
                 st.markdown(f"""
                 <div class="rec-box" style="border-left:4px solid {bar_color};padding:16px;background:#27272a;border-radius:8px;">
                     <strong style="color:{bar_color};">{cached_level}</strong> — Cached risk score: <strong>{cached_prob:.0%}</strong>
