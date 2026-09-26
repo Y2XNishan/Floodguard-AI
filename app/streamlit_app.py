@@ -4093,7 +4093,7 @@ def render_footer():
         <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
             <p style="margin:0"><span style="color:#fafafa;font-weight:600;">India Flood Risk Prediction System</span></p>
             <a href="tel:1078" style="text-decoration:none;">
-                <span style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;">
+                <span style="background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.3);color:#f97316;padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;">
                     NDMA Hotline: 1078
                 </span>
             </a>
