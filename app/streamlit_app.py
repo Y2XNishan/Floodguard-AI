@@ -3418,14 +3418,9 @@ def page_crop_loss_estimator():
 # ===== PAGE 9: ALERT SYSTEM =====
 def page_alert_system():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-            <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Automated Early Warning & Alert System</h2>
-                <p style="margin:0;color:#71717a;font-size:0.875rem;">Configure threshold-based regional notification dispatches via SMTP and SMS channels.</p>
-            </div>
-            <div>
-                <span class="status-pill"><span class="status-dot green"></span> Dispatch Daemon: Online</span>
-            </div>
+        <div>
+            <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Automated Early Warning & Alert System</h2>
+            <p style="margin:0;color:#71717a;font-size:0.875rem;">Configure threshold-based regional notification dispatches via SMTP and SMS channels.</p>
         </div>
     </div>""", unsafe_allow_html=True)
 
@@ -3448,7 +3443,9 @@ def page_alert_system():
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
   <div style="width:32px;height:32px;background:rgba(249,115,22,0.15);
     border:1px solid rgba(249,115,22,0.3);border-radius:4px;display:flex;align-items:center;
-    justify-content:center;color:#f97316;font-size:11px;font-weight:700;">AL</div>
+    justify-content:center;">
+    <i class="fa-solid fa-bell" style="color:#f97316;font-size:14px;"></i>
+  </div>
   <div>
     <div style="color:#fafafa;font-size:14px;font-weight:600;">
       Notification Dispatch Parameters</div>
@@ -3461,7 +3458,7 @@ def page_alert_system():
     # STEP 2 - Email and District in 2 columns:
     col1, col2 = st.columns(2)
     with col1:
-        email = st.text_input("EMAIL", 
+        email = st.text_input("Email", 
             placeholder="you@example.com",
             key="alert_email", label_visibility="visible")
     with col2:
@@ -3476,7 +3473,7 @@ def page_alert_system():
                     default_idx = district_list_with_placeholder.index(target)
                     break
         
-        district = st.selectbox("DISTRICT",
+        district = st.selectbox("District",
             options=district_list_with_placeholder,
             index=default_idx,
             key="alert_district")
@@ -3485,8 +3482,7 @@ def page_alert_system():
     st.markdown("""
 <div style="background:#27272a;border:1px solid #3f3f46;border-radius:6px;
   padding:14px;margin:16px 0;">
-  <div style="color:#71717a;font-size:11px;text-transform:uppercase;
-    letter-spacing:0.04em;font-weight:600;">
+  <div style="color:#71717a;font-size:12px;font-weight:600;">
     Alert threshold — notify when risk exceeds:</div>
 </div>
 """, unsafe_allow_html=True)
@@ -3497,23 +3493,23 @@ def page_alert_system():
     t1, t2, t3, t4 = st.columns(4)
 
     thresholds = [
-        (t1, 20, "Low", "#4ade80"),
-        (t2, 40, "Moderate", "#f59e0b"),
+        (t1, 20, "Low", "#fdba74"),
+        (t2, 40, "Moderate", "#fb923c"),
         (t3, 60, "High", "#f97316"),
-        (t4, 80, "Very High", "#ef4444"),
+        (t4, 80, "Very High", "#ea580c"),
     ]
 
     for col, val, label, color in thresholds:
         with col:
             is_selected = st.session_state.alert_threshold == val
             st.markdown(f"""
-            <div style="background:#27272a;
+            <div style="background:{'rgba(249,115,22,0.12)' if is_selected else '#27272a'};
               border:1px solid {'#f97316' if is_selected else '#3f3f46'};
               border-radius:6px;padding:12px;text-align:center;">
               <div style="font-size:20px;font-weight:600;
-                color:{'#f97316' if is_selected else color};">
+                color:{color};">
                 {val}%</div>
-              <div style="font-size:11px;color:#71717a;
+              <div style="font-size:11px;color:{'#fafafa' if is_selected else '#71717a'};
                 margin-top:4px;">{label}</div>
             </div>
             """, unsafe_allow_html=True)
