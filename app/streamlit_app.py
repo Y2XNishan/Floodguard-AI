@@ -3117,19 +3117,16 @@ def page_yield_predictor():
             "Select State",
             options=states,
             index=states.index(st.session_state.get("last_state")) if st.session_state.get("last_state") in states else 0,
-            help="Select your state",
         )
 
         selected_crop = st.selectbox(
             "Select Crop",
             options=crops,
-            help="Select crop type",
         )
 
         selected_season = st.selectbox(
             "Select Season",
             options=seasons,
-            help="Kharif=June-Nov, Rabi=Nov-Apr",
         )
 
         area = st.number_input(
@@ -3147,7 +3144,6 @@ def page_yield_predictor():
             min_value=0,
             max_value=100,
             value=int(default_flood_risk),
-            help="Auto-filled from Risk Predictor if you made a prediction",
         )
 
         rainfall = st.number_input(
