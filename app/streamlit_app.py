@@ -1092,9 +1092,15 @@ def show_risk_gauge(risk_score, risk_level):
     else:
         color = "#4ade80"
     
+    # Ensure risk_score is on a 0-100 scale (convert 0-1 scale to 0-100 if needed)
+    score_val = float(risk_score)
+    if 0.0 < score_val <= 1.0:
+        score_val = score_val * 100.0
+    score_val = round(score_val, 1)
+
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
-        value=risk_score,
+        value=score_val,
         number={"suffix": "%", "font": {"color": "#fafafa", "size": 36}},
         gauge={
             "axis": {
@@ -1116,7 +1122,7 @@ def show_risk_gauge(risk_score, risk_level):
             "threshold": {
                 "line": {"color": color, "width": 4},
                 "thickness": 0.75,
-                "value": risk_score
+                "value": score_val
             }
         },
         title={"text": f"Flood Risk: {risk_level}", 
