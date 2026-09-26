@@ -3232,17 +3232,7 @@ def page_yield_predictor():
                         "Call: 1800-180-1551 (Toll Free)"
                     )
 
-    st.markdown("---")
-    try:
-        with open(MODELS_DIR / "crop_yield_metadata.json", encoding="utf-8") as f:
-            meta = json.load(f)
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Model R² Score", f"{meta.get('rf_r2', 0):.3f}")
-        c2.metric("Crops Covered", len(meta.get("crops", [])))
-        c3.metric("States Covered", len(meta.get("states", [])))
-        c4.metric("Algorithm", "RF + GBM Ensemble")
-    except Exception:
-        pass
+
 
 # ===== PAGE 8: CROP LOSS ESTIMATOR =====
 def page_crop_loss_estimator():
