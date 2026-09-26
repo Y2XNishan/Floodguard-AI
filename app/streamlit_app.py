@@ -3356,12 +3356,15 @@ def page_crop_loss_estimator():
             </div>
             """, unsafe_allow_html=True)
 
-            m1, m2, m3 = st.columns(3)
-            with m1:
-                st.metric("Worst Affected", results["worst_crop"])
-            with m2:
-                st.metric("Safest Crop", results["safest_crop"])
-            with m3:
+            if len(selected_crops) > 1:
+                m1, m2, m3 = st.columns(3)
+                with m1:
+                    st.metric("Worst Affected", results["worst_crop"])
+                with m2:
+                    st.metric("Safest Crop", results["safest_crop"])
+                with m3:
+                    st.metric("Total Area", f"{results['total_area_ha']:.1f} ha")
+            else:
                 st.metric("Total Area", f"{results['total_area_ha']:.1f} ha")
 
             st.markdown("### Crop-wise Breakdown")
@@ -3381,7 +3384,8 @@ def page_crop_loss_estimator():
 
             st.markdown("### Loss Visualization")
             fig = plot_loss_chart(results["crops"])
-            st.plotly_chart(fig, use_container_width=True)
+            fig.update_layout(height=300)
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
             st.markdown("### Government Compensation")
             schemes = get_compensation_schemes()
