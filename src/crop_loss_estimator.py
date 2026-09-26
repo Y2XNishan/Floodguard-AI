@@ -255,16 +255,12 @@ def plot_loss_chart(results: list[dict[str, Any]]) -> go.Figure:
     crops = [item["crop"] for item in results]
     losses = [item["loss_lakhs"] for item in results]
     damages = [item["damage_pct"] for item in results]
-    colors = [
-        "#10b981" if damage < 20 else "#f59e0b" if damage <= 50 else "#ef4444"
-        for damage in damages
-    ]
 
     fig = go.Figure(
         go.Bar(
             x=crops,
             y=losses,
-            marker_color=colors,
+            marker_color="#f97316",
             text=[f"{loss:.2f}" for loss in losses],
             textposition="outside",
             hovertemplate=(
@@ -283,6 +279,7 @@ def plot_loss_chart(results: list[dict[str, Any]]) -> go.Figure:
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(color="#f1f5f9"),
         margin=dict(l=20, r=20, t=60, b=40),
+        height=300,
     )
     fig.update_yaxes(rangemode="tozero")
     return fig
