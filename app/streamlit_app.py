@@ -3192,7 +3192,7 @@ def page_yield_predictor():
                 padding: 16px;
                 text-align: left;
                 margin-bottom: 16px;'>
-                <div style='color: #71717a; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;'>Expected Yield Projection</div>
+                <div style='color: #71717a; font-size: 11px; font-weight: 600; letter-spacing: 0.02em;'>Expected Yield Projection</div>
                 <div style='color: {color}; font-size: 24px; font-weight: 700; margin-top: 4px;'>
                 {result['adjusted_yield']} t/ha</div>
                 </div>
@@ -3211,18 +3211,20 @@ def page_yield_predictor():
                 c3.metric("Total Production", f"{result['total_production']} t")
                 c4.metric("Economic Loss", f"₹{result['economic_loss']:,.0f}")
 
-                if result["vs_average"] >= 0:
-                    st.success(
-                        f"{result['adjusted_yield']} t/ha is "
-                        f"{abs(result['vs_average']):.2f} t/ha ABOVE district average"
-                    )
-                else:
-                    st.warning(
-                        f"{result['adjusted_yield']} t/ha is "
-                        f"{abs(result['vs_average']):.2f} t/ha BELOW district average"
-                    )
+                avg_comparison = "above" if result["vs_average"] >= 0 else "below"
+                st.markdown(f"""
+                <div style="background:#27272a;border:1px solid #3f3f46;border-left:4px solid #f97316;
+                padding:12px 16px;border-radius:6px;margin:12px 0 8px 0;color:#fafafa;font-size:0.875rem;line-height:1.5;">
+                    {result['adjusted_yield']} t/ha is {abs(result['vs_average']):.2f} t/ha {avg_comparison} district average
+                </div>
+                """, unsafe_allow_html=True)
 
-                st.info(f"{result['recommendation']}")
+                st.markdown(f"""
+                <div style="background:#27272a;border:1px solid #3f3f46;border-left:4px solid #f97316;
+                padding:12px 16px;border-radius:6px;margin:8px 0 16px 0;color:#fafafa;font-size:0.875rem;line-height:1.5;">
+                    {result['recommendation']}
+                </div>
+                """, unsafe_allow_html=True)
 
                 if flood_risk > 50:
                     st.error(
