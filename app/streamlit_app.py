@@ -3237,14 +3237,9 @@ def page_yield_predictor():
 # ===== PAGE 8: CROP LOSS ESTIMATOR =====
 def page_crop_loss_estimator():
     st.markdown("""<div class="card-custom" style="padding:16px 20px;margin-bottom:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-            <div>
-                <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Loss Estimator & Compensation</h2>
-                <p style="margin:0;color:#71717a;font-size:0.875rem;">Estimate financial loss to regional crops due to flooding and query PMFBY compensation schemes.</p>
-            </div>
-            <div>
-                <span class="status-pill"><span class="status-dot green"></span> PMFBY Scheme Rates: 2024-25</span>
-            </div>
+        <div>
+            <h2 style="font-size:1.35rem;font-weight:600;margin:0 0 2px 0;color:#fafafa;">Crop Loss Estimator & Compensation</h2>
+            <p style="margin:0;color:#71717a;font-size:0.875rem;">Estimate financial loss to regional crops due to flooding and query compensation schemes</p>
         </div>
     </div>""", unsafe_allow_html=True)
 
@@ -3344,12 +3339,12 @@ def page_crop_loss_estimator():
 
             st.markdown(f"""
             <div style='background: #27272a;
-                border: 2px solid #ef4444;
+                border: 2px solid #f97316;
                 border-radius: 15px;
                 padding: 25px;
                 text-align: center;
                 margin-bottom: 20px'>
-                <h2 style='color: #ef4444; margin:0'>
+                <h2 style='color: #f97316; margin:0'>
                 Estimated Loss</h2>
                 <h1 style='color: #fafafa;
                     font-size: 2.5em; margin:10px 0'>
@@ -3392,6 +3387,8 @@ def page_crop_loss_estimator():
             schemes = get_compensation_schemes()
             for key, scheme in schemes.items():
                 with st.expander(f"{scheme['name']}"):
+                    if "description" in scheme:
+                        st.caption(scheme["description"])
                     st.markdown(f"**Coverage:** {scheme['coverage']}")
                     if "premium" in scheme:
                         st.markdown(f"**Premium:** {scheme['premium']}")
