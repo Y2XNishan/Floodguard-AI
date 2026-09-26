@@ -42,16 +42,6 @@ The project addresses two closely linked challenges during monsoon seasons: esti
 | Damage Classifier | EfficientNetB0 | Flood damage severity (3 classes) | Accuracy: 89.6% |
 | Crop Disease Detector | EfficientNetB0 | Foliar plant disease (13 classes) | Accuracy: 98.4% |
 
-## Screenshots
-
-| Risk Predictor Dashboard | Pan-India Risk Map |
-| :---: | :---: |
-| ![Risk Predictor Dashboard](docs/screenshots/risk_predictor.png) | ![Pan-India Risk Map](docs/screenshots/risk_map.png) |
-
-| Crop Disease Detection | Historical Flood Analytics |
-| :---: | :---: |
-| ![Crop Disease Detection](docs/screenshots/crop_disease.png) | ![Historical Flood Analytics](docs/screenshots/flood_trends.png) |
-
 ## Project Structure
 
 ```text
