@@ -216,6 +216,7 @@ def get_compensation_schemes() -> dict[str, dict[str, str]]:
     return {
         "PMFBY": {
             "name": "PM Fasal Bima Yojana",
+            "description": "Comprehensive risk insurance covering yield loss from non-preventable natural risks.",
             "coverage": "Up to 100% of crop loss",
             "premium": "2% for Kharif, 1.5% for Rabi",
             "how_to_apply": "Contact nearest bank or CSC center",
@@ -224,6 +225,7 @@ def get_compensation_schemes() -> dict[str, dict[str, str]]:
         },
         "SDRF": {
             "name": "State Disaster Relief Fund",
+            "description": "Immediate state assistance for small and marginal farmers affected by severe natural disasters.",
             "coverage": "Rs 6,800 per hectare for crop loss",
             "how_to_apply": "Apply through District Collector office",
             "helpline": "1070",
@@ -231,6 +233,7 @@ def get_compensation_schemes() -> dict[str, dict[str, str]]:
         },
         "NDRF": {
             "name": "National Disaster Response Fund",
+            "description": "Central government disaster assistance supplementing state relief during severe calamities.",
             "coverage": "Additional support for major disasters",
             "how_to_apply": "Automatic for declared disasters",
             "helpline": "1078",
@@ -238,6 +241,7 @@ def get_compensation_schemes() -> dict[str, dict[str, str]]:
         },
         "KCC": {
             "name": "Kisan Credit Card",
+            "description": "Institutional credit providing timely loans with subsidized interest rates for agricultural needs.",
             "coverage": "Crop loan up to Rs 3 lakh at 4% interest",
             "how_to_apply": "Apply at any bank branch",
             "helpline": "1800-11-0001",
