@@ -3548,13 +3548,15 @@ def page_alert_system():
                 risk_threshold=threshold,
                 send_daily=daily,
             )
-            st.success(f"""
-            <i class="fa-solid fa-check-circle" style="color:#4ade80;"></i> Subscribed successfully!
-            You will receive alerts when flood
-            risk in {district} exceeds {threshold}%
-            via Email.
-            Your ID: {sub_id}
-            """)
+            st.markdown(f"""
+            <div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-left:4px solid #4ade80;border-radius:6px;padding:14px 16px;margin:12px 0;color:#fafafa;font-size:0.875rem;line-height:1.6;">
+                <div style="font-weight:600;margin-bottom:4px;">
+                    <i class="fa-solid fa-check-circle" style="color:#4ade80;margin-right:6px;"></i> Subscribed successfully!
+                </div>
+                <div>You will receive alerts when flood risk in {district} exceeds {threshold}% via Email.</div>
+                <div style="color:#a1a1aa;margin-top:4px;font-size:0.8125rem;">Your ID: {sub_id}</div>
+            </div>
+            """, unsafe_allow_html=True)
         else:
             if not email:
                 st.warning("Please enter your email address!")
