@@ -3053,6 +3053,11 @@ def page_crop_disease():
                     for pred in result["top_predictions"]:
                         st.progress(min(1.0, max(0.0, pred["probability"] / 100.0)), text=f"{pred['label']}: {pred['probability']}%")
 
+            st.caption(
+                "Note: Model trained on PlantVillage dataset (89.4% accuracy). "
+                "Results may vary on real-world field images."
+            )
+
             st.markdown("---")
             st.markdown("**Description:**")
             st.markdown(f"""
