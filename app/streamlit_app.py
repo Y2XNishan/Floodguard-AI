@@ -1102,7 +1102,8 @@ def show_risk_gauge(risk_score, risk_level):
                 "tickmode": "array",
                 "tickvals": [0, 20, 40, 60, 80, 100],
                 "ticktext": ["0", "20", "40", "60", "80", "100"],
-                "tickcolor": "#52525b"
+                "tickcolor": "#52525b",
+                "dtick": 20
             },
             "bar": {"color": color},
             "bgcolor": "#27272a",
