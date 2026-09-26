@@ -1976,7 +1976,7 @@ def page_map():
 
     districts_df = get_district_risk_data()
     m = folium.Map(
-        location=[22.0, 82.0],
+        location=[22.5, 80.0],
         zoom_start=5,
         tiles="OpenStreetMap",
         prefer_canvas=True,
