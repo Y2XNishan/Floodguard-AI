@@ -1109,6 +1109,7 @@ def show_risk_gauge(risk_score, risk_level):
                 "tickvals": [0, 20, 40, 60, 80, 100],
                 "ticktext": ["0", "20", "40", "60", "80", "100"],
                 "tickcolor": "#52525b",
+                "tickfont": {"size": 11, "color": "#71717a"},
                 "dtick": 20
             },
             "bar": {"color": color},
@@ -1132,9 +1133,9 @@ def show_risk_gauge(risk_score, risk_level):
         paper_bgcolor="#18181b",
         font={"color": "#fafafa"},
         height=300,
-        margin=dict(l=20, r=20, t=40, b=20)
+        margin=dict(l=40, r=40, t=40, b=20)
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 # ===== PAGE 1: RISK PREDICTOR =====
 def page_predictor():
