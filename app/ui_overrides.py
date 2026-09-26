@@ -261,6 +261,16 @@ def inject_ui_overrides() -> None:
           font-weight: 700 !important;
         }
 
+        /* Captions and Disclaimers - Small Muted Gray */
+        [data-testid="stCaptionContainer"],
+        [data-testid="stCaptionContainer"] p,
+        .stCaption {
+          color: var(--app-text-muted) !important;
+          font-family: var(--font-family) !important;
+          font-size: 0.8125rem !important;
+          line-height: 1.4 !important;
+        }
+
         /* Generic Container Cards */
         .glass-card,
         .metric-card,
